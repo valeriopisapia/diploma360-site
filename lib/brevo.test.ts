@@ -1,5 +1,5 @@
 // @vitest-environment node
-import { describe, it, expect, vi } from 'vitest'
+import { it, expect, vi } from 'vitest'
 import { createBrevoContact } from './brevo'
 
 const env = { apiKey: 'k', listId: '7' }

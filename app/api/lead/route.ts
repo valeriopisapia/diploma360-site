@@ -3,7 +3,9 @@ import { createBrevoContact, LeadPayload } from '@/lib/brevo'
 export const runtime = 'nodejs'
 
 export async function POST(req: Request) {
-  const body = await req.json()
+  let body: Record<string, unknown>
+  try { body = await req.json() }
+  catch { return Response.json({ error: 'Corpo della richiesta non valido' }, { status: 400 }) }
   const { nome, telefono, email, per_chi, messaggio, pagina, origine, ts, website } = body
 
   // Honeypot: bot filled the hidden field — silently succeed, do not call Brevo
@@ -31,5 +33,6 @@ export async function POST(req: Request) {
   }
 
   const httpStatus = result.status >= 400 ? result.status : 502
-  return Response.json({ error: result.error }, { status: httpStatus })
+  console.error('Brevo error:', result.error)
+  return Response.json({ error: 'Brevo ha rifiutato la richiesta' }, { status: httpStatus })
 }
