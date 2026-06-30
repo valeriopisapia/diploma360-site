@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Handoff sviluppo — Diploma360 · per Valerio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --coral:#E48267; --coral-dk:#993C1D; --rosa:#EC89C0;
+    --grad:linear-gradient(135deg,#E3815A,#EC89C0);
+    --ink:#1F1F1F; --soft:#5A626D; --line:#ECE6E0; --bg:#FAF7F2;
+    --code-bg:#1E1B19; --code-ink:#F3E9E2;
+    --ok:#15803D; --warn:#B45309; --warn-bg:#FBF1E4; --warn-line:#EFD9BC;
+    --danger:#B91C1C;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .page{max-width:880px;margin:0 auto;padding:0 24px 96px}
+
+  /* Hero */
+  .masthead{background:var(--grad);color:#fff;margin:0 -24px 0;padding:54px 40px 46px;border-radius:0 0 28px 28px}
+  .masthead .kick{font-family:'Poppins';font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;opacity:.9}
+  .masthead h1{font-family:'Poppins';font-weight:800;font-size:38px;letter-spacing:-.02em;line-height:1.08;margin:12px 0 10px}
+  .masthead p{font-size:16px;max-width:600px;opacity:.96}
+  .masthead .by{margin-top:20px;display:inline-flex;gap:18px;flex-wrap:wrap;font-size:13.5px;font-weight:600}
+  .masthead .by span{background:rgba(255,255,255,.16);padding:6px 14px;border-radius:999px;backdrop-filter:blur(4px)}
+
+  /* TOC */
+  .toc{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 20px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 24px;margin:28px 0 12px}
+  .toc a{display:flex;gap:10px;align-items:baseline;text-decoration:none;color:var(--ink);font-size:14px;font-weight:600;padding:5px 0}
+  .toc a:hover{color:var(--coral-dk)}
+  .toc a .n{font-family:'JetBrains Mono';font-size:12px;color:var(--coral);font-weight:500;min-width:20px}
+
+  h2{font-family:'Poppins';font-weight:700;font-size:24px;letter-spacing:-.01em;margin:46px 0 4px;scroll-margin-top:20px;display:flex;align-items:center;gap:12px}
+  h2 .hn{font-family:'JetBrains Mono';font-size:15px;font-weight:500;color:#fff;background:var(--coral);width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex-shrink:0}
+  h2 + .lede{color:var(--soft);font-size:15px;margin-bottom:18px;max-width:640px}
+  h3{font-family:'Poppins';font-weight:700;font-size:16px;margin:24px 0 8px}
+  p{margin:0 0 12px}
+  a{color:var(--coral-dk)}
+  ul,ol{margin:0 0 14px;padding-left:22px}
+  li{margin-bottom:7px}
+  strong{font-weight:700}
+  code{font-family:'JetBrains Mono';font-size:.86em;background:#F4ECE5;border:1px solid var(--line);border-radius:5px;padding:1px 6px;color:#7A3417}
+
+  pre{background:var(--code-bg);color:var(--code-ink);border-radius:14px;padding:18px 20px;overflow-x:auto;margin:0 0 16px;font-family:'JetBrains Mono';font-size:12.5px;line-height:1.7}
+  pre .c{color:#9A8C82}
+  pre .k{color:#E8A87C}
+  pre .s{color:#9DC08B}
+
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 24px;margin:0 0 16px}
+  .card.tight{padding:16px 20px}
+
+  /* Checklist */
+  .check{list-style:none;padding:0;margin:0}
+  .check li{display:flex;gap:13px;align-items:flex-start;padding:13px 0;border-bottom:1px solid var(--line)}
+  .check li:last-child{border-bottom:0}
+  .check .box{width:22px;height:22px;border:2px solid var(--coral);border-radius:6px;flex-shrink:0;margin-top:1px}
+  .check .ct{flex:1}
+  .check .ct b{display:block;font-weight:700;font-size:14.5px}
+  .check .ct span{font-size:13.5px;color:var(--soft)}
+  .pill{display:inline-block;font-family:'Poppins';font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 9px;border-radius:999px;margin-left:6px;vertical-align:2px}
+  .pill.must{background:#FBE2DE;color:var(--danger)}
+  .pill.opt{background:#E7EEF7;color:#2A5B9E}
+
+  .note{border-left:4px solid var(--coral);background:#fff;border-radius:0 12px 12px 0;padding:14px 18px;margin:0 0 16px;font-size:14px}
+  .note.warn{border-color:var(--warn);background:var(--warn-bg)}
+  .note.warn b{color:var(--warn)}
+  .note.ok{border-color:var(--ok)}
+  .note.ok b{color:var(--ok)}
+
+  .file-row{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .file-row:last-child{border-bottom:0}
+  .file-row .fn{font-family:'JetBrains Mono';font-size:13px;font-weight:500;color:#7A3417;background:#F4ECE5;border:1px solid var(--line);border-radius:6px;padding:3px 9px;white-space:nowrap;flex-shrink:0}
+  .file-row .fd{font-size:13.5px;color:var(--soft)}
+  .file-row .fd b{color:var(--ink);font-weight:600}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin:0 0 16px}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line)}
+  th{font-family:'Poppins';font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--soft)}
+  td code{font-size:12px}
+
+  .foot{margin-top:50px;padding-top:22px;border-top:1px solid var(--line);font-size:13px;color:var(--soft);text-align:center}
+
+  @media (max-width:640px){
+    .masthead{padding:40px 24px 36px}
+    .masthead h1{font-size:29px}
+    .toc{grid-template-columns:1fr}
+    h2{font-size:21px}
+  }
+  @media print{
+    body{background:#fff}
+    .masthead{border-radius:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .toc{display:none}
+    pre,.card,.note{break-inside:avoid}
+    h2{break-after:avoid}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="masthead">
+    <div class="kick">Handoff sviluppo · documento per il dev</div>
+    <h1>Sito vetrina Diploma360 — tutto pronto per andare online</h1>
+    <p>Sito statico multipagina, già costruito e production-ready. Questo documento ti dà i file di configurazione già scritti e l'elenco esatto delle 3 cose da collegare prima del lancio. Tempo stimato: ~1–2 ore.</p>
+    <div class="by">
+      <span>Per: Valerio</span>
+      <span>43 pagine HTML</span>
+      <span>0 build necessari</span>
+      <span>Aggiornato: giugno 2026</span>
+    </div>
+  </header>
+
+  <nav class="toc">
+    <a href="#start"><span class="n">01</span> Deploy in 3 passi</a>
+    <a href="#checklist"><span class="n">02</span> Checklist pre-lancio</a>
+    <a href="#files"><span class="n">03</span> File già pronti per te</a>
+    <a href="#form"><span class="n">04</span> Form → Brevo</a>
+    <a href="#ga4"><span class="n">05</span> Analytics GA4</a>
+    <a href="#routes"><span class="n">06</span> URL e rewrite</a>
+    <a href="#css"><span class="n">07</span> Come funziona il CSS</a>
+    <a href="#rules"><span class="n">08</span> Regole contenuti (non toccare)</a>
+    <a href="#next"><span class="n">09</span> Porting Next.js (futuro)</a>
+    <a href="#todo"><span class="n">10</span> Cosa è ancora placeholder</a>
+  </nav>
+
+  <!-- 01 -->
+  <h2 id="start"><span class="hn">1</span>Deploy in 3 passi</h2>
+  <p class="lede">È un sito statico puro: nessun build, nessun framework. Va online così com'è.</p>
+  <div class="card">
+    <ol>
+      <li><b>Pubblica la cartella <code>sito-v3/</code></b> su Vercel, Netlify o Cloudflare Pages come sito statico (root = <code>sito-v3</code>).</li>
+      <li><b>Imposta le 2 variabili d'ambiente</b> <code>BREVO_API_KEY</code> e <code>BREVO_LIST_ID</code> (per il form — vedi §4) e <b>l'ID GA4</b> nelle pagine (§5).</li>
+      <li><b>Punta il dominio</b> <code>www.diploma360.it</code> e attiva i redirect 301 dal vecchio sito (§6).</li>
+    </ol>
+    <p style="margin-bottom:0">In locale: <code>npx serve sito-v3</code> e apri <code>http://localhost:3000</code>.</p>
+  </div>
+  <div class="note ok"><b>Già fatto da me:</b> menu accessibile (tastiera/touch), form con validazione, cookie banner GDPR + Consent Mode v2, lazy-load immagini, sitemap.xml e robots.txt, CSS responsive su tutti i breakpoint, JSON-LD SEO.</div>
+
+  <!-- 02 -->
+  <h2 id="checklist"><span class="hn">2</span>Checklist pre-lancio</h2>
+  <p class="lede">Le voci <span class="pill must">obbligatorio</span> bloccano il lancio; le <span class="pill opt">opzionale</span> si possono fare dopo.</p>
+  <div class="card">
+    <ul class="check">
+      <li><span class="box"></span><div class="ct"><b>API key Brevo + ID lista <span class="pill must">obbligatorio</span></b><span>Imposta <code>BREVO_API_KEY</code> e <code>BREVO_LIST_ID</code> come env var. Senza, il form non salva i lead. Vedi §4.</span></div></li>
+      <li><span class="box"></span><div class="ct"><b>ID GA4 reale <span class="pill must">obbligatorio</span></b><span>Sostituisci <code>G-XXXXXXXXXX</code> in tutte le pagine con l'ID vero. Vedi §5.</span></div></li>
+      <li><span class="box"></span><div class="ct"><b>Rewrite route pulite <span class="pill must">obbligatorio</span></b><span>Carica <code>vercel.json</code> o <code>_redirects</code> (già scritti). Senza, le 19 landing città danno 404. Vedi §6.</span></div></li>
+      <li><span class="box"></span><div class="ct"><b>Redirect 301 dal vecchio dominio <span class="pill must">obbligatorio</span></b><span>Mappa vecchie URL → nuove per non perdere SEO. La founder ti fornisce l'elenco delle vecchie URL.</span></div></li>
+      <li><span class="box"></span><div class="ct"><b>Attributi Brevo <code>PER_CHI</code>, <code>PAGINA_ARRIVO</code>, <code>MESSAGGIO</code> <span class="pill must">obbligatorio</span></b><span>Creali nella lista Brevo prima del lancio, altrimenti vengono ignorati. Vedi §4.</span></div></li>
+      <li><span class="box"></span><div class="ct"><b>Validare pagine legali <span class="pill must">obbligatorio</span></b><span><code>privacy.html</code>, <code>cookie.html</code>, <code>termini.html</code> sono BOZZE: falle validare da chi di dovere prima di pubblicare.</span></div></li>
+      <li><span class="box"></span><div class="ct"><b>Verificare invio mail di notifica <span class="pill opt">opzionale</span></b><span>L'endpoint crea il contatto Brevo; se vuoi anche una mail interna a ogni lead, abilita il blocco SMTP commentato in <code>api/lead.js</code>.</span></div></li>
+      <li><span class="box"></span><div class="ct"><b>Submit sitemap in Search Console <span class="pill opt">opzionale</span></b><span><code>/sitemap.xml</code> è pronto: caricalo su Google Search Console dopo il go-live.</span></div></li>
+      <li><span class="box"></span><div class="ct"><b>Foto/loghi reali al posto dei placeholder <span class="pill opt">opzionale</span></b><span>I loghi partner del carosello sono ora quelli ufficiali. Restano da sostituire eventuali foto stock segnalate nel CHANGELOG.</span></div></li>
+    </ul>
+  </div>
+
+  <!-- 03 -->
+  <h2 id="files"><span class="hn">3</span>File già pronti per te</h2>
+  <p class="lede">Li ho scritti io, sono nella root di <code>sito-v3/</code>. Non devi crearli da zero.</p>
+  <div class="card">
+    <div class="file-row"><span class="fn">vercel.json</span><div class="fd"><b>Deploy su Vercel.</b> Clean URLs, rewrite delle 19 landing città + pagina blog, redirect <code>.html</code>→pulito, cache header. Pronto.</div></div>
+    <div class="file-row"><span class="fn">_redirects</span><div class="fd"><b>Deploy su Netlify / Cloudflare Pages.</b> Stesse regole di rewrite in formato <code>_redirects</code>. Usa questo <i>oppure</i> vercel.json a seconda dell'host.</div></div>
+    <div class="file-row"><span class="fn">netlify.toml</span><div class="fd"><b>Config Netlify</b> (publish dir + clean URLs + header cache).</div></div>
+    <div class="file-row"><span class="fn">api/lead.js</span><div class="fd"><b>Endpoint serverless</b> che riceve il form e crea il contatto su Brevo. Funziona su Vercel così com'è; su Netlify spostalo in <code>netlify/functions/lead.js</code>.</div></div>
+    <div class="file-row"><span class="fn">sitemap.xml · robots.txt</span><div class="fd">Già generati con tutte le 43 route pulite.</div></div>
+    <div class="file-row"><span class="fn">HANDOFF-DEV.md</span><div class="fd">Versione testo di questo documento dentro al repo, per riferimento rapido.</div></div>
+  </div>
+
+  <!-- 04 -->
+  <h2 id="form"><span class="hn">4</span>Form → Brevo</h2>
+  <p class="lede">Il form (home + landing) invia un POST JSON a <code>/api/lead</code>. La API key NON sta nel client.</p>
+  <h3>Payload inviato dal client</h3>
+  <pre><span class="c">// js/site.js → fetch POST /api/lead</span>
+{
+  nome, telefono, email,
+  per_chi,      <span class="c">// "Per me" | "Per mio figlio"</span>
+  messaggio,    <span class="c">// facoltativo</span>
+  pagina,       <span class="c">// path di provenienza (utile per capire da dove arriva il lead)</span>
+  ts            <span class="c">// timestamp ISO</span>
+}</pre>
+  <h3>Cosa fare</h3>
+  <ol>
+    <li>In Brevo: crea (o scegli) la <b>lista</b> e annota il suo <b>ID numerico</b>.</li>
+    <li>Crea gli <b>attributi contatto</b>: <code>NOME</code>, <code>SMS</code> (telefono), <code>PER_CHI</code>, <code>MESSAGGIO</code>, <code>PAGINA_ARRIVO</code>, <code>DATA_RICHIESTA</code>.</li>
+    <li>Imposta le env var sull'host: <code>BREVO_API_KEY</code> e <code>BREVO_LIST_ID</code>.</li>
+    <li>Deploy. <code>api/lead.js</code> fa il resto (gestisce anche il contatto duplicato senza errore).</li>
+  </ol>
+  <div class="note warn"><b>Importante:</b> non mettere mai la API key Brevo nel codice client o in un file committato. Solo come variabile d'ambiente sull'host.</div>
+  <div class="note"><b>Fallback senza endpoint:</b> se <code>/api/lead</code> non risponde, il form mostra un messaggio con telefono e WhatsApp, così nessun contatto va perso anche prima che tu colleghi Brevo.</div>
+
+  <!-- 05 -->
+  <h2 id="ga4"><span class="hn">5</span>Analytics GA4</h2>
+  <p class="lede">Consent Mode v2 è già impostato: GA si carica <b>solo dopo</b> l'accettazione cookie.</p>
+  <p>In ogni pagina c'è <code>window.__GA_ID__='G-XXXXXXXXXX'</code>. Sostituiscilo con l'ID reale. Find &amp; replace su tutte le pagine:</p>
+  <pre><span class="c"># dalla cartella sito-v3/</span>
+<span class="k">grep</span> -rl <span class="s">"G-XXXXXXXXXX"</span> . | <span class="k">xargs</span> sed -i <span class="s">''</span> <span class="s">"s/G-XXXXXXXXXX/G-TUOIDREALE/g"</span></pre>
+  <p style="margin-bottom:0">Il default consenso è <code>denied</code> per <code>analytics_storage</code> e <code>ad_storage</code>; passa a <code>granted</code> all'accettazione. Non devi toccare la logica del consenso.</p>
+
+  <!-- 06 -->
+  <h2 id="routes"><span class="hn">6</span>URL e rewrite</h2>
+  <p class="lede">Le route pubbliche sono <b>pulite</b> (senza <code>.html</code>) e in alcuni casi il nome differisce dal file. I rewrite sono già scritti nei file di config.</p>
+  <table>
+    <thead><tr><th>Route pubblica</th><th>File servito</th><th>Gestito da</th></tr></thead>
+    <tbody>
+      <tr><td><code>/come-funziona</code></td><td><code>come-funziona.html</code></td><td>clean URLs (auto)</td></tr>
+      <tr><td><code>/diplomi/afm</code></td><td><code>diplomi/afm.html</code></td><td>clean URLs (auto)</td></tr>
+      <tr><td><code>/recupero-anni-scolastici-roma</code></td><td><code>recupero-anni-roma.html</code></td><td>rewrite esplicito ×19 città</td></tr>
+      <tr><td><code>/blog/recuperare-due-anni-in-uno</code></td><td><code>recuperare-due-anni-in-uno.html</code></td><td>rewrite esplicito</td></tr>
+    </tbody>
+  </table>
+  <div class="note warn"><b>Attenzione:</b> le 19 landing città hanno nome file <code>recupero-anni-&lt;città&gt;</code> ma route <code>recupero-anni-<u>scolastici</u>-&lt;città&gt;</code> (canonical e sitemap usano la route). Senza i rewrite di <code>vercel.json</code>/<code>_redirects</code> queste pagine danno 404. I file sono già pronti — basta che siano nella root.</div>
+  <div class="note"><b>Redirect 301 dal vecchio sito:</b> chiedi alla founder l'elenco delle vecchie URL di <code>diploma360.it</code> e mappale sulle nuove route (lista completa in <code>sitemap.xml</code>).</div>
+
+  <!-- 07 -->
+  <h2 id="css"><span class="hn">7</span>Come funziona il CSS</h2>
+  <div class="card">
+    <ul>
+      <li><code>styles/site.css</code> è l'<b>unica fonte del design system condiviso</b>: token, header/mega-menu, footer, bottoni, card, hero, form, cookie banner, accessibilità, responsive.</li>
+      <li>Ogni pagina linka <code>site.css</code> e ha un piccolo <code>&lt;style&gt;</code> inline con <b>solo il CSS specifico di quella pagina</b>.</li>
+      <li>Token brand canonici: corallo <code>#E48267</code>, gradient <code>#E3815A → #EC89C0</code>, verde AA <code>#16a34a</code>. <b>Modifica i colori solo in <code>site.css</code>.</b></li>
+      <li>Responsive: breakpoint a 1240 / 1180 / 1000 / 980 / 900 / 860 / 760 / 700 / 640 / 600 / 560 / 520px. Header collassa in menu hamburger sotto 980px; CTA mobile fissa sotto 760px.</li>
+    </ul>
+  </div>
+
+  <!-- 08 -->
+  <h2 id="rules"><span class="hn">8</span>Regole contenuti — non toccare</h2>
+  <p class="lede">Decisioni della founder per compliance e tono. Mantienile in qualsiasi modifica.</p>
+  <div class="card">
+    <ul>
+      <li>Prezzi <b>1.500 / 1.900 / 2.900 €</b> — rate 72,68 / 92,06 / 140,52 €/mese × 24. <b>Mai scrivere «senza interessi».</b></li>
+      <li>Claim onesti: mai «facciamo al posto tuo». Usare «Diploma di Stato riconosciuto» (<b>mai «MIM»</b>). «Coordinatrice del percorso».</li>
+      <li><b>Niente claim sull'AI</b> — già ripuliti ovunque.</li>
+      <li>Logo PNG ufficiale con «Powered by LaScuola360»; palette cipria.</li>
+      <li>Loghi partner del carosello: ora sono <b>quelli ufficiali</b> forniti dalla founder.</li>
+    </ul>
+  </div>
+
+  <!-- 09 -->
+  <h2 id="next"><span class="hn">9</span>Porting in Next.js (quando vorrai)</h2>
+  <p class="lede">Non necessario per il lancio. Se in futuro vorrai un'app, ecco la rotta.</p>
+  <div class="card">
+    <p>Il lavoro è <b>estrarre componenti</b> da <code>site.css</code> + markup. Componenti consigliati:</p>
+    <p style="margin-bottom:8px"><code>SiteHeader</code> · <code>MegaMenu</code> · <code>MobileMenu</code> · <code>LeadForm</code> · <code>HeroFormLead</code> · <code>HeroPhoto</code> · <code>BrochureCard</code> · <code>PlanCard</code> · <code>Timeline4Step</code> · <code>Footer</code></p>
+    <p style="margin-bottom:0">Le 20 pagine indirizzo e le 19 landing città si generano da un dato unico (<code>indirizzi.ts</code>, <code>citta.ts</code>) con route dinamiche. L'endpoint <code>api/lead.js</code> diventa una route handler. JSON-LD già presente: <code>EducationalOrganization</code> (home/pagine) e <code>Course</code> (indirizzi).</p>
+  </div>
+
+  <!-- 10 -->
+  <h2 id="todo"><span class="hn">10</span>Cosa è ancora placeholder</h2>
+  <div class="card tight">
+    <ul style="margin-bottom:0">
+      <li><b>Brevo</b> — endpoint pronto, mancano API key + ID lista (env var).</li>
+      <li><b>GA4</b> — <code>G-XXXXXXXXXX</code> da sostituire con l'ID reale.</li>
+      <li><b>Pagine legali</b> — privacy / cookie / termini sono bozze da validare.</li>
+      <li><b>Redirect 301</b> — serve la mappa delle vecchie URL dalla founder.</li>
+      <li><b>Card «Brescia»</b> in <code>sedi-esame.html</code> punta al form home: la landing città dedicata non è ancora prodotta (scelta voluta).</li>
+    </ul>
+  </div>
+
+  <div class="foot">
+    Diploma360 — sito vetrina · documento di handoff per lo sviluppo.<br>
+    Contatti agganciati alle CTA: <code>tel:0684280999</code> · <code>wa.me/393517214644</code> · <code>info@diploma360.it</code>
+  </div>
+
+</div>
+</body>
+</html>

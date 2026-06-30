@@ -1,0 +1,28 @@
+# Diploma360 — rewrite route pulite -> file .html (200 = rewrite, non redirect)
+# Le route extensionless (/come-funziona, /diplomi/afm ...) sono gestite
+# automaticamente da "Pretty URLs" (Netlify) / clean URLs. Qui solo i mismatch.
+
+/recupero-anni-scolastici-ancona   /recupero-anni-ancona.html   200
+/recupero-anni-scolastici-bari   /recupero-anni-bari.html   200
+/recupero-anni-scolastici-bergamo   /recupero-anni-bergamo.html   200
+/recupero-anni-scolastici-bologna   /recupero-anni-bologna.html   200
+/recupero-anni-scolastici-cagliari   /recupero-anni-cagliari.html   200
+/recupero-anni-scolastici-catania   /recupero-anni-catania.html   200
+/recupero-anni-scolastici-firenze   /recupero-anni-firenze.html   200
+/recupero-anni-scolastici-genova   /recupero-anni-genova.html   200
+/recupero-anni-scolastici-latina   /recupero-anni-latina.html   200
+/recupero-anni-scolastici-milano   /recupero-anni-milano.html   200
+/recupero-anni-scolastici-napoli   /recupero-anni-napoli.html   200
+/recupero-anni-scolastici-padova   /recupero-anni-padova.html   200
+/recupero-anni-scolastici-palermo   /recupero-anni-palermo.html   200
+/recupero-anni-scolastici-perugia   /recupero-anni-perugia.html   200
+/recupero-anni-scolastici-pescara   /recupero-anni-pescara.html   200
+/recupero-anni-scolastici-roma   /recupero-anni-roma.html   200
+/recupero-anni-scolastici-salerno   /recupero-anni-salerno.html   200
+/recupero-anni-scolastici-torino   /recupero-anni-torino.html   200
+/recupero-anni-scolastici-verona   /recupero-anni-verona.html   200
+/blog/recuperare-due-anni-in-uno   /recuperare-due-anni-in-uno.html   200
+
+# 301: vecchie URL con .html -> route pulita
+/index.html   /   301!
+/*.html       /:splat   301

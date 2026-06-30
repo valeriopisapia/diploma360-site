@@ -1,5 +1,5 @@
 // @vitest-environment node
-import { describe, it, expect } from 'vitest'
+import { it, expect } from 'vitest'
 import { buildMetadata } from './seo'
 
 it('builds canonical + index metadata', () => {

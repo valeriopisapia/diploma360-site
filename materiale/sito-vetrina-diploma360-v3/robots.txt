@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.diploma360.it/sitemap.xml

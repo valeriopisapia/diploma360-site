@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Preview — Home più corta | Diploma360</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --coral:#E3815A; --rosa:#EC89C0; --coral-dk:#993C1D;
+    --text:#1F1F1F; --soft:#5A626D; --border:#ECE6E0;
+    --bg:#FAF7F2; --keep:#15803D; --merge:#B45309; --cut:#B91C1C;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.5;padding:48px 24px 80px}
+  .wrap{max-width:1120px;margin:0 auto}
+  .eyebrow{font-family:'Poppins';font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--coral-dk)}
+  h1{font-family:'Poppins';font-weight:800;font-size:34px;letter-spacing:-.02em;margin:10px 0 8px;line-height:1.1}
+  .sub{font-size:16px;color:var(--soft);max-width:680px}
+  .meta{display:flex;gap:28px;flex-wrap:wrap;margin-top:22px;padding:18px 22px;background:#fff;border:1px solid var(--border);border-radius:16px}
+  .meta .stat{display:flex;flex-direction:column;gap:2px}
+  .meta .num{font-family:'Poppins';font-weight:800;font-size:26px;letter-spacing:-.02em}
+  .meta .num.was{color:var(--soft)}
+  .meta .num.now{color:var(--coral-dk)}
+  .meta .lbl{font-size:12px;color:var(--soft);font-weight:600}
+  .meta .arrow{align-self:center;font-size:24px;color:var(--coral)}
+
+  .legend{display:flex;gap:18px;flex-wrap:wrap;margin:26px 0 8px}
+  .lg{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--soft)}
+  .dot{width:11px;height:11px;border-radius:3px;flex-shrink:0}
+  .dot.keep{background:var(--keep)} .dot.merge{background:var(--merge)} .dot.cut{background:var(--cut)}
+
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:18px;align-items:start}
+  .col h2{font-family:'Poppins';font-weight:700;font-size:15px;letter-spacing:.02em;margin-bottom:14px;display:flex;align-items:center;gap:9px}
+  .col h2 .badge{font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;background:#fff;border:1px solid var(--border);color:var(--soft)}
+  .list{display:flex;flex-direction:column;gap:8px}
+  .row{display:flex;gap:11px;align-items:flex-start;background:#fff;border:1px solid var(--border);border-radius:12px;padding:11px 13px}
+  .row .n{font-family:'Poppins';font-weight:700;font-size:12px;color:#fff;background:var(--soft);border-radius:6px;min-width:22px;height:22px;display:grid;place-items:center;flex-shrink:0;margin-top:1px}
+  .row .body{flex:1;min-width:0}
+  .row .t{font-weight:600;font-size:14px;line-height:1.35}
+  .row .tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-top:3px;display:inline-block}
+  .row .note{font-size:12.5px;color:var(--soft);margin-top:4px;line-height:1.45}
+  .row.keep .n{background:var(--keep)} .row.keep .tag{color:var(--keep)}
+  .row.merge .n{background:var(--merge)} .row.merge .tag{color:var(--merge)}
+  .row.cut{opacity:.62} .row.cut .n{background:var(--cut)} .row.cut .tag{color:var(--cut)}
+  .row.cut .t{text-decoration:line-through;text-decoration-color:rgba(185,28,28,.5)}
+  .row.new{border-color:var(--coral);box-shadow:0 0 0 1px var(--coral) inset}
+  .row.new .n{background:linear-gradient(135deg,var(--coral),var(--rosa))}
+
+  .why{margin-top:40px;background:#fff;border:1px solid var(--border);border-radius:18px;padding:26px 28px}
+  .why h3{font-family:'Poppins';font-weight:700;font-size:18px;margin-bottom:14px}
+  .why ul{list-style:none;display:flex;flex-direction:column;gap:12px}
+  .why li{display:flex;gap:11px;font-size:14.5px;color:#374151;line-height:1.5}
+  .why li b{color:var(--text)}
+  .why .ic{color:var(--coral-dk);font-weight:800;flex-shrink:0}
+  .ask{margin-top:26px;font-size:14.5px;color:var(--soft);background:#FBEEE4;border:1px solid #F2D9C6;border-radius:14px;padding:16px 20px}
+  .ask b{color:var(--coral-dk)}
+  @media(max-width:760px){.cols{grid-template-columns:1fr}h1{font-size:27px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="eyebrow">Fix #05 · Preview (non ancora applicato)</span>
+  <h1>Home più corta, una sola FAQ, un solo finale.</h1>
+  <p class="sub">Mappa di cosa terrei, unirei e taglierei nella home. Niente è ancora modificato: dimmi se la direzione ti convince e poi la realizzo.</p>
+
+  <div class="meta">
+    <div class="stat"><span class="num was">19</span><span class="lbl">sezioni adesso</span></div>
+    <div class="arrow">→</div>
+    <div class="stat"><span class="num now">12</span><span class="lbl">sezioni proposte</span></div>
+    <div class="stat"><span class="num was">11</span><span class="lbl">voci FAQ adesso</span></div>
+    <div class="arrow">→</div>
+    <div class="stat"><span class="num now">5</span><span class="lbl">FAQ chiave + link</span></div>
+    <div class="stat"><span class="num was">2</span><span class="lbl">finali quasi uguali</span></div>
+    <div class="arrow">→</div>
+    <div class="stat"><span class="num now">1</span><span class="lbl">finale unico</span></div>
+  </div>
+
+  <div class="legend">
+    <span class="lg"><span class="dot keep"></span>Resta</span>
+    <span class="lg"><span class="dot merge"></span>Unito a un altro blocco</span>
+    <span class="lg"><span class="dot cut"></span>Tagliato (ridondante)</span>
+  </div>
+
+  <div class="cols">
+    <div class="col">
+      <h2>Adesso <span class="badge">19 sezioni</span></h2>
+      <div class="list">
+        <div class="row keep"><span class="n">1</span><div class="body"><div class="t">Hero + form</div><span class="tag">resta</span></div></div>
+        <div class="row keep"><span class="n">2</span><div class="body"><div class="t">Trustbar</div><span class="tag">resta</span></div></div>
+        <div class="row merge"><span class="n">3</span><div class="body"><div class="t">Se hai perso anni… (situazioni)</div><span class="tag">unito → blocco "Situazioni"</span></div></div>
+        <div class="row merge"><span class="n">4</span><div class="body"><div class="t">Ti riconosci in queste situazioni?</div><span class="tag">unito → blocco "Situazioni"</span></div></div>
+        <div class="row merge"><span class="n">5</span><div class="body"><div class="t">Tutor &amp; esperti didattici</div><span class="tag">unito → blocco "Persone"</span></div></div>
+        <div class="row keep"><span class="n">6</span><div class="body"><div class="t">La piattaforma</div><span class="tag">resta</span></div></div>
+        <div class="row merge"><span class="n">7</span><div class="body"><div class="t">Le persone (i tutor)</div><span class="tag">unito → blocco "Persone"</span></div></div>
+        <div class="row keep"><span class="n">8</span><div class="body"><div class="t">Oltre 18 indirizzi</div><span class="tag">resta</span></div></div>
+        <div class="row keep"><span class="n">9</span><div class="body"><div class="t">I numeri di Diploma360</div><span class="tag">resta</span></div></div>
+        <div class="row keep"><span class="n">10</span><div class="body"><div class="t">Storie / esperienze</div><span class="tag">resta</span></div></div>
+        <div class="row merge"><span class="n">11</span><div class="body"><div class="t">Non promettiamo scorciatoie</div><span class="tag">unito → blocco "Garanzia"</span></div></div>
+        <div class="row merge"><span class="n">12</span><div class="body"><div class="t">E se cambi idea? (garanzia)</div><span class="tag">unito → blocco "Garanzia"</span></div></div>
+        <div class="row cut"><span class="n">13</span><div class="body"><div class="t">Un percorso diverso per ogni situazione</div><span class="tag">tagliato</span><div class="note">Ripete il messaggio dei blocchi "situazioni" (3–4).</div></div></div>
+        <div class="row merge"><span class="n">14</span><div class="body"><div class="t">FAQ — 11 voci</div><span class="tag">ridotto a 5 + link a faq.html</span></div></div>
+        <div class="row keep"><span class="n">15</span><div class="body"><div class="t">Prezzi</div><span class="tag">resta</span></div></div>
+        <div class="row keep"><span class="n">16</span><div class="body"><div class="t">Burocrazia</div><span class="tag">resta</span></div></div>
+        <div class="row keep"><span class="n">17</span><div class="body"><div class="t">Chi c'è dietro (LaScuola360)</div><span class="tag">resta · unico "chi c'è dietro"</span></div></div>
+        <div class="row keep"><span class="n">18</span><div class="body"><div class="t">Finale — "Pronto a scoprire il tuo percorso?"</div><span class="tag">resta</span></div></div>
+        <div class="row cut"><span class="n">19</span><div class="body"><div class="t">Finale — "Pronto a scoprire il tuo percorso?"</div><span class="tag">tagliato (doppione)</span><div class="note">Identico al 18: due CTA finali in fila.</div></div></div>
+      </div>
+    </div>
+
+    <div class="col">
+      <h2>Proposta <span class="badge">12 sezioni</span></h2>
+      <div class="list">
+        <div class="row keep"><span class="n">1</span><div class="body"><div class="t">Hero + form</div><span class="tag">resta</span></div></div>
+        <div class="row keep"><span class="n">2</span><div class="body"><div class="t">Trustbar</div><span class="tag">resta</span></div></div>
+        <div class="row new"><span class="n">3</span><div class="body"><div class="t">Situazioni — "A chi serve Diploma360"</div><span class="tag" style="color:var(--coral-dk)">da 3+4+13</span><div class="note">Un solo blocco: il messaggio "qualunque sia la tua situazione" detto una volta, con forza.</div></div></div>
+        <div class="row keep"><span class="n">4</span><div class="body"><div class="t">La piattaforma</div><span class="tag">resta</span></div></div>
+        <div class="row new"><span class="n">5</span><div class="body"><div class="t">Le persone — tutor &amp; esperti</div><span class="tag" style="color:var(--coral-dk)">da 5+7</span><div class="note">Tutor per materia + "non sei mai solo" in un blocco unico.</div></div></div>
+        <div class="row keep"><span class="n">6</span><div class="body"><div class="t">Oltre 18 indirizzi</div><span class="tag">resta</span></div></div>
+        <div class="row keep"><span class="n">7</span><div class="body"><div class="t">I numeri di Diploma360</div><span class="tag">resta</span></div></div>
+        <div class="row keep"><span class="n">8</span><div class="body"><div class="t">Storie / esperienze</div><span class="tag">resta</span></div></div>
+        <div class="row new"><span class="n">9</span><div class="body"><div class="t">Garanzia &amp; serietà</div><span class="tag" style="color:var(--coral-dk)">da 11+12</span><div class="note">"Niente scorciatoie" + "se cambi idea / garanzia" in un blocco.</div></div></div>
+        <div class="row new"><span class="n">10</span><div class="body"><div class="t">FAQ essenziali (5) → faq.html</div><span class="tag" style="color:var(--coral-dk)">da 14</span><div class="note">Le 5 domande che bloccano la decisione; il resto sulla pagina FAQ.</div></div></div>
+        <div class="row keep"><span class="n">11</span><div class="body"><div class="t">Prezzi · Burocrazia · Chi c'è dietro</div><span class="tag">resta (15·16·17)</span></div></div>
+        <div class="row keep"><span class="n">12</span><div class="body"><div class="t">Finale unico + CTA</div><span class="tag">un solo finale</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="why">
+    <h3>Perché accorciare</h3>
+    <ul>
+      <li><span class="ic">→</span><div><b>Meno ripetizioni, più fiducia.</b> Il messaggio "qualunque sia la tua situazione" oggi torna in 3 blocchi; detto una volta bene pesa di più.</div></li>
+      <li><span class="ic">→</span><div><b>Decisione più rapida.</b> 11 FAQ in home allungano lo scroll: 5 domande chiave bastano per arrivare al form, il resto vive su <i>faq.html</i>.</div></li>
+      <li><span class="ic">→</span><div><b>Un solo finale.</b> Oggi ci sono due CTA "Pronto a scoprire il tuo percorso?" una dopo l'altra: ne resta una, più decisa.</div></li>
+      <li><span class="ic">→</span><div><b>Nulla di sostanziale si perde.</b> Tutti i contenuti restano: si uniscono blocchi affini, non si cancellano argomenti.</div></li>
+    </ul>
+  </div>
+
+  <p class="ask">Questa è solo la mappa. Dimmi <b>"vai"</b> e realizzo la home corta così, oppure dimmi quali blocchi vuoi tenere separati / quali FAQ consideri indispensabili e adatto la proposta.</p>
+</div>
+</body>
+</html>

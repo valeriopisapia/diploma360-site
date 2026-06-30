@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0,viewport-fit=cover" name="viewport"/>
+<title>Diploma360 — Recupera gli anni persi e preparati al diploma senza stress</title>
+<meta content="Recupera gli anni persi e preparati al diploma valido e riconosciuto dallo Stato italiano, online. Tutor per materia, materiali già organizzati e supporto fino agli esami. 97% promossi. Da 72,68€/mese in 24 rate." name="description"/>
+<link rel="icon" type="image/png" href="foto/logo-diploma360.png"/>
+<link rel="apple-touch-icon" href="foto/logo-diploma360.png"/>
+<link rel="canonical" href="https://www.diploma360.it/"/>
+<meta name="theme-color" content="#E48267"/>
+<meta name="robots" content="index,follow"/>
+<meta property="og:type" content="website"/>
+<meta property="og:locale" content="it_IT"/>
+<meta property="og:site_name" content="Diploma360"/>
+<meta property="og:title" content="Diploma360 — Recupera gli anni persi e preparati al diploma senza stress"/>
+<meta property="og:description" content="Diploma di Stato riconosciuto, online. Tutor per materia e accompagnamento fino agli esami. Consulenza gratuita e senza impegno."/>
+<meta property="og:image" content="foto/logo-diploma360.png"/>
+<meta property="og:url" content="https://www.diploma360.it/"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Diploma360 — Recupera gli anni persi e preparati al diploma senza stress"/>
+<meta name="twitter:description" content="Diploma di Stato riconosciuto, online. Tutor per materia e accompagnamento fino agli esami."/>
+<meta name="twitter:image" content="foto/logo-diploma360.png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --coral:#E48267;--coral-dk:#C7674E;--coral-lt:#F2C3B3;--coral-soft:#FCE6DE;
+  --pink:#EC89C0;--pink-soft:#FBE6F2;
+  --grad:linear-gradient(135deg,#E3815A 0%,#EC89C0 100%);
+  --grad-soft:linear-gradient(135deg,#FFF1EA 0%,#FDEAF4 100%);
+  --bg-warm:#FBEDE7;--bg-chip:#FFF4EE;--surface:#fff;--text:#20242B;--soft:#5E6772;--light:#9CA3AF;
+  --border:#EFD8CF;--green:#27A96B;--green-dk:#1F8856;--green-soft:#E5F7EE;--amber:#F2B540;--ai:#6E56CF;--ai-soft:#EFEDFB;
+  --shadow:0 12px 32px rgba(91,55,40,.10);
+  --shadow-sm:0 6px 18px rgba(91,55,40,.07);
+  --shadow-lg:0 24px 60px rgba(91,55,40,.18);
+  --radius:18px;--radius-lg:24px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:Inter,system-ui,-apple-system,sans-serif;background:
+  radial-gradient(900px circle at 100% 0%,#FAE1E4 0%,#FAE1E4 16%,transparent 55%),
+  radial-gradient(750px circle at 96% 58%,#FAE3DD 0%,transparent 52%),
+  radial-gradient(850px circle at 50% 100%,#FBE4E6 0%,transparent 55%),
+  var(--bg-warm);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh}
+a{text-decoration:none;color:inherit}
+img{display:block}
+h1,h2,h3{font-family:Poppins,Inter,sans-serif;letter-spacing:-.03em;color:var(--text);font-weight:800}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+/* HEADER */
+.header{background:rgba(253,240,235,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:30;transition:transform .32s ease}
+.header.hide{transform:translateY(-100%)}
+.header .wrap{height:68px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:11px;line-height:1}
+.brand-logo{height:38px;width:auto;display:block}
+.brand-mark{width:38px;height:38px;border-radius:50%;background:var(--grad);display:grid;place-items:center;color:#fff;box-shadow:0 6px 14px rgba(228,130,103,.34);font-size:18px}
+.brand small{font-weight:500;font-family:Inter;font-size:11px;color:var(--soft);display:block;margin-top:2px;letter-spacing:.01em}
+.head-actions{display:flex;align-items:center;gap:12px;font-size:14px}
+.head-phone{display:inline-flex;align-items:center;gap:6px;color:var(--text);font-weight:700;font-size:14px}
+.head-phone i{color:var(--coral-dk);font-style:normal}
+
+.btn{font-family:Poppins,sans-serif;font-weight:700;font-size:14px;padding:11px 22px;border-radius:999px;cursor:pointer;border:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;transition:transform .15s,box-shadow .15s,background .15s}
+.btn-lg{font-size:15.5px;padding:15px 28px}
+.btn-sm{font-size:13px;padding:9px 16px}
+.btn-primary{background:var(--grad);color:#fff;box-shadow:0 8px 18px rgba(228,130,103,.34)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 26px rgba(228,130,103,.42)}
+.btn-outline{background:#fff;color:var(--coral-dk);border:1px solid var(--border);box-shadow:var(--shadow-sm)}
+.btn-outline:hover{transform:translateY(-1px);border-color:var(--coral-lt)}
+.btn-wa{background:#25D366;color:#fff;box-shadow:0 6px 14px rgba(37,211,102,.24)}
+.btn-wa:hover{transform:translateY(-1px)}
+
+/* HERO */
+.hero{padding:64px 0 52px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.hero-copy{padding-top:6px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:9px;background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:6px 15px 6px 7px;font-size:12.5px;font-weight:600;color:var(--coral-dk);margin-bottom:24px;box-shadow:var(--shadow-sm)}
+.hero-eyebrow .pill{background:var(--grad);color:#fff;font-family:Poppins;font-weight:700;font-size:11px;letter-spacing:.04em;padding:4px 11px;border-radius:999px}
+.hero h1{font-size:54px;line-height:1.02;letter-spacing:-.035em;margin:0}
+.grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-lead{font-size:18.5px;color:var(--soft);margin-top:22px;max-width:540px;line-height:1.62}
+.hero-bullets{display:grid;grid-template-columns:1fr 1fr;gap:11px 20px;margin-top:26px;max-width:560px}
+.hb{display:flex;align-items:flex-start;gap:10px;font-size:14.5px;color:var(--text);font-weight:600;line-height:1.35}
+.check{width:21px;height:21px;border-radius:50%;background:var(--green-soft);color:var(--green-dk);display:grid;place-items:center;flex:0 0 auto;font-weight:900;font-size:12px;margin-top:1px}
+.hero-cta{display:flex;align-items:center;gap:12px;margin-top:30px;flex-wrap:wrap}
+.hero-phone-cta{display:inline-flex;align-items:center;gap:14px;background:var(--grad);color:#fff;border-radius:16px;padding:13px 26px 13px 14px;box-shadow:0 12px 26px rgba(228,130,103,.34);transition:transform .15s,box-shadow .15s}
+.hero-phone-cta:hover{transform:translateY(-2px);box-shadow:0 18px 34px rgba(228,130,103,.44)}
+.hero-phone-cta .hpc-ic{width:48px;height:48px;border-radius:13px;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.42);display:grid;place-items:center;flex:0 0 auto}
+.hero-phone-cta .hpc-ic svg{width:25px;height:25px}
+.hero-phone-cta .hpc-body{display:flex;flex-direction:column;line-height:1.12}
+.hero-phone-cta .hpc-label{font-size:12.5px;font-weight:600;opacity:.94}
+.hero-phone-cta .hpc-num{font-family:Poppins;font-weight:800;font-size:27px;letter-spacing:-.02em}
+.hero-proof{display:flex;align-items:center;gap:10px;margin-top:24px;flex-wrap:wrap}
+.hero-proof .pf{display:inline-flex;align-items:center;gap:7px;font-weight:600;font-size:13px;color:var(--text);background:#fff;border:1px solid var(--border);border-radius:999px;padding:7px 14px;box-shadow:var(--shadow-sm)}
+.hero-proof .pf b{font-family:Poppins;font-weight:800}
+.hero-proof .stars{color:var(--amber);letter-spacing:1px;font-size:12px}
+.hero-price{margin-top:30px}
+.hero-price .hp-label{display:block;font-family:Poppins;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--coral-dk);margin-bottom:7px}
+.hero-price .hp-line{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.hero-price .hp-amount{font-family:Poppins;font-size:66px;font-weight:800;letter-spacing:-.04em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
+.hero-price .hp-desc{font-family:Poppins;font-size:20px;color:var(--soft);font-weight:700}
+
+/* FORM CARD */
+.form-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:26px 26px 24px;box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+.form-card::before{content:"";position:absolute;inset:-2px;border-radius:inherit;background:var(--grad);z-index:-1;opacity:.22;filter:blur(22px)}
+.form-card::after{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:var(--grad)}
+.form-flag{display:inline-flex;align-items:center;gap:7px;background:var(--green-soft);color:var(--green-dk);font-family:Poppins;font-weight:700;font-size:11.5px;letter-spacing:.02em;padding:6px 12px;border-radius:999px;margin-bottom:14px}
+.form-flag .dotpulse{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(39,169,107,.5);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(39,169,107,.45)}70%{box-shadow:0 0 0 7px rgba(39,169,107,0)}100%{box-shadow:0 0 0 0 rgba(39,169,107,0)}}
+.price-chip{position:relative;background:var(--grad-soft);border:1.5px solid var(--coral-soft);border-radius:16px;padding:14px 16px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.price-chip .pc-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--coral-dk);font-family:Poppins;display:block;margin-bottom:3px}
+.price-chip strong{font-family:Poppins;font-size:34px;letter-spacing:-.04em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:.95;display:block}
+.price-chip .pc-right{text-align:right}
+.price-chip small{color:var(--soft);font-weight:600;display:block;font-size:11.5px;line-height:1.35}
+.pc-badge{display:inline-block;background:#fff;border:1px solid var(--coral-soft);color:var(--coral-dk);font-family:Poppins;font-weight:700;font-size:10.5px;letter-spacing:.02em;padding:3px 9px;border-radius:999px;margin-top:6px}
+.form-card h2{font-size:22px;line-height:1.15;margin-bottom:4px}
+.form-sub{color:var(--soft);font-size:13.5px;margin-bottom:16px;line-height:1.5}
+.field{margin-bottom:11px}
+.field label{display:block;font-size:12px;font-weight:700;color:#303640;margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;height:46px;border:1px solid #D9D2CC;border-radius:12px;background:#fff;font:500 15px Inter,sans-serif;padding:0 14px;color:var(--text);outline:none;-webkit-appearance:none;appearance:none;transition:border-color .15s,box-shadow .15s}
+.field textarea{height:auto;min-height:78px;padding:11px 14px;line-height:1.5;resize:vertical}
+.field select{background:#fff url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23C7674E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>") no-repeat right 14px center;padding-right:36px}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--coral);box-shadow:0 0 0 3px var(--coral-soft)}
+.form-card .btn{width:100%;height:50px;margin-top:8px;font-size:15.5px}
+.privacy{font-size:11px;color:var(--light);line-height:1.45;margin-top:11px;text-align:center}
+.wa-link{font-weight:700;color:var(--green-dk);text-align:center;display:block;margin-top:11px;font-size:13.5px}
+/* consenso + reassurance + whatsapp */
+.form-consent{display:flex;gap:9px;align-items:flex-start;margin:6px 0 2px;font-size:11.5px;color:var(--soft);line-height:1.45;cursor:pointer}
+.form-consent input{width:17px;height:17px;flex:0 0 auto;margin-top:1px;accent-color:var(--coral);cursor:pointer}
+.form-consent a{color:var(--coral-dk);font-weight:700;text-decoration:underline}
+.form-consent.invalid span{color:#E0563E}
+.form-reassure{display:flex;align-items:center;justify-content:center;gap:7px;font-size:12px;font-weight:600;color:var(--soft);margin-top:11px;text-align:center;line-height:1.35}
+.form-reassure .fr-ic{width:16px;height:16px;border-radius:50%;background:var(--green-soft);color:var(--green-dk);display:grid;place-items:center;font-size:9px;font-weight:900;flex:0 0 auto}
+.form-wa{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:13px;padding-top:13px;border-top:1px solid var(--border);font-weight:700;font-size:13px;color:var(--green-dk)}
+.form-wa svg{width:17px;height:17px;flex:0 0 auto}
+.form-wa:hover{color:#157a3e}
+.form-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border);justify-content:center}
+.field input.invalid,.field select.invalid,.field textarea.invalid{border-color:#E0563E;box-shadow:0 0 0 3px rgba(224,86,62,.14)}
+.form-success{text-align:center;padding:20px 8px 6px}
+.form-success .fs-ic{width:58px;height:58px;border-radius:50%;background:var(--green-soft);color:var(--green-dk);display:grid;place-items:center;font-size:27px;font-weight:900;margin:0 auto 14px}
+.form-success h3{font-family:Poppins;font-size:21px;margin-bottom:7px}
+.form-success p{color:var(--soft);font-size:14px;line-height:1.55}
+.form-success a{color:var(--green-dk);font-weight:700;text-decoration:underline}
+.form-tags span{font-size:11px;font-weight:700;color:var(--coral-dk);background:var(--bg-chip);border:1px solid var(--border);border-radius:999px;padding:6px 11px}
+
+/* TRUST BAR — 6 benefit chips */
+.trustbar{background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.trust-grid{display:grid;grid-template-columns:repeat(6,1fr)}
+.trust-item{padding:24px 18px;border-left:1px solid var(--border);display:flex;flex-direction:column;align-items:flex-start;gap:11px;font-size:13.5px;font-weight:700;color:var(--text);line-height:1.32}
+.trust-item:first-child{border-left:0}
+.trust-item .ti-icon{width:42px;height:42px;border-radius:12px;background:var(--grad-soft);border:1px solid var(--coral-soft);color:var(--coral-dk);display:grid;place-items:center;flex:0 0 auto}
+.trust-item .ti-icon svg{width:21px;height:21px}
+
+/* SECTIONS */
+.section{padding:72px 0}
+.section.tight{padding:52px 0}
+.section.airy{padding:92px 0}
+.section.white{background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.section h2{font-size:34px;line-height:1.1;letter-spacing:-.025em}
+.tag{display:inline-flex;align-items:center;gap:7px;font-family:Poppins;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--coral-dk);margin-bottom:12px}
+.tag::before{content:"";width:18px;height:2px;border-radius:2px;background:var(--grad)}
+.sec-lead{font-size:16.5px;color:var(--soft);max-width:620px;margin-top:14px;line-height:1.6}
+.sec-head{margin-bottom:36px;max-width:780px}
+
+/* MID-PAGE CTA RAIL */
+.cta-rail{display:flex;align-items:center;justify-content:space-between;gap:18px 32px;flex-wrap:wrap;background:#fff;border:1px solid var(--coral-soft);border-radius:var(--radius-lg);padding:22px 30px;box-shadow:var(--shadow-sm);margin-top:36px}
+.cta-rail-soft{background:var(--grad-soft)}
+.cta-rail .cr-text b{font-family:Poppins;font-size:19px;font-weight:800;letter-spacing:-.02em;color:var(--text);display:block;line-height:1.2}
+.cta-rail .cr-text span{font-size:14px;color:var(--soft);display:block;margin-top:4px;line-height:1.45}
+.cta-rail .cr-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.cta-rail .cr-phone{display:inline-flex;align-items:center;gap:9px;font-family:Poppins;font-weight:800;font-size:16px;color:var(--coral-dk);background:#fff;border:2px solid var(--coral);border-radius:999px;padding:13px 24px;line-height:1;box-shadow:0 6px 16px rgba(228,130,103,.18);transition:transform .2s,box-shadow .2s,background .2s}
+.cta-rail .cr-phone:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(228,130,103,.28);background:var(--coral-soft)}
+.cta-rail .cr-phone svg{width:18px;height:18px}
+
+/* PER CHI */
+.perchi{background:var(--grad-soft);border:1px solid var(--coral-soft);border-radius:var(--radius-lg);padding:36px;display:grid;grid-template-columns:.82fr 1.18fr;gap:44px;align-items:stretch}
+.perchi-copy{align-self:center}
+.perchi h2{font-size:30px;line-height:1.1;margin-bottom:12px}
+.perchi p{color:var(--soft);font-size:15.5px;line-height:1.58}
+.perchi-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}
+.perchi-item{background:#fff;border:1px solid var(--coral-soft);border-radius:13px;padding:13px 15px;font-weight:600;color:var(--text);font-size:14px;display:flex;gap:10px;align-items:flex-start;line-height:1.4}
+/* photo + floating parent call-out */
+.perchi-media{position:relative;display:flex;flex-direction:column;min-height:392px}
+.perchi-photo{position:relative;flex:1;width:100%;border-radius:20px;overflow:hidden;background:var(--coral-soft);box-shadow:var(--shadow)}
+.perchi-photo img{width:100%;height:100%;object-fit:cover;object-position:center 16%}
+.perchi-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(228,130,103,.08),rgba(236,137,192,.06));mix-blend-mode:multiply}
+.perchi-parent{position:relative;z-index:2;margin:-42px 12px 0;background:var(--grad);color:#fff;border-radius:16px;padding:15px 17px;display:flex;align-items:center;gap:14px;box-shadow:0 16px 32px rgba(228,130,103,.34);transition:transform .15s,box-shadow .15s}
+.perchi-parent:hover{transform:translateY(-2px);box-shadow:0 22px 40px rgba(228,130,103,.44)}
+.pf-illo{width:46px;height:46px;border-radius:13px;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.4);display:grid;place-items:center;flex:0 0 auto}
+.pf-illo svg{width:25px;height:25px;color:#fff}
+.perchi-parent .pf-body{flex:1}
+.perchi-parent b{font-weight:800;display:block;font-family:Poppins;font-size:15px;margin-bottom:3px;line-height:1.2}
+.perchi-parent .pf-sub{font-weight:500;font-size:13px;opacity:.94;line-height:1.4;display:block}
+.perchi-parent .pf-arrow{flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:#fff;color:var(--coral-dk);display:grid;place-items:center;font-size:17px;font-weight:800}
+
+/* METODO PILLARS */
+.metodo-top{display:grid;grid-template-columns:1.12fr .88fr;gap:48px;align-items:center;margin-bottom:40px}
+.metodo-top .sec-head{margin-bottom:0;max-width:none}
+.metodo-photo{position:relative;border-radius:20px;overflow:hidden;box-shadow:var(--shadow);aspect-ratio:4/3;background:var(--coral-soft)}
+.metodo-photo img{width:100%;height:100%;object-fit:cover;object-position:center 28%}
+.metodo-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(228,130,103,.08),rgba(236,137,192,.06));mix-blend-mode:multiply}
+.pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.pillar{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow-sm);transition:transform .18s,box-shadow .18s}
+.pillar:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.pillar .step{font-family:Poppins;font-size:11px;font-weight:700;color:var(--coral-dk);letter-spacing:.1em;margin-bottom:14px;display:inline-flex;align-items:center;gap:8px;text-transform:uppercase}
+.pillar .step .num{width:26px;height:26px;border-radius:9px;background:var(--grad-soft);border:1px solid var(--coral-soft);display:grid;place-items:center;font-size:12px;color:var(--coral-dk)}
+.pillar h3{font-size:16.5px;margin-bottom:7px;line-height:1.25}
+.pillar p{color:var(--soft);font-size:13.5px;line-height:1.52}
+
+/* INDIRIZZI */
+.indirizzi{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.indir-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow-sm);transition:transform .18s,box-shadow .18s}
+.indir-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.indir-card .ic-head{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.indir-card .ic-ic{width:44px;height:44px;border-radius:12px;background:var(--grad-soft);border:1px solid var(--coral-soft);color:var(--coral-dk);display:grid;place-items:center;flex:0 0 auto}
+.indir-card .ic-ic svg{width:22px;height:22px}
+.indir-card .ic-title{font-family:Poppins;font-size:16.5px;font-weight:700;line-height:1.15;display:block}
+.indir-card .ic-count{font-size:12px;color:var(--coral-dk);font-weight:700;font-family:Poppins}
+.indir-list{list-style:none;display:grid;gap:10px}
+.indir-list li{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--text);font-weight:500;line-height:1.35}
+.indir-list .dot{width:18px;height:18px;border-radius:50%;background:var(--green-soft);color:var(--green-dk);display:grid;place-items:center;flex:0 0 auto;font-size:10px;font-weight:900;margin-top:1px}
+
+/* FAMIGLIA INFORMATA */
+.family-box{background:var(--grad-soft);border:1px solid var(--coral-soft);border-radius:var(--radius-lg);padding:40px;display:grid;grid-template-columns:.92fr 1.08fr;gap:44px;align-items:center;box-shadow:var(--shadow-sm)}
+.family-text h2{font-size:27px;line-height:1.1;margin-bottom:12px}
+.family-text p{color:var(--soft);font-size:15.5px;line-height:1.58;margin-bottom:22px}
+.family-bullets{list-style:none;display:grid;gap:14px;margin-top:6px}
+.family-bullets li{display:flex;gap:13px;align-items:flex-start;font-size:14.5px;line-height:1.45;color:var(--text)}
+.fb-icon{width:38px;height:38px;border-radius:11px;background:#fff;border:1px solid var(--coral-soft);color:var(--coral-dk);display:grid;place-items:center;flex:0 0 auto}
+.fb-icon svg{width:19px;height:19px}
+.family-bullets li b{font-family:Poppins;font-weight:700;color:var(--text)}
+.family-bullets li small{display:block;color:var(--soft);font-weight:500;font-size:13px;margin-top:2px;line-height:1.45}
+.family-media{position:relative}
+.family-photo{width:100%;aspect-ratio:4/3.4;border-radius:22px;overflow:hidden;background:var(--grad-soft);box-shadow:var(--shadow);position:relative}
+.family-photo img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.family-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(155deg,rgba(228,130,103,.10),rgba(236,137,192,.08));mix-blend-mode:multiply}
+.family-float{position:absolute;left:-18px;bottom:-18px;background:#fff;border:1px solid var(--border);border-radius:16px;padding:13px 16px;box-shadow:var(--shadow);display:flex;align-items:center;gap:11px;max-width:230px}
+.family-float .ff-ic{width:36px;height:36px;border-radius:50%;background:var(--green-soft);color:var(--green-dk);display:grid;place-items:center;flex:0 0 auto;font-weight:900}
+.family-float .ff-t{font-family:Poppins;font-weight:700;font-size:13px;line-height:1.2}
+.family-float .ff-s{font-size:11.5px;color:var(--soft);font-weight:500}
+.family-box.persone{grid-template-columns:1.08fr .92fr}
+.persone-h{font-size:33px;line-height:1.08;margin-bottom:14px;letter-spacing:-.028em}
+.persone .family-text p{font-size:16px;line-height:1.6;margin-bottom:24px}
+.persone .family-photo{aspect-ratio:4/4.5}
+
+.family-h{font-size:24px;line-height:1.12;margin-bottom:12px}
+.tutor-intro{max-width:700px;margin:54px 0 26px}
+.tutor-intro p{color:var(--soft);font-size:15.5px;line-height:1.55;margin-top:6px}
+
+/* TUTOR GRID */
+.tutor-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.tutor-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:0 0 20px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;align-items:flex-start;gap:5px;overflow:hidden;transition:transform .18s,box-shadow .18s}
+.tutor-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.tutor-photo{width:100%;aspect-ratio:1/1.06;overflow:hidden;background:#F3E8DF;margin-bottom:14px;position:relative}
+.tutor-photo img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.tutor-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(155deg,rgba(228,130,103,.2),rgba(236,137,192,.16));mix-blend-mode:multiply}
+.tutor-verified{position:absolute;top:12px;right:12px;z-index:2;font-size:11px;font-weight:700;color:var(--green-dk);background:rgba(255,255,255,.94);backdrop-filter:blur(4px);border-radius:999px;padding:5px 11px;display:inline-flex;align-items:center;gap:5px;box-shadow:var(--shadow-sm)}
+.tutor-verified .vchk{width:15px;height:15px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-size:9px;font-weight:900}
+.tutor-card>:not(.tutor-photo){padding-left:18px;padding-right:18px}
+.tutor-card b{font-family:Poppins;font-size:16px;line-height:1.2;display:block}
+.tutor-card .tutor-sub{font-family:Poppins;font-size:13px;color:var(--coral-dk);font-weight:700;margin-bottom:2px}
+.tutor-card p{color:var(--soft);font-size:13px;line-height:1.5;flex:1}
+
+/* ASTERISK NOTES */
+.asterisk-note{font-size:11.5px;color:#9C8E86;line-height:1.5;margin-top:14px;font-style:italic}
+.asterisk-note b{color:var(--soft);font-weight:700;font-style:normal;margin-right:3px}
+
+/* GARANZIA — editorial */
+.guarantee{position:relative;background:#fff;border:1px solid var(--coral-soft);border-radius:var(--radius-lg);padding:40px 44px;display:grid;grid-template-columns:auto 1fr auto;gap:32px;align-items:center;box-shadow:var(--shadow);overflow:hidden}
+.guarantee::before{content:"";position:absolute;top:0;left:0;bottom:0;width:6px;background:var(--grad)}
+.seal{width:104px;height:104px;border-radius:50%;background:var(--grad);display:grid;place-items:center;flex:0 0 auto;box-shadow:0 14px 30px rgba(228,130,103,.34);position:relative}
+.seal::after{content:"";position:absolute;inset:7px;border-radius:50%;border:2px dashed rgba(255,255,255,.55)}
+.seal span{font-size:40px;color:#fff;line-height:1}
+.guarantee-badge{display:inline-flex;align-items:center;gap:6px;background:var(--grad-soft);border:1px solid var(--coral-soft);color:var(--coral-dk);border-radius:999px;padding:5px 12px;font-size:11.5px;font-weight:700;margin-bottom:12px;font-family:Poppins}
+.guarantee h2{font-size:28px;margin-bottom:9px;line-height:1.1}
+.guarantee p{font-size:15px;color:var(--soft);max-width:640px;line-height:1.58}
+.guarantee .btn{flex:0 0 auto}
+
+/* PREZZO — testo sinistra, big price destra */
+.price-row{display:grid;grid-template-columns:1.12fr .88fr;gap:40px;align-items:center;background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:44px;box-shadow:var(--shadow-sm)}
+.price-text h2{font-size:30px;line-height:1.12;margin-bottom:13px}
+.price-text p{color:var(--soft);font-size:15.5px;line-height:1.6}
+.price-text .price-bullets{margin-top:20px;display:grid;gap:9px}
+.price-text .price-bullets li{list-style:none;font-size:14.5px;color:var(--text);font-weight:600;display:flex;gap:10px;align-items:flex-start;line-height:1.4}
+.price-box{position:relative;background:var(--grad-soft);border:1.5px solid var(--coral-soft);border-radius:var(--radius-lg);padding:36px 30px;text-align:center;box-shadow:var(--shadow-sm)}
+.price-box .pb-label{font-family:Poppins;font-size:12px;font-weight:700;color:var(--coral-dk);letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:14px}
+.price-big{font-family:Poppins;font-size:74px;letter-spacing:-.05em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:.9;display:inline-flex;align-items:baseline;gap:6px;justify-content:center}
+.price-big .pb-month{font-size:22px;color:var(--soft);font-family:Poppins;font-weight:700;letter-spacing:0;-webkit-text-fill-color:var(--soft);background:none}
+.price-box .pb-sub{color:var(--soft);font-weight:700;font-size:14px;margin-top:14px;display:block}
+.price-box .pb-pills{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:14px}
+.price-box .pb-pills span{font-size:11px;font-weight:700;color:var(--coral-dk);background:#fff;border:1px solid var(--coral-soft);border-radius:999px;padding:5px 11px}
+.price-box .btn{margin-top:20px;width:100%}
+
+/* TESTIMONIAL CAROUSEL */
+.testi-track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 0 18px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.testi-track::-webkit-scrollbar{display:none}
+.testi-card{flex:0 0 calc((100% - 36px)/3);min-width:300px;scroll-snap-align:start;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:13px}
+.testi-card.is-parent{border-color:var(--coral-soft);box-shadow:0 14px 32px rgba(228,130,103,.14)}
+.testi-card .t-head{display:flex;align-items:center;gap:13px}
+.tavatar{width:52px;height:52px;border-radius:50%;overflow:hidden;flex:0 0 auto;background:#F3E8DF;box-shadow:0 4px 12px rgba(91,55,40,.16)}
+.tavatar img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.testi-card .t-name{font-family:Poppins;font-size:14.5px;font-weight:700;line-height:1.2;display:flex;align-items:center;gap:6px}
+.t-badge{font-size:9.5px;font-weight:700;color:var(--coral-dk);background:var(--coral-soft);border-radius:999px;padding:2px 7px;letter-spacing:.02em;text-transform:uppercase;font-family:Poppins}
+.testi-card .t-meta{color:var(--soft);font-weight:600;font-size:12.5px;display:block;margin-top:2px}
+.testi-card .stars{font-size:14px;color:var(--amber);letter-spacing:1px}
+.testi-card p{font-size:14.5px;line-height:1.55;color:var(--text);flex:1}
+.testi-hint{display:none;text-align:center;color:var(--soft);font-size:12px;margin-top:6px}
+
+/* PARTNER MARQUEE */
+.partner-wrap{background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:34px 0;overflow:hidden;position:relative}
+.partner-wrap::before,.partner-wrap::after{content:"";position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none}
+.partner-wrap::before{left:0;background:linear-gradient(to right,#fff,transparent)}
+.partner-wrap::after{right:0;background:linear-gradient(to left,#fff,transparent)}
+.partner-label{text-align:center;color:var(--soft);font-family:Poppins;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:20px}
+.partner-track{display:flex;gap:42px;width:max-content;animation:partner-scroll 32s linear infinite}
+.partner-track:hover{animation-play-state:paused}
+.partner-item{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
+.partner-item img{height:60px;width:auto;max-width:210px;object-fit:contain;opacity:.95;transition:opacity .3s,transform .3s}
+.partner-item:hover img{opacity:1;transform:scale(1.04)}
+@keyframes partner-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* FAQ */
+.faq{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
+.faq details{background:#fff;border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow-sm);overflow:hidden;transition:border-color .15s}
+.faq details[open]{border-color:var(--coral-soft)}
+.faq summary{cursor:pointer;list-style:none;padding:17px 20px;font-family:Poppins;font-weight:700;display:flex;justify-content:space-between;gap:14px;font-size:14.5px;line-height:1.3}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--coral-dk);font-size:22px;line-height:1;flex:0 0 auto}
+.faq details[open] summary::after{content:"–"}
+.faq .answer{padding:0 20px 18px;color:var(--soft);font-size:14px;line-height:1.55}
+
+/* FINAL — editorial */
+.final{padding:40px 0 72px}
+.final-box{position:relative;background:var(--grad);border-radius:var(--radius-lg);padding:48px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:28px;color:#fff;box-shadow:0 22px 50px rgba(228,130,103,.32);overflow:hidden}
+.final-box::after{content:"";position:absolute;top:-40%;right:-6%;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.18),transparent 70%)}
+.final-eyebrow{font-family:Poppins;font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;opacity:.9;margin-bottom:10px;display:block}
+.final-box h2{color:#fff;font-size:32px;line-height:1.08;position:relative}
+.final-box p{font-size:15px;opacity:.95;max-width:560px;margin-top:10px;line-height:1.55;position:relative}
+.final-box .btn{background:#fff;color:var(--coral-dk);position:relative}
+.final-box .btn:hover{transform:translateY(-2px);box-shadow:0 14px 26px rgba(0,0,0,.16)}
+
+/* FOOTER */
+.footer{background:#20242B;color:#AEB5BF;padding:56px 0 26px;font-size:13px}
+.footer .footer-top{display:grid;grid-template-columns:1.5fr .85fr .95fr 1fr;gap:40px;align-items:start}
+.footer-logo{height:34px;width:auto;margin-bottom:16px}
+.footer-claim{font-size:13px;line-height:1.6;color:#9097A1;max-width:300px}
+.footer-social{display:flex;gap:10px;margin-top:18px}
+.footer-social a{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.08);display:grid;place-items:center;color:#C7CDD6;transition:background .15s,color .15s,transform .15s}
+.footer-social a:hover{background:var(--coral);color:#fff;transform:translateY(-2px)}
+.footer-social svg{width:17px;height:17px}
+.footer-col h4{font-family:Poppins;color:#fff;font-size:13px;letter-spacing:.02em;margin-bottom:12px;font-weight:700}
+.footer-col a,.footer-col .fc-item{display:block;color:#AEB5BF;font-size:13px;line-height:1.4;padding:6px 0;transition:color .15s}
+.footer-col a:hover{color:#fff}
+.footer-col .fc-item{color:#9097A1}
+.footer-col .fc-item b{color:#C7CDD6;font-weight:600;font-family:Inter}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.1);margin-top:42px;padding-top:22px;display:flex;justify-content:space-between;gap:28px;flex-wrap:wrap;align-items:flex-start}
+.footer-legal{max-width:700px;color:#7E8590;font-size:11.5px;line-height:1.6}
+.footer-legal b{color:#9097A1;font-weight:700;font-style:normal;margin-right:3px}
+.footer-copy{color:#9097A1;font-size:12px;text-align:right;line-height:1.7}
+.footer-copy b{color:#fff;font-family:Poppins}
+.footer-company{display:block;margin-top:4px;color:#7E8590;font-size:11.5px}
+
+/* COOKIE BANNER */
+.cookie-banner{position:fixed;left:16px;right:16px;bottom:16px;z-index:50;background:#fff;border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow-lg);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:20px;max-width:1148px;margin:0 auto;transform:translateY(140%);opacity:0;transition:transform .35s cubic-bezier(.2,.7,.2,1),opacity .35s}
+.cookie-banner.show{transform:translateY(0);opacity:1}
+.cookie-banner[hidden]{display:none}
+.cookie-banner p{font-size:12.5px;color:var(--soft);line-height:1.5;flex:1;margin:0}
+.cookie-banner p b{font-family:Poppins;color:var(--text);font-weight:700}
+.cookie-banner a{color:var(--coral-dk);font-weight:700;text-decoration:underline}
+.cookie-actions{display:flex;gap:10px;flex-shrink:0;align-items:center}
+.cookie-actions .btn{padding:11px 20px;font-size:13.5px}
+.cookie-reject{background:none;border:none;color:var(--soft);font-family:Poppins;font-weight:700;font-size:13px;cursor:pointer;padding:11px 8px;text-decoration:underline;text-underline-offset:2px}
+.cookie-reject:hover{color:var(--text)}
+
+/* MOBILE STICKY CTA */
+.mobile-cta{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.97);border-top:1px solid var(--border);box-shadow:0 -8px 24px rgba(91,55,40,.1);z-index:40;padding:10px 12px;gap:8px}
+.mobile-cta .btn{flex:1;padding:14px 14px;font-size:14.5px}
+.mobile-cta .btn svg{flex:0 0 auto}
+.mobile-cta .btn-wa{flex:0 0 52px;padding:14px 0}
+
+/* FLOATING ACTIONS (desktop) */
+.float-actions{position:fixed;left:50%;bottom:24px;z-index:45;display:flex;align-items:center;gap:12px;opacity:0;visibility:hidden;transform:translateX(-50%) translateY(14px);transition:opacity .25s,transform .25s,visibility .25s}
+.float-actions.visible{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+.float-call,.float-wa{display:inline-flex;align-items:center;gap:11px;color:#fff;border-radius:999px;padding:12px 26px 12px 13px;font-family:Poppins;font-weight:800;font-size:17px;letter-spacing:-.01em;transition:transform .2s,box-shadow .2s}
+.float-call{background:var(--grad);box-shadow:0 14px 32px rgba(228,130,103,.42)}
+.float-wa{background:#25D366;box-shadow:0 14px 32px rgba(37,211,102,.4)}
+.float-actions.visible .float-call:hover{transform:translateY(-2px);box-shadow:0 18px 38px rgba(228,130,103,.5)}
+.float-actions.visible .float-wa:hover{transform:translateY(-2px);box-shadow:0 18px 38px rgba(37,211,102,.5)}
+.float-call .fc-ic,.float-wa .fc-ic{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.42);display:grid;place-items:center;flex:0 0 auto}
+.float-call .fc-ic svg,.float-wa .fc-ic svg{width:18px;height:18px}
+.float-call .fc-num,.float-wa .fc-num{line-height:1}
+@media(max-width:640px){.float-actions{display:none}}
+
+/* ============================ */
+/* TABLET                       */
+/* ============================ */
+@media(max-width:1000px){
+  .hero{padding:44px 0 36px}
+  .hero .wrap{grid-template-columns:1fr;gap:38px}
+  .hero h1{font-size:44px}
+  .hero-copy{padding-top:0}
+  .hero-lead,.hero-bullets{max-width:none}
+  .form-card{max-width:540px;width:100%;margin:0 auto}
+  .trust-grid{grid-template-columns:repeat(3,1fr)}
+  .trust-item:nth-child(3n+1){border-left:0}
+  .trust-item:nth-child(n+4){border-top:1px solid var(--border)}
+  .perchi,.price-row{grid-template-columns:1fr;gap:30px}
+  .family-box,.family-box.persone{grid-template-columns:1fr;gap:30px;padding:32px 28px}
+  .family-media{max-width:440px;margin:0 auto;width:100%}
+  .guarantee{grid-template-columns:auto 1fr;gap:24px 28px;padding:34px 30px}
+  .guarantee .btn{grid-column:1/-1;justify-self:start}
+  .tutor-grid{grid-template-columns:repeat(2,1fr);gap:14px}
+  .price-row{padding:34px 30px}
+  .pillars{grid-template-columns:repeat(2,1fr)}
+  .metodo-top{grid-template-columns:1fr;gap:28px;margin-bottom:32px}
+  .metodo-photo{aspect-ratio:16/8;max-width:560px}
+  .indirizzi{grid-template-columns:1fr 1fr}
+  .final-box{grid-template-columns:1fr;padding:34px 30px}
+  .footer .footer-top{grid-template-columns:1fr 1fr;gap:32px}
+  .footer-claim{max-width:none}
+  .faq{grid-template-columns:1fr}
+  .testi-card{flex-basis:calc((100% - 18px)/2);min-width:280px}
+  .section{padding:56px 0}
+  .section.airy{padding:64px 0}
+  .section h2{font-size:28px}
+}
+
+/* ============================ */
+/* MOBILE                       */
+/* ============================ */
+@media(max-width:640px){
+  body{padding-bottom:74px}
+  .wrap{padding:0 16px}
+  .header .wrap{height:60px}
+  .head-phone{display:none}
+  .head-actions .btn{padding:9px 13px;font-size:12.5px;gap:6px}
+  .head-actions .btn-wa{padding:9px 11px}
+  .head-actions .wa-label{display:none}
+  .hide-sm{display:none}
+  .brand-logo{height:30px}
+
+  .hero{padding:26px 0 22px}
+  .hero .wrap{gap:22px}
+  .hero-eyebrow{font-size:11.5px;margin-bottom:14px}
+  .hero h1{font-size:31px;line-height:1.06}
+  .hero-lead{font-size:15.5px;margin-top:14px;line-height:1.55}
+  .hero-bullets{grid-template-columns:1fr;gap:8px;margin-top:18px}
+  .hb{font-size:14px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:11px 13px}
+  .hero-cta{margin-top:20px;flex-direction:column;align-items:stretch}
+  .hero-cta .btn{width:100%}
+  .hero-cta .btn-outline{display:none}
+  .hero-phone-cta{justify-content:center;padding:12px 22px}
+  .hero-phone-cta .hpc-num{font-size:24px}
+  .hero-proof{margin-top:16px;gap:8px}
+  .hero-proof .pf{font-size:12px;padding:6px 12px}
+  .hero-price{margin-top:22px}
+  .hero-price .hp-amount{font-size:52px}
+  .hero-price .hp-desc{font-size:17px}
+
+  .form-card{padding:22px 18px 20px;border-radius:18px;max-width:none}
+  .price-chip{padding:13px 14px}
+  .price-chip strong{font-size:30px}
+  .form-card h2{font-size:19px}
+  .form-sub{font-size:13px}
+  .field input,.field select,.field textarea{height:48px;font-size:16px}
+  .field textarea{height:auto;min-height:84px}
+  .form-card .btn{height:50px;font-size:15px}
+
+  .trust-grid{grid-template-columns:repeat(2,1fr)}
+  .trust-item{padding:18px 14px;border-left:1px solid var(--border) !important;border-top:1px solid var(--border);font-size:13px;gap:9px}
+  .trust-item:nth-child(odd){border-left:0 !important}
+  .trust-item:nth-child(-n+2){border-top:0}
+  .trust-item .ti-icon{width:38px;height:38px;border-radius:11px}
+  .trust-item .ti-icon svg{width:19px;height:19px}
+
+  .section{padding:42px 0}
+  .section.airy{padding:48px 0}
+  .section h2{font-size:24px}
+
+  .perchi{padding:26px 20px;border-radius:18px}
+  .perchi h2{font-size:23px}
+  .cta-rail{padding:20px;gap:16px;margin-top:26px}
+  .cta-rail .cr-actions{width:100%;flex-direction:column;align-items:stretch}
+  .cta-rail .cr-actions .btn{width:100%}
+  .cta-rail .cr-phone{justify-content:center}
+  .perchi-list{grid-template-columns:1fr;gap:9px}
+  .perchi-media{min-height:0}
+  .perchi-photo{aspect-ratio:4/3.2}
+  .perchi-parent{flex-wrap:wrap;gap:12px;padding:16px 18px;margin:-32px 10px 0}
+  .perchi-parent .pf-arrow{display:none}
+  .family-box,.family-box.persone{grid-template-columns:1fr;padding:24px 18px;gap:24px}
+  .family-text h2{font-size:23px}
+  .family-h{font-size:21px}
+  .persone-h{font-size:24px}
+  .persone .family-text p{font-size:14.5px}
+  .persone .family-photo{aspect-ratio:4/3.6}
+  .tutor-intro{margin:32px 0 16px}
+  .family-media{max-width:none}
+  .family-float{left:10px;right:10px;bottom:-16px;max-width:none}
+  .pillars{grid-template-columns:1fr;gap:11px}
+  .indirizzi{grid-template-columns:1fr;gap:11px}
+  .pillar{padding:20px}
+  .pillar h3{font-size:16px}
+
+  .tutor-grid{grid-template-columns:1fr 1fr;gap:11px}
+  .tutor-card{padding:0 0 16px}
+  .tutor-card>:not(.tutor-photo){padding-left:14px;padding-right:14px}
+  .tutor-card b{font-size:14.5px}
+  .tutor-card p{font-size:12.5px}
+  .tutor-verified{top:9px;right:9px;padding:4px 9px;font-size:10px}
+
+  .guarantee{grid-template-columns:1fr;text-align:center;padding:28px 22px;gap:18px;justify-items:center}
+  .guarantee::before{width:100%;height:6px;bottom:auto}
+  .guarantee p{font-size:14px}
+  .guarantee .btn{justify-self:center}
+  .seal{width:84px;height:84px}
+  .seal span{font-size:32px}
+
+  .price-row{padding:26px 20px;border-radius:18px;gap:24px}
+  .price-text h2{font-size:23px}
+  .price-text p{font-size:14px}
+  .price-box{padding:28px 22px;border-radius:18px}
+  .price-big{font-size:56px}
+  .price-big .pb-month{font-size:18px}
+
+  .testi-card{flex-basis:85%;min-width:260px;padding:20px}
+  .testi-card p{font-size:14px}
+  .testi-hint{display:block}
+  .partner-wrap{padding:24px 0}
+  .partner-track{gap:30px;animation-duration:24s}
+  .partner-item img{height:46px;max-width:170px}
+  .partner-wrap::before,.partner-wrap::after{width:40px}
+
+  .faq summary{padding:15px 16px;font-size:14px}
+  .faq .answer{padding:0 16px 16px;font-size:13.5px}
+
+  .final{padding:18px 0 36px}
+  .final-box{padding:28px 22px;border-radius:18px;text-align:center}
+  .final-box h2{font-size:23px}
+  .final-box p{font-size:14px;margin-left:auto;margin-right:auto}
+  .final-box .btn{justify-self:center}
+
+  .footer{padding:40px 0 24px}
+  .footer .footer-top{grid-template-columns:1fr;gap:28px}
+  .footer-bottom{flex-direction:column;gap:16px;margin-top:30px}
+  .footer-copy{text-align:left}
+  .cookie-banner{flex-direction:column;align-items:stretch;bottom:84px;left:10px;right:10px;padding:14px 16px;gap:12px}
+  .cookie-actions{justify-content:stretch}
+  .cookie-actions .btn{flex:1}
+  .mobile-cta{display:flex}
+}
+
+@media(max-width:360px){
+  .hero h1{font-size:28px}
+  .price-big{font-size:50px}
+}
+</style>
+</head>
+<body>
+<template id="__bundler_thumbnail">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E3815A"/><stop offset="1" stop-color="#EC89C0"/></linearGradient></defs><rect width="100" height="100" fill="#FBEDE7"/><g transform="translate(30 28)" fill="none" stroke="url(#g)" stroke-width="6" stroke-linecap="round"><path d="M34 20a17 17 0 1 1-5-12"/><path d="M30 2l4 6-7 2z" fill="url(#g)" stroke="none"/></g><text x="50" y="78" font-family="Poppins,Arial,sans-serif" font-size="13" font-weight="800" fill="url(#g)" text-anchor="middle">Diploma360</text></svg>
+</template>
+<header class="header">
+  <div class="wrap">
+    <a class="brand" href="#"><img class="brand-logo" src="foto/logo-diploma360.png" alt="Diploma360 — Powered by LaScuola360"/></a>
+    <div class="head-actions">
+      <a class="btn btn-primary btn-sm head-call" href="tel:+390684280999"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Chiama ora</a>
+      <a class="btn btn-wa btn-sm" href="https://wa.me/393517214644"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.27.86 5.82 2.42a8.2 8.2 0 0 1 2.42 5.82c0 4.54-3.7 8.24-8.24 8.24-1.52 0-3.01-.41-4.3-1.19l-.31-.18-3.12.82.83-3.04-.2-.32a8.18 8.18 0 0 1-1.26-4.35c0-4.54 3.7-8.24 8.24-8.24zm-2.9 4.43c-.14 0-.36.05-.55.26-.19.21-.72.71-.72 1.73s.74 2.01.84 2.15c.1.14 1.45 2.21 3.5 3.1.49.21.87.34 1.17.43.49.16.94.13 1.29.08.39-.06 1.21-.49 1.38-.97.17-.48.17-.88.12-.97-.05-.08-.19-.13-.39-.23-.21-.1-1.21-.6-1.4-.67-.19-.07-.32-.1-.46.1-.14.21-.53.67-.65.81-.12.14-.24.16-.44.05-.21-.1-.87-.32-1.66-1.02-.61-.55-1.03-1.22-1.15-1.43-.12-.21-.01-.32.09-.42.09-.09.21-.24.31-.36.1-.12.14-.21.21-.35.07-.14.03-.26-.02-.36-.05-.1-.46-1.12-.63-1.53-.17-.4-.34-.35-.46-.36z"/></svg> <span class="wa-label"><span class="hide-sm">Scrivici su </span>WhatsApp</span></a>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- HERO + FORM -->
+<section class="hero" data-screen-label="Hero + Form">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="hero-eyebrow"><span class="pill">2026 / 2027</span> Iscrizioni aperte · consulenza gratuita</span>
+      <h1>Recupera gli anni persi e <span class="grad-text">preparati al diploma</span> senza stress.</h1>
+      <p class="hero-lead">Un percorso online costruito sui tuoi anni da recuperare, con materiali già organizzati, tutor per materia e supporto fino agli esami. Diploma valido e riconosciuto dallo Stato italiano.</p>
+      <div class="hero-price">
+        <span class="hp-label">A partire da</span>
+        <div class="hp-line"><span class="hp-amount">72,68€</span><span class="hp-desc">al mese</span></div>
+      </div>
+    </div>
+
+    <aside class="form-card" id="form">
+      <span class="form-flag"><span class="dotpulse"></span> Gratis e senza impegno</span>
+      <h2>Scopri gratis il tuo percorso.</h2>
+      <p class="form-sub">Lascia i dati: ti aiutiamo a capire anni recuperabili, indirizzo e costi.</p>
+      <form id="lead-form" action="https://formspree.io/f/REPLACE_ID" method="POST" novalidate>
+        <!-- DEV: sostituisci action con il tuo endpoint (Formspree / Web3Forms / backend interno). I "name" dei campi sono già pronti. -->
+        <div class="field"><label for="lf-nome">Nome e cognome</label><input id="lf-nome" name="nome" placeholder="Es. Marco Rossi" type="text" autocomplete="name" required/></div>
+        <div class="field"><label for="lf-tel">Telefono</label><input id="lf-tel" name="telefono" placeholder="Es. 333 1234567" type="tel" inputmode="tel" autocomplete="tel" required/></div>
+        <div class="field"><label for="lf-email">Email</label><input id="lf-email" name="email" placeholder="nome@email.it" type="email" inputmode="email" autocomplete="email" required/></div>
+        <div class="field"><label for="lf-msg">Messaggio (facoltativo)</label><textarea id="lf-msg" name="messaggio" placeholder="Raccontaci la situazione: anni da recuperare, indirizzo, dubbi…" rows="3"></textarea></div>
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0"/>
+        <input type="hidden" name="_subject" value="Nuova richiesta consulenza — Diploma360"/>
+        <input type="hidden" name="origine" value="Landing Ads — Genitori"/>
+        <label class="form-consent" for="lf-privacy"><input type="checkbox" name="privacy_consent" id="lf-privacy" value="si" required/><span>Ho letto la <a href="https://schoolr.net/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a> e acconsento a essere ricontattato per la consulenza.</span></label>
+        <button class="btn btn-primary" type="submit">Richiedi la consulenza gratuita</button>
+        <p class="form-reassure"><span class="fr-ic">✓</span> Risposta entro 24h · Nessun impegno · Dati riservati</p>
+        <a class="form-wa" href="https://wa.me/393517214644"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.27.86 5.82 2.42a8.2 8.2 0 0 1 2.42 5.82c0 4.54-3.7 8.24-8.24 8.24-1.52 0-3.01-.41-4.3-1.19l-.31-.18-3.12.82.83-3.04-.2-.32a8.18 8.18 0 0 1-1.26-4.35c0-4.54 3.7-8.24 8.24-8.24zm-2.9 4.43c-.14 0-.36.05-.55.26-.19.21-.72.71-.72 1.73s.74 2.01.84 2.15c.1.14 1.45 2.21 3.5 3.1.49.21.87.34 1.17.43.49.16.94.13 1.29.08.39-.06 1.21-.49 1.38-.97.17-.48.17-.88.12-.97-.05-.08-.19-.13-.39-.23-.21-.1-1.21-.6-1.4-.67-.19-.07-.32-.1-.46.1-.14.21-.53.67-.65.81-.12.14-.24.16-.44.05-.21-.1-.87-.32-1.66-1.02-.61-.55-1.03-1.22-1.15-1.43-.12-.21-.01-.32.09-.42.09-.09.21-.24.31-.36.1-.12.14-.21.21-.35.07-.14.03-.26-.02-.36-.05-.1-.46-1.12-.63-1.53-.17-.4-.34-.35-.46-.36z"/></svg> Preferisci scrivere? Scrivici su WhatsApp</a>
+      </form>
+      <div class="form-success" id="lead-success" hidden>
+        <div class="fs-ic">✓</div>
+        <h3>Richiesta inviata!</h3>
+        <p>Grazie, ti ricontattiamo entro 24h. Se vuoi, intanto scrivici su <a href="https://wa.me/393517214644">WhatsApp</a>.</p>
+      </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- TRUST BAR — 6 benefit -->
+<section class="trustbar" data-screen-label="Trust bar">
+  <div class="trust-grid">
+    <div class="trust-item">
+      <span class="ti-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></span>
+      Recupera più anni in 1
+    </div>
+    <div class="trust-item">
+      <span class="ti-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+      Nessun obbligo di frequenza
+    </div>
+    <div class="trust-item">
+      <span class="ti-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+      Lezioni disponibili H24
+    </div>
+    <div class="trust-item">
+      <span class="ti-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+      Oltre 3.000 tutor
+    </div>
+    <div class="trust-item">
+      <span class="ti-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
+      Promosso o Ripreparato
+    </div>
+    <div class="trust-item">
+      <span class="ti-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2" ry="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></span>
+      Diploma riconosciuto dal MIM
+    </div>
+  </div>
+  <p class="asterisk-note" style="text-align:center;padding:14px 24px 18px;margin:0">
+    <b>*</b>Promosso o Ripreparato: garanzia inclusa nei piani Plus e Max, secondo condizioni. Se non passi l'esame, ti riprepariamo gratis.
+    <b style="margin-left:10px">*</b>97% promossi: dati interni Diploma360; i risultati possono variare in base alla situazione di partenza e all'impegno dello studente.
+  </p>
+</section>
+
+<!-- PER CHI -->
+<section class="section" data-screen-label="Per chi è">
+  <div class="wrap">
+    <div class="perchi">
+      <div class="perchi-media">
+        <div class="perchi-photo">
+          <img src="foto/chi.jpg" alt="Studente che riprende il percorso verso il diploma" loading="lazy"/>
+        </div>
+        <a class="perchi-parent" href="#famiglia">
+          <span class="pf-illo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 20v-1.5A4.5 4.5 0 0 1 7.5 14h3A4.5 4.5 0 0 1 15 18.5V20"/><path d="M16 20v-1a3.5 3.5 0 0 1 5-3.16"/></svg></span>
+          <span class="pf-body"><b>Sei un genitore preoccupato per tuo figlio?</b><span class="pf-sub">Ti aiutiamo a capire se Diploma360 può funzionare nella sua situazione.</span></span>
+          <span class="pf-arrow">→</span>
+        </a>
+      </div>
+      <div class="perchi-copy">
+        <div class="tag">Per chi è</div>
+        <h2>Quando la scuola tradizionale non basta.</h2>
+        <p>Capita più spesso di quanto si pensi. La soluzione non è studiare di più, ma sapere cosa studiare, in che ordine e con quali strumenti — con qualcuno che ti accompagna fino agli esami.</p>
+        <div class="perchi-list">
+          <div class="perchi-item"><span class="check">✓</span> Hai lasciato la scuola e vuoi rientrare</div>
+          <div class="perchi-item"><span class="check">✓</span> Sei stato bocciato uno o più anni</div>
+          <div class="perchi-item"><span class="check">✓</span> Lavori o hai poco tempo per studiare</div>
+          <div class="perchi-item"><span class="check">✓</span> Cerchi un percorso flessibile, online</div>
+          <div class="perchi-item"><span class="check">✓</span> Vuoi essere seguito, non solo iscritto</div>
+          <div class="perchi-item"><span class="check">✓</span> Hai DSA, BES o difficoltà nello studio</div>
+        </div>
+      </div>
+    </div>
+    <div class="cta-rail cta-rail-soft">
+      <div class="cr-text">
+        <b>Non sai se fa al caso tuo o di tuo figlio?</b>
+        <span>Te lo diciamo in una consulenza gratuita, senza impegno: bastano due minuti.</span>
+      </div>
+      <div class="cr-actions">
+        <a class="btn btn-primary btn-lg" href="#form">Richiedi la consulenza gratuita</a>
+        <a class="cr-phone" href="tel:+390684280999"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> 06 84 280 999</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METODO 4 PILLARS -->
+<section class="section white" id="metodo" data-screen-label="Cos'è Diploma360">
+  <div class="wrap">
+    <div class="metodo-top">
+      <div class="sec-head">
+        <div class="tag">Cos'è Diploma360</div>
+        <h2>Perché Diploma360 è diverso.</h2>
+        <p class="sec-lead">Non ti diamo solo contenuti da studiare. Organizziamo un percorso: partiamo dagli anni da recuperare, costruiamo un piano, mettiamo a disposizione materiali e tutor, e ti accompagniamo fino agli esami.</p>
+      </div>
+      <div class="metodo-photo">
+        <img src="foto/studio.jpg" alt="Studente che segue le lezioni online sulla piattaforma Diploma360" loading="lazy"/>
+      </div>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <span class="step"><span class="num">01</span> Persone</span>
+        <h3>Tutor + esperto didattico</h3>
+        <p>Un tutor per ogni materia e un referente che costruisce il piano insieme a te. Online non significa da solo.</p>
+      </div>
+      <div class="pillar">
+        <span class="step"><span class="num">02</span> Metodo</span>
+        <h3>Personalizzato sui tuoi anni</h3>
+        <p>Si parte dagli anni reali da recuperare, non da un programma standard. Materie e tempi calibrati su di te.</p>
+      </div>
+      <div class="pillar">
+        <span class="step"><span class="num">03</span> Strumenti</span>
+        <h3>Piattaforma + AI</h3>
+        <p>Videolezioni, materiali, quiz, Tutore.AI e Riepilogo360: ogni lezione diventa riassunto, podcast e flashcard.</p>
+      </div>
+      <div class="pillar">
+        <span class="step"><span class="num">04</span> Esami</span>
+        <h3>Fino al diploma</h3>
+        <p>Candidatura, fascicolo, PCTO, tesina e sede d'esame: ti seguiamo anche sui passaggi organizzativi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDIRIZZI -->
+<section class="section" id="indirizzi" data-screen-label="Indirizzi">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="tag">I diplomi</div>
+      <h2>18 indirizzi tra cui scegliere.</h2>
+      <p class="sec-lead">Ti prepariamo agli esami per il diploma di Stato riconosciuto su licei, istituti tecnici e professionali. In consulenza valutiamo l'indirizzo più adatto in base alla storia scolastica, agli anni da recuperare e all'esame da sostenere.</p>
+    </div>
+    <div class="indirizzi">
+      <div class="indir-card">
+        <div class="ic-head">
+          <span class="ic-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1 2.7 2.5 6 2.5s6-1.5 6-2.5v-5"/></svg></span>
+          <span><span class="ic-title">Licei</span><span class="ic-count">6 indirizzi</span></span>
+        </div>
+        <ul class="indir-list">
+          <li><span class="dot">✓</span> Scientifico</li>
+          <li><span class="dot">✓</span> Scienze Applicate</li>
+          <li><span class="dot">✓</span> Linguistico</li>
+          <li><span class="dot">✓</span> Classico</li>
+          <li><span class="dot">✓</span> Scienze Umane</li>
+          <li><span class="dot">✓</span> Artistico</li>
+        </ul>
+      </div>
+      <div class="indir-card">
+        <div class="ic-head">
+          <span class="ic-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
+          <span><span class="ic-title">Istituti Tecnici</span><span class="ic-count">6 indirizzi</span></span>
+        </div>
+        <ul class="indir-list">
+          <li><span class="dot">✓</span> Amministrazione, Finanza e Marketing</li>
+          <li><span class="dot">✓</span> Turismo</li>
+          <li><span class="dot">✓</span> Informatica e Telecomunicazioni</li>
+          <li><span class="dot">✓</span> Costruzioni, Ambiente e Territorio</li>
+          <li><span class="dot">✓</span> Meccanica e Meccatronica</li>
+          <li><span class="dot">✓</span> Elettronica ed Elettrotecnica</li>
+        </ul>
+      </div>
+      <div class="indir-card">
+        <div class="ic-head">
+          <span class="ic-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
+          <span><span class="ic-title">Istituti Professionali</span><span class="ic-count">6 indirizzi</span></span>
+        </div>
+        <ul class="indir-list">
+          <li><span class="dot">✓</span> Servizi per la Sanità e l'Assistenza Sociale</li>
+          <li><span class="dot">✓</span> Enogastronomia e Ospitalità Alberghiera</li>
+          <li><span class="dot">✓</span> Servizi Commerciali</li>
+          <li><span class="dot">✓</span> Manutenzione e Assistenza Tecnica</li>
+          <li><span class="dot">✓</span> Servizi per l'Agricoltura</li>
+          <li><span class="dot">✓</span> Industria e Artigianato Made in Italy</li>
+        </ul>
+      </div>
+    </div>
+    <p class="asterisk-note" style="text-align:center"><b>*</b>Indirizzi attivabili in base alla normativa e alla disponibilità. In consulenza verifichiamo l'indirizzo più adatto al tuo percorso.</p>
+  </div>
+</section>
+
+<!-- PARTNER -->
+<section class="partner-wrap" data-screen-label="Partner">
+  <div class="wrap"><div class="partner-label">Con il supporto e la fiducia di</div></div>
+  <div class="partner-track">
+    <div class="partner-item"><img src="foto/partner/cdp.png" alt="Cassa Depositi e Prestiti" loading="lazy"/></div>
+    <div class="partner-item"><img src="foto/partner/edenred.png" alt="Edenred" loading="lazy"/></div>
+    <div class="partner-item"><img src="foto/partner/jointly.png" alt="Jointly" loading="lazy"/></div>
+    <div class="partner-item"><img src="foto/partner/coop.png" alt="Coop" loading="lazy"/></div>
+    <div class="partner-item"><img src="foto/partner/edison.png" alt="Edison" loading="lazy"/></div>
+    <div class="partner-item"><img src="foto/partner/epassi.png" alt="Epassi" loading="lazy"/></div>
+    <div class="partner-item"><img src="foto/partner/marsh.png" alt="Marsh" loading="lazy"/></div>
+    <div class="partner-item"><img src="foto/partner/nana_bianca.png" alt="Nana Bianca" loading="lazy"/></div>
+    <div class="partner-item"><img src="foto/partner/cdp.png" alt="" aria-hidden="true" loading="lazy"/></div>
+    <div class="partner-item"><img src="foto/partner/edenred.png" alt="" aria-hidden="true" loading="lazy"/></div>
+    <div class="partner-item"><img src="foto/partner/jointly.png" alt="" aria-hidden="true" loading="lazy"/></div>
+    <div class="partner-item"><img src="foto/partner/coop.png" alt="" aria-hidden="true" loading="lazy"/></div>
+    <div class="partner-item"><img src="foto/partner/edison.png" alt="" aria-hidden="true" loading="lazy"/></div>
+    <div class="partner-item"><img src="foto/partner/epassi.png" alt="" aria-hidden="true" loading="lazy"/></div>
+    <div class="partner-item"><img src="foto/partner/marsh.png" alt="" aria-hidden="true" loading="lazy"/></div>
+    <div class="partner-item"><img src="foto/partner/nana_bianca.png" alt="" aria-hidden="true" loading="lazy"/></div>
+  </div>
+</section>
+
+<!-- LE PERSONE + FAMIGLIA (sezione unica) -->
+<section class="section airy" id="famiglia" data-screen-label="Le persone e la famiglia">
+  <div class="wrap">
+    <div class="family-box persone">
+      <div class="family-text">
+        <div class="tag">Le persone</div>
+        <h2 class="persone-h">Online non significa da soli. Né per chi studia, né per chi gli sta vicino.</h2>
+        <p>Un tutor per ogni materia e un esperto didattico costruiscono il percorso insieme allo studente — e una famiglia che resta informata a ogni passo. La tecnologia organizza lo studio. Le persone fanno la differenza.</p>
+        <ul class="family-bullets">
+          <li><span class="fb-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 12 0v1"/><path d="M18 8h4M20 6v4"/></svg></span><span><b>Profilo genitore</b><small>Accesso dedicato per vedere materie, progressi e prossimi passi.</small></span></li>
+          <li><span class="fb-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="14" y2="13"/><line x1="8" y1="17" x2="12" y2="17"/></svg></span><span><b>Report periodici</b><small>Aggiornamenti sui risultati delle verifiche e sugli obiettivi della settimana.</small></span></li>
+          <li><span class="fb-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg></span><span><b>Tutor raggiungibile</b><small>Puoi parlare con l'esperto didattico che segue tuo figlio.</small></span></li>
+        </ul>
+      </div>
+      <div class="family-media">
+        <div class="family-photo">
+          <img src="foto/p_male.jpg" alt="Tutor Diploma360 — laureato e abilitato" loading="lazy"/>
+        </div>
+        <div class="family-float">
+          <span class="ff-ic">✓</span>
+          <div><div class="ff-t">Tutor verificato</div><div class="ff-s">Laureato e abilitato</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GARANZIA -->
+<section class="section tight" data-screen-label="Garanzia">
+  <div class="wrap">
+    <div class="guarantee">
+      <div class="seal"><span>♥</span></div>
+      <div>
+        <span class="guarantee-badge">♥ Garanzia Diploma360</span>
+        <h2>Promosso o Ripreparato.</h2>
+        <p>Non promettiamo scorciatoie: il diploma non si compra, si prepara. Nei piani Plus e Max, se non passi l'esame ti riprepariamo gratis, secondo condizioni. Studio, tutor, materiali e supporto fino agli esami.</p>
+      </div>
+      <a class="btn btn-primary btn-lg" href="#form">Voglio una consulenza</a>
+    </div>
+  </div>
+</section>
+
+<!-- PREZZO -->
+<section class="section white airy" id="prezzi" data-screen-label="Prezzo">
+  <div class="wrap">
+    <div class="price-row">
+      <div class="price-text">
+        <div class="tag">Prezzi trasparenti</div>
+        <h2>Un percorso accessibile, costruito su misura.</h2>
+        <p>Il prezzo del tuo percorso dipende dagli anni da recuperare e dal livello di supporto. Pagamento rateizzabile in 24 mensilità. Durante la consulenza gratuita ti spieghiamo il piano più adatto e quanto costa esattamente — senza sorprese.</p>
+        <ul class="price-bullets">
+          <li><span class="check">✓</span> 24 rate</li>
+          <li><span class="check">✓</span> Consulenza gratuita prima di scegliere</li>
+          <li><span class="check">✓</span> Garanzia Promosso o Ripreparato disponibile</li>
+        </ul>
+      </div>
+      <div class="price-box">
+        <span class="pb-label">A partire da</span>
+        <div class="price-big">72,68€<span class="pb-month">/mese</span></div>
+        <span class="pb-sub">in 24 rate</span>
+        <div class="pb-pills"><span>24 rate</span><span>Senza sorprese</span></div>
+        <a class="btn btn-primary btn-lg" href="#form">Scopri il tuo piano</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="section tight" data-screen-label="Testimonial">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:24px">
+      <div class="tag">Esperienze</div>
+      <h2>Chi era nella tua situazione, ce l'ha fatta.</h2>
+    </div>
+    <div class="testi-track">
+      <div class="testi-card is-parent">
+        <div class="t-head"><div class="tavatar"><img src="foto/contatti.jpg" alt="Marta C."/></div><div><span class="t-name">Marta C. <span class="t-badge">Genitore</span></span><span class="t-meta">Mamma di Luca, 17</span></div></div>
+        <span class="stars">★★★★★</span>
+        <p>"All'inizio eravamo preoccupati, ma il tutor ci ha aiutato a capire il percorso e a organizzare lo studio. Non sentirci soli è stata la cosa più utile."</p>
+      </div>
+      <div class="testi-card">
+        <div class="t-head"><div class="tavatar"><img src="foto/chi.jpg" alt="Davide L."/></div><div><span class="t-name">Davide L.</span><span class="t-meta">Studente, 22 anni</span></div></div>
+        <span class="stars">★★★★★</span>
+        <p>"Dovevo recuperare in fretta. Mi hanno costruito un piano serrato ma sostenibile e sono arrivato all'esame preparato."</p>
+      </div>
+      <div class="testi-card">
+        <div class="t-head"><div class="tavatar"><img src="foto/studio.jpg" alt="Andrea R."/></div><div><span class="t-name">Andrea R.</span><span class="t-meta">Studente lavoratore, 24</span></div></div>
+        <span class="stars">★★★★★</span>
+        <p>"Lavoro otto ore al giorno. Podcast e riassunti pronti mi hanno fatto risparmiare un sacco di tempo."</p>
+      </div>
+      <div class="testi-card">
+        <div class="t-head"><div class="tavatar"><img src="foto/quando.jpg" alt="Giulia P."/></div><div><span class="t-name">Giulia P.</span><span class="t-meta">Studentessa, 19 anni</span></div></div>
+        <span class="stars">★★★★★</span>
+        <p>"Il piano di studi era costruito sulla mia situazione. Mi seguivano materia per materia. Mi sono diplomata."</p>
+      </div>
+    </div>
+    <p class="testi-hint">← scorri per vedere altre esperienze →</p>
+    <div class="cta-rail">
+      <div class="cr-text">
+        <b>Anche tu puoi arrivare al diploma.</b>
+        <span>Parti da una consulenza gratuita: capiamo insieme anni recuperabili, indirizzo e costi.</span>
+      </div>
+      <div class="cr-actions">
+        <a class="btn btn-primary btn-lg" href="#form">Richiedi la consulenza gratuita</a>
+        <a class="cr-phone" href="tel:+390684280999"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> 06 84 280 999</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section white" id="faq" data-screen-label="FAQ">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="tag">Domande frequenti</div>
+      <h2>Le risposte prima di iniziare.</h2>
+    </div>
+    <div class="faq">
+      <details open><summary>Posso recuperare più anni in uno?</summary><div class="answer">Sì, dove la normativa lo consente è possibile recuperare fino a 2 annualità in un anno.</div></details>
+      <details><summary>Il diploma è riconosciuto?</summary><div class="answer">Sì: Diploma360 ti accompagna nella preparazione agli esami necessari per conseguire un diploma valido e riconosciuto dallo Stato italiano. Diploma360 non rilascia direttamente il diploma: l'esame si sostiene presso scuole paritarie o statali.</div></details>
+      <details><summary>Come posso seguire il percorso di mio figlio?</summary><div class="answer">Hai accesso a un profilo genitore dedicato, ricevi report periodici sui progressi e puoi parlare con l'esperto didattico.</div></details>
+      <details><summary>Cosa succede se mio figlio non studia abbastanza?</summary><div class="answer">Il tutor si accorge subito dei rallentamenti e interviene. Riceverai un alert dal profilo genitore.</div></details>
+      <details><summary>Quanto costa Diploma360?</summary><div class="answer">Si parte da 72,68€/mese in 24 rate.</div></details>
+      <details><summary>Cosa succede se non passo l'esame?</summary><div class="answer">Nei piani Plus e Max è inclusa la garanzia "Promosso o Ripreparato", secondo condizioni: se non passi, ti riprepariamo gratis.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section class="final" data-screen-label="Final CTA">
+  <div class="wrap">
+    <div class="final-box">
+      <div>
+        <span class="final-eyebrow">Consulenza gratuita</span>
+        <h2>Pronto a scoprire il tuo percorso?</h2>
+        <p>Consulenza gratuita e senza impegno. Risposta entro 24h anche su WhatsApp.</p>
+      </div>
+      <a class="btn btn-lg" href="#form">Scopri gratis il tuo percorso</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img class="footer-logo" src="foto/logo-diploma360.png" alt="Diploma360 — Powered by LaScuola360"/>
+        <p class="footer-claim">Recupera gli anni persi e preparati al diploma valido e riconosciuto dallo Stato italiano, online: tutor per ogni materia e supporto fino agli esami.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/schoolrhq/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg></a>
+          <a href="https://www.facebook.com/schoolrhq" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="https://www.linkedin.com/company/schoolr/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="https://www.tiktok.com/@schoolr" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3c.3 2.1 1.5 3.4 3.5 3.6v2.4c-1.2.1-2.3-.2-3.5-.9v5.9c0 3.3-2.4 5.5-5.4 5.5-2.9 0-5.1-2.1-5.1-4.9 0-3 2.3-5 5.3-4.8v2.6c-.4-.1-.8-.2-1.2-.1-1.2.1-2 .9-1.9 2.1.1 1.2 1 1.9 2.1 1.8 1.2-.1 1.9-1 1.9-2.4V3h2.8z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Esplora</h4>
+        <a href="#metodo">Perché siamo diversi</a>
+        <a href="#indirizzi">Indirizzi</a>
+        <a href="#famiglia">Le persone e la famiglia</a>
+        <a href="#prezzi">Prezzi</a>
+        <a href="#faq">Domande frequenti</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contatti</h4>
+        <a href="tel:+390684280999">06 84 280 999</a>
+        <a href="https://wa.me/393517214644">Scrivici su WhatsApp</a>
+        <a href="mailto:info@diploma360.it">info@diploma360.it</a>
+        <span class="fc-item"><b>Lun–Ven</b> 9:00–19:00</span>
+      </div>
+      <div class="footer-col">
+        <h4>Note legali</h4>
+        <a href="https://schoolr.net/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>
+        <a href="https://schoolr.net/cookie-policy/" target="_blank" rel="noopener">Cookie Policy</a>
+        <a href="https://schoolr.net/termini-e-condizioni/" target="_blank" rel="noopener">Termini e condizioni</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-legal">
+        <b>*</b>Fino a 2 anni in uno: dove la normativa lo consente.
+        <b>*</b>Promosso o Ripreparato: garanzia inclusa nei piani Plus e Max, secondo condizioni; se non passi l'esame ti riprepariamo gratis.
+        <b>*</b>97% promossi e dati indicati: dati interni Diploma360; i risultati possono variare in base alla situazione di partenza, al percorso scelto e all'impegno dello studente.
+      </p>
+      <div class="footer-copy">
+        © 2026 <b>Diploma360</b> — Powered by LaScuola360. Tutti i diritti riservati.
+        <span class="footer-company">Classme S.r.l. · P.IVA IT15441141007 · C.F. 15441141007 · Sede legale Via Giovanni Antonelli, 00197 Roma (RM), IT · Stabile organizzazione: Via Giovanni Antonelli 41, 00197 Roma (RM), IT</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- COOKIE BANNER -->
+<div class="cookie-banner" id="cookie-banner" role="dialog" aria-live="polite" aria-label="Preferenze cookie" hidden>
+  <p><b>Rispettiamo la tua privacy.</b> Usiamo cookie tecnici necessari al funzionamento del sito e, con il tuo consenso, cookie di statistica e marketing. Leggi la <a href="https://schoolr.net/cookie-policy/" target="_blank" rel="noopener">Cookie Policy</a>.</p>
+  <div class="cookie-actions">
+    <button type="button" class="cookie-reject" id="cookie-reject">Rifiuta</button>
+    <button type="button" class="btn btn-primary cookie-accept" id="cookie-accept">Accetta tutti</button>
+  </div>
+</div>
+
+<div class="mobile-cta">
+  <a class="btn btn-outline" href="tel:+390684280999"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> 06 84 280 999</a>
+  <a class="btn btn-primary" href="#form">Consulenza gratuita</a>
+</div>
+
+<div class="float-actions">
+  <a class="float-call" href="tel:+390684280999" aria-label="Chiama il 06 84 280 999">
+    <span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+    <span class="fc-num">Chiama ora</span>
+  </a>
+  <a class="float-wa" href="https://wa.me/393517214644" aria-label="Scrivici su WhatsApp">
+    <span class="fc-ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.15h-.01c-1.52 0-3.01-.41-4.3-1.18l-.31-.18-3.19.84.85-3.11-.2-.32a8.23 8.23 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24zm4.52-6.17c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.48-.01-.16 0-.43.06-.66.31-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.57.12.17 1.75 2.67 4.24 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg></span>
+    <span class="fc-num">Scrivici su WhatsApp</span>
+  </a>
+</div>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "Diploma360",
+  "url": "https://www.diploma360.it/",
+  "logo": "https://www.diploma360.it/foto/logo-diploma360.png",
+  "description": "Preparazione al diploma di Stato riconosciuto, online. Recupero anni scolastici con tutor per materia e accompagnamento fino agli esami.",
+  "telephone": "+39 06 84 280 999",
+  "email": "info@diploma360.it",
+  "legalName": "Classme S.r.l.",
+  "vatID": "IT15441141007",
+  "taxID": "15441141007",
+  "address": {"@type": "PostalAddress", "streetAddress": "Via Giovanni Antonelli 41", "postalCode": "00197", "addressLocality": "Roma", "addressRegion": "RM", "addressCountry": "IT"},
+  "areaServed": "IT",
+  "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.8", "bestRating": "5", "ratingCount": "120"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "Posso recuperare più anni in uno?", "acceptedAnswer": {"@type": "Answer", "text": "Sì, dove la normativa lo consente è possibile recuperare fino a 2 annualità in un anno."}},
+    {"@type": "Question", "name": "Il diploma è riconosciuto?", "acceptedAnswer": {"@type": "Answer", "text": "Sì: Diploma360 ti accompagna nella preparazione agli esami necessari per conseguire un diploma valido e riconosciuto dallo Stato italiano. Diploma360 non rilascia direttamente il diploma: l'esame si sostiene presso scuole paritarie o statali."}},
+    {"@type": "Question", "name": "Come posso seguire il percorso di mio figlio?", "acceptedAnswer": {"@type": "Answer", "text": "Hai accesso a un profilo genitore dedicato, ricevi report periodici sui progressi e puoi parlare con l'esperto didattico."}},
+    {"@type": "Question", "name": "Quanto costa Diploma360?", "acceptedAnswer": {"@type": "Answer", "text": "Si parte da 72,68€/mese in 24 rate."}},
+    {"@type": "Question", "name": "Cosa succede se non passo l'esame?", "acceptedAnswer": {"@type": "Answer", "text": "Nei piani Plus e Max è inclusa la garanzia Promosso o Ripreparato, secondo condizioni: se non passi, ti riprepariamo gratis."}}
+  ]
+}
+</script>
+<script>
+/* dal primo scorrimento: nasconde l'header e mostra i due pulsanti flottanti.
+   Tornando proprio in cima, l'header riappare e i pulsanti spariscono. */
+(function(){
+  var fc=document.querySelector('.float-actions');
+  var h=document.querySelector('.header');
+  var ticking=false;
+  function upd(){
+    var y=window.scrollY||document.documentElement.scrollTop||0;
+    var scrolled=y>24;
+    if(h)h.classList.toggle('hide', scrolled);
+    if(fc)fc.classList.toggle('visible', scrolled);
+    ticking=false;
+  }
+  window.addEventListener('scroll',function(){if(!ticking){requestAnimationFrame(upd);ticking=true;}},{passive:true});
+  window.addEventListener('resize',upd);
+  upd();
+})();
+</script>
+<script>
+/* DEV: invio form. Funziona out-of-the-box con Formspree/Web3Forms (risposta JSON).
+   Se usi un altro endpoint che NON risponde JSON, togli questo blocco: il form farà un POST classico all'action. */
+(function(){
+  var f=document.getElementById('lead-form');if(!f)return;
+  var ok=document.getElementById('lead-success');
+  var EMAIL=/^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var valid=true;
+    [['lf-nome',false],['lf-tel',false],['lf-email',true]].forEach(function(p){
+      var el=document.getElementById(p[0]);if(!el)return;
+      var bad=!el.value.trim()||(p[1]&&!EMAIL.test(el.value.trim()));
+      el.classList.toggle('invalid',bad);if(bad)valid=false;
+    });
+    if(!valid){var fb=f.querySelector('.invalid');if(fb)fb.focus();return;}
+    var consent=document.getElementById('lf-privacy');
+    if(consent&&!consent.checked){consent.closest('.form-consent').classList.add('invalid');consent.focus();return;}
+    else if(consent){consent.closest('.form-consent').classList.remove('invalid');}
+    if(f.querySelector('[name=_gotcha]').value){return;} /* honeypot anti-spam */
+    var btn=f.querySelector('button[type=submit]');
+    var label=btn.textContent;btn.disabled=true;btn.textContent='Invio in corso…';
+    fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}})
+      .then(function(r){
+        if(r.ok){f.style.display='none';ok.hidden=false;ok.scrollIntoView({block:'nearest'});}
+        else{throw new Error('bad');}
+      })
+      .catch(function(){
+        btn.disabled=false;btn.textContent=label;
+        alert('Si è verificato un problema nell\u2019invio. Riprova oppure scrivici su WhatsApp.');
+      });
+  });
+})();
+</script>
+<script>
+/* COOKIE BANNER — consenso persistente (localStorage).
+   La scelta viene salvata: il banner non riappare ai visitatori che hanno già risposto.
+   DEV: per attivare analytics/marketing SOLO dopo consenso, scrivi il codice dentro
+   window.onCookieConsent(function(){ ... carica qui GA4 / Pixel / Ads ... });
+   Per riaprire il banner programmaticamente: window.openCookieSettings(). */
+(function(){
+  var KEY='d360_cookie_consent';
+  var banner=document.getElementById('cookie-banner');
+  if(!banner)return;
+  var acceptBtn=document.getElementById('cookie-accept');
+  var rejectBtn=document.getElementById('cookie-reject');
+  var consentCbs=[];
+  window.onCookieConsent=function(cb){ if(typeof cb==='function') consentCbs.push(cb); fireIfAccepted(); };
+  function fireIfAccepted(){ if(localStorage.getItem(KEY)==='accepted'){ consentCbs.splice(0).forEach(function(c){try{c();}catch(e){}}); } }
+  function open(){ banner.hidden=false; requestAnimationFrame(function(){ banner.classList.add('show'); }); }
+  function close(){ banner.classList.remove('show'); setTimeout(function(){ banner.hidden=true; }, 380); }
+  function save(v){ try{ localStorage.setItem(KEY, v); }catch(e){} }
+  acceptBtn&&acceptBtn.addEventListener('click',function(){ save('accepted'); close(); fireIfAccepted(); });
+  rejectBtn&&rejectBtn.addEventListener('click',function(){ save('rejected'); close(); });
+  window.openCookieSettings=function(){ open(); };
+  if(!localStorage.getItem(KEY)){ setTimeout(open, 700); } else { fireIfAccepted(); }
+})();
+</script>
+</body>
+</html>

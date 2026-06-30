@@ -1,0 +1,21 @@
+# Diploma360 — config Netlify
+[build]
+  publish = "."
+
+# Route pulite senza .html
+[[redirects]]
+  from = "/*.html"
+  to = "/:splat"
+  status = 301
+  force = false
+
+# Endpoint lead (se usi Netlify Functions: rinomina api/lead.js in netlify/functions/lead.js)
+# [[redirects]]
+#   from = "/api/lead"
+#   to = "/.netlify/functions/lead"
+#   status = 200
+
+[[headers]]
+  for = "/assets-vetrina/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
