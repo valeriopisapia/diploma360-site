@@ -1,0 +1,11 @@
+/**
+ * LeadForm component-specific overrides.
+ * Global design-system classes (.lf-status, .hp-field, .field, .lf-consent, .seg, .seg-opt)
+ * are provided by the site-wide site.css already imported in the root layout.
+ */
+
+.form {
+  /* No additional overrides needed at this stage — all layout/field styles come
+     from the imported site.css global sheet. Add component-specific rules here
+     as pages compose this form into different contexts. */
+}
