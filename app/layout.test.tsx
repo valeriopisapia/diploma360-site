@@ -30,13 +30,6 @@ vi.mock('next/script', () => ({
   ),
 }))
 
-// Mock next/font/google — fonts are a build-time concern; tests only need the
-// className and style objects the layout receives
-vi.mock('next/font/google', () => ({
-  Inter: () => ({ className: '__inter', style: { fontFamily: 'Inter' } }),
-  Poppins: () => ({ className: '__poppins', style: { fontFamily: 'Poppins' } }),
-}))
-
 // CookieBanner pulls grantConsent from lib/analytics
 vi.mock('@/lib/analytics', () => ({ grantConsent: vi.fn() }))
 
