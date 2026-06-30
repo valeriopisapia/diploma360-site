@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { it, expect, beforeEach } from 'vitest'
 import { pushLead, grantConsent } from './analytics'
 
 beforeEach(() => { (window as any).dataLayer = []; (window as any).gtag = (...a: any[]) => (window as any).dataLayer.push(a) })
