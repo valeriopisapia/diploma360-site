@@ -1,2 +1,10 @@
 /* MegaMenu.module.css — bulk styling provided by site.css .navitem/.navlink/.mega/.mega-* */
-/* Add component-scoped overrides here only if needed */
+
+/* Reset browser default <button> styles for mega-menu trigger elements.
+   The global .navlink class handles colors, font-weight, padding, etc.
+   This class adds what anchors got for free that buttons do not. */
+.trigger {
+  background: none;
+  border: none;
+  font-family: inherit;
+}

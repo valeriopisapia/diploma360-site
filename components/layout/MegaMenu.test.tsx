@@ -49,4 +49,19 @@ describe('MegaMenu accessibility', () => {
     expect(trigger).toHaveAttribute('aria-haspopup', 'true')
     expect(trigger).toHaveAttribute('aria-controls')
   })
+
+  it('Escape inside the panel closes the menu and returns focus to the trigger', () => {
+    render(<MegaMenu />)
+    const trigger = screen.getByRole('button', { name: /come funziona/i })
+    fireEvent.click(trigger)
+    expect(trigger).toHaveAttribute('aria-expanded', 'true')
+
+    // Fire Escape on the panel div (exercises handlePanelKeyDown)
+    const panelId = trigger.getAttribute('aria-controls')!
+    const panel = document.getElementById(panelId)!
+    fireEvent.keyDown(panel, { key: 'Escape' })
+
+    expect(trigger).toHaveAttribute('aria-expanded', 'false')
+    expect(trigger).toHaveFocus()
+  })
 })
