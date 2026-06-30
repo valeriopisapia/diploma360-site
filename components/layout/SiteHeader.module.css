@@ -1,0 +1,3 @@
+/* SiteHeader.module.css
+   site.css defines .site-header and .site-header.scrolled;
+   the scrolled class is toggled via useEffect in SiteHeader.tsx */
