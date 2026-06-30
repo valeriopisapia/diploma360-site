@@ -1,0 +1,16 @@
+/* Import the Diploma360 design system BEFORE Tailwind layers.
+   site.css is unlayered CSS, so it wins over Tailwind's @layer base (preflight)
+   and @layer utilities. This ensures the design system styling is preserved.
+   Note: Tailwind utility classes that conflict with site.css rules won't override
+   them by default (unlayered > layered in CSS cascade). Later tasks may need to
+   wrap specific site.css sections in @layer if Tailwind utilities must take precedence. */
+@import '../styles/site.css';
+
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
