@@ -1,0 +1,9 @@
+/* Component-specific overrides — base styles come from site.css .cookie-banner */
+.banner {
+  /* Ensure banner sits above other content when visible */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+}
