@@ -854,3 +854,11 @@ img{-webkit-user-drag:none;user-select:none}
 .eco-fact b{display:block;font-family:'Poppins',sans-serif;font-size:15px;font-weight:700;line-height:1.2;color:#1F1F1F}
 .eco-fact span{display:block;font-size:13px;color:#5A626D;margin-top:3px;line-height:1.4}
 @media (max-width:900px){.eco-band{grid-template-columns:1fr;gap:30px}}
+
+/* === Sezione Italia — intestazione hd/eb/sub/hl === */
+.hd{margin-bottom:36px}
+.hd h2{font-size:32px;font-weight:800;line-height:1.18;letter-spacing:-.02em;margin:0 0 12px;color:#1F1F1F;font-family:'Poppins',sans-serif}
+.hd .eb{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;color:var(--coral-dk);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+.hd .eb::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--coral)}
+.hd h2 .hl{color:var(--coral-dk)}
+.hd .sub{font-size:15.5px;color:#3F4754;line-height:1.65;margin:0;max-width:620px}
