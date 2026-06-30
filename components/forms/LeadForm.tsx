@@ -77,7 +77,6 @@ export function LeadForm({ origine, showPerChi = false }: LeadFormProps) {
         pagina,
         origine,
         ts: new Date().toISOString(),
-        website,
       }
       if (per_chi) payload.per_chi = per_chi
 
