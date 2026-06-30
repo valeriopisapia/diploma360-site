@@ -25,7 +25,17 @@ export async function POST(req: Request) {
     return Response.json({ error: 'Brevo non configurato (manca BREVO_API_KEY o BREVO_LIST_ID)' }, { status: 500 })
   }
 
-  const payload: LeadPayload = { nome, telefono, email, per_chi, messaggio, pagina, origine, ts }
+  // Values are validated/trusted above; cast from unknown to the expected string types
+  const payload: LeadPayload = {
+    nome: nome as string | undefined,
+    telefono: telefono as string,
+    email: email as string,
+    per_chi: per_chi as string | undefined,
+    messaggio: messaggio as string | undefined,
+    pagina: pagina as string | undefined,
+    origine: origine as string | undefined,
+    ts: ts as string | undefined,
+  }
   const result = await createBrevoContact(payload, { apiKey, listId })
 
   if (result.ok) {
