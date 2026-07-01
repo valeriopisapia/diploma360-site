@@ -1,0 +1,99 @@
+/* City landing pages — recupero-anni-scolastici-[citta] */
+
+/* ── Breadcrumb ── */
+.breadcrumb { padding: 14px 0 0 }
+.breadcrumb ol { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 13px; color: var(--muted) }
+.breadcrumb a { color: var(--soft) }
+.breadcrumb a:hover { color: var(--coral-dk) }
+.breadcrumb li + li::before { content: "›"; margin-right: 6px; color: var(--border-s) }
+
+/* ── City hero (2-column) ── */
+.chero { padding: 30px 0 10px }
+.chero .wrap { display: grid; grid-template-columns: 1.05fr .92fr; gap: 44px; align-items: start }
+.chero h1 { font-size: 46px; font-weight: 800; line-height: 1.06; letter-spacing: -.03em; margin: 6px 0 14px }
+.chero .lead { font-size: 17px; color: var(--soft); line-height: 1.6; max-width: 560px }
+@media (max-width: 920px) {
+  .chero .wrap { grid-template-columns: 1fr; gap: 26px }
+  .chero h1 { font-size: 36px }
+}
+
+/* ── Hero trust row ── */
+.chero-trust { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 20px }
+.rating { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px; color: var(--text) }
+.rating .stars { color: #F2B540; letter-spacing: 1px }
+.avstack { display: flex }
+.avstack img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; margin-left: -9px; box-shadow: var(--shadow-sm) }
+.avstack img:first-child { margin-left: 0 }
+.minip { font-size: 13.5px; color: var(--soft) }
+
+/* ── Lead form card (overrides shared .form-card for city hero) ── */
+.form-card.city-lead {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 26px;
+  box-shadow: var(--shadow-lg);
+}
+.form-card.city-lead::after { display: none }
+.form-flag { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 700; color: var(--coral-dk); text-transform: uppercase; letter-spacing: .06em }
+.dotpulse { width: 8px; height: 8px; border-radius: 50%; background: var(--green) }
+.form-sub { font-size: 14px; color: var(--soft); margin-bottom: 8px }
+
+/* ── Testimonials grid ── */
+.tgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 26px }
+@media (max-width: 860px) { .tgrid { grid-template-columns: 1fr } }
+.tcard { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 12px }
+.tcard .stars { color: #F2B540; font-size: 14px; letter-spacing: 1px }
+.tcard p { font-size: 15.5px; color: var(--text); line-height: 1.6 }
+.tcard .who { display: flex; align-items: center; gap: 11px; margin-top: auto }
+.tcard .who img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover }
+.tcard .who b { font-family: 'Poppins'; font-weight: 600; font-size: 14.5px; display: block }
+.tcard .who span { font-size: 13.5px; color: var(--soft) }
+.tcard-disclaimer { font-size: 12px; color: var(--muted); margin-top: 10px; text-align: center }
+
+/* ── Zone strip and chips ── */
+.zone-strip { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px }
+.zone-chip { display: inline-flex; align-items: center; gap: 7px; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 8px 15px; font-size: 13.5px; font-weight: 500; color: var(--text); box-shadow: var(--shadow-sm) }
+.zone-chip svg { width: 15px; height: 15px; color: var(--coral) }
+
+/* ── Local card (how it works RHS) ── */
+.local-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 26px; box-shadow: var(--shadow) }
+.local-card .lc-row { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 16px }
+.local-card .lc-row:last-child { margin-bottom: 0 }
+.local-card .lc-ic { width: 38px; height: 38px; border-radius: 11px; flex-shrink: 0; display: grid; place-items: center; background: var(--coral-lt); color: var(--coral-dk) }
+.local-card .lc-ic svg { width: 19px; height: 19px }
+.local-card b { font-family: 'Poppins'; font-weight: 600; font-size: 15px }
+.local-card span { display: block; font-size: 13.5px; color: var(--soft); margin-top: 2px; line-height: 1.55 }
+
+/* ── Section title ── */
+.s-title { font-family: 'Poppins', sans-serif; font-size: 30px; font-weight: 800; line-height: 1.18; letter-spacing: -.02em; color: var(--text); margin: 0 }
+@media (max-width: 760px) { .s-title { font-size: 25px } }
+
+/* ── CTA inline strip ── */
+.cta-inline { display: flex; align-items: center; justify-content: space-between; gap: 22px; flex-wrap: wrap; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 22px 28px; box-shadow: var(--shadow-sm) }
+.cta-inline.soft { background: var(--grad-soft); border-color: transparent }
+.cta-inline .ci-txt { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 18px; line-height: 1.3; color: var(--text) }
+.cta-inline .ci-btns { display: flex; gap: 10px; flex-wrap: wrap; flex-shrink: 0 }
+@media (max-width: 640px) {
+  .cta-inline { flex-direction: column; align-items: stretch; text-align: center; padding: 22px }
+  .cta-inline .ci-btns { justify-content: center }
+}
+
+/* ── Pricing block ── */
+.pricing { display: grid; grid-template-columns: 1.05fr .95fr; gap: 0; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-lg); border: 1px solid var(--border) }
+@media (max-width: 780px) { .pricing { grid-template-columns: 1fr } }
+.pricing-left { background: var(--grad); color: #fff; padding: 40px 38px; display: flex; flex-direction: column; gap: 10px }
+.pricing-left .tag-w { align-self: flex-start; background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.5); color: #fff; font-family: 'Poppins'; font-weight: 700; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; padding: 6px 14px; border-radius: 999px }
+.price-big { display: flex; align-items: baseline; gap: 9px; margin-top: 10px }
+.price-big .amt { font-family: 'Poppins'; font-weight: 800; font-size: 42px; line-height: 1; letter-spacing: -.02em }
+.price-big .per { font-size: 21px; font-weight: 600; opacity: .92 }
+.price-sub { font-size: 16px; font-weight: 600; opacity: .96 }
+.pricing-left .note { font-size: 15px; line-height: 1.65; opacity: .93; margin: 6px 0 4px }
+.pricing-left .cta-row { margin-top: 8px }
+.guarantee { display: flex; align-items: center; gap: 10px; margin-top: 16px; font-size: 14.5px; font-weight: 600 }
+.guarantee svg { width: 21px; height: 21px; flex-shrink: 0 }
+.pricing-right { background: #fff; padding: 36px; display: flex; flex-direction: column; justify-content: center }
+.pricing-right .pr-h { font-family: 'Poppins'; font-weight: 600; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--coral-dk); margin-bottom: 18px }
+.incl { list-style: none; display: flex; flex-direction: column; gap: 14px }
+.incl li { display: flex; align-items: center; gap: 12px; font-size: 16.5px; color: var(--text); line-height: 1.4 }
+.incl li svg { width: 24px; height: 24px; flex-shrink: 0; color: var(--green) }
