@@ -5,7 +5,6 @@ const PARTNERS = [
   { src: '/assets-vetrina/partner/edison.png', alt: 'Edison' },
   { src: '/assets-vetrina/partner/epassi.png', alt: 'Epassi' },
   { src: '/assets-vetrina/partner/jointly.png', alt: 'Jointly' },
-  { src: '/assets-vetrina/partner/luxottica.png', alt: 'Luxottica' },
   { src: '/assets-vetrina/partner/marsh.png', alt: 'Marsh' },
   { src: '/assets-vetrina/partner/nana_bianca.png', alt: 'Nana Bianca' },
 ]
