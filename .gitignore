@@ -43,3 +43,6 @@ next-env.d.ts
 # Claude Code scratch
 .claude/worktrees/
 .claude/settings.local.json
+
+# keep the env template in the repo
+!.env.example
