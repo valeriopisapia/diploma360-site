@@ -4,6 +4,7 @@ import { GtmScript } from '@/components/gtm/GtmScript'
 import { SiteHeader } from '@/components/layout/SiteHeader'
 import { Footer } from '@/components/layout/Footer'
 import { CookieBanner } from '@/components/consent/CookieBanner'
+import { ChromeGate } from '@/components/layout/ChromeGate'
 import './globals.css'
 
 // ─── Metadata ─────────────────────────────────────────────────────────────────
@@ -47,9 +48,9 @@ export default function RootLayout({
       </head>
       <body>
         <GtmScript />
-        <SiteHeader />
+        <ChromeGate><SiteHeader /></ChromeGate>
         {children}
-        <Footer />
+        <ChromeGate><Footer /></ChromeGate>
         <CookieBanner />
       </body>
     </html>
