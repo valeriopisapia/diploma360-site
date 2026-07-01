@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { ConsentDefault } from '@/components/gtm/ConsentDefault'
 import { GtmScript } from '@/components/gtm/GtmScript'
 import { SiteHeader } from '@/components/layout/SiteHeader'
@@ -12,6 +12,12 @@ export const metadata: Metadata = {
   title: 'Diploma360',
   description: 'Consegui il diploma online con Diploma360',
   metadataBase: new URL('https://www.diploma360.it'),
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#E48267',
 }
 
 // ─── Layout ───────────────────────────────────────────────────────────────────
