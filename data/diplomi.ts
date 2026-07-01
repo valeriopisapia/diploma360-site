@@ -1,9 +1,41 @@
+export type MatArea = {
+  style: 'scien' | 'umani' | 'lingue' | 'altro'
+  title: string
+  sub: string
+  desc: string
+  items: string[]
+}
+
+export type GalleryItem = {
+  imgSrc: string
+  alt: string
+  lbl: string
+  nm: string
+}
+
 export type Diploma = {
   slug: string
   nome: string
   categoria: 'liceo' | 'tecnico' | 'professionale'
   titoloSeo: string
   descSeo: string
+  // ── page-specific content ─────────────────────────────────────────────────
+  chips: string[]          // 2 extra chips (beyond the fixed "5 anni" / "Diploma di Stato")
+  heroImgSrc: string       // Unsplash hero image
+  materiCardine: string    // overlay info text
+  dopoVal: string          // overlay "Dopo" info text
+  descP1: string           // HTML — "cosa imparerai" paragraph 1
+  descP2: string           // HTML — "cosa imparerai" paragraph 2
+  splitPhotoSrc: string
+  splitPhotoAlt: string
+  splitPhotoCap: string
+  matAreas: MatArea[]      // 4 subject-area cards
+  dopoP1: string           // HTML — "dopo il diploma" paragraph 1
+  dopoP2: string           // HTML — "dopo il diploma" paragraph 2
+  dopoPhotoSrc: string
+  dopoPhotoAlt: string
+  dopoPhotoCap: string
+  gallery: GalleryItem[]   // 3 gallery images
 }
 
 // Groupings derived from materiale/sito-vetrina-diploma360-v3/diplomi.html
@@ -20,6 +52,31 @@ export const diplomi: Diploma[] = [
     titoloSeo: 'Liceo Scientifico | Diploma360',
     descSeo:
       'Scegli una formazione scientifica per il tuo futuro. Programma, materie, sbocchi e iscrizioni — Liceo Scientifico con Diploma360.',
+    chips: ['🧪 Forte impronta scientifica', '🎯 <b>Tutte</b> le università'],
+    heroImgSrc: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1000&q=80',
+    materiCardine: 'Matematica · Fisica',
+    dopoVal: 'Università STEM',
+    descP1: 'Il Liceo Scientifico offre un percorso di studi equilibrato tra discipline scientifiche e umanistiche, preparando gli studenti ad affrontare con metodo e rigore le sfide del mondo contemporaneo. Solida formazione in matematica, fisica, chimica, biologia e scienze naturali, accompagnata da un’adeguata preparazione in italiano, storia, filosofia e lingue straniere.',
+    descP2: 'Questo indirizzo sviluppa capacità logiche, analitiche e critiche, promuovendo una mentalità scientifica e una comprensione approfondita dei fenomeni naturali. Il Liceo Scientifico prepara a proseguire gli studi universitari in ambiti come ingegneria, medicina, scienze naturali, matematica, fisica e informatica.',
+    splitPhotoSrc: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=900&q=80',
+    splitPhotoAlt: 'Il cuore scientifico',
+    splitPhotoCap: 'Il cuore scientifico',
+    matAreas: [
+      { style: 'scien', title: 'Area scientifica', sub: 'Il cuore dell’indirizzo', desc: 'Le materie distintive del Liceo Scientifico: forte presenza per tutti i 5 anni.', items: ['Matematica', 'Fisica', 'Scienze naturali (chimica, biologia, scienze della Terra)'] },
+      { style: 'umani', title: 'Area umanistica', sub: 'Pensiero critico e cultura', desc: 'La base umanistica che bilancia il rigore scientifico, fondamentale all’esame di Stato.', items: ['Lingua e letteratura italiana', 'Lingua e cultura latina', 'Storia e Geografia (biennio) → Storia (triennio)', 'Filosofia (triennio)'] },
+      { style: 'lingue', title: 'Lingue straniere', sub: 'Strumento per il futuro', desc: 'Inglese per tutti e 5 gli anni: essenziale per università, lavoro e ricerca.', items: ['Lingua inglese'] },
+      { style: 'altro', title: 'Arte ed educazione fisica', sub: 'Completare la persona', desc: 'L’occhio e il corpo: due materie spesso sottovalutate, ma centrali nel curriculum liceale.', items: ['Disegno e storia dell’arte', 'Scienze motorie e sportive', 'Educazione civica'] },
+    ],
+    dopoP1: 'Il diploma di maturità scientifica rappresenta un trampolino di lancio per proseguire gli studi universitari in ambiti come <strong>Fisica, Matematica, Ingegneria e Medicina</strong>. Fornisce una preparazione solida e un metodo di studio efficace, permettendo di affrontare con sicurezza qualsiasi facoltà universitaria.',
+    dopoP2: 'Sebbene non conferisca una qualifica professionale immediata, il Liceo Scientifico sviluppa <strong>competenze versatili</strong> e un approccio flessibile allo studio e al problem solving.',
+    dopoPhotoSrc: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=900&q=80',
+    dopoPhotoAlt: 'Le porte dell’università',
+    dopoPhotoCap: 'Le porte dell’università',
+    gallery: [
+      { imgSrc: 'https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=600&q=80', alt: 'Ingegneria · STEM', lbl: 'Università', nm: 'Ingegneria · STEM' },
+      { imgSrc: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&q=80', alt: 'Medicina · Sanità', lbl: 'Università', nm: 'Medicina · Sanità' },
+      { imgSrc: 'https://images.unsplash.com/photo-1581093458791-9d2b03c5ad8d?w=600&q=80', alt: 'Ricerca scientifica', lbl: 'Università', nm: 'Ricerca scientifica' },
+    ],
   },
   {
     slug: 'liceo-classico',
@@ -28,6 +85,31 @@ export const diplomi: Diploma[] = [
     titoloSeo: 'Liceo Classico | Diploma360',
     descSeo:
       'La formazione più completa per chi vuole imparare a pensare. Programma, materie, sbocchi e iscrizioni — Liceo Classico con Diploma360.',
+    chips: ['📜 Greco e Latino', '🎯 <b>Tutte</b> le università'],
+    heroImgSrc: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1000&q=80',
+    materiCardine: 'Latino · Greco · Italiano',
+    dopoVal: 'Università umanistiche, Giurisprudenza, Medicina',
+    descP1: 'Il Liceo Classico offre un percorso di studi profondo e impegnativo basato sullo studio del latino, del greco antico, della letteratura italiana, della storia e della filosofia. È l’indirizzo più tradizionale e nobile della scuola italiana, pensato per chi vuole sviluppare un metodo di studio rigoroso e una capacità critica fuori dal comune.',
+    descP2: 'Questo indirizzo forma persone capaci di analizzare i testi, di costruire ragionamenti complessi e di comprendere le radici della cultura occidentale. Pur essendo umanistico, il Liceo Classico apre le porte a <strong>qualsiasi facoltà universitaria</strong>, comprese quelle scientifiche come Medicina, dove l’attitudine al metodo conta più delle materie specifiche.',
+    splitPhotoSrc: 'https://images.unsplash.com/photo-1568667256549-094345857637?w=900&q=80',
+    splitPhotoAlt: 'La tradizione del pensiero',
+    splitPhotoCap: 'La tradizione del pensiero',
+    matAreas: [
+      { style: 'umani', title: 'Area classica', sub: 'Il cuore dell’indirizzo', desc: 'Le lingue antiche e la letteratura: cuore distintivo del percorso.', items: ['Lingua e cultura latina', 'Lingua e cultura greca', 'Lingua e letteratura italiana', 'Storia · Filosofia'] },
+      { style: 'scien', title: 'Area scientifica', sub: 'Base per qualsiasi facoltà', desc: 'Matematica, scienze e fisica per tutti i 5 anni, base per l’accesso a qualsiasi università.', items: ['Matematica', 'Fisica (triennio)', 'Scienze naturali (chimica, biologia, scienze della Terra)'] },
+      { style: 'lingue', title: 'Lingue straniere', sub: 'Apertura al mondo moderno', desc: 'Inglese per tutti i 5 anni, accanto allo studio delle lingue classiche.', items: ['Lingua inglese'] },
+      { style: 'altro', title: 'Arte ed educazione fisica', sub: 'Completare la persona', desc: 'L’occhio e il corpo: arte, storia dell’arte ed educazione fisica per una formazione completa.', items: ['Storia dell’arte', 'Scienze motorie e sportive', 'Educazione civica'] },
+    ],
+    dopoP1: 'Il diploma del Liceo Classico è considerato uno dei più prestigiosi della scuola italiana, e <strong>apre la strada a qualsiasi facoltà universitaria</strong>, dalle materie umanistiche (Lettere, Filosofia, Lingue, Storia) a Giurisprudenza, Scienze politiche, Comunicazione — ma anche a Medicina e a percorsi scientifici, dove la solidità del metodo è apprezzata.',
+    dopoP2: 'Pur non conferendo una qualifica professionale immediata, sviluppa <strong>capacità analitiche e di scrittura</strong> di alto livello, molto richieste in ambito editoriale, giuridico, della ricerca e della comunicazione.',
+    dopoPhotoSrc: 'https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=900&q=80',
+    dopoPhotoAlt: 'Le porte dell’università',
+    dopoPhotoCap: 'Le porte dell’università',
+    gallery: [
+      { imgSrc: 'https://images.unsplash.com/photo-1589994965851-a8f479c573a9?w=600&q=80', alt: 'Lettere · Filosofia', lbl: 'Università', nm: 'Lettere · Filosofia' },
+      { imgSrc: 'https://images.unsplash.com/photo-1589994160957-d0d0b40e9b4d?w=600&q=80', alt: 'Giurisprudenza', lbl: 'Università', nm: 'Giurisprudenza' },
+      { imgSrc: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80', alt: 'Medicina · Lettere', lbl: 'Università', nm: 'Medicina · Lettere' },
+    ],
   },
   {
     slug: 'liceo-scienze-applicate',
@@ -36,6 +118,31 @@ export const diplomi: Diploma[] = [
     titoloSeo: 'Liceo Scientifico Scienze Applicate | Diploma360',
     descSeo:
       'Una formazione scientifica con focus su informatica e laboratorio. Programma, materie, sbocchi e iscrizioni — Liceo Scientifico Scienze Applicate con Diploma360.',
+    chips: ['💻 Informatica', '🎯 Università STEM'],
+    heroImgSrc: 'https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=1000&q=80',
+    materiCardine: 'Informatica · Matematica · Fisica',
+    dopoVal: 'Università tecnico-scientifiche',
+    descP1: 'Il Liceo delle Scienze Applicate è la variante del Liceo Scientifico senza latino: in cambio offre <strong>più ore di informatica, scienze sperimentali e laboratorio</strong>. È pensato per chi vuole una formazione scientifica forte ma orientata alla tecnologia e all’applicazione pratica.',
+    descP2: 'Sviluppa una mentalità tecnico-scientifica concreta, con un’attenzione particolare alla risoluzione di problemi tramite metodi sperimentali e strumenti digitali. È un ottimo punto di partenza per Informatica, Ingegneria, Biologia, Chimica e altre lauree tecnico-scientifiche.',
+    splitPhotoSrc: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?w=900&q=80',
+    splitPhotoAlt: 'Laboratorio e codice',
+    splitPhotoCap: 'Laboratorio e codice',
+    matAreas: [
+      { style: 'scien', title: 'Area scientifica', sub: 'Il cuore dell’indirizzo', desc: 'Matematica, fisica e scienze sperimentali con tanto laboratorio.', items: ['Matematica', 'Fisica', 'Scienze naturali (chimica, biologia, scienze della Terra)', 'Informatica (tutti i 5 anni)'] },
+      { style: 'umani', title: 'Area umanistica', sub: 'Solidità culturale', desc: 'Italiano, storia, filosofia e disegno: la base culturale del liceo senza latino.', items: ['Lingua e letteratura italiana', 'Storia e Geografia (biennio) → Storia (triennio)', 'Filosofia (triennio)'] },
+      { style: 'lingue', title: 'Lingue straniere', sub: 'Per il mondo tecnologico', desc: 'Inglese essenziale per la documentazione tecnica e la ricerca internazionale.', items: ['Lingua inglese'] },
+      { style: 'altro', title: 'Arte ed educazione fisica', sub: 'Completare la persona', desc: 'Disegno, storia dell’arte e scienze motorie.', items: ['Disegno e storia dell’arte', 'Scienze motorie e sportive', 'Educazione civica'] },
+    ],
+    dopoP1: 'Le Scienze Applicate sono il liceo ideale per chi punta a <strong>Informatica, Ingegneria, Biologia, Chimica, Architettura</strong> o ad altri percorsi tecnico-scientifici universitari. Il forte impianto laboratoriale prepara anche al lavoro in ambito tecnico o agli ITS Academy.',
+    dopoP2: 'Sviluppa <strong>competenze digitali e analitiche</strong> molto richieste nel mercato del lavoro, dal coding al pensiero algoritmico fino al data analysis di base.',
+    dopoPhotoSrc: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=900&q=80',
+    dopoPhotoAlt: 'Verso il futuro tecnologico',
+    dopoPhotoCap: 'Verso il futuro tecnologico',
+    gallery: [
+      { imgSrc: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&q=80', alt: 'Informatica', lbl: 'Università', nm: 'Informatica' },
+      { imgSrc: 'https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=600&q=80', alt: 'Ingegneria', lbl: 'Università', nm: 'Ingegneria' },
+      { imgSrc: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=600&q=80', alt: 'Scienze applicate', lbl: 'Università', nm: 'Scienze applicate' },
+    ],
   },
   {
     slug: 'liceo-sportivo',
@@ -44,6 +151,31 @@ export const diplomi: Diploma[] = [
     titoloSeo: 'Liceo Scientifico Indirizzo Sportivo | Diploma360',
     descSeo:
       'Per chi vuole unire studio scientifico e passione per lo sport. Programma, materie, sbocchi e iscrizioni — Liceo Scientifico Indirizzo Sportivo con Diploma360.',
+    chips: ['⚽ Scienze motorie', '🎯 Università sportive e mediche'],
+    heroImgSrc: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1000&q=80',
+    materiCardine: 'Scienze motorie · Diritto sport · Matematica',
+    dopoVal: 'Scienze motorie, Fisioterapia, Management sportivo',
+    descP1: 'Il Liceo Scientifico a Indirizzo Sportivo unisce <strong>materie scientifiche e discipline sportive</strong>, con un programma che integra studio di matematica, fisica, scienze e diritto-economia dello sport. È pensato per chi vuole costruire una carriera in ambito sportivo o sanitario senza rinunciare a una formazione liceale completa.',
+    descP2: 'Forte presenza di scienze motorie (3 ore settimanali per tutti i 5 anni) e moduli specifici di diritto sportivo, economia dello sport e discipline sportive. Una scelta naturale per atleti, allenatori e per chi punta a lauree come Scienze Motorie, Fisioterapia, Scienze della Riabilitazione.',
+    splitPhotoSrc: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?w=900&q=80',
+    splitPhotoAlt: 'Movimento e scienza',
+    splitPhotoCap: 'Movimento e scienza',
+    matAreas: [
+      { style: 'scien', title: 'Area scientifica', sub: 'Solida base STEM', desc: 'Matematica, fisica e scienze naturali, come nello Scientifico tradizionale.', items: ['Matematica', 'Fisica', 'Scienze naturali (chimica, biologia, scienze della Terra)'] },
+      { style: 'altro', title: 'Area sportiva', sub: 'Il distintivo del percorso', desc: 'Scienze motorie potenziate + diritto ed economia dello sport per 5 anni.', items: ['Scienze motorie e sportive (potenziate)', 'Diritto ed economia dello sport', 'Discipline sportive'] },
+      { style: 'umani', title: 'Area umanistica', sub: 'Base culturale', desc: 'Italiano, storia e filosofia, accanto al programma sportivo.', items: ['Lingua e letteratura italiana', 'Storia · Filosofia (triennio)'] },
+      { style: 'lingue', title: 'Lingue straniere', sub: 'Per il contesto internazionale', desc: 'Inglese: essenziale anche nel mondo sportivo globalizzato.', items: ['Lingua inglese'] },
+    ],
+    dopoP1: 'Il diploma sportivo apre l’accesso a <strong>tutte le università</strong>, con percorsi naturali in Scienze Motorie, Fisioterapia, Scienze della Riabilitazione, Medicina, Management dello sport, Giurisprudenza dello sport.',
+    dopoP2: 'Sviluppa anche <strong>competenze trasversali</strong> come gestione del tempo, lavoro di squadra, capacità di prestazione sotto pressione — apprezzate in molti settori lavorativi.',
+    dopoPhotoSrc: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=900&q=80',
+    dopoPhotoAlt: 'Carriere nello sport',
+    dopoPhotoCap: 'Carriere nello sport',
+    gallery: [
+      { imgSrc: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=600&q=80', alt: 'Scienze motorie', lbl: 'Università', nm: 'Scienze motorie' },
+      { imgSrc: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600&q=80', alt: 'Fisioterapia', lbl: 'Università', nm: 'Fisioterapia' },
+      { imgSrc: 'https://images.unsplash.com/photo-1571019613540-996a30a35fc6?w=600&q=80', alt: 'Management sportivo', lbl: 'Carriera', nm: 'Management sportivo' },
+    ],
   },
   {
     slug: 'liceo-linguistico',
@@ -52,6 +184,31 @@ export const diplomi: Diploma[] = [
     titoloSeo: 'Liceo Linguistico | Diploma360',
     descSeo:
       'Tre lingue straniere per un futuro internazionale. Programma, materie, sbocchi e iscrizioni — Liceo Linguistico con Diploma360.',
+    chips: ['🌍 3 lingue straniere', '🎯 Carriere internazionali'],
+    heroImgSrc: 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=1000&q=80',
+    materiCardine: 'Inglese · Francese · Spagnolo (o Tedesco)',
+    dopoVal: 'Lingue, Mediazione linguistica, Lavoro internazionale',
+    descP1: 'Il Liceo Linguistico offre una formazione approfondita in <strong>tre lingue straniere</strong> (di norma Inglese, Francese e Spagnolo o Tedesco), accompagnate dallo studio delle relative letterature, culture e civiltà. È l’indirizzo per chi vuole costruire una carriera in un contesto internazionale.',
+    descP2: 'Sviluppa solide competenze comunicative e una mentalità aperta al confronto culturale. Prepara a percorsi universitari in Lingue, Mediazione Linguistica, Comunicazione internazionale, Turismo, e a carriere nel mondo del lavoro globalizzato.',
+    splitPhotoSrc: 'https://images.unsplash.com/photo-1500332988905-1bf2a5733f43?w=900&q=80',
+    splitPhotoAlt: 'Le lingue del mondo',
+    splitPhotoCap: 'Le lingue del mondo',
+    matAreas: [
+      { style: 'lingue', title: 'Tre lingue straniere', sub: 'Il cuore dell’indirizzo', desc: 'Tre lingue straniere studiate per tutti i 5 anni, con relative letterature e culture.', items: ['Inglese (5 anni)', 'Seconda lingua: Francese / Spagnolo / Tedesco', 'Terza lingua: Spagnolo / Tedesco / Cinese (a seconda della scuola)'] },
+      { style: 'umani', title: 'Area umanistica', sub: 'Base culturale', desc: 'Italiano, storia, filosofia e cultura italiana, fondamentali per il contesto internazionale.', items: ['Lingua e letteratura italiana', 'Latino (biennio)', 'Storia · Filosofia (triennio)'] },
+      { style: 'scien', title: 'Area scientifica', sub: 'Solidità di base', desc: 'Matematica, scienze e fisica come complemento.', items: ['Matematica', 'Fisica', 'Scienze naturali'] },
+      { style: 'altro', title: 'Arte ed educazione fisica', sub: 'Completare la persona', desc: 'Storia dell’arte ed educazione fisica.', items: ['Storia dell’arte', 'Scienze motorie e sportive', 'Educazione civica'] },
+    ],
+    dopoP1: 'Il Liceo Linguistico apre la strada a corsi universitari in <strong>Lingue, Mediazione Linguistica, Comunicazione, Relazioni Internazionali, Turismo, Marketing</strong>. Apre anche a carriere in ambasciate, aziende multinazionali, organizzazioni internazionali, traduzione e interpretariato.',
+    dopoP2: 'Le competenze linguistiche acquisite sono <strong>direttamente spendibili sul mercato del lavoro</strong>, anche immediatamente dopo il diploma, in ruoli come addetto alla comunicazione internazionale, customer service multilingue, hostess di terra/aria, guida turistica.',
+    dopoPhotoSrc: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=900&q=80',
+    dopoPhotoAlt: 'Verso l’estero',
+    dopoPhotoCap: 'Verso l’estero',
+    gallery: [
+      { imgSrc: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80', alt: 'Lingue · Mediazione', lbl: 'Università', nm: 'Lingue · Mediazione' },
+      { imgSrc: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80', alt: 'Comunicazione internazionale', lbl: 'Carriera', nm: 'Comunicazione internazionale' },
+      { imgSrc: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=600&q=80', alt: 'Diplomazia · Turismo', lbl: 'Carriera', nm: 'Diplomazia · Turismo' },
+    ],
   },
   {
     slug: 'liceo-scienze-umane',
@@ -60,6 +217,31 @@ export const diplomi: Diploma[] = [
     titoloSeo: 'Liceo Scienze Umane | Diploma360',
     descSeo:
       'Esplora il mondo della cultura e della società. Programma, materie, sbocchi e iscrizioni — Liceo Scienze Umane con Diploma360.',
+    chips: ['🧠 Discipline umane', '🎯 Università umanistiche'],
+    heroImgSrc: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?w=1000&q=80',
+    materiCardine: 'Psicologia · Pedagogia · Sociologia',
+    dopoVal: 'Psicologia, Scienze educazione, Servizio sociale',
+    descP1: 'Il Liceo delle Scienze Umane offre un percorso di studi mirato alla comprensione approfondita delle dinamiche <strong>psicologiche, pedagogiche, sociologiche e antropologiche</strong> che caratterizzano l’essere umano e le società. Gli studenti acquisiscono una solida preparazione nelle discipline umanistiche, integrata dallo studio delle scienze sociali.',
+    descP2: 'Particolare attenzione è dedicata all’analisi del comportamento umano, dei processi educativi e delle strutture sociali. Questo indirizzo sviluppa <strong>competenze critiche e analitiche</strong>, promuovendo la capacità di riflessione e di comprensione delle relazioni interpersonali e sociali.',
+    splitPhotoSrc: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=900&q=80',
+    splitPhotoAlt: 'Studio della persona',
+    splitPhotoCap: 'Studio della persona',
+    matAreas: [
+      { style: 'umani', title: 'Scienze umane', sub: 'Il cuore dell’indirizzo', desc: 'Psicologia, pedagogia, sociologia e antropologia per tutti i 5 anni.', items: ['Psicologia', 'Pedagogia', 'Sociologia', 'Antropologia'] },
+      { style: 'umani', title: 'Area culturale', sub: 'Pensiero critico', desc: 'Italiano, latino, storia e filosofia: la base classica.', items: ['Lingua e letteratura italiana', 'Lingua e cultura latina', 'Storia · Filosofia'] },
+      { style: 'scien', title: 'Area scientifica', sub: 'Solidità di base', desc: 'Matematica, fisica e scienze come complemento.', items: ['Matematica', 'Fisica (triennio)', 'Scienze naturali'] },
+      { style: 'lingue', title: 'Lingue straniere', sub: 'Apertura al mondo', desc: 'Inglese per tutti i 5 anni.', items: ['Lingua inglese'] },
+    ],
+    dopoP1: 'Il diploma di Scienze Umane è la base per percorsi universitari in <strong>Psicologia, Scienze dell’Educazione, Sociologia, Giurisprudenza</strong>. Fornisce una solida preparazione e un efficace metodo di studio.',
+    dopoP2: 'Pur non abilitando direttamente a una professione, sviluppa <strong>competenze versatili</strong> per inserirsi nei settori dell’educazione, dell’animazione, dei servizi socio-assistenziali, della comunicazione e dell’integrazione culturale.',
+    dopoPhotoSrc: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=900&q=80',
+    dopoPhotoAlt: 'Verso le professioni di aiuto',
+    dopoPhotoCap: 'Verso le professioni di aiuto',
+    gallery: [
+      { imgSrc: 'https://images.unsplash.com/photo-1559757175-5700dde675bc?w=600&q=80', alt: 'Psicologia', lbl: 'Università', nm: 'Psicologia' },
+      { imgSrc: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80', alt: 'Scienze educazione', lbl: 'Università', nm: 'Scienze educazione' },
+      { imgSrc: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80', alt: 'Servizio sociale', lbl: 'Carriera', nm: 'Servizio sociale' },
+    ],
   },
   {
     slug: 'liceo-economico-sociale',
@@ -68,6 +250,31 @@ export const diplomi: Diploma[] = [
     titoloSeo: 'Liceo Economico-Sociale (LES) | Diploma360',
     descSeo:
       'Discipline umane integrate con economia e diritto. Programma, materie, sbocchi e iscrizioni — Liceo Economico-Sociale (LES) con Diploma360.',
+    chips: ['⚖️ Diritto ed economia', '🎯 Università di area sociale'],
+    heroImgSrc: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1000&q=80',
+    materiCardine: 'Diritto · Economia · Scienze umane',
+    dopoVal: 'Economia, Giurisprudenza, Scienze politiche',
+    descP1: 'Il Liceo delle Scienze Umane opzione Economico-Sociale (LES) integra lo studio delle <strong>discipline umanistiche con l’economia e il diritto</strong>, offrendo una formazione equilibrata tra scienze sociali ed economiche. Pensato per chi vuole capire i meccanismi della società attuale.',
+    descP2: 'Sviluppa competenze analitiche per interpretare i fenomeni economici, sociali e giuridici contemporanei. È la base ideale per percorsi universitari in Economia, Giurisprudenza, Scienze Politiche, Sociologia.',
+    splitPhotoSrc: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=900&q=80',
+    splitPhotoAlt: 'Diritto e società',
+    splitPhotoCap: 'Diritto e società',
+    matAreas: [
+      { style: 'umani', title: 'Diritto ed economia', sub: 'Il cuore dell’indirizzo', desc: 'Diritto ed economia politica per tutti i 5 anni.', items: ['Diritto', 'Economia politica', 'Scienze umane (sociologia, antropologia, psicologia)'] },
+      { style: 'umani', title: 'Area culturale', sub: 'Pensiero critico', desc: 'Italiano, storia e filosofia: la base liceale.', items: ['Lingua e letteratura italiana', 'Storia · Filosofia'] },
+      { style: 'lingue', title: 'Due lingue straniere', sub: 'Per il contesto internazionale', desc: 'Due lingue straniere per i 5 anni — fondamentale per l’economia globale.', items: ['Inglese', 'Seconda lingua: Francese / Spagnolo / Tedesco'] },
+      { style: 'scien', title: 'Area scientifica', sub: 'Solidità di base', desc: 'Matematica, fisica e scienze naturali.', items: ['Matematica', 'Fisica (triennio)', 'Scienze naturali'] },
+    ],
+    dopoP1: 'Il LES apre l’accesso a tutte le facoltà, con percorsi naturali in <strong>Economia, Giurisprudenza, Scienze Politiche, Sociologia, Servizio Sociale, Scienze della Comunicazione</strong>.',
+    dopoP2: 'Le competenze acquisite (analisi sociale, comprensione giuridica ed economica) sono <strong>spendibili nel settore pubblico, no-profit, consulenza, risorse umane</strong> e in tutti i lavori che richiedono capacità di lettura dei contesti sociali.',
+    dopoPhotoSrc: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=900&q=80',
+    dopoPhotoAlt: 'Verso il mondo socio-economico',
+    dopoPhotoCap: 'Verso il mondo socio-economico',
+    gallery: [
+      { imgSrc: 'https://images.unsplash.com/photo-1589994160957-d0d0b40e9b4d?w=600&q=80', alt: 'Giurisprudenza', lbl: 'Università', nm: 'Giurisprudenza' },
+      { imgSrc: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80', alt: 'Economia', lbl: 'Università', nm: 'Economia' },
+      { imgSrc: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=600&q=80', alt: 'Scienze politiche', lbl: 'Università', nm: 'Scienze politiche' },
+    ],
   },
   {
     slug: 'liceo-artistico',
@@ -76,6 +283,31 @@ export const diplomi: Diploma[] = [
     titoloSeo: 'Liceo Artistico | Diploma360',
     descSeo:
       'Per chi vede il mondo con occhi creativi. Programma, materie, sbocchi e iscrizioni — Liceo Artistico con Diploma360.',
+    chips: ['🎨 Arte e creatività', '🎯 Accademie, Architettura, Design'],
+    heroImgSrc: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1000&q=80',
+    materiCardine: 'Disegno · Storia dell’arte · Discipline plastiche',
+    dopoVal: 'Accademia di Belle Arti, Architettura, Design',
+    descP1: 'Il Liceo Artistico è l’indirizzo per chi vuole sviluppare la propria <strong>sensibilità estetica e tecnica artistica</strong> in un percorso strutturato. Offre solida formazione in disegno, pittura, scultura, storia dell’arte, accanto a una base culturale classica.',
+    descP2: 'Forma persone capaci di esprimere visivamente concetti, di analizzare opere d’arte e di applicare tecniche grafiche e plastiche. È la base ideale per accademie di Belle Arti, Architettura, Design, Beni Culturali.',
+    splitPhotoSrc: 'https://images.unsplash.com/photo-1515405295579-ba7b45403062?w=900&q=80',
+    splitPhotoAlt: 'Tecnica e visione',
+    splitPhotoCap: 'Tecnica e visione',
+    matAreas: [
+      { style: 'altro', title: 'Discipline artistiche', sub: 'Il cuore dell’indirizzo', desc: 'Tecniche artistiche, storia dell’arte e laboratorio.', items: ['Discipline grafiche e pittoriche', 'Discipline plastiche e scultoree', 'Storia dell’arte', 'Laboratorio artistico'] },
+      { style: 'umani', title: 'Area umanistica', sub: 'Base culturale', desc: 'Italiano, storia e filosofia, fondamentali anche per l’arte.', items: ['Lingua e letteratura italiana', 'Storia · Filosofia'] },
+      { style: 'scien', title: 'Area scientifica', sub: 'Logica e proporzione', desc: 'Matematica, fisica e chimica: utili per la prospettiva e i materiali.', items: ['Matematica', 'Fisica (triennio)', 'Chimica dei materiali'] },
+      { style: 'lingue', title: 'Lingua straniera', sub: 'Per il contesto globale', desc: 'Inglese per tutti i 5 anni.', items: ['Lingua inglese'] },
+    ],
+    dopoP1: 'Il diploma artistico apre l’accesso naturale alle <strong>Accademie di Belle Arti, Architettura, Design, Restauro, Beni Culturali</strong>, ma permette anche di iscriversi a qualsiasi facoltà universitaria.',
+    dopoP2: 'Sviluppa competenze direttamente spendibili nel <strong>mondo della comunicazione visiva, illustrazione, grafica, scenografia</strong> e in tutti i settori creativi, anche subito dopo il diploma.',
+    dopoPhotoSrc: 'https://images.unsplash.com/photo-1558452919-08ae4aea8e29?w=900&q=80',
+    dopoPhotoAlt: 'Verso le accademie',
+    dopoPhotoCap: 'Verso le accademie',
+    gallery: [
+      { imgSrc: 'https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=600&q=80', alt: 'Belle Arti', lbl: 'Accademia', nm: 'Belle Arti' },
+      { imgSrc: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&q=80', alt: 'Architettura', lbl: 'Università', nm: 'Architettura' },
+      { imgSrc: 'https://images.unsplash.com/photo-1561070791-2526d30994b8?w=600&q=80', alt: 'Design industriale', lbl: 'Università', nm: 'Design industriale' },
+    ],
   },
 
   // ── Istituti Tecnici ────────────────────────────────────────────────────────
@@ -86,6 +318,31 @@ export const diplomi: Diploma[] = [
     titoloSeo: 'Amministrazione, Finanza e Marketing | Diploma360',
     descSeo:
       'Le competenze chiave per il mondo aziendale. Programma, materie, sbocchi e iscrizioni — Amministrazione, Finanza e Marketing con Diploma360.',
+    chips: ['📊 Economia ed azienda', '🎯 Lavoro o università tecniche'],
+    heroImgSrc: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1000&q=80',
+    materiCardine: 'Economia · Diritto · Marketing',
+    dopoVal: 'Economia, lavoro in azienda, ITS',
+    descP1: 'L’indirizzo Amministrazione, Finanza e Marketing forma gli studenti in <strong>economia aziendale, diritto, gestione e marketing</strong>, preparandoli per carriere in ambito amministrativo, finanziario e commerciale. È la scelta ideale per chi vuole entrare nel mondo dell’azienda con competenze già pronte.',
+    descP2: 'Sviluppa una mentalità pratica e quantitativa, capace di leggere bilanci, costruire piani di marketing, gestire procedure amministrative. Permette di accedere al lavoro subito dopo il diploma, ma anche di proseguire all’università o agli ITS.',
+    splitPhotoSrc: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=900&q=80',
+    splitPhotoAlt: 'Mondo aziendale',
+    splitPhotoCap: 'Mondo aziendale',
+    matAreas: [
+      { style: 'scien', title: 'Area economico-aziendale', sub: 'Il cuore dell’indirizzo', desc: 'Economia, diritto, marketing e gestione aziendale.', items: ['Economia aziendale', 'Diritto', 'Economia politica', 'Marketing e tecniche di comunicazione'] },
+      { style: 'scien', title: 'Strumenti tecnici', sub: 'Per il lavoro reale', desc: 'Informatica, matematica applicata e tecniche professionali.', items: ['Informatica', 'Matematica', 'Statistica (triennio)'] },
+      { style: 'umani', title: 'Area culturale', sub: 'Base liceale', desc: 'Italiano e storia per il contesto culturale.', items: ['Lingua e letteratura italiana', 'Storia'] },
+      { style: 'lingue', title: 'Due lingue straniere', sub: 'Per il business internazionale', desc: 'Due lingue (Inglese + una seconda) per il mondo aziendale globale.', items: ['Lingua inglese', 'Seconda lingua: Francese / Spagnolo / Tedesco'] },
+    ],
+    dopoP1: 'Il diplomato AFM è subito spendibile sul mercato del lavoro in ruoli di <strong>contabilità, segreteria amministrativa, supporto al controllo di gestione, marketing junior, sales support</strong>. È anche la base per gli ITS in area economica e amministrativa.',
+    dopoP2: 'Apre l’accesso a tutte le facoltà, con percorsi naturali in <strong>Economia, Giurisprudenza, Management, Marketing, Scienze Politiche</strong>.',
+    dopoPhotoSrc: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=900&q=80',
+    dopoPhotoAlt: 'Carriere economico-finanziarie',
+    dopoPhotoCap: 'Carriere economico-finanziarie',
+    gallery: [
+      { imgSrc: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=600&q=80', alt: 'Amministrazione', lbl: 'Carriera', nm: 'Amministrazione' },
+      { imgSrc: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80', alt: 'Finanza', lbl: 'Carriera', nm: 'Finanza' },
+      { imgSrc: 'https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=600&q=80', alt: 'Marketing', lbl: 'Carriera', nm: 'Marketing' },
+    ],
   },
   {
     slug: 'rim',
@@ -94,6 +351,31 @@ export const diplomi: Diploma[] = [
     titoloSeo: 'Relazioni Internazionali per il Marketing (RIM) | Diploma360',
     descSeo:
       'Marketing e business in un contesto globale. Programma, materie, sbocchi e iscrizioni — Relazioni Internazionali per il Marketing (RIM) con Diploma360.',
+    chips: ['🌍 3 lingue + marketing', '🎯 Business globale'],
+    heroImgSrc: 'https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?w=1000&q=80',
+    materiCardine: '3 lingue · Marketing · Diritto internazionale',
+    dopoVal: 'Economia, Marketing internazionale, Lingue per il business',
+    descP1: 'RIM è la specializzazione dell’AFM dedicata al <strong>marketing internazionale e alle relazioni commerciali con l’estero</strong>. Combina lo studio di tre lingue straniere con marketing, diritto internazionale e gestione di imprese che operano sui mercati esteri.',
+    descP2: 'Forma giovani professionisti per gestire l’export, le relazioni con clienti e fornitori esteri, il marketing globale. Una scelta orientata al lavoro internazionale o a percorsi universitari in Economia internazionale.',
+    splitPhotoSrc: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=900&q=80',
+    splitPhotoAlt: 'Mercati globali',
+    splitPhotoCap: 'Mercati globali',
+    matAreas: [
+      { style: 'lingue', title: 'Tre lingue straniere', sub: 'Il cuore dell’indirizzo', desc: 'Tre lingue per il commercio internazionale e il marketing globale.', items: ['Inglese', 'Seconda lingua: Francese / Spagnolo / Tedesco', 'Terza lingua: Spagnolo / Tedesco / Cinese'] },
+      { style: 'scien', title: 'Area economico-internazionale', sub: 'Mercati e marketing', desc: 'Economia aziendale, marketing e relazioni internazionali.', items: ['Economia aziendale e geo-politica', 'Marketing internazionale', 'Relazioni internazionali', 'Diritto internazionale'] },
+      { style: 'umani', title: 'Area culturale', sub: 'Per il contesto', desc: 'Italiano e storia per il quadro generale.', items: ['Lingua e letteratura italiana', 'Storia'] },
+      { style: 'scien', title: 'Strumenti tecnici', sub: 'Quantitativi', desc: 'Matematica e informatica.', items: ['Matematica', 'Informatica'] },
+    ],
+    dopoP1: 'Il diploma RIM è particolarmente apprezzato in <strong>aziende esportatrici, agenzie di marketing, e-commerce internazionale, multinazionali</strong>. Ruoli tipici: export manager assistant, marketing internazionale, customer service multilingue, area manager estero.',
+    dopoP2: 'Ottima base per università in <strong>Economia, Marketing, Lingue per il business, Relazioni Internazionali</strong> e per ITS in area logistica e commercio estero.',
+    dopoPhotoSrc: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=900&q=80',
+    dopoPhotoAlt: 'Marketing internazionale',
+    dopoPhotoCap: 'Marketing internazionale',
+    gallery: [
+      { imgSrc: 'https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?w=600&q=80', alt: 'Marketing internazionale', lbl: 'Carriera', nm: 'Marketing internazionale' },
+      { imgSrc: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=80', alt: 'Economia internazionale', lbl: 'Università', nm: 'Economia internazionale' },
+      { imgSrc: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&q=80', alt: 'Export · Commercio estero', lbl: 'Carriera', nm: 'Export · Commercio estero' },
+    ],
   },
   {
     slug: 'turismo',
@@ -102,6 +384,31 @@ export const diplomi: Diploma[] = [
     titoloSeo: 'Turismo (I.T.E.) | Diploma360',
     descSeo:
       'Competenze turistiche, economiche e linguistiche. Programma, materie, sbocchi e iscrizioni — Turismo (I.T.E.) con Diploma360.',
+    chips: ['✈️ Turismo e viaggio', '🎯 Hospitality, agenzie, eventi'],
+    heroImgSrc: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1000&q=80',
+    materiCardine: 'Geografia turistica · Lingue · Marketing',
+    dopoVal: 'Turismo, Hospitality, Scienze del turismo',
+    descP1: 'L’Istituto Tecnico per il Turismo forma gli studenti in <strong>discipline turistiche, economiche e linguistiche</strong>, fornendo competenze in gestione aziendale, marketing, geografia turistica e tre lingue straniere. Una scelta orientata al settore dell’ospitalità e dei viaggi.',
+    descP2: 'Sviluppa una mentalità imprenditoriale applicata al turismo: come si organizza un viaggio, come si gestisce una struttura ricettiva, come si crea un’esperienza per il cliente. Permette di lavorare subito o di proseguire all’università.',
+    splitPhotoSrc: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=900&q=80',
+    splitPhotoAlt: 'Mondo del turismo',
+    splitPhotoCap: 'Mondo del turismo',
+    matAreas: [
+      { style: 'scien', title: 'Area turistica', sub: 'Il cuore dell’indirizzo', desc: 'Discipline turistiche, geografia e tecniche del settore.', items: ['Discipline turistiche e aziendali', 'Geografia turistica', 'Arte e territorio', 'Diritto e legislazione turistica'] },
+      { style: 'lingue', title: 'Tre lingue straniere', sub: 'Per l’ospitalità globale', desc: 'Tre lingue: inglese + 2 a scelta.', items: ['Inglese', 'Seconda lingua: Francese / Spagnolo / Tedesco', 'Terza lingua: Spagnolo / Tedesco / Cinese'] },
+      { style: 'scien', title: 'Strumenti tecnici', sub: 'Per il business', desc: 'Matematica, informatica e marketing.', items: ['Matematica', 'Informatica', 'Economia aziendale'] },
+      { style: 'umani', title: 'Area culturale', sub: 'Per il contesto', desc: 'Italiano e storia: base culturale.', items: ['Lingua e letteratura italiana', 'Storia'] },
+    ],
+    dopoP1: 'Il diplomato Turismo è subito spendibile nel settore in ruoli di <strong>reception, agenzie di viaggi, tour operator, organizzazione eventi e congressi, animazione turistica, hospitality</strong>.',
+    dopoP2: 'Apre l’accesso a tutte le facoltà, con percorsi naturali in <strong>Scienze del Turismo, Economia del Turismo, Lingue, Beni Culturali</strong>, oltre agli ITS in area turistico-alberghiera.',
+    dopoPhotoSrc: 'https://images.unsplash.com/photo-1455587734955-081b22074882?w=900&q=80',
+    dopoPhotoAlt: 'Carriere nell’hospitality',
+    dopoPhotoCap: 'Carriere nell’hospitality',
+    gallery: [
+      { imgSrc: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=600&q=80', alt: 'Hotel · Reception', lbl: 'Carriera', nm: 'Hotel · Reception' },
+      { imgSrc: 'https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=600&q=80', alt: 'Tour operator', lbl: 'Carriera', nm: 'Tour operator' },
+      { imgSrc: 'https://images.unsplash.com/photo-1530541930197-ff16ac917b0e?w=600&q=80', alt: 'Eventi e congressi', lbl: 'Carriera', nm: 'Eventi e congressi' },
+    ],
   },
   {
     slug: 'meccanica',
@@ -110,6 +417,31 @@ export const diplomi: Diploma[] = [
     titoloSeo: 'Meccanica, Meccatronica ed Energia | Diploma360',
     descSeo:
       'Costruire, progettare, automatizzare. Programma, materie, sbocchi e iscrizioni — Meccanica, Meccatronica ed Energia con Diploma360.',
+    chips: ['⚙️ Meccanica e automazione', '🎯 Ingegneria · ITS · Lavoro tecnico'],
+    heroImgSrc: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=1000&q=80',
+    materiCardine: 'Meccanica · Sistemi · Automazione',
+    dopoVal: 'Ingegneria meccanica, ITS, lavoro tecnico',
+    descP1: 'Meccanica, Meccatronica ed Energia forma tecnici capaci di progettare, costruire e gestire <strong>sistemi meccanici, impianti energetici e sistemi automatizzati</strong>. È uno degli indirizzi più richiesti dalle aziende italiane del settore manifatturiero.',
+    descP2: 'Sviluppa competenze pratiche di disegno tecnico, controllo numerico, programmazione PLC, sistemi pneumatici e idraulici. Permette di entrare subito in officina o in azienda, ma è anche un’ottima base per Ingegneria.',
+    splitPhotoSrc: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=900&q=80',
+    splitPhotoAlt: 'Officine e impianti',
+    splitPhotoCap: 'Officine e impianti',
+    matAreas: [
+      { style: 'scien', title: 'Area tecnica', sub: 'Il cuore dell’indirizzo', desc: 'Meccanica, meccatronica, sistemi e tecnologia industriale.', items: ['Meccanica, macchine ed energia', 'Sistemi e automazione', 'Tecnologie meccaniche di processo', 'Disegno, progettazione e organizzazione industriale'] },
+      { style: 'scien', title: 'Area scientifica', sub: 'Fondamenta della tecnica', desc: 'Matematica, fisica e complementi tecnici.', items: ['Matematica', 'Fisica', 'Chimica', 'Tecnologie informatiche'] },
+      { style: 'umani', title: 'Area culturale', sub: 'Base liceale', desc: 'Italiano e storia.', items: ['Lingua e letteratura italiana', 'Storia'] },
+      { style: 'lingue', title: 'Lingua straniera', sub: 'Per la tecnica internazionale', desc: 'Inglese tecnico per la documentazione e il lavoro internazionale.', items: ['Lingua inglese (tecnico)'] },
+    ],
+    dopoP1: 'Il diplomato Meccanica entra direttamente in <strong>officine, aziende manifatturiere, reparti di automazione, impianti industriali</strong>. Ruoli tipici: tecnico di produzione, manutentore, programmatore CNC, addetto al controllo qualità.',
+    dopoP2: 'Ottima base per <strong>Ingegneria Meccanica, Ingegneria dell’Automazione, Ingegneria Energetica</strong> e per gli ITS Academy in area meccanica e meccatronica.',
+    dopoPhotoSrc: 'https://images.unsplash.com/photo-1593436215395-5ae6c2c3ba0e?w=900&q=80',
+    dopoPhotoAlt: 'Industria 4.0',
+    dopoPhotoCap: 'Industria 4.0',
+    gallery: [
+      { imgSrc: 'https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0?w=600&q=80', alt: 'Ingegneria meccanica', lbl: 'Università', nm: 'Ingegneria meccanica' },
+      { imgSrc: 'https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=600&q=80', alt: 'Automazione industriale', lbl: 'Carriera', nm: 'Automazione industriale' },
+      { imgSrc: 'https://images.unsplash.com/photo-1574710619228-3df9a4e8b0c4?w=600&q=80', alt: 'Manutenzione tecnica', lbl: 'Carriera', nm: 'Manutenzione tecnica' },
+    ],
   },
   {
     slug: 'elettronica',
@@ -118,6 +450,31 @@ export const diplomi: Diploma[] = [
     titoloSeo: 'Elettronica ed Elettrotecnica | Diploma360',
     descSeo:
       'Dalle reti elettriche ai sistemi embedded. Programma, materie, sbocchi e iscrizioni — Elettronica ed Elettrotecnica con Diploma360.',
+    chips: ['⚡ Elettronica ed elettrotecnica', '🎯 Ingegneria · ITS · Lavoro tecnico'],
+    heroImgSrc: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=1000&q=80',
+    materiCardine: 'Elettrotecnica · Elettronica · Sistemi',
+    dopoVal: 'Ingegneria elettronica, ITS, lavoro tecnico',
+    descP1: 'L’indirizzo Elettronica ed Elettrotecnica forma tecnici esperti in <strong>sistemi elettrici, elettronici e di automazione industriale</strong>. Una specializzazione altamente richiesta dalle aziende del settore energetico, manifatturiero e tecnologico.',
+    descP2: 'Sviluppa competenze su circuiti, sistemi di controllo, reti elettriche, microcontrollori, automazione. Apre la strada al lavoro in azienda, agli ITS o all’Ingegneria.',
+    splitPhotoSrc: 'https://images.unsplash.com/photo-1581092335397-9583eb92d232?w=900&q=80',
+    splitPhotoAlt: 'Circuiti e laboratorio',
+    splitPhotoCap: 'Circuiti e laboratorio',
+    matAreas: [
+      { style: 'scien', title: 'Area tecnica', sub: 'Il cuore dell’indirizzo', desc: 'Elettrotecnica, elettronica, sistemi e telecomunicazioni.', items: ['Elettrotecnica ed elettronica', 'Sistemi automatici', 'Tecnologie elettrico-elettroniche', 'Telecomunicazioni'] },
+      { style: 'scien', title: 'Area scientifica', sub: 'Fondamenta', desc: 'Matematica, fisica, chimica e informatica.', items: ['Matematica', 'Fisica', 'Chimica', 'Tecnologie informatiche'] },
+      { style: 'umani', title: 'Area culturale', sub: 'Base liceale', desc: 'Italiano e storia.', items: ['Lingua e letteratura italiana', 'Storia'] },
+      { style: 'lingue', title: 'Lingua straniera', sub: 'Per la tecnica globale', desc: 'Inglese tecnico per la documentazione internazionale.', items: ['Lingua inglese (tecnico)'] },
+    ],
+    dopoP1: 'Il diplomato Elettronica entra in <strong>aziende elettrotecniche, telecomunicazioni, automazione industriale, reparti tecnici di multiutility</strong>. Ruoli tipici: tecnico di automazione, addetto manutenzione impianti, technician per IoT e dispositivi embedded.',
+    dopoP2: 'Ottima base per <strong>Ingegneria Elettronica, Ingegneria delle Telecomunicazioni, Ingegneria Informatica</strong> e per gli ITS Academy in area elettronica e ICT.',
+    dopoPhotoSrc: 'https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?w=900&q=80',
+    dopoPhotoAlt: 'Sistemi embedded',
+    dopoPhotoCap: 'Sistemi embedded',
+    gallery: [
+      { imgSrc: 'https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?w=600&q=80', alt: 'Ingegneria elettronica', lbl: 'Università', nm: 'Ingegneria elettronica' },
+      { imgSrc: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80', alt: 'Automazione industriale', lbl: 'Carriera', nm: 'Automazione industriale' },
+      { imgSrc: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?w=600&q=80', alt: 'Embedded · IoT', lbl: 'Carriera', nm: 'Embedded · IoT' },
+    ],
   },
   {
     slug: 'informatica',
@@ -126,6 +483,31 @@ export const diplomi: Diploma[] = [
     titoloSeo: 'Informatica e Telecomunicazioni | Diploma360',
     descSeo:
       'Coding, reti e sistemi: le competenze del futuro. Programma, materie, sbocchi e iscrizioni — Informatica e Telecomunicazioni con Diploma360.',
+    chips: ['💻 Coding e reti', '🎯 ICT · ITS · Università'],
+    heroImgSrc: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1000&q=80',
+    materiCardine: 'Informatica · Sistemi · Reti',
+    dopoVal: 'Informatica, Ingegneria, lavoro IT, ITS',
+    descP1: 'L’indirizzo Informatica e Telecomunicazioni è una delle scelte più richieste oggi: forma <strong>sviluppatori, sistemisti e tecnici di rete</strong> capaci di lavorare con i linguaggi di programmazione più diffusi, basi di dati, reti e sistemi operativi.',
+    descP2: 'Sviluppa competenze pratiche immediatamente spendibili nel mercato del lavoro ICT, in costante crescita. È anche la base ideale per Ingegneria Informatica, Informatica, Data Science.',
+    splitPhotoSrc: 'https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=900&q=80',
+    splitPhotoAlt: 'Codice e architetture',
+    splitPhotoCap: 'Codice e architetture',
+    matAreas: [
+      { style: 'scien', title: 'Area informatica', sub: 'Il cuore dell’indirizzo', desc: 'Programmazione, basi di dati, sistemi e reti.', items: ['Informatica (programmazione)', 'Sistemi e reti', 'Tecnologie e progettazione di sistemi', 'Gestione progetto e organizzazione d’impresa (5° anno)'] },
+      { style: 'scien', title: 'Area scientifica', sub: 'Fondamenta', desc: 'Matematica, fisica, chimica.', items: ['Matematica', 'Fisica', 'Chimica', 'Telecomunicazioni'] },
+      { style: 'umani', title: 'Area culturale', sub: 'Base liceale', desc: 'Italiano e storia.', items: ['Lingua e letteratura italiana', 'Storia'] },
+      { style: 'lingue', title: 'Lingua straniera', sub: 'Lingua del codice', desc: 'Inglese tecnico, indispensabile in ambito ICT.', items: ['Lingua inglese (tecnico)'] },
+    ],
+    dopoP1: 'Il diplomato ITT è uno dei più richiesti sul mercato del lavoro IT: <strong>sviluppatore software, sistemista, tecnico di rete, web developer, supporto ICT</strong>. Ruoli accessibili anche subito dopo il diploma.',
+    dopoP2: 'Ottima base per <strong>Informatica, Ingegneria Informatica, Data Science, Cybersecurity</strong> e per gli ITS Academy in area ICT e cybersecurity.',
+    dopoPhotoSrc: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=900&q=80',
+    dopoPhotoAlt: 'Carriere ICT',
+    dopoPhotoCap: 'Carriere ICT',
+    gallery: [
+      { imgSrc: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80', alt: 'Sviluppatore software', lbl: 'Carriera', nm: 'Sviluppatore software' },
+      { imgSrc: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&q=80', alt: 'Sistemista · DevOps', lbl: 'Carriera', nm: 'Sistemista · DevOps' },
+      { imgSrc: 'https://images.unsplash.com/photo-1573164713988-8665fc963095?w=600&q=80', alt: 'Informatica', lbl: 'Università', nm: 'Informatica' },
+    ],
   },
   {
     slug: 'grafica',
@@ -133,7 +515,32 @@ export const diplomi: Diploma[] = [
     categoria: 'tecnico',
     titoloSeo: 'Grafica e Comunicazione | Diploma360',
     descSeo:
-      'Progettare e comunicare nell\'era digitale. Programma, materie, sbocchi e iscrizioni — Grafica e Comunicazione con Diploma360.',
+      "Progettare e comunicare nell'era digitale. Programma, materie, sbocchi e iscrizioni — Grafica e Comunicazione con Diploma360.",
+    chips: ['🎨 Grafica e digitale', '🎯 Agenzie creative · Design · Università'],
+    heroImgSrc: 'https://images.unsplash.com/photo-1561070791-2526d30994b8?w=1000&q=80',
+    materiCardine: 'Grafica · Multimedia · Comunicazione',
+    dopoVal: 'Design, Comunicazione, Agenzie creative',
+    descP1: 'L’indirizzo Grafica e Comunicazione forma tecnici per il <strong>design grafico, la produzione multimediale e la comunicazione visiva</strong>. Competenze direttamente spendibili nelle agenzie creative, negli studi di comunicazione e in ambito digitale.',
+    descP2: 'Sviluppa creatività e competenze tecniche: dall’uso professionale di software come Photoshop, Illustrator e InDesign alla produzione di video e contenuti web. Una scelta ideale per chi vede il design come carriera.',
+    splitPhotoSrc: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=900&q=80',
+    splitPhotoAlt: 'Strumenti del designer',
+    splitPhotoCap: 'Strumenti del designer',
+    matAreas: [
+      { style: 'altro', title: 'Area grafica', sub: 'Il cuore dell’indirizzo', desc: 'Progettazione grafica, multimedia, fotografia e video.', items: ['Progettazione multimediale', 'Teoria della comunicazione', 'Tecnologie dei processi di produzione', 'Laboratori tecnici'] },
+      { style: 'scien', title: 'Area tecnica', sub: 'Strumenti digitali', desc: 'Matematica, informatica e tecnologie applicate.', items: ['Matematica', 'Informatica', 'Chimica dei materiali (biennio)'] },
+      { style: 'umani', title: 'Area culturale', sub: 'Base culturale', desc: 'Italiano, storia e storia dell’arte.', items: ['Lingua e letteratura italiana', 'Storia', 'Storia dell’arte'] },
+      { style: 'lingue', title: 'Lingua straniera', sub: 'Per la comunicazione globale', desc: 'Inglese, essenziale nel mondo del design.', items: ['Lingua inglese'] },
+    ],
+    dopoP1: 'Il diplomato Grafica è subito spendibile in <strong>agenzie di comunicazione, studi grafici, redazioni, agenzie web e digital</strong>. Ruoli: graphic designer junior, web designer, social media designer, video editor.',
+    dopoP2: 'Ottima base per <strong>Design, Comunicazione, Architettura, Beni Culturali</strong>, Accademie di Belle Arti e ITS Academy in area design e digital.',
+    dopoPhotoSrc: 'https://images.unsplash.com/photo-1503551723145-6c040742065b?w=900&q=80',
+    dopoPhotoAlt: 'Carriere creative',
+    dopoPhotoCap: 'Carriere creative',
+    gallery: [
+      { imgSrc: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=600&q=80', alt: 'Graphic designer', lbl: 'Carriera', nm: 'Graphic designer' },
+      { imgSrc: 'https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?w=600&q=80', alt: 'Web/UX designer', lbl: 'Carriera', nm: 'Web/UX designer' },
+      { imgSrc: 'https://images.unsplash.com/photo-1554080353-a576cf803bda?w=600&q=80', alt: 'Comunicazione visiva', lbl: 'Carriera', nm: 'Comunicazione visiva' },
+    ],
   },
   {
     slug: 'chimica',
@@ -141,7 +548,32 @@ export const diplomi: Diploma[] = [
     categoria: 'tecnico',
     titoloSeo: 'Chimica, Materiali e Biotecnologie | Diploma360',
     descSeo:
-      'Scienze applicate al servizio dell\'industria. Programma, materie, sbocchi e iscrizioni — Chimica, Materiali e Biotecnologie con Diploma360.',
+      "Scienze applicate al servizio dell'industria. Programma, materie, sbocchi e iscrizioni — Chimica, Materiali e Biotecnologie con Diploma360.",
+    chips: ['🧪 Laboratorio scientifico', '🎯 Università STEM · Farmaceutica · ITS'],
+    heroImgSrc: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=1000&q=80',
+    materiCardine: 'Chimica · Biologia · Biotecnologie',
+    dopoVal: 'Chimica, Biotecnologie, Industria farmaceutica',
+    descP1: 'L’indirizzo Chimica, Materiali e Biotecnologie forma tecnici per <strong>laboratorio chimico, biotecnologico e di analisi</strong>. Una specializzazione richiesta in industria farmaceutica, alimentare, cosmetica, ambientale e nella ricerca.',
+    descP2: 'Sviluppa competenze pratiche in chimica analitica, microbiologia, biotecnologie. Permette di entrare subito in laboratorio o di proseguire studi universitari in area scientifica.',
+    splitPhotoSrc: 'https://images.unsplash.com/photo-1576086213369-97a306d36557?w=900&q=80',
+    splitPhotoAlt: 'Laboratorio chimico',
+    splitPhotoCap: 'Laboratorio chimico',
+    matAreas: [
+      { style: 'scien', title: 'Area chimico-biologica', sub: 'Il cuore dell’indirizzo', desc: 'Chimica analitica, organica, biotecnologie e laboratorio.', items: ['Chimica analitica e strumentale', 'Chimica organica e biochimica', 'Biologia, microbiologia e biotecnologie', 'Tecnologie chimiche industriali'] },
+      { style: 'scien', title: 'Area scientifica', sub: 'Fondamenta', desc: 'Matematica, fisica e scienze.', items: ['Matematica', 'Fisica', 'Scienze integrate (chimica, biologia)', 'Tecnologie informatiche'] },
+      { style: 'umani', title: 'Area culturale', sub: 'Base liceale', desc: 'Italiano e storia.', items: ['Lingua e letteratura italiana', 'Storia'] },
+      { style: 'lingue', title: 'Lingua straniera', sub: 'Per la ricerca', desc: 'Inglese tecnico-scientifico per la documentazione internazionale.', items: ['Lingua inglese (tecnico)'] },
+    ],
+    dopoP1: 'Il diplomato Chimica entra in <strong>laboratori di analisi, industria farmaceutica, cosmetica, alimentare, ambientale</strong>. Ruoli: tecnico di laboratorio, controllo qualità, analisi ambientali, supporto alla ricerca.',
+    dopoP2: 'Ottima base per <strong>Chimica, Biotecnologie, Farmacia, Biologia, CTF, Ingegneria Chimica</strong> e per gli ITS Academy in area chimica e farmaceutica.',
+    dopoPhotoSrc: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=900&q=80',
+    dopoPhotoAlt: 'Industria e ricerca',
+    dopoPhotoCap: 'Industria e ricerca',
+    gallery: [
+      { imgSrc: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&q=80', alt: 'Chimica', lbl: 'Università', nm: 'Chimica' },
+      { imgSrc: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&q=80', alt: 'Biotecnologie', lbl: 'Università', nm: 'Biotecnologie' },
+      { imgSrc: 'https://images.unsplash.com/photo-1581093458791-9d2b03c5ad8d?w=600&q=80', alt: 'Industria farmaceutica', lbl: 'Carriera', nm: 'Industria farmaceutica' },
+    ],
   },
 
   // ── Istituti Professionali ──────────────────────────────────────────────────
@@ -152,6 +584,31 @@ export const diplomi: Diploma[] = [
     titoloSeo: 'Servizi Commerciali | Diploma360',
     descSeo:
       'Pronto per il mondo del lavoro in tempi rapidi. Programma, materie, sbocchi e iscrizioni — Servizi Commerciali con Diploma360.',
+    chips: ['🛒 Commerciale e marketing', '🎯 Lavoro qualificato in azienda'],
+    heroImgSrc: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1000&q=80',
+    materiCardine: 'Marketing · Amministrazione · Comunicazione',
+    dopoVal: 'Lavoro in azienda, ITS, vendita e marketing',
+    descP1: 'L’indirizzo Servizi Commerciali forma giovani professionisti per il <strong>settore amministrativo, commerciale e di marketing</strong>. È pensato per chi vuole entrare nel mondo del lavoro in tempi brevi, con competenze pratiche e direttamente applicabili.',
+    descP2: 'Sviluppa competenze concrete in tecniche di vendita, gestione clienti, amministrazione di base, marketing digitale. Ideale per chi vede la propria carriera in azienda piuttosto che all’università.',
+    splitPhotoSrc: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=900&q=80',
+    splitPhotoAlt: 'Negozio e vendita',
+    splitPhotoCap: 'Negozio e vendita',
+    matAreas: [
+      { style: 'scien', title: 'Area professionale', sub: 'Il cuore dell’indirizzo', desc: 'Tecniche commerciali, marketing e gestione amministrativa.', items: ['Tecniche professionali dei servizi commerciali', 'Tecniche di comunicazione', 'Marketing e tecniche di vendita', 'Economia aziendale'] },
+      { style: 'scien', title: 'Strumenti tecnici', sub: 'Per il lavoro', desc: 'Informatica, matematica e diritto applicato.', items: ['Informatica', 'Matematica', 'Diritto/Economia'] },
+      { style: 'umani', title: 'Area culturale', sub: 'Base culturale', desc: 'Italiano, storia e laboratorio professionale.', items: ['Lingua e letteratura italiana', 'Storia'] },
+      { style: 'lingue', title: 'Due lingue straniere', sub: 'Per il commercio', desc: 'Due lingue per il mondo aziendale globale.', items: ['Inglese', 'Seconda lingua: Francese / Spagnolo / Tedesco'] },
+    ],
+    dopoP1: 'Il diplomato Servizi Commerciali è subito spendibile in <strong>negozi, agenzie, uffici commerciali e amministrativi</strong>. Ruoli: addetto vendite, customer service, segreteria, supporto marketing, amministrazione di base.',
+    dopoP2: 'Apre l’accesso a tutte le facoltà (con percorsi naturali in <strong>Economia, Marketing</strong>) e agli ITS Academy in area commerciale e marketing.',
+    dopoPhotoSrc: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=900&q=80',
+    dopoPhotoAlt: 'Carriere commerciali',
+    dopoPhotoCap: 'Carriere commerciali',
+    gallery: [
+      { imgSrc: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&q=80', alt: 'Vendita · Retail', lbl: 'Carriera', nm: 'Vendita · Retail' },
+      { imgSrc: 'https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?w=600&q=80', alt: 'Marketing', lbl: 'Carriera', nm: 'Marketing' },
+      { imgSrc: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=600&q=80', alt: 'Amministrazione', lbl: 'Carriera', nm: 'Amministrazione' },
+    ],
   },
   {
     slug: 'enogastronomia',
@@ -159,23 +616,98 @@ export const diplomi: Diploma[] = [
     categoria: 'professionale',
     titoloSeo: 'Enogastronomia e Ospitalità Alberghiera | Diploma360',
     descSeo:
-      'Cucina, sala e accoglienza per il mondo dell\'hospitality. Programma, materie, sbocchi e iscrizioni — Enogastronomia e Ospitalità Alberghiera con Diploma360.',
+      "Cucina, sala e accoglienza per il mondo dell'hospitality. Programma, materie, sbocchi e iscrizioni — Enogastronomia e Ospitalità Alberghiera con Diploma360.",
+    chips: ['🍳 Cucina e sala', '🎯 Hotel · Ristoranti · Resort'],
+    heroImgSrc: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1000&q=80',
+    materiCardine: 'Cucina · Sala · Ricevimento',
+    dopoVal: 'Ristorazione, Hotel, Hospitality manager',
+    descP1: 'L’indirizzo Enogastronomia e Ospitalità Alberghiera forma gli studenti nelle <strong>tecniche di cucina, sala e ricevimento</strong>, con una solida base in discipline linguistiche, alimentari e gestionali. Una scelta perfetta per chi vuole costruire una carriera nel mondo del ristoro e dell’hospitality.',
+    descP2: 'Sviluppa competenze pratiche di cucina professionale, servizio di sala, gestione di una struttura ricettiva. Il diploma è subito spendibile in ristoranti, hotel, resort, e apre anche a percorsi universitari o ITS in ambito alberghiero.',
+    splitPhotoSrc: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=900&q=80',
+    splitPhotoAlt: 'Sala e cucina',
+    splitPhotoCap: 'Sala e cucina',
+    matAreas: [
+      { style: 'scien', title: 'Area professionale', sub: 'Il cuore dell’indirizzo', desc: 'Cucina, sala e ricevimento — con specializzazione triennale.', items: ['Laboratorio di cucina', 'Laboratorio di sala e vendita', 'Accoglienza turistica', 'Scienza e cultura dell’alimentazione'] },
+      { style: 'scien', title: 'Strumenti tecnici', sub: 'Per la gestione', desc: 'Diritto, matematica e tecniche aziendali.', items: ['Matematica', 'Diritto e tecniche amministrative', 'Scienza degli alimenti'] },
+      { style: 'umani', title: 'Area culturale', sub: 'Base culturale', desc: 'Italiano, storia e geografia.', items: ['Lingua e letteratura italiana', 'Storia · Geografia'] },
+      { style: 'lingue', title: 'Due lingue straniere', sub: 'Per l’ospitalità globale', desc: 'Due lingue per servire clienti di tutto il mondo.', items: ['Inglese', 'Seconda lingua: Francese / Spagnolo / Tedesco'] },
+    ],
+    dopoP1: 'Il diplomato Enogastronomia è <strong>uno dei profili più richiesti in Italia</strong>: cucina, pasticceria, sala, bar, sommelier, reception, room manager. Spendibile in ristoranti, hotel, resort, navi da crociera, catering.',
+    dopoP2: 'Apre l’accesso a percorsi universitari in <strong>Scienze Gastronomiche, Hospitality Management</strong> e a ITS Academy in area alberghiera, agro-alimentare e turistica.',
+    dopoPhotoSrc: 'https://images.unsplash.com/photo-1551218372-a8789b81b253?w=900&q=80',
+    dopoPhotoAlt: 'Hospitality di alto livello',
+    dopoPhotoCap: 'Hospitality di alto livello',
+    gallery: [
+      { imgSrc: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&q=80', alt: 'Chef · Cuoco', lbl: 'Carriera', nm: 'Chef · Cuoco' },
+      { imgSrc: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80', alt: 'Maître · Sommelier', lbl: 'Carriera', nm: 'Maître · Sommelier' },
+      { imgSrc: 'https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=600&q=80', alt: 'Hotel manager', lbl: 'Carriera', nm: 'Hotel manager' },
+    ],
   },
   {
     slug: 'sanita',
-    nome: 'Servizi per la Sanità e l\'Assistenza Sociale',
+    nome: "Servizi per la Sanità e l'Assistenza Sociale",
     categoria: 'professionale',
-    titoloSeo: 'Servizi per la Sanità e l\'Assistenza Sociale | Diploma360',
+    titoloSeo: "Servizi per la Sanità e l'Assistenza Sociale | Diploma360",
     descSeo:
-      'Per chi vuole occuparsi delle persone. Programma, materie, sbocchi e iscrizioni — Servizi per la Sanità e l\'Assistenza Sociale con Diploma360.',
+      "Per chi vuole occuparsi delle persone. Programma, materie, sbocchi e iscrizioni — Servizi per la Sanità e l'Assistenza Sociale con Diploma360.",
+    chips: ['🏥 Sanità e socio-assistenziale', '🎯 OSS · Università sanitarie · ITS'],
+    heroImgSrc: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=1000&q=80',
+    materiCardine: 'Psicologia · Igiene · Assistenza sociale',
+    dopoVal: 'Operatore socio-sanitario, OSS, Università sanitarie',
+    descP1: 'L’indirizzo Servizi per la Sanità e l’Assistenza Sociale forma gli studenti in <strong>discipline sanitarie, psicologiche e sociali</strong>, preparando per carriere nel settore socio-sanitario e per studi universitari in ambito sanitario.',
+    descP2: 'Sviluppa competenze pratiche per lavorare in strutture sanitarie e socio-assistenziali, con conoscenze di igiene, primo soccorso, psicologia applicata. Il diploma è la base per professioni di aiuto e cura.',
+    splitPhotoSrc: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=900&q=80',
+    splitPhotoAlt: 'Cura della persona',
+    splitPhotoCap: 'Cura della persona',
+    matAreas: [
+      { style: 'scien', title: 'Area sanitario-sociale', sub: 'Il cuore dell’indirizzo', desc: 'Discipline sanitarie, psicologiche e di assistenza sociale.', items: ['Igiene e cultura medico-sanitaria', 'Psicologia generale e applicata', 'Metodologie operative', 'Diritto e legislazione socio-sanitaria'] },
+      { style: 'scien', title: 'Area scientifica', sub: 'Base medico-biologica', desc: 'Matematica, scienze e chimica.', items: ['Matematica', 'Scienze integrate (biologia, chimica)', 'Fisica (biennio)'] },
+      { style: 'umani', title: 'Area culturale', sub: 'Base culturale', desc: 'Italiano, storia e formazione di base.', items: ['Lingua e letteratura italiana', 'Storia'] },
+      { style: 'lingue', title: 'Due lingue straniere', sub: 'Per il contesto sanitario', desc: 'Due lingue per il contesto internazionale e l’assistenza multilingue.', items: ['Inglese', 'Seconda lingua: Francese / Spagnolo / Tedesco'] },
+    ],
+    dopoP1: 'Il diplomato Sanità è la base per la qualifica di <strong>Operatore Socio-Sanitario (OSS)</strong> e per ruoli in strutture socio-assistenziali, RSA, ospedali, comunità terapeutiche. Lavoro immediatamente accessibile dopo il diploma.',
+    dopoP2: 'Apre l’accesso a percorsi universitari in <strong>Infermieristica, Scienze Infermieristiche, Educazione Professionale, Logopedia, Fisioterapia, Servizio Sociale</strong> e a ITS Academy in area sanitaria.',
+    dopoPhotoSrc: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=900&q=80',
+    dopoPhotoAlt: 'Sanità e assistenza',
+    dopoPhotoCap: 'Sanità e assistenza',
+    gallery: [
+      { imgSrc: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&q=80', alt: 'Operatore Sanitario', lbl: 'Carriera', nm: 'Operatore Sanitario' },
+      { imgSrc: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80', alt: 'Infermieristica', lbl: 'Università', nm: 'Infermieristica' },
+      { imgSrc: 'https://images.unsplash.com/photo-1559757175-5700dde675bc?w=600&q=80', alt: 'Assistenza sociale', lbl: 'Carriera', nm: 'Assistenza sociale' },
+    ],
   },
   {
     slug: 'agricoltura',
-    nome: 'Servizi per l\'Agricoltura e lo Sviluppo Rurale',
+    nome: "Servizi per l'Agricoltura e lo Sviluppo Rurale",
     categoria: 'professionale',
-    titoloSeo: 'Servizi per l\'Agricoltura e lo Sviluppo Rurale | Diploma360',
+    titoloSeo: "Servizi per l'Agricoltura e lo Sviluppo Rurale | Diploma360",
     descSeo:
-      'Agricoltura moderna e gestione del territorio. Programma, materie, sbocchi e iscrizioni — Servizi per l\'Agricoltura e lo Sviluppo Rurale con Diploma360.',
+      "Agricoltura moderna e gestione del territorio. Programma, materie, sbocchi e iscrizioni — Servizi per l'Agricoltura e lo Sviluppo Rurale con Diploma360.",
+    chips: ['🌱 Agricoltura sostenibile', '🎯 Aziende agricole · Agraria · ITS'],
+    heroImgSrc: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1000&q=80',
+    materiCardine: 'Agronomia · Zootecnia · Sviluppo rurale',
+    dopoVal: 'Aziende agricole, ITS, Università agrarie',
+    descP1: 'L’indirizzo Agricoltura e Sviluppo Rurale forma tecnici per <strong>aziende agricole, agriturismi e gestione del territorio</strong>. Una scelta adatta a chi ama la natura e vuole inserirsi nel settore agro-alimentare moderno.',
+    descP2: 'Sviluppa competenze in agronomia, zootecnia, gestione di aziende agricole, sostenibilità ambientale. Il diploma è subito spendibile nel settore o apre a percorsi universitari in Agraria, Veterinaria, Scienze Forestali.',
+    splitPhotoSrc: 'https://images.unsplash.com/photo-1571504211935-1c936b327411?w=900&q=80',
+    splitPhotoAlt: 'Lavoro nei campi',
+    splitPhotoCap: 'Lavoro nei campi',
+    matAreas: [
+      { style: 'altro', title: 'Area agraria', sub: 'Il cuore dell’indirizzo', desc: 'Agronomia, zootecnia e gestione aziende agricole.', items: ['Agronomia ed ecosistemi', 'Zootecnia', 'Tecniche di allevamento e coltivazione', 'Sviluppo sostenibile del territorio'] },
+      { style: 'scien', title: 'Area scientifica', sub: 'Fondamenta', desc: 'Matematica, scienze e chimica applicata.', items: ['Matematica', 'Scienze integrate (biologia, chimica)', 'Fisica (biennio)'] },
+      { style: 'umani', title: 'Area culturale', sub: 'Base culturale', desc: 'Italiano, storia e geografia.', items: ['Lingua e letteratura italiana', 'Storia · Geografia'] },
+      { style: 'lingue', title: 'Lingua straniera', sub: 'Per il settore globale', desc: 'Inglese per il contesto agro-alimentare internazionale.', items: ['Lingua inglese'] },
+    ],
+    dopoP1: 'Il diplomato Agricoltura è spendibile in <strong>aziende agricole, agriturismi, cooperative agro-alimentari, enti per la gestione del territorio</strong>. Ruoli: tecnico agrario, gestore agriturismo, addetto alla filiera, perito agrario.',
+    dopoP2: 'Apre l’accesso a tutte le facoltà, con percorsi naturali in <strong>Agraria, Veterinaria, Scienze Forestali, Scienze Alimentari</strong> e a ITS Academy in area agro-alimentare.',
+    dopoPhotoSrc: 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=900&q=80',
+    dopoPhotoAlt: 'Sviluppo del territorio',
+    dopoPhotoCap: 'Sviluppo del territorio',
+    gallery: [
+      { imgSrc: 'https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=600&q=80', alt: 'Tecnico agrario', lbl: 'Carriera', nm: 'Tecnico agrario' },
+      { imgSrc: 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=600&q=80', alt: 'Agraria', lbl: 'Università', nm: 'Agraria' },
+      { imgSrc: 'https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=600&q=80', alt: 'Agriturismo · Filiera', lbl: 'Carriera', nm: 'Agriturismo · Filiera' },
+    ],
   },
 ]
 
