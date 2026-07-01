@@ -148,7 +148,7 @@ export default function RecuperareDueAnniInUno() {
               <li><strong>Massimo due anni per sessione.</strong> Se devi recuperarne di più, lo farai in più passaggi, secondo un piano sostenibile.</li>
               <li><strong>Presidente esterno.</strong> Quando l&apos;esame riguarda due anni, la commissione è presieduta da un presidente <strong>esterno</strong> all&apos;istituto, nominato dall&apos;Ufficio Scolastico Regionale. È una garanzia di trasparenza in più.</li>
             </ul>
-            <div className="note-box">Le regole sugli esami di idoneità e le relative scadenze possono essere aggiornate ogni anno dal Ministero. Le date e le modalità esatte per la tua situazione vanno sempre confermate con la sede d&apos;esame: in <a href="/recupero-anni-roma#lead">consulenza gratuita</a> ti aiutiamo a verificarle.</div>
+            <div className="note-box">Le regole sugli esami di idoneità e le relative scadenze possono essere aggiornate ogni anno dal Ministero. Le date e le modalità esatte per la tua situazione vanno sempre confermate con la sede d&apos;esame: in <a href="/recupero-anni-scolastici-roma#lead">consulenza gratuita</a> ti aiutiamo a verificarle.</div>
 
             <h2>Come funziona l&apos;esame di idoneità per due anni in uno?</h2>
             <p>In pratica funziona così:</p>
@@ -162,7 +162,7 @@ export default function RecuperareDueAnniInUno() {
 
             <div className="inline-cta">
               <div className="t">Quanti anni puoi recuperare nella tua situazione?</div>
-              <a className="btn btn-primary btn-lg" href="/recupero-anni-roma#lead">Richiedi la consulenza gratuita</a>
+              <a className="btn btn-primary btn-lg" href="/recupero-anni-scolastici-roma#lead">Richiedi la consulenza gratuita</a>
             </div>
 
             <h2>Quali requisiti servono?</h2>
@@ -177,17 +177,17 @@ export default function RecuperareDueAnniInUno() {
             <p>Diffida di chi promette il recupero &laquo;a poco e in pochissimo tempo&raquo;: la trasparenza sui costi è uno dei segnali per riconoscere un percorso serio. Approfondisci nella nostra guida su <a href="/prezzi">prezzi e piani</a>.</p>
 
             <h2>Si può fare nella scuola pubblica, al serale o online?</h2>
-            <p>Puoi prepararti da solo e presentarti da privatista, frequentare un corso serale, oppure seguire un percorso online. La differenza la fa la <strong>flessibilità</strong>: il serale ha orari e presenza fissi, mentre con Diploma360 <strong>studi quando vuoi</strong>, con un tutor dedicato per ogni materia, e vai in sede solo per l&apos;esame. Per chi lavora o ha avuto un percorso interrotto, online è spesso la soluzione più sostenibile. Vedi <a href="/recupero-anni-roma">come funziona il recupero anni</a> passo per passo.</p>
+            <p>Puoi prepararti da solo e presentarti da privatista, frequentare un corso serale, oppure seguire un percorso online. La differenza la fa la <strong>flessibilità</strong>: il serale ha orari e presenza fissi, mentre con Diploma360 <strong>studi quando vuoi</strong>, con un tutor dedicato per ogni materia, e vai in sede solo per l&apos;esame. Per chi lavora o ha avuto un percorso interrotto, online è spesso la soluzione più sostenibile. Vedi <a href="/recupero-anni-scolastici-roma">come funziona il recupero anni</a> passo per passo.</p>
 
             <h2>In quanto tempo e quanto è difficile?</h2>
             <p>Recuperare due anni in uno è possibile, ma <strong>impegnativo</strong>: stai preparando il programma di due annualità in pochi mesi. Con un piano personalizzato, tutor che ti seguono e costanza, è un obiettivo realistico — ma serve metterci impegno. Per questo il primo passo è capire onestamente da dove parti e costruire un calendario sostenibile.</p>
 
             <h2>Dove sostengo l&apos;esame?</h2>
-            <p>L&apos;esame si svolge in presenza in una <strong>sede convenzionata vicino a te</strong>. Diploma360 collabora con istituti paritari in più città: puoi vedere le sedi nella pagina <a href="/sedi-esame">Sedi d&apos;esame</a> e le pagine dedicate, ad esempio <a href="/recupero-anni-roma">recupero anni a Roma</a> o <a href="/recupero-anni-milano">a Milano</a>.</p>
+            <p>L&apos;esame si svolge in presenza in una <strong>sede convenzionata vicino a te</strong>. Diploma360 collabora con istituti paritari in più città: puoi vedere le sedi nella pagina <a href="/sedi-esame">Sedi d&apos;esame</a> e le pagine dedicate, ad esempio <a href="/recupero-anni-scolastici-roma">recupero anni a Roma</a> o <a href="/recupero-anni-scolastici-milano">a Milano</a>.</p>
 
             <div className="inline-cta">
               <div className="t">Scopri in 2 minuti il percorso giusto per te, senza impegno.</div>
-              <a className="btn btn-primary btn-lg" href="/recupero-anni-roma#lead">Parla con un esperto</a>
+              <a className="btn btn-primary btn-lg" href="/recupero-anni-scolastici-roma#lead">Parla con un esperto</a>
             </div>
           </div>
 
@@ -232,7 +232,7 @@ export default function RecuperareDueAnniInUno() {
               <p>Una consulenza gratuita per capire anni recuperabili, indirizzo e costi su misura. Senza impegno, anche su WhatsApp.</p>
             </div>
             <div className="cta-band-btns">
-              <a className="btn btn-white btn-lg" href="/recupero-anni-roma#lead">Richiedi la consulenza gratuita</a>
+              <a className="btn btn-white btn-lg" href="/recupero-anni-scolastici-roma#lead">Richiedi la consulenza gratuita</a>
               <a className="btn btn-glass btn-lg" href="https://wa.me/393517214644" target="_blank" rel="noopener">Scrivici su WhatsApp</a>
             </div>
           </div>
