@@ -15,9 +15,7 @@ export default function Cookie() {
       <div className="wrap">
         <div className="legal">
           <h1>Cookie Policy</h1>
-          <div className="card">
-            <IubendaPolicy type="cookie" />
-          </div>
+          <IubendaPolicy type="cookie" />
         </div>
       </div>
     </main>

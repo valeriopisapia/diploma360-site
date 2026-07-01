@@ -15,9 +15,7 @@ export default function Privacy() {
       <div className="wrap">
         <div className="legal">
           <h1>Privacy Policy</h1>
-          <div className="card">
-            <IubendaPolicy type="privacy" />
-          </div>
+          <IubendaPolicy type="privacy" />
         </div>
       </div>
     </main>

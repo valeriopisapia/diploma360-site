@@ -14,9 +14,7 @@ export default function Termini() {
       <div className="wrap">
         <div className="legal">
           <h1>Termini e Condizioni</h1>
-          <div className="card">
-            <IubendaPolicy type="termini" />
-          </div>
+          <IubendaPolicy type="termini" />
         </div>
       </div>
     </main>
