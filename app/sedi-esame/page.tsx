@@ -5,7 +5,7 @@ import { buildMetadata } from '@/lib/seo'
 import './sedi-esame.css'
 
 export const metadata = buildMetadata({
-  title: "Sedi d'esame | Diploma360",
+  title: "Sedi d'esame in tutta Italia — Diploma360",
   description:
     "Studi online, l'esame lo fai vicino a te. Sedi convenzionate in tutta Italia: Milano, Roma, Napoli, Torino e molte altre province.",
   path: '/sedi-esame',

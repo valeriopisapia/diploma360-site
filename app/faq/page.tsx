@@ -213,7 +213,7 @@ export default function Faq() {
                 <p>Per iscriversi, è necessario aver definito il percorso scolastico che si desidera seguire e i dettagli da includere nel modulo di iscrizione. Ecco le informazioni richieste: Informazioni relative al piano di studi</p>
                 <ol>
                   <li>Indirizzo di studio scelto</li>
-                  <li>Piano di assistenza allo studio selezionato: Basic, Pro o Max</li>
+                  <li>Piano di assistenza allo studio selezionato: Basic, Plus o Max</li>
                   <li>Seconda lingua straniera prevista dal piano di studi: la prima lingua è sempre inglese, la seconda può essere francese o spagnolo</li>
                   <li>Percorso di studi già effettuato, se sono stati completati anni di scuola superiore</li>
                   <li>Modalità di recupero e classi da conseguire: ad esempio, recupero classi 1ª+2ª o recupero 2ª+3ª+4ª classe</li>

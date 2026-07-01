@@ -3,7 +3,7 @@ import { buildMetadata } from '@/lib/seo'
 import './iscrizioni.css'
 
 export const metadata = buildMetadata({
-  title: 'Iscrizioni 2026/27 | Diploma360',
+  title: 'Iscrizioni 2026/2027 | Diploma360',
   description:
     'Come iscriverti a Diploma360: consulenza gratuita, scelta del piano, firma online. Iscrizioni aperte tutto l\'anno. Inizia oggi.',
   path: '/iscrizioni',

@@ -4,7 +4,7 @@ import { buildMetadata } from '@/lib/seo'
 import './credibilita.css'
 
 export const metadata = buildMetadata({
-  title: 'Perché fidarti di Diploma360 | Diploma360',
+  title: 'Perché fidarti di Diploma360 — Serietà e garanzie',
   description:
     'Non siamo un diplomificio. Scopri chi siamo, la nostra sede a Roma, le tutele per iscritto e come riconoscere una scuola seria.',
   path: '/credibilita',
