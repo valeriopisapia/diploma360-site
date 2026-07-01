@@ -1,0 +1,7 @@
+runConfig:
+  minInstances: 0
+env:
+  - variable: BREVO_API_KEY
+    secret: BREVO_API_KEY
+  - variable: BREVO_LIST_ID
+    secret: BREVO_LIST_ID
