@@ -180,7 +180,7 @@ export function LeadForm({ origine, showPerChi = false }: LeadFormProps) {
         {' '}e acconsento al trattamento dei dati.
       </label>
 
-      <button type="submit" disabled={uiStatus === 'loading'}>
+      <button type="submit" className="btn btn-primary btn-block" disabled={uiStatus === 'loading'}>
         {uiStatus === 'loading' ? 'Invio in corso…' : 'Invia la richiesta'}
       </button>
 
