@@ -1,0 +1,34 @@
+/* === Recuperare due anni in uno — article page === */
+.breadcrumb{padding:14px 0 0}
+.breadcrumb ol{list-style:none;display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px;color:var(--muted)}
+.breadcrumb a{color:var(--soft)}
+.breadcrumb a:hover{color:var(--coral-dk)}
+.breadcrumb li+li::before{content:"›";margin-right:6px;color:var(--border-s)}
+.art{max-width:760px;margin:0 auto}
+.art-head{padding:18px 0 6px}
+.art-head h1{font-family:'Poppins';font-weight:800;font-size:38px;line-height:1.12;letter-spacing:-.025em;margin:8px 0 12px}
+@media(max-width:640px){.art-head h1{font-size:28px}}
+.art-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:13.5px;color:var(--soft)}
+.art-meta .dot{width:4px;height:4px;border-radius:50%;background:var(--border-s)}
+.art-body{font-size:17px;line-height:1.72;color:#2B313A}
+.art-body h2{font-family:'Poppins';font-weight:700;font-size:24px;line-height:1.25;letter-spacing:-.015em;margin:34px 0 12px;color:var(--text)}
+.art-body h3{font-family:'Poppins';font-weight:600;font-size:19px;margin:24px 0 8px}
+.art-body p{margin:0 0 16px}
+.art-body ul{margin:0 0 16px 0;padding-left:22px}
+.art-body li{margin:0 0 8px}
+.art-body a{color:var(--coral-dk);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+.art-body strong{font-weight:600}
+.tldr{background:var(--grad-soft);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px 24px;margin:18px 0 8px}
+.tldr .h{display:inline-flex;align-items:center;gap:8px;font-family:'Poppins';font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--coral-dk);margin-bottom:8px}
+.tldr ul{margin:6px 0 0 0;padding-left:20px}
+.tldr li{margin-bottom:6px;font-size:15.5px;color:var(--text)}
+.note-box{background:var(--surface-soft);border:1px solid var(--border);border-left:3px solid var(--coral);border-radius:10px;padding:16px 18px;margin:18px 0;font-size:15px;color:var(--soft)}
+.note-box a{color:var(--coral-dk)}
+.sources{font-size:13.5px;color:var(--soft);border-top:1px solid var(--border);margin-top:30px;padding-top:16px}
+.sources a{color:var(--coral-dk)}
+.inline-cta{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);padding:22px 24px;margin:26px 0;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.inline-cta .t{font-family:'Poppins';font-weight:600;font-size:18px;color:var(--text)}
+@media(max-width:600px){.inline-cta{flex-direction:column;align-items:stretch;text-align:center}}
+/* Article-page FAQ (uses .faq from site.css, override max-width) */
+.art .faq{max-width:760px;margin:0 auto}
+.s-title{font-family:'Poppins';font-weight:700;font-size:24px;margin:38px 0 0}
