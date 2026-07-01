@@ -1,6 +1,6 @@
 # Diploma360 — sito marketing
 
-Diploma360 marketing site and Ads landing pages. Built with Next.js (App Router), ported from the static sources in `materiale/`, and deployed on Firebase App Hosting. Targets prospective adult students seeking a state-recognised secondary diploma in Italy.
+Diploma360 marketing site and Ads landing pages. Built with Next.js (App Router), ported from the static sources in `materiale/`, and deployed on Google Cloud Run (via GitLab CI). Targets prospective adult students seeking a state-recognised secondary diploma in Italy.
 
 ---
 
@@ -29,28 +29,22 @@ BREVO_API_KEY=your-key-here
 BREVO_LIST_ID=12345
 ```
 
-`.env.local` is gitignored. In production these values come from Firebase secrets — see the Deploy section below.
+`.env.local` is gitignored. In production these values come from Google Secret Manager, injected into the Cloud Run service — see the Deploy section below.
 
 ---
 
-## Deploy (Firebase App Hosting)
+## Deploy (Cloud Run via GitLab CI)
 
-The project is configured for Firebase App Hosting via `apphosting.yaml` at the repo root.
+The app is containerised (`Dockerfile`, Next.js `output: 'standalone'`) and deployed to **Google Cloud Run** by the project's own **GitLab CI** (`.gitlab-ci.yml`) — no GitHub, no separate repo. Every push to `main` runs tests then `gcloud run deploy --source .`; Brevo values are injected from Secret Manager (`BREVO_API_KEY`, `BREVO_LIST_ID`).
 
-### First-time secret setup
+**Full step-by-step deploy guide (one-time GCP setup, CI variables, custom domain, Brevo & GTM config, troubleshooting): [`docs/DEPLOY.md`](docs/DEPLOY.md).**
 
-Run these commands once (grant the backend service account access when prompted):
+Quick reference for the GitLab CI/CD variables to set:
 
-```bash
-firebase apphosting:secrets:set BREVO_API_KEY
-firebase apphosting:secrets:set BREVO_LIST_ID
-```
-
-Firebase App Hosting automatically injects the secrets into the Next.js server runtime as `process.env.BREVO_API_KEY` and `process.env.BREVO_LIST_ID`.
-
-### Subsequent deploys
-
-Pushing to the connected branch triggers an automatic build and deploy.
+| Key | Value | Type |
+|---|---|---|
+| `GCP_SA_KEY` | deploy service-account JSON key | File |
+| `GCP_PROJECT_ID` | GCP project id | Variable |
 
 ---
 
