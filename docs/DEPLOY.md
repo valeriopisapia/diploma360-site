@@ -1,240 +1,147 @@
-# Deploy — Diploma360 su Google Cloud Run (via GitLab CI)
+# Deploy — Diploma360
 
-Guida operativa completa. Il sito Next.js gira come **container su Cloud Run**, buildato e
-deployato dalla **CI del vostro GitLab** (`git.lascuola360.it`). Nessun GitHub, nessun repo
-nuovo. Ogni push su `main` fa un deploy automatico.
+Percorso **principale: Firebase App Hosting** (gestione più semplice, dashboard integrata,
+deploy automatico dal repo connesso). In **Appendice** trovi l'alternativa **Cloud Run via
+GitLab CI** (già validata) nel caso App Hosting non riesca a connettere il vostro GitLab.
 
-Legenda placeholder da sostituire:
-- `<PROJECT_ID>` — id del progetto GCP (es. `diploma360-prod`)
-- `<PROJECT_NUMBER>` — numero del progetto (lo ricavi al passo 1)
-- `<REGION>` — regione, consigliata `europe-west1`
-- `<KEY_XKEYSIB>` — la Brevo **API key** (inizia con `xkeysib-`)
+Placeholder da sostituire: `<FIREBASE_PROJECT_ID>`, `<REGION>` (consigliata `europe-west1`),
+`<KEY_XKEYSIB>` (Brevo API key, inizia con `xkeysib-`).
 
 ---
 
-## 0. Architettura in breve
+## A. Firebase App Hosting (percorso principale)
 
-- **Codice** → resta su GitLab (`origin`).
-- **`.gitlab-ci.yml`** → 2 stage: `test` (npm ci + test + build) su ogni push/MR; `deploy` su `main`.
-- **`deploy`** esegue `gcloud run deploy --source .`: Cloud Build costruisce l'immagine dal
-  `Dockerfile`, la pubblica su Artifact Registry, e la rilascia su Cloud Run.
-- **Segreti Brevo** → in **Secret Manager**, iniettati come env var nel servizio Cloud Run
-  (mai nell'immagine, mai nel repo). Li legge `app/api/lead/route.ts`.
-- **Tracking** (GTM/GA4/Pixel) → lato client, si configura nel pannello GTM.
+Firebase App Hosting è il livello Firebase che gira **sopra Cloud Run**: builda la Next.js dal
+repo connesso e la serve, con scaling e TLS gestiti. Config nel repo: **`apphosting.yaml`**.
 
-Verificato in locale: `docker build` + run del container → tutte le route 200, `/lp` noindex,
-`/api/lead` → `200 {"ok":true}` verso Brevo.
-
----
-
-## 1. Prerequisiti GCP (una tantum)
-
-1. Crea o seleziona un progetto GCP e **abilita la fatturazione (piano a consumo)**.
-2. Installa e autentica gcloud:
+### A.1 Prerequisiti
+1. Un **progetto Firebase** dedicato (un progetto Firebase È un progetto GCP) con **piano Blaze**
+   (App Hosting richiede la fatturazione attiva). Console: https://console.firebase.google.com
+   → *Add project* (o collega un progetto GCP esistente/dedicato).
+2. CLI:
    ```bash
-   # macOS
-   brew install --cask google-cloud-sdk
-   gcloud auth login
-   gcloud config set project <PROJECT_ID>
-   ```
-3. Ricava il **numero progetto** (serve dopo):
-   ```bash
-   gcloud projects describe <PROJECT_ID> --format='value(projectNumber)'
-   ```
-4. Abilita le API necessarie:
-   ```bash
-   gcloud services enable \
-     run.googleapis.com \
-     cloudbuild.googleapis.com \
-     artifactregistry.googleapis.com \
-     secretmanager.googleapis.com
+   npm i -g firebase-tools
+   firebase login
    ```
 
----
+### A.2 Connettere il repo (il punto delicato)
+App Hosting connette il codice via **Developer Connect**. Il vostro GitLab
+(`git.lascuola360.it`) è **raggiungibile da internet**, quindi la connessione diretta è
+tecnicamente possibile. In Console → **Build → App Hosting → Get started**:
 
-## 2. Segreti Brevo in Secret Manager
+- **Se compare l'opzione GitLab / "self-managed GitLab"** → collega direttamente
+  `git.lascuola360.it`, autorizza, scegli il repo e il branch **`main`**. ✅ Nessun GitHub.
+- **Se compare solo GitHub** → serve un **mirror GitHub** (il vostro GitLab resta la fonte; il
+  mirror è solo il trigger di deploy):
+  ```bash
+  # crea un repo vuoto su github.com, poi:
+  git remote add github https://github.com/<owner>/diploma360-site.git
+  git push github main
+  # (opz.) mirror automatico: GitLab → Settings → Repository → Mirroring repositories → Push
+  ```
+  Poi in App Hosting connetti il repo **GitHub**, branch `main`.
 
-Crea i due segreti (valori: la API key `xkeysib-...` e il list id `41`):
+Scegli la **region** (`<REGION>`). App Hosting rileva Next.js e usa `apphosting.yaml`.
+
+### A.3 Secret Brevo
+Una volta sola (concedi l'accesso al backend quando richiesto):
 ```bash
-printf '%s' '<KEY_XKEYSIB>' | gcloud secrets create BREVO_API_KEY --data-file=-
-printf '%s' '41'            | gcloud secrets create BREVO_LIST_ID --data-file=-
+firebase apphosting:secrets:set BREVO_API_KEY   # incolli la <KEY_XKEYSIB>
+firebase apphosting:secrets:set BREVO_LIST_ID   # 41
 ```
+Sono già referenziati in `apphosting.yaml` → iniettati nel runtime come
+`process.env.BREVO_API_KEY` / `process.env.BREVO_LIST_ID`, letti da `app/api/lead/route.ts`.
 
-Il servizio Cloud Run gira, di default, con la **service account di runtime**
-`<PROJECT_NUMBER>-compute@developer.gserviceaccount.com`. Dagli il permesso di leggere i segreti:
-```bash
-for S in BREVO_API_KEY BREVO_LIST_ID; do
-  gcloud secrets add-iam-policy-binding "$S" \
-    --member="serviceAccount:<PROJECT_NUMBER>-compute@developer.gserviceaccount.com" \
-    --role="roles/secretmanager.secretAccessor"
-done
-```
+### A.4 Deploy
+Ogni **push sul branch connesso (`main`)** avvia un rollout automatico (build + deploy). Il primo
+parte alla creazione del backend. Stato e URL in Console → App Hosting.
 
-> Per aggiornare un valore in futuro:
-> `printf '%s' 'nuovo-valore' | gcloud secrets versions add BREVO_API_KEY --data-file=-`
-> (la pipeline usa `:latest`, quindi il prossimo deploy prende la nuova versione).
-
----
-
-## 3. Service account di deploy (per la CI)
-
-```bash
-# 3a. Crea la SA
-gcloud iam service-accounts create diploma360-deployer \
-  --display-name="Diploma360 GitLab CI deployer"
-
-DEPLOYER="diploma360-deployer@<PROJECT_ID>.iam.gserviceaccount.com"
-
-# 3b. Ruoli a livello progetto
-for R in roles/run.admin roles/cloudbuild.builds.editor roles/artifactregistry.writer; do
-  gcloud projects add-iam-policy-binding <PROJECT_ID> \
-    --member="serviceAccount:$DEPLOYER" --role="$R"
-done
-
-# 3c. La SA di deploy deve poter "usare" la SA di runtime del servizio
-gcloud iam service-accounts add-iam-policy-binding \
-  <PROJECT_NUMBER>-compute@developer.gserviceaccount.com \
-  --member="serviceAccount:$DEPLOYER" --role="roles/iam.serviceAccountUser"
-
-# 3d. Genera la chiave JSON (da mettere in GitLab)
-gcloud iam service-accounts keys create diploma360-deployer-key.json \
-  --iam-account="$DEPLOYER"
-```
-
-> **Pre-crea il repo Artifact Registry** usato da `--source` (evita un errore al primo deploy):
-> ```bash
-> gcloud artifacts repositories create cloud-run-source-deploy \
->   --repository-format=docker --location=<REGION> \
->   --description="Cloud Run source deploys"
-> ```
-
-⚠️ `diploma360-deployer-key.json` è una **credenziale sensibile**: caricala solo in GitLab
-(passo 4) e **cancellala dal disco** subito dopo (`rm diploma360-deployer-key.json`). Non
-committarla mai.
+### A.5 Dominio
+App Hosting → il tuo backend → **Add custom domain** → `www.diploma360.it` (e apex
+`diploma360.it`) → aggiorna i DNS come indicato. Il canonical del sito è già
+`https://www.diploma360.it`.
 
 ---
 
-## 4. Variabili CI/CD su GitLab
+## B. Configurazione Brevo (pannello) — prima del go-live
 
-GitLab → progetto → **Settings → CI/CD → Variables** → aggiungi:
-
-| Key | Value | Type | Flags |
-|---|---|---|---|
-| `GCP_SA_KEY` | contenuto di `diploma360-deployer-key.json` | **File** | Protected, Masked |
-| `GCP_PROJECT_ID` | `<PROJECT_ID>` | Variable | Protected |
-
-Opzionali (hanno già un default in `.gitlab-ci.yml`):
-| Key | Default |
-|---|---|
-| `GCP_REGION` | `europe-west1` |
-| `CLOUD_RUN_SERVICE` | `diploma360-site` |
-
-> Serve un **GitLab Runner** attivo (shared o self-hosted) che possa eseguire immagini Docker
-> (`node:20`, `google/cloud-sdk:slim`) e uscire su internet. Se usate i runner condivisi di
-> GitLab.com è già ok; su GitLab self-managed verificate che ci sia almeno un runner registrato.
-
----
-
-## 5. Primo deploy
-
-Il deploy parte da solo a ogni push su `main`. Per lanciarlo ora:
-```bash
-git commit --allow-empty -m "chore: trigger first Cloud Run deploy"
-git push origin main
-```
-Segui la pipeline in GitLab → **Build → Pipelines**. Al termine dello stage `deploy`, l'URL del
-servizio è nei log (`Service URL: https://diploma360-site-....run.app`), oppure:
-```bash
-gcloud run services describe diploma360-site --region <REGION> --format='value(status.url)'
-```
-
-Apri quell'URL e verifica homepage, una pagina città, `/prezzi`, e invia un lead di prova.
-
----
-
-## 6. Dominio custom `diploma360.it`
-
-```bash
-gcloud run domain-mappings create \
-  --service diploma360-site --domain www.diploma360.it --region <REGION>
-gcloud run domain-mappings create \
-  --service diploma360-site --domain diploma360.it --region <REGION>
-```
-gcloud stampa i **record DNS** da creare (A/AAAA per l'apex, CNAME per il www). Aggiungili nel
-DNS del dominio. La propagazione + certificato TLS possono richiedere fino a ~24h (di norma pochi
-minuti). Il canonical del sito è già `https://www.diploma360.it`.
-
-> In alternativa, tutto questo è disponibile anche da Console → Cloud Run → servizio →
-> **Manage custom domains**.
-
----
-
-## 7. Configurazione Brevo (pannello) — necessaria prima del go-live
-
-1. **API key**: usa una **API key** (`xkeysib-...`), NON una SMTP key (`xsmtpsib-`). Brevo →
-   *SMTP & API → API keys*.
-2. **Authorised IPs**: **disattivato**. Cloud Run ha IP di uscita dinamici; con la whitelist i
-   lead fallirebbero a intermittenza. (Brevo → *Security → Authorised IPs*.)
+1. **API key**: usa una **API key** (`xkeysib-...`), NON una SMTP key (`xsmtpsib-`).
+   Brevo → *SMTP & API → API keys*.
+2. **Authorised IPs**: **disattivato**. Gli IP di uscita del serverless sono dinamici; con la
+   whitelist i lead fallirebbero a intermittenza. Brevo → *Security → Authorised IPs*.
 3. **Lista**: `BREVO_LIST_ID = 41` (`diploma360-lead-2026`).
-4. **Attributi contatto** (tipo *testo*) — devono esistere: `NOME`, `TELEFONO`, `PER_CHI`,
-   `MESSAGGIO`, `PAGINA_ARRIVO`, `ORIGINE`, `DATA_RICHIESTA`. (Già presenti sull'account.)
-   Il telefono va su `TELEFONO` (testo), **non** su `SMS`/`LANDLINE_NUMBER` che validano E.164 e
-   rifiutano numeri in formato locale o fissi.
+4. **Attributi** (tipo *testo*): `NOME`, `TELEFONO`, `PER_CHI`, `MESSAGGIO`, `PAGINA_ARRIVO`,
+   `ORIGINE`, `DATA_RICHIESTA` (già presenti sull'account). Il telefono va su `TELEFONO` (testo),
+   **non** su `SMS`/`LANDLINE_NUMBER` che validano E.164 e rifiutano numeri locali/fissi.
 
 ---
 
-## 8. Google Tag Manager
+## C. Google Tag Manager
 
-Il codice carica GTM `GTM-K5VMGM8C` con **Consent Mode v2** (default *denied*, il cookie banner
-concede) e fa `dataLayer.push({event:'lead_submit', origine, pagina})` all'invio riuscito del form.
-Nel **pannello GTM** configura:
-- Tag **GA4** con measurement id `GT-M3LW776G` (trigger: All Pages), rispettando il consenso.
-- Tag **Meta Pixel** `1460557338306322` (trigger: All Pages).
-- **Conversione**: trigger su evento personalizzato `lead_submit` → tag conversione GA4/Ads e
-  evento `Lead` del Pixel.
+Il codice carica GTM `GTM-K5VMGM8C` con **Consent Mode v2** (default *denied*, concesso dal cookie
+banner) e fa `dataLayer.push({event:'lead_submit', origine, pagina})` all'invio riuscito. Nel
+pannello GTM configura:
+- **GA4** measurement id `GT-M3LW776G` (All Pages, rispetta il consenso)
+- **Meta Pixel** `1460557338306322` (All Pages)
+- **Conversione**: trigger sull'evento `lead_submit` → conversione GA4/Ads + evento `Lead` del Pixel
 
 Nessuna modifica al codice: i tag vivono in GTM.
 
 ---
 
-## 9. Verifica post-deploy (checklist)
+## D. Verifica post-deploy
 
-- [ ] Homepage e navigazione OK sull'URL Cloud Run / dominio
-- [ ] Una pagina città (`/recupero-anni-scolastici-milano`) e una diploma (`/diplomi/afm`) renderizzano
-- [ ] `/lp` mostra `noindex` e NON ha l'header/menu del sito
+- [ ] Homepage e navigazione OK sull'URL App Hosting / dominio
+- [ ] Pagina città (`/recupero-anni-scolastici-milano`) e diploma (`/diplomi/afm`) renderizzano
+- [ ] `/lp` è `noindex` e NON mostra l'header/menu del sito
 - [ ] `/privacy`, `/termini`, `/cookie` mostrano l'iframe Iubenda
-- [ ] Invio form reale → messaggio di successo → contatto compare nella lista Brevo `41` con gli attributi
-- [ ] `https://www.diploma360.it/sitemap.xml` e `/robots.txt` rispondono
-- [ ] GTM: in Preview/Tag Assistant, `lead_submit` scatta e i tag partono dopo consenso
+- [ ] Form reale → successo → contatto nella lista Brevo `41` con gli attributi
+- [ ] `/sitemap.xml` e `/robots.txt` rispondono
+- [ ] GTM Preview: `lead_submit` scatta, i tag partono dopo consenso
 
 ---
 
-## 10. Troubleshooting (problemi già incontrati)
+## E. Troubleshooting (problemi già incontrati)
 
 | Sintomo | Causa | Fix |
 |---|---|---|
-| `/api/lead` → 401, msg "unrecognised IP" | Brevo *Authorised IPs* attivo | Disattivalo (§7.2) |
-| `/api/lead` → 401 | Chiave SMTP (`xsmtpsib-`) invece di API | Usa `xkeysib-` (§7.1) |
-| `/api/lead` → 400 "Invalid phone number" | Telefono mappato su `SMS` | Già risolto: usa `TELEFONO` (testo) |
-| `/api/lead` → 500 "Brevo non configurato" | Secret non iniettati | Verifica §2 + `--set-secrets` nella CI |
-| Deploy fallisce su permessi Artifact Registry | repo non esistente / ruoli mancanti | Pre-crea il repo (§3) + ruoli §3b |
-| Deploy fallisce "iam.serviceAccountUser" | manca il binding §3c | Esegui §3c |
-| Immagini non ottimizzate / errore sharp | — | `sharp` è già in `dependencies` |
-
-Log del servizio in produzione:
-```bash
-gcloud run services logs read diploma360-site --region <REGION> --limit 100
-```
+| `/api/lead` → 401 "unrecognised IP" | Brevo *Authorised IPs* attivo | Disattivalo (B.2) |
+| `/api/lead` → 401 | Chiave SMTP (`xsmtpsib-`) | Usa API key `xkeysib-` (B.1) |
+| `/api/lead` → 400 "Invalid phone number" | Telefono su `SMS` | Già risolto: usa `TELEFONO` testo |
+| `/api/lead` → 500 "Brevo non configurato" | Secret non impostati | `firebase apphosting:secrets:set …` (A.3) |
+| App Hosting non vede il repo GitLab | Solo GitHub nella UI | Usa il mirror GitHub (A.2) |
 
 ---
 
-## 11. Decisioni di business ancora aperte (non bloccano il deploy)
+## Appendice — Alternativa: Cloud Run via GitLab CI (senza GitHub)
 
+Se preferisci **restare 100% sul GitLab** senza App Hosting, il repo è già pronto anche per
+questa strada (validata: `docker build` + smoke test del container → route 200, `/api/lead`
+→ 200). File: `Dockerfile`, `.dockerignore`, `.gcloudignore`, `.gitlab-ci.yml` (job `deploy`
+**opt-in manuale**), `next.config` con `output: 'standalone'`.
+
+Setup una-tantum (GCP, con `gcloud`):
+1. Abilita API: `run` `cloudbuild` `artifactregistry` `secretmanager`.
+2. Secret in Secret Manager (`BREVO_API_KEY`, `BREVO_LIST_ID`) + accesso alla runtime SA
+   `PROJECT_NUMBER-compute@developer.gserviceaccount.com` (ruolo `secretmanager.secretAccessor`).
+3. Service account di deploy con ruoli `run.admin`, `cloudbuild.builds.editor`,
+   `artifactregistry.writer`, e `iam.serviceAccountUser` sulla runtime SA; scarica la key JSON.
+4. Variabili GitLab CI/CD: `GCP_SA_KEY` (File), `GCP_PROJECT_ID`, e **`DEPLOY_TARGET=cloudrun`**
+   per abilitare il job.
+5. In una pipeline su `main`, avvia manualmente il job `deploy` (è `when: manual`).
+
+Attiva i secret con `--set-secrets` come già configurato nel job. Dominio via
+`gcloud run domain-mappings create`.
+
+> Consiglio: se scegli Cloud Run, valuta un **progetto GCP dedicato** (`diploma360-prod`) per
+> billing/IAM/quote separati dagli altri workload. Lo stesso vale per il progetto Firebase.
+
+---
+
+## F. Decisioni di business ancora aperte (non bloccano il deploy)
 1. **Indirizzo sede**: vetrina `Viale Castrense 5, 00182 Roma` vs landing `Via Giovanni Antonelli
    41, 00197 Roma` — da unificare.
 2. **Iubenda**: verifica che la policy (id `43474147`, Classme S.r.l.) copra anche il dominio
    `diploma360.it` e il trattamento del form (Brevo).
-3. **Naming "Tutore.AI"/"Riepilogo360"** (landing/come-funziona): conferma la coerenza con la
-   policy "niente claim AI" della vetrina.
-4. **Fonts**: Inter/Poppins sono caricati via Google Fonts `<link>` — valutabile il self-hosting
-   per hardening GDPR.
+3. **Naming "Tutore.AI"/"Riepilogo360"**: conferma coerenza con la policy "niente claim AI".
+4. **Fonts**: Inter/Poppins via Google Fonts `<link>` — self-hosting come hardening GDPR.

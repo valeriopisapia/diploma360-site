@@ -1,6 +1,6 @@
 # Diploma360 — sito marketing
 
-Diploma360 marketing site and Ads landing pages. Built with Next.js (App Router), ported from the static sources in `materiale/`, and deployed on Google Cloud Run (via GitLab CI). Targets prospective adult students seeking a state-recognised secondary diploma in Italy.
+Diploma360 marketing site and Ads landing pages. Built with Next.js (App Router), ported from the static sources in `materiale/`, and deployed on Firebase App Hosting. Targets prospective adult students seeking a state-recognised secondary diploma in Italy.
 
 ---
 
@@ -29,22 +29,21 @@ BREVO_API_KEY=your-key-here
 BREVO_LIST_ID=12345
 ```
 
-`.env.local` is gitignored. In production these values come from Google Secret Manager, injected into the Cloud Run service — see the Deploy section below.
+`.env.local` is gitignored. In production these values come from Cloud Secret Manager, injected into the server runtime — see the Deploy section below.
 
 ---
 
-## Deploy (Cloud Run via GitLab CI)
+## Deploy (Firebase App Hosting)
 
-The app is containerised (`Dockerfile`, Next.js `output: 'standalone'`) and deployed to **Google Cloud Run** by the project's own **GitLab CI** (`.gitlab-ci.yml`) — no GitHub, no separate repo. Every push to `main` runs tests then `gcloud run deploy --source .`; Brevo values are injected from Secret Manager (`BREVO_API_KEY`, `BREVO_LIST_ID`).
+Primary target is **Firebase App Hosting** (managed, auto-deploys from the connected repo). Config: `apphosting.yaml`. Brevo values come from Cloud Secret Manager (`BREVO_API_KEY`, `BREVO_LIST_ID`).
 
-**Full step-by-step deploy guide (one-time GCP setup, CI variables, custom domain, Brevo & GTM config, troubleshooting): [`docs/DEPLOY.md`](docs/DEPLOY.md).**
+- Connect the repo in the Firebase console (try connecting GitLab `git.lascuola360.it` directly; if only GitHub is offered, push a mirror of `main` to a GitHub repo and connect that).
+- Set secrets once: `firebase apphosting:secrets:set BREVO_API_KEY` and `BREVO_LIST_ID`.
+- Push to the connected branch → automatic rollout.
 
-Quick reference for the GitLab CI/CD variables to set:
+**Full step-by-step guide (repo connection options, secrets, custom domain, Brevo & GTM config, troubleshooting) and the Cloud-Run-via-GitLab-CI alternative: [`docs/DEPLOY.md`](docs/DEPLOY.md).**
 
-| Key | Value | Type |
-|---|---|---|
-| `GCP_SA_KEY` | deploy service-account JSON key | File |
-| `GCP_PROJECT_ID` | GCP project id | Variable |
+> The repo also ships a validated **Cloud Run + GitLab CI** path (`Dockerfile`, `.gitlab-ci.yml`) as an opt-in alternative if you'd rather stay entirely on GitLab — see `docs/DEPLOY.md` Appendix.
 
 ---
 

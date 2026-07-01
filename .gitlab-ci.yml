@@ -61,5 +61,10 @@ deploy:
       --set-secrets "BREVO_API_KEY=BREVO_API_KEY:latest,BREVO_LIST_ID=BREVO_LIST_ID:latest"
   environment:
     name: production
+  # PRIMARY deploy is Firebase App Hosting (deploys from the connected repo on push).
+  # This Cloud Run job is an OPT-IN alternative: it only runs when you manually start
+  # it AND set the CI variable DEPLOY_TARGET=cloudrun. It never runs automatically.
   rules:
-    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: '$DEPLOY_TARGET == "cloudrun" && $CI_COMMIT_BRANCH == "main"'
+      when: manual
+    - when: never
