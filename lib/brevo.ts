@@ -30,7 +30,7 @@ export async function createBrevoContact(
         listIds: [Number(env.listId)],
         attributes: {
           NOME: p.nome,
-          SMS: p.telefono,
+          TELEFONO: p.telefono,
           PER_CHI: p.per_chi,
           MESSAGGIO: p.messaggio,
           PAGINA_ARRIVO: p.pagina,

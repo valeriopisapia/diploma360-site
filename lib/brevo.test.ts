@@ -12,7 +12,7 @@ it('maps payload to Brevo attributes and succeeds on 201', async () => {
   expect(res.ok).toBe(true)
   const body = JSON.parse((fetchMock.mock.calls[0][1] as any).body)
   expect(body.listIds).toEqual([7])
-  expect(body.attributes).toMatchObject({ NOME: 'Ada', SMS: '333', PER_CHI: 'Per me', PAGINA_ARRIVO: '/lp', ORIGINE: 'landing-ads' })
+  expect(body.attributes).toMatchObject({ NOME: 'Ada', TELEFONO: '333', PER_CHI: 'Per me', PAGINA_ARRIVO: '/lp', ORIGINE: 'landing-ads' })
 })
 
 it('treats duplicate contact as success', async () => {
