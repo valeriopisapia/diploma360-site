@@ -1,0 +1,20 @@
+# What NOT to upload to Cloud Build when running `gcloud run deploy --source .`
+# (the Dockerfile + app source ARE uploaded; these are excluded to keep it lean)
+.git
+node_modules
+.next
+out
+
+# Source material & internal docs — not needed to build the image
+materiale
+docs
+.superpowers
+.claude
+
+# Local env & secrets (provided to Cloud Run via Secret Manager, never in the image)
+.env
+.env.*
+!.env.example
+
+*.log
+.DS_Store

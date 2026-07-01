@@ -1,0 +1,65 @@
+# CI/CD: test on every push/MR, deploy to Cloud Run on `main`.
+#
+# ── One-time setup (GCP) ────────────────────────────────────────────────────
+# 1. Enable APIs:  run.googleapis.com  cloudbuild.googleapis.com
+#                  artifactregistry.googleapis.com  secretmanager.googleapis.com
+# 2. Create the Brevo secrets in Secret Manager:
+#      printf '%s' 'xkeysib-…' | gcloud secrets create BREVO_API_KEY --data-file=-
+#      printf '%s' '41'        | gcloud secrets create BREVO_LIST_ID --data-file=-
+#    Grant the Cloud Run runtime SA access (PROJECT_NUMBER-compute@developer.gserviceaccount.com):
+#      gcloud secrets add-iam-policy-binding BREVO_API_KEY \
+#        --member="serviceAccount:PROJECT_NUMBER-compute@developer.gserviceaccount.com" \
+#        --role="roles/secretmanager.secretAccessor"   # repeat for BREVO_LIST_ID
+# 3. Create a DEPLOY service account with roles:
+#      roles/run.admin  roles/cloudbuild.builds.editor
+#      roles/artifactregistry.writer  roles/iam.serviceAccountUser
+#    Download its JSON key.
+#
+# ── GitLab CI/CD variables (Settings → CI/CD → Variables) ───────────────────
+#   GCP_SA_KEY       → the deploy SA JSON key. TYPE = File. (Protected + Masked)
+#   GCP_PROJECT_ID   → your GCP project id.               (Protected)
+#   GCP_REGION       → optional, overrides default below.
+#   CLOUD_RUN_SERVICE→ optional, overrides default below.
+# ────────────────────────────────────────────────────────────────────────────
+
+stages:
+  - test
+  - deploy
+
+variables:
+  GCP_REGION: europe-west1
+  CLOUD_RUN_SERVICE: diploma360-site
+
+test:
+  stage: test
+  image: node:20
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - node_modules/
+  script:
+    - npm ci
+    - npm test
+    - npm run build
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
+deploy:
+  stage: deploy
+  image: google/cloud-sdk:slim
+  script:
+    - gcloud auth activate-service-account --key-file="$GCP_SA_KEY"
+    - gcloud config set project "$GCP_PROJECT_ID"
+    - >
+      gcloud run deploy "$CLOUD_RUN_SERVICE"
+      --source .
+      --region "$GCP_REGION"
+      --platform managed
+      --allow-unauthenticated
+      --port 8080
+      --set-secrets "BREVO_API_KEY=BREVO_API_KEY:latest,BREVO_LIST_ID=BREVO_LIST_ID:latest"
+  environment:
+    name: production
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'

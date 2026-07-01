@@ -1,0 +1,27 @@
+# Build artifacts & deps (rebuilt inside the image)
+node_modules
+.next
+out
+
+# Source material & docs — not needed at build or runtime
+materiale
+docs
+.superpowers
+.claude
+
+# Local env & secrets (Cloud Run injects these at runtime)
+.env
+.env.*
+!.env.example
+
+# VCS / editor / OS
+.git
+.gitignore
+.gitlab-ci.yml
+*.log
+.DS_Store
+
+# Tests & config not needed in the runtime image build context is fine to keep,
+# but these reduce noise:
+vitest.config.ts
+vitest.setup.ts
