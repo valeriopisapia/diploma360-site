@@ -3,7 +3,7 @@ import { buildMetadata } from '@/lib/seo'
 import './nostra-piattaforma.css'
 
 export const metadata = buildMetadata({
-  title: 'La nostra piattaforma | Tutte le schermate — Diploma360',
+  title: 'La nostra piattaforma | Diploma360',
   description:
     'Tutta la piattaforma Diploma360, schermata per schermata: home, il mio diploma, classi, lezioni live, ore 1:1 con i tutor, ripasso e strumenti di studio.',
   path: '/nostra-piattaforma',

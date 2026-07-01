@@ -3,7 +3,7 @@ import { buildMetadata } from '@/lib/seo'
 import './esami-normativa.css'
 
 export const metadata = buildMetadata({
-  title: 'Esami e normativa | Come funzionano — Diploma360',
+  title: 'Esami e normativa | Come funzionano gli esami — Diploma360',
   description:
     'I quattro esami possibili, candidato esterno o interno, tempi e cornice normativa spiegati in modo semplice.',
   path: '/esami-normativa',

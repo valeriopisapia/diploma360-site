@@ -4,7 +4,7 @@ import { buildMetadata } from '@/lib/seo'
 import './come-funziona.css'
 
 export const metadata = buildMetadata({
-  title: 'Come funziona Diploma360 | Il metodo',
+  title: 'Come funziona | Diploma360',
   description:
     'Il metodo Diploma360: piano personalizzato, lezioni live e tutor che ti seguono passo passo fino al Diploma di Stato.',
   path: '/come-funziona',

@@ -3,7 +3,7 @@ import { buildMetadata } from '@/lib/seo'
 import './piattaforma.css'
 
 export const metadata = buildMetadata({
-  title: 'La piattaforma Diploma360 | Piano di studio e lezioni',
+  title: 'La piattaforma | Diploma360',
   description:
     'La piattaforma Diploma360: piano di studio, lezioni live, classi, ore con i tutor, materiali di ripasso e i tuoi avanzamenti, tutto in un posto.',
   path: '/piattaforma',
