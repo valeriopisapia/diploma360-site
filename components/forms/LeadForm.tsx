@@ -13,6 +13,7 @@
  */
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { pushLead } from '@/lib/analytics'
 import styles from './LeadForm.module.css'
 
@@ -25,8 +26,39 @@ interface LeadFormProps {
 
 type UIStatus = 'idle' | 'loading' | 'ok' | 'err'
 
+// Thank-you route per origin: the vetrina forms land on /grazie, the ads
+// landing form on its own /lp-thank-you-page (own chrome, separate conversion URL).
+const THANK_YOU_ROUTE: Record<Origine, string> = {
+  vetrina: '/grazie',
+  'landing-ads': '/lp-thank-you-page',
+}
+
+const MAX_PHONE_DIGITS = 15 // E.164 ceiling
+const PHONE_RE = /^\+?\d{6,15}$/
+
+/**
+ * Keep only digits and an optional single leading `+`, and cap the length.
+ * Blocks letters, spaces, symbols and absurdly long input as the user types
+ * or pastes.
+ */
+function sanitizePhone(raw: string): string {
+  const hasPlus = raw.trimStart().startsWith('+')
+  const digits = raw.replace(/\D/g, '').slice(0, MAX_PHONE_DIGITS)
+  return (hasPlus ? '+' : '') + digits
+}
+
 export function LeadForm({ origine, showPerChi = false }: LeadFormProps) {
+  const router = useRouter()
   const [uiStatus, setUiStatus] = useState<UIStatus>('idle')
+
+  // Live-filter the phone field: rewrite the value on every input/paste so
+  // invalid characters can never remain, and clear any prior custom-validity.
+  const handlePhoneInput = (e: React.FormEvent<HTMLInputElement>) => {
+    const el = e.currentTarget
+    const clean = sanitizePhone(el.value)
+    if (el.value !== clean) el.value = clean
+    el.setCustomValidity('')
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -43,16 +75,24 @@ export function LeadForm({ origine, showPerChi = false }: LeadFormProps) {
     }
 
     // Client-side validation of required fields
-    const telefono = (
-      form.querySelector<HTMLInputElement>('[name="telefono"]')?.value ?? ''
-    ).trim()
+    const telInput = form.querySelector<HTMLInputElement>('[name="telefono"]')
+    const telefono = (telInput?.value ?? '').trim()
     const email = (
       form.querySelector<HTMLInputElement>('[name="email"]')?.value ?? ''
     ).trim()
     const consenso =
       form.querySelector<HTMLInputElement>('[name="consenso"]')?.checked ?? false
 
-    if (!telefono || !email || !consenso) {
+    // Guard the phone format even against paste/autofill that bypass live filtering.
+    if (telefono && !PHONE_RE.test(telefono)) {
+      telInput?.setCustomValidity(
+        'Inserisci un numero di telefono valido: solo cifre, con eventuale + iniziale.',
+      )
+    } else {
+      telInput?.setCustomValidity('')
+    }
+
+    if (!telefono || !email || !consenso || !PHONE_RE.test(telefono)) {
       form.reportValidity?.()
       return
     }
@@ -87,9 +127,12 @@ export function LeadForm({ origine, showPerChi = false }: LeadFormProps) {
       })
       if (!res.ok) throw new Error('bad status')
 
+      // Fire the GTM event first, then client-side navigate to the thank-you
+      // page. router.push keeps the SPA context alive so the dataLayer event
+      // isn't cut off by a full reload. Stay in 'loading' so the button remains
+      // disabled during the redirect.
       pushLead({ origine, pagina })
-      setUiStatus('ok')
-      form.reset()
+      router.push(THANK_YOU_ROUTE[origine])
     } catch {
       setUiStatus('err')
     }
@@ -119,9 +162,14 @@ export function LeadForm({ origine, showPerChi = false }: LeadFormProps) {
           id="lf-tel"
           name="telefono"
           type="tel"
+          inputMode="numeric"
           autoComplete="tel"
           required
-          placeholder="Es. 333 1234567"
+          maxLength={MAX_PHONE_DIGITS + 1}
+          pattern="\+?[0-9]{6,15}"
+          title="Solo cifre, con eventuale + iniziale per il prefisso."
+          onInput={handlePhoneInput}
+          placeholder="Es. 3331234567"
         />
       </div>
 
