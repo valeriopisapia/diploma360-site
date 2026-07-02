@@ -714,7 +714,7 @@ export default function LpPage() {
           <PhoneIcon size={17} /> 06 84 280 999
         </a>
         <a className="btn btn-wa" href="https://wa.me/393517214644">
-          <WaIcon /> WhatsApp
+          <WaIcon /> Scrivici su WA
         </a>
       </div>
 

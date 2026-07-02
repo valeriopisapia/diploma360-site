@@ -339,9 +339,10 @@ h1,h2,h3{font-family:Poppins,Inter,sans-serif;letter-spacing:-.03em;color:var(--
 
 /* MOBILE STICKY CTA */
 .mobile-cta{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.97);border-top:1px solid var(--border);box-shadow:0 -8px 24px rgba(91,55,40,.1);z-index:40;padding:10px 12px;gap:8px}
-.mobile-cta .btn{flex:1;padding:14px 14px;font-size:14.5px}
+.mobile-cta .btn{padding:14px 12px;font-size:14.5px}
 .mobile-cta .btn svg{flex:0 0 auto}
-.mobile-cta .btn-wa{flex:0 0 52px;padding:14px 0}
+.mobile-cta .btn-outline{flex:1}
+.mobile-cta .btn-wa{flex:1.5}
 
 /* FLOATING ACTIONS (desktop) */
 .float-actions{position:fixed;left:50%;bottom:24px;z-index:45;display:flex;align-items:center;gap:12px;opacity:0;visibility:hidden;transform:translateX(-50%) translateY(14px);transition:opacity .25s,transform .25s,visibility .25s}
