@@ -13,7 +13,9 @@ state-diploma / "recupero anni scolastici" service. Next.js port of the static s
 ## Commands
 - `npm run dev` — dev server
 - `npm run build` — production build (verify changes with this; page ports have no unit tests)
-- `npm test` — Vitest (happy-dom). Output must be pristine (no warnings).
+- `npm test` — Vitest (happy-dom). Output must be pristine (no warnings). Component tests that use
+  `next/navigation` (e.g. `LeadForm`'s `useRouter`) must `vi.mock('next/navigation', …)`. The benign
+  Google-Fonts `fetch` errors from `layout.test.tsx` are happy-dom noise, not failures.
 
 ## Stack
 Next.js 16 (App Router, **Turbopack**), React 19, TypeScript, Tailwind (utility only — does NOT
@@ -30,6 +32,12 @@ replace the design system), Vitest + happy-dom, `sharp` (image optimisation).
 - **Landing:** `app/lp/` — `noindex`, excluded from sitemap/menu, its OWN chrome. The site
   header/footer are hidden on `/lp` by `components/layout/ChromeGate.tsx` (client, `usePathname`),
   which wraps `<SiteHeader/>`/`<Footer/>` in the root layout. GTM/consent/cookie banner still apply.
+  LP chrome is componentised in `app/lp/`: `LpHeader`, `LpFooter`, `LpFloatActions`.
+- **Thank-you pages:** `/grazie` (vetrina) + `/lp-thank-you-page` (ads funnel). On success `LeadForm`
+  redirects here by `origine` (client-side `router.push`, AFTER the GTM event). `/lp-thank-you-page`
+  is a top-level route (outside `app/lp/`), so it imports `../lp/lp.css` and reuses the LP chrome
+  components. The `/lp` prefix in ChromeGate AND `robots.ts` disallow intentionally also matches
+  `/lp-thank-you-page`; both TY pages are `noindex` + absent from `app/sitemap.ts`.
 - City/diploma per-item copy lives in `data/citta.ts` / `data/diplomi.ts` (single template + data).
 
 ## Conventions
@@ -60,7 +68,11 @@ replace the design system), Vitest + happy-dom, `sharp` (image optimisation).
 ## Integrations
 - **GTM** `GTM-K5VMGM8C` with **Consent Mode v2** (default denied, granted by the cookie banner).
   GA4 `GT-M3LW776G` + Meta Pixel `1460557338306322` are configured IN GTM, not in code.
-  `LeadForm` fires `dataLayer.push({event:'lead_submit', origine, pagina})` on success.
+  (Heads-up: the live GTM container currently inits Meta Pixel `1020929560296043` — reconcile which
+  is correct before trusting Meta conversions.)
+  `LeadForm` fires `dataLayer.push({event:'lead_submit', origine, pagina})` on success, then
+  redirects to the thank-you page. Its phone field accepts ONLY digits + an optional leading `+`,
+  capped at 15 (live `onInput` filter + submit-time `^\+?\d{6,15}$` guard).
   `ConsentDefault` must render in `<head>` BEFORE `GtmScript` (root layout ordering).
 - **Brevo** (`lib/brevo.ts` + `/api/lead`): list `BREVO_LIST_ID=41`, attributes (text):
   `NOME, TELEFONO, PER_CHI, MESSAGGIO, PAGINA_ARRIVO, ORIGINE, DATA_RICHIESTA`.
@@ -75,6 +87,10 @@ replace the design system), Vitest + happy-dom, `sharp` (image optimisation).
 - Two remotes, keep BOTH in sync: `origin` (GitLab, source of truth) + `github`
   (`valeriopisapia/diploma360-site`, deploy trigger). **After every commit, push to both.**
 - Primary target: **Firebase App Hosting** (`apphosting.yaml`, connects via the GitHub repo).
+  Live deploy URL: `https://diploma360-site--schoolrcloud.us-east4.hosted.app` — **verify live
+  changes HERE.** As of 2026-07, `www.diploma360.it` still serves the OLD WordPress/Divi site
+  (contains forbidden "59€ / senza interessi / MIUR"); do not test this Next.js site there until the
+  DNS is cut over.
   Alternative (opt-in, validated): **Cloud Run via GitLab CI** (`Dockerfile`, `.gitlab-ci.yml`,
   `next.config` `output:'standalone'`). Full guide: `docs/DEPLOY.md`.
 - Secrets (`BREVO_API_KEY`, `BREVO_LIST_ID`) come from Secret Manager at runtime, never in the repo.
