@@ -77,11 +77,14 @@ export async function createBrevoContact(
   try {
     let r = await post(sms ? { ...baseAttributes, SMS: sms } : baseAttributes)
 
-    // If the request failed only because of the extra native SMS field, retry
-    // once without it — TELEFONO still carries the number, so the lead survives.
+    // If the with-SMS attempt failed, retry once WITHOUT it. The native SMS field
+    // is a UNIQUE identifier in Brevo: a number already tied to another contact
+    // fails the whole request with `duplicate_parameter` and NOTHING is saved — so
+    // this error must NOT be treated as success here (that would silently drop the
+    // lead). Dropping SMS and retrying keeps the lead (TELEFONO still holds the
+    // number); if the email genuinely already exists, updateEnabled updates it.
     if (!r.ok && sms) {
-      const firstText = await r.text()
-      if (isDuplicate(firstText)) return { ok: true }
+      await r.text().catch(() => {}) // drain the body before re-posting
       r = await post(baseAttributes)
     }
 
@@ -89,6 +92,8 @@ export async function createBrevoContact(
       return { ok: true }
     }
 
+    // With no SMS in play, a remaining `duplicate` is a real already-exists that
+    // updateEnabled has updated → success.
     const text = await r.text()
     if (isDuplicate(text)) {
       return { ok: true }

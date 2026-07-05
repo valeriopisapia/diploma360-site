@@ -81,9 +81,14 @@ replace the design system), Vitest + happy-dom, `sharp` (image optimisation).
   ALWAYS goes in **`TELEFONO` (text)** — the raw value, never validated. It is ALSO written to the
   native **`SMS`** field (contact card + SMS/WhatsApp campaigns) but ONLY when `toE164Mobile()` can
   normalise it confidently (already-`+…`, or a bare 10-digit IT mobile → `+39…`); otherwise `SMS`
-  is omitted. `SMS`/`LANDLINE_NUMBER` E.164-validate and reject local/landline → 400 "Invalid phone
-  number", so if a request fails WITH `SMS`, `createBrevoContact` retries once WITHOUT it → the lead
-  is never lost (TELEFONO still holds the number). Key/secret are server-side only.
+  is omitted. TWO reasons `SMS` can fail the whole create: (1) `SMS`/`LANDLINE_NUMBER` E.164-validate
+  and reject local/landline → 400 "Invalid phone number"; (2) **`SMS` is a UNIQUE identifier** — a
+  number already tied to another contact → 400 `duplicate_parameter` "SMS is already associated with
+  another Contact" and NOTHING is saved. So `createBrevoContact`: on ANY failure of the with-`SMS`
+  attempt it retries once WITHOUT `SMS` (TELEFONO still holds the number) → the lead is never lost.
+  CRITICAL: a `duplicate_parameter` from the with-`SMS` attempt must NOT be treated as success (that
+  silently drops the lead) — only a duplicate on the no-`SMS` attempt = genuine already-exists = ok.
+  Key/secret are server-side only.
 - **Legal pages** (`/privacy`, `/termini`, `/cookie`): `components/legal/IubendaPolicy.tsx`
   renders the Iubenda policy (id `43474147`, Classme S.r.l.) as a direct **iframe** — no CTA.
 

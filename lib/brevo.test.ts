@@ -52,7 +52,27 @@ it('retries without SMS (never loses the lead) when Brevo rejects the phone', as
   expect(retryBody.attributes.TELEFONO).toBe('3451168611') // number still saved
 })
 
-it('treats duplicate contact as success', async () => {
+it('does NOT swallow an SMS-uniqueness collision — retries without SMS so the lead is saved', async () => {
+  // Brevo's SMS field is a UNIQUE identifier: a number already tied to another
+  // contact fails the whole create with duplicate_parameter and NOTHING is saved.
+  // The old code treated that as success (200) and silently dropped the lead.
+  const collision = new Response(
+    '{"code":"duplicate_parameter","message":"Unable to update contact, SMS is already associated with another Contact","metadata":{"duplicate_identifiers":["SMS"]}}',
+    { status: 400 })
+  const fetchMock = vi.fn()
+    .mockResolvedValueOnce(collision)
+    .mockResolvedValueOnce(new Response(null, { status: 201 }))
+  const res = await createBrevoContact({ email: 'new@b.it', telefono: '3451168611' }, env, fetchMock as any)
+  expect(res.ok).toBe(true)
+  expect(fetchMock).toHaveBeenCalledTimes(2)                 // retried, not swallowed
+  const retryBody = JSON.parse((fetchMock.mock.calls[1][1] as any).body)
+  expect(retryBody.attributes.SMS).toBeUndefined()           // dropped on retry
+  expect(retryBody.attributes.TELEFONO).toBe('3451168611')   // number still saved
+})
+
+it('treats an already-existing contact (no SMS) as success', async () => {
+  // No SMS in the payload (telefono not a mobile) → no retry → a duplicate here
+  // is a genuine already-exists that updateEnabled has updated.
   const fetchMock = vi.fn(async () => new Response('{"code":"duplicate_parameter"}', { status: 400 }))
   const res = await createBrevoContact({ email: 'a@b.it', telefono: '1' }, env, fetchMock as any)
   expect(res.ok).toBe(true)
