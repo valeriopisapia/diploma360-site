@@ -77,9 +77,13 @@ replace the design system), Vitest + happy-dom, `sharp` (image optimisation).
 - **Brevo** (`lib/brevo.ts` + `/api/lead`): list `BREVO_LIST_ID=41`, attributes (text):
   `NOME, TELEFONO, PER_CHI, MESSAGGIO, PAGINA_ARRIVO, ORIGINE, DATA_RICHIESTA`.
   GOTCHAS learned: use a Brevo **API key** (`xkeysib-`), NOT an SMTP key (`xsmtpsib-`) → else 401;
-  disable Brevo **"Authorised IPs"** (serverless egress IPs are dynamic) → else 401; the phone
-  goes in **`TELEFONO` (text)**, NOT `SMS`/`LANDLINE_NUMBER` which validate E.164 and reject
-  local/landline numbers → else 400 "Invalid phone number". Key/secret are server-side only.
+  disable Brevo **"Authorised IPs"** (serverless egress IPs are dynamic) → else 401. The phone
+  ALWAYS goes in **`TELEFONO` (text)** — the raw value, never validated. It is ALSO written to the
+  native **`SMS`** field (contact card + SMS/WhatsApp campaigns) but ONLY when `toE164Mobile()` can
+  normalise it confidently (already-`+…`, or a bare 10-digit IT mobile → `+39…`); otherwise `SMS`
+  is omitted. `SMS`/`LANDLINE_NUMBER` E.164-validate and reject local/landline → 400 "Invalid phone
+  number", so if a request fails WITH `SMS`, `createBrevoContact` retries once WITHOUT it → the lead
+  is never lost (TELEFONO still holds the number). Key/secret are server-side only.
 - **Legal pages** (`/privacy`, `/termini`, `/cookie`): `components/legal/IubendaPolicy.tsx`
   renders the Iubenda policy (id `43474147`, Classme S.r.l.) as a direct **iframe** — no CTA.
 

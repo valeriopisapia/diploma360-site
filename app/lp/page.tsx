@@ -152,7 +152,7 @@ export default function LpPage() {
               <p className="form-sub">
                 Lascia i dati: ti aiutiamo a capire anni recuperabili, indirizzo e costi.
               </p>
-              <LeadForm origine="landing-ads" />
+              <LeadForm origine="landing-ads" showPerChi />
             </aside>
           </div>
         </section>

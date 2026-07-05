@@ -15,6 +15,43 @@ it('maps payload to Brevo attributes and succeeds on 201', async () => {
   expect(body.attributes).toMatchObject({ NOME: 'Ada', TELEFONO: '333', PER_CHI: 'Per me', PAGINA_ARRIVO: '/lp', ORIGINE: 'landing-ads' })
 })
 
+it('also populates the native SMS field for a bare Italian mobile (E.164)', async () => {
+  const fetchMock = vi.fn(async () => new Response(null, { status: 201 }))
+  const res = await createBrevoContact(
+    { email: 'a@b.it', telefono: '3451168611' }, env, fetchMock as any)
+  expect(res.ok).toBe(true)
+  const body = JSON.parse((fetchMock.mock.calls[0][1] as any).body)
+  expect(body.attributes.TELEFONO).toBe('3451168611') // raw kept
+  expect(body.attributes.SMS).toBe('+393451168611')   // normalised
+})
+
+it('keeps an already-E.164 number as-is in SMS', async () => {
+  const fetchMock = vi.fn(async () => new Response(null, { status: 201 }))
+  await createBrevoContact({ email: 'a@b.it', telefono: '+393496013212' }, env, fetchMock as any)
+  const body = JSON.parse((fetchMock.mock.calls[0][1] as any).body)
+  expect(body.attributes.SMS).toBe('+393496013212')
+})
+
+it('omits SMS when the number is not a confident mobile (never risk a 400)', async () => {
+  const fetchMock = vi.fn(async () => new Response(null, { status: 201 }))
+  await createBrevoContact({ email: 'a@b.it', telefono: '06 8428 0999' }, env, fetchMock as any)
+  const body = JSON.parse((fetchMock.mock.calls[0][1] as any).body)
+  expect(body.attributes.SMS).toBeUndefined()
+  expect(body.attributes.TELEFONO).toBe('06 8428 0999')
+})
+
+it('retries without SMS (never loses the lead) when Brevo rejects the phone', async () => {
+  const fetchMock = vi.fn()
+    .mockResolvedValueOnce(new Response('{"code":"invalid_parameter","message":"Invalid phone number"}', { status: 400 }))
+    .mockResolvedValueOnce(new Response(null, { status: 201 }))
+  const res = await createBrevoContact({ email: 'a@b.it', telefono: '3451168611' }, env, fetchMock as any)
+  expect(res.ok).toBe(true)
+  expect(fetchMock).toHaveBeenCalledTimes(2)
+  const retryBody = JSON.parse((fetchMock.mock.calls[1][1] as any).body)
+  expect(retryBody.attributes.SMS).toBeUndefined()      // dropped on retry
+  expect(retryBody.attributes.TELEFONO).toBe('3451168611') // number still saved
+})
+
 it('treats duplicate contact as success', async () => {
   const fetchMock = vi.fn(async () => new Response('{"code":"duplicate_parameter"}', { status: 400 }))
   const res = await createBrevoContact({ email: 'a@b.it', telefono: '1' }, env, fetchMock as any)
