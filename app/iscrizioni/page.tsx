@@ -1,20 +1,21 @@
 import { JsonLd } from '@/components/seo/JsonLd'
 import { buildMetadata } from '@/lib/seo'
+import { brand } from '@/lib/brand'
 import './iscrizioni.css'
 
 export const metadata = buildMetadata({
-  title: 'Iscrizioni 2026/2027 | Diploma360',
+  title: `Iscrizioni 2026/2027 | ${brand.name}`,
   description:
-    'Come iscriverti a Diploma360: consulenza gratuita, scelta del piano, firma online. Iscrizioni aperte tutto l\'anno. Inizia oggi.',
+    `Come iscriverti a ${brand.name}: consulenza gratuita, scelta del piano, firma online. Iscrizioni aperte tutto l'anno. Inizia oggi.`,
   path: '/iscrizioni',
 })
 
 const jsonLdData = {
   '@context': 'https://schema.org',
   '@type': 'EducationalOrganization',
-  name: 'Diploma360',
-  url: 'https://www.diploma360.it/',
-  logo: 'https://www.diploma360.it/assets-vetrina/logo-diploma360.png',
+  name: brand.name,
+  url: `${brand.domain}/`,
+  logo: `${brand.domain}${brand.logo.header}`,
   telephone: '+390684280999',
   email: 'info@diploma360.it',
   parentOrganization: {
@@ -39,7 +40,7 @@ export default function Iscrizioni() {
           <div className="ihero-copy">
             <span className="eyebrow-b">Iscrizioni 2026 / 2027</span>
             <h1>Iscrizioni aperte. <span className="hl">Inizia oggi, parti quando vuoi</span>.</h1>
-            <p className="lead">Le iscrizioni a Diploma360 sono sempre aperte: non c&apos;è una finestra rigida. Decidi tu quando partire con il percorso, dopo aver fatto la consulenza gratuita con una coordinatrice del percorso.</p>
+            <p className="lead">Le iscrizioni a {brand.name} sono sempre aperte: non c&apos;è una finestra rigida. Decidi tu quando partire con il percorso, dopo aver fatto la consulenza gratuita con una coordinatrice del percorso.</p>
             <div className="cta-row">
               <a className="btn btn-primary btn-lg" href="/#lead">Scopri il tuo percorso</a>
               <a className="btn btn-out btn-lg" href="https://wa.me/393517214644" target="_blank" rel="noopener">WhatsApp</a>

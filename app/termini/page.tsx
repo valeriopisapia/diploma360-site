@@ -1,10 +1,11 @@
 import { buildMetadata } from '@/lib/seo'
+import { brand } from '@/lib/brand'
 import { IubendaPolicy } from '@/components/legal/IubendaPolicy'
 import './termini.css'
 
 export const metadata = buildMetadata({
-  title: 'Termini di servizio | Diploma360',
-  description: 'Termini di servizio del sito Diploma360 (Classme S.r.l.).',
+  title: `Termini di servizio | ${brand.name}`,
+  description: `Termini di servizio del sito ${brand.name} (Classme S.r.l.).`,
   path: '/termini',
 })
 

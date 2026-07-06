@@ -1,11 +1,11 @@
 import { buildMetadata } from '@/lib/seo'
+import { brand } from '@/lib/brand'
 import { IubendaPolicy } from '@/components/legal/IubendaPolicy'
 import './privacy.css'
 
 export const metadata = buildMetadata({
-  title: 'Privacy Policy | Diploma360',
-  description:
-    'Informativa privacy di Diploma360 (Classme S.r.l.): quali dati raccogliamo, perché e i tuoi diritti GDPR.',
+  title: `Privacy Policy | ${brand.name}`,
+  description: `Informativa privacy di ${brand.name} (Classme S.r.l.): quali dati raccogliamo, perché e i tuoi diritti GDPR.`,
   path: '/privacy',
 })
 

@@ -1,23 +1,24 @@
 import Image from 'next/image'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { buildMetadata } from '@/lib/seo'
+import { brand } from '@/lib/brand'
 import './chi-siamo.css'
 
 export const metadata = buildMetadata({
-  title: 'Chi siamo | Diploma360',
+  title: `Chi siamo | ${brand.name}`,
   description:
-    'Diploma360 di Classme S.r.l.: chi siamo, la nostra missione e come accompagniamo studenti e famiglie verso il diploma.',
+    `${brand.name} di Classme S.r.l.: chi siamo, la nostra missione e come accompagniamo studenti e famiglie verso il diploma.`,
   path: '/chi-siamo',
 })
 
 const orgJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'EducationalOrganization',
-  name: 'Diploma360',
-  url: 'https://www.diploma360.it/',
-  logo: 'https://www.diploma360.it/assets-vetrina/logo-diploma360.png',
+  name: brand.name,
+  url: `${brand.domain}/`,
+  logo: `${brand.domain}${brand.logo.header}`,
   telephone: '+390684280999',
-  email: 'info@diploma360.it',
+  email: brand.contacts.email,
   parentOrganization: {
     '@type': 'Organization',
     name: 'Classme S.r.l.',
@@ -36,7 +37,7 @@ export default function ChiSiamo() {
         <div className="wrap">
           <div>
             <span className="eb">Chi siamo</span>
-            <h1>Diploma360 ti aiuta a <span className="hl">diventare ciò che vuoi essere</span>.</h1>
+            <h1>{brand.name} ti aiuta a <span className="hl">diventare ciò che vuoi essere</span>.</h1>
             <p className="lead">Da anni accompagniamo giovani studenti, adulti, professionisti e sportivi a conseguire il diploma. Programmi personalizzati, tutor selezionati e una piattaforma costruita intorno alla vita reale: non un corso uguale per tutti, ma il percorso che apre nuove opportunità di lavoro e di vita.</p>
             <div className="cta-row">
               <a className="btn btn-primary btn-lg" href="/#lead">Scopri il tuo percorso</a>
@@ -84,7 +85,7 @@ export default function ChiSiamo() {
           <div className="chd">
             <span className="eb">Cosa facciamo</span>
             <h2>Una scuola pensata <span className="hl">per la vita reale</span>.</h2>
-            <p>Diploma360 offre supporto a giovani studenti, adulti, professionisti e sportivi per conseguire il diploma, fornendo gli strumenti per raggiungere obiettivi professionali e personali. Grazie ai programmi personalizzati e alla flessibilità dell&apos;apprendimento online, ogni persona può progredire nel proprio percorso educativo e di vita.</p>
+            <p>{brand.name} offre supporto a giovani studenti, adulti, professionisti e sportivi per conseguire il diploma, fornendo gli strumenti per raggiungere obiettivi professionali e personali. Grazie ai programmi personalizzati e alla flessibilità dell&apos;apprendimento online, ogni persona può progredire nel proprio percorso educativo e di vita.</p>
             <p style={{ marginTop: '10px' }}><strong style={{ color: '#1F1F1F' }}>10 motivi per sceglierci</strong> &mdash; quello che ci rende diversi, in dieci punti concreti.</p>
           </div>
           <div className="cvant">
@@ -95,7 +96,7 @@ export default function ChiSiamo() {
             <div className="v"><div className="n">5</div><p>Accesso ai <strong>materiali didattici in qualsiasi momento</strong>, anche di notte, anche di domenica.</p></div>
             <div className="v r"><div className="n">6</div><p>Assistenza dei <strong>tutor tutto l&apos;anno</strong>, non solo nei giorni di lezione.</p></div>
             <div className="v"><div className="n">7</div><p>Confronti online con <strong>tutor e docenti qualificati</strong>, selezionati con cura.</p></div>
-            <div className="v r"><div className="n">8</div><p>Approccio e <strong>Metodo Diploma360</strong> per un apprendimento davvero efficace.</p></div>
+            <div className="v r"><div className="n">8</div><p>Approccio e <strong>Metodo {brand.name}</strong> per un apprendimento davvero efficace.</p></div>
             <div className="v"><div className="n">9</div><p><strong>Costi competitivi</strong> e niente spostamenti per arrivare a scuola.</p></div>
             <div className="v r"><div className="n">10</div><p>Lezioni live per <strong>migliorare le tue abilità</strong> e personalizzare il tuo studio.</p></div>
           </div>
@@ -109,7 +110,7 @@ export default function ChiSiamo() {
             <div className="ph">
               <Image
                 src="/assets-vetrina/studio.jpg"
-                alt="LaScuola360 — il network dietro Diploma360"
+                alt={`LaScuola360 — il network dietro ${brand.name}`}
                 width={700}
                 height={525}
                 style={{ width: '100%', borderRadius: '14px', display: 'block', aspectRatio: '4/3', objectFit: 'cover', boxShadow: '0 16px 36px rgba(0,0,0,.10)' }}
@@ -117,7 +118,7 @@ export default function ChiSiamo() {
             </div>
             <div>
               <h3>Powered by LaScuola360.</h3>
-              <p>Diploma360 fa parte di <strong>LaScuola360</strong>, network di servizi educativi che ogni anno accompagna migliaia di studenti tra recupero anni, ripetizioni e preparazione esami. Una squadra che mette al primo posto la qualità del rapporto umano: dietro la piattaforma ci sono persone vere, non un&apos;app anonima.</p>
+              <p>{brand.name} fa parte di <strong>LaScuola360</strong>, network di servizi educativi che ogni anno accompagna migliaia di studenti tra recupero anni, ripetizioni e preparazione esami. Una squadra che mette al primo posto la qualità del rapporto umano: dietro la piattaforma ci sono persone vere, non un&apos;app anonima.</p>
               <p>La nostra esperienza viene dal lavoro quotidiano con studenti di tutte le età: ragazzi che hanno perso anni, lavoratori che vogliono diplomarsi, atleti, persone in percorsi clinici, famiglie expat. Ogni storia è diversa, e il nostro lavoro è costruire il percorso giusto per ciascuna.</p>
             </div>
           </div>
@@ -144,7 +145,7 @@ export default function ChiSiamo() {
           <div className="copy">
             <span className="eb">La nostra sede</span>
             <h2>Una scuola con le <span className="hl">porte aperte</span>.</h2>
-            <p className="lead">Dietro Diploma360 c&apos;è <strong>LaScuola360</strong>, il network di cui facciamo parte, con una sede fisica a Roma. Non un&apos;app anonima: un posto reale dove studiare, incontrare i tutor e venire a conoscerci.</p>
+            <p className="lead">Dietro {brand.name} c&apos;è <strong>LaScuola360</strong>, il network di cui facciamo parte, con una sede fisica a Roma. Non un&apos;app anonima: un posto reale dove studiare, incontrare i tutor e venire a conoscerci.</p>
             <ul className="proofs">
               <li>
                 <span className="ic">
@@ -208,7 +209,7 @@ export default function ChiSiamo() {
           </figure>
         </div>
         <div className="wrap">
-          <p className="legal">Diploma360 è un marchio di <strong>Classme S.r.l.</strong> &middot; P.IVA IT15441141007 &middot; Sede: Viale Castrense 5E, 00182 Roma</p>
+          <p className="legal">{brand.name} è un marchio di <strong>Classme S.r.l.</strong> &middot; P.IVA IT15441141007 &middot; Sede: Viale Castrense 5E, 00182 Roma</p>
         </div>
       </section>
 
@@ -216,7 +217,7 @@ export default function ChiSiamo() {
       <section className="section csec">
         <div className="wrap">
           <div className="chd center">
-            <span className="eb">I numeri di Diploma360</span>
+            <span className="eb">I numeri di {brand.name}</span>
             <h2>Quello che facciamo, <span className="hl">in cifre</span>.</h2>
           </div>
           <div className="cstats">
@@ -225,7 +226,7 @@ export default function ChiSiamo() {
             <div className="s"><div className="v">+3.000</div><div className="l">tutor qualificati nel network</div></div>
             <div className="s"><div className="v">+7.000</div><div className="l">videolezioni disponibili in piattaforma</div></div>
           </div>
-          <p style={{ textAlign: 'center', fontSize: '12px', color: 'var(--muted)', marginTop: '18px', maxWidth: '760px', marginLeft: 'auto', marginRight: 'auto' }}>*Dati interni Diploma360. I risultati possono variare in base alla situazione di partenza, al percorso scelto e all&apos;impegno dello studente.</p>
+          <p style={{ textAlign: 'center', fontSize: '12px', color: 'var(--muted)', marginTop: '18px', maxWidth: '760px', marginLeft: 'auto', marginRight: 'auto' }}>*Dati interni {brand.name}. I risultati possono variare in base alla situazione di partenza, al percorso scelto e all&apos;impegno dello studente.</p>
         </div>
       </section>
 
@@ -255,7 +256,7 @@ export default function ChiSiamo() {
                 </svg>
               </span>
               <h3>Trasparenza prima di tutto</h3>
-              <p>Prezzi in chiaro, niente preventivi misteriosi, niente promesse magiche. <strong>Diploma360 prepara, non rilascia</strong>: il diploma è di Stato.</p>
+              <p>Prezzi in chiaro, niente preventivi misteriosi, niente promesse magiche. <strong>{brand.name} prepara, non rilascia</strong>: il diploma è di Stato.</p>
             </div>
             <div className="vc">
               <span className="ic">

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { LeadForm } from '@/components/forms/LeadForm'
 import { buildMetadata } from '@/lib/seo'
+import { brand } from '@/lib/brand'
 import { getDiploma, allDiplomaSlugs, type MatArea } from '@/data/diplomi'
 import './diploma.css'
 
@@ -98,11 +99,11 @@ export default async function DiplomaPage({
     name: d.nome,
     description: d.descSeo,
     inLanguage: 'it',
-    url: `https://www.diploma360.it/diplomi/${slug}`,
+    url: `${brand.domain}/diplomi/${slug}`,
     provider: {
       '@type': 'EducationalOrganization',
-      name: 'Diploma360',
-      url: 'https://www.diploma360.it/',
+      name: brand.name,
+      url: `${brand.domain}/`,
     },
   }
 
@@ -110,18 +111,18 @@ export default async function DiplomaPage({
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.diploma360.it/' },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${brand.domain}/` },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Diplomi',
-        item: 'https://www.diploma360.it/diplomi/',
+        item: `${brand.domain}/diplomi/`,
       },
       {
         '@type': 'ListItem',
         position: 3,
         name: d.nome,
-        item: `https://www.diploma360.it/diplomi/${slug}/`,
+        item: `${brand.domain}/diplomi/${slug}/`,
       },
     ],
   }

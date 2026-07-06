@@ -1,23 +1,24 @@
 import Image from 'next/image'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { buildMetadata } from '@/lib/seo'
+import { brand } from '@/lib/brand'
 import './garanzia.css'
 
 export const metadata = buildMetadata({
-  title: 'Garanzia Promosso o Ripreparato | Diploma360',
+  title: `Garanzia Promosso o Ripreparato | ${brand.name}`,
   description:
-    'Se non passi l\'esame ti ripreparariamo gratis. Scopri le condizioni della garanzia Diploma360: quando vale, quando non vale e cosa facciamo.',
+    `Se non passi l'esame ti ripreparariamo gratis. Scopri le condizioni della garanzia ${brand.name}: quando vale, quando non vale e cosa facciamo.`,
   path: '/garanzia',
 })
 
 const jsonLdData = {
   '@context': 'https://schema.org',
   '@type': 'EducationalOrganization',
-  name: 'Diploma360',
-  url: 'https://www.diploma360.it/',
-  logo: 'https://www.diploma360.it/assets-vetrina/logo-diploma360.png',
+  name: brand.name,
+  url: `${brand.domain}/`,
+  logo: `${brand.domain}${brand.logo.header}`,
   telephone: '+390684280999',
-  email: 'info@diploma360.it',
+  email: brand.contacts.email,
   parentOrganization: {
     '@type': 'Organization',
     name: 'Classme S.r.l.',
@@ -47,7 +48,7 @@ export default function Garanzia() {
             </div>
           </div>
           <div className="vis">
-            <Image src="/assets-vetrina/chi.jpg" alt="Garanzia esame Diploma360" fill style={{objectFit:'cover',objectPosition:'center'}} />
+            <Image src="/assets-vetrina/chi.jpg" alt={`Garanzia esame ${brand.name}`} fill style={{objectFit:'cover',objectPosition:'center'}} />
             <div className="qbox">
               <span className="qlbl">Trasparenza</span>
               <p>Niente promesse vuote: condizioni esplicite, scritte in chiaro, valide solo se rispettate da entrambe le parti.</p>
@@ -116,7 +117,7 @@ export default function Garanzia() {
               </span>
               <div>
                 <h4>Esame sostenuto nella sede consigliata</h4>
-                <p>L&apos;esame deve essere sostenuto nella sede convenzionata indicata da Diploma360 (oppure documentato motivo per cambio).</p>
+                <p>L&apos;esame deve essere sostenuto nella sede convenzionata indicata da {brand.name} (oppure documentato motivo per cambio).</p>
               </div>
             </div>
           </div>
@@ -144,7 +145,7 @@ export default function Garanzia() {
               </li>
               <li style={{background:'#F8DDE7',padding:'14px 18px',borderRadius:'10px'}}>
                 <b>Esame fuori protocollo</b>
-                Se lo studente sceglie autonomamente una sede d&apos;esame non convenzionata o non consigliata da Diploma360.
+                Se lo studente sceglie autonomamente una sede d&apos;esame non convenzionata o non consigliata da {brand.name}.
               </li>
               <li style={{background:'#F8DDE7',padding:'14px 18px',borderRadius:'10px'}}>
                 <b>Frode o uso improprio</b>

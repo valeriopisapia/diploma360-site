@@ -1,20 +1,21 @@
 import { JsonLd } from '@/components/seo/JsonLd'
 import { buildMetadata } from '@/lib/seo'
+import { brand } from '@/lib/brand'
 import './nostra-piattaforma.css'
 
 export const metadata = buildMetadata({
-  title: 'La nostra piattaforma | Diploma360',
+  title: `La nostra piattaforma | ${brand.name}`,
   description:
-    'Tutta la piattaforma Diploma360, schermata per schermata: home, il mio diploma, classi, lezioni live, ore 1:1 con i tutor, ripasso e strumenti di studio.',
+    `Tutta la piattaforma ${brand.name}, schermata per schermata: home, il mio diploma, classi, lezioni live, ore 1:1 con i tutor, ripasso e strumenti di studio.`,
   path: '/nostra-piattaforma',
 })
 
 const jsonLdData = {
   '@context': 'https://schema.org',
   '@type': 'EducationalOrganization',
-  name: 'Diploma360',
-  url: 'https://www.diploma360.it/',
-  logo: 'https://www.diploma360.it/assets-vetrina/logo-diploma360.png',
+  name: brand.name,
+  url: `${brand.domain}/`,
+  logo: `${brand.domain}${brand.logo.header}`,
   telephone: '+390684280999',
   email: 'info@diploma360.it',
   parentOrganization: {
@@ -82,7 +83,7 @@ export default function NostraPiattaforma() {
           <div className="sec-head center">
             <span className="eyebrow">Dentro la piattaforma</span>
             <h2 className="sec-h2">Ogni schermata, <span className="grad-text">spiegata</span>.</h2>
-            <p className="sec-lead">Ti facciamo entrare davvero dentro Diploma360: schermata per schermata, ecco cosa trovi e a cosa serve.</p>
+            <p className="sec-lead">Ti facciamo entrare davvero dentro {brand.name}: schermata per schermata, ecco cosa trovi e a cosa serve.</p>
           </div>
           <div className="ptour">
 

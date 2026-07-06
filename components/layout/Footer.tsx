@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import { footerNav } from '@/data/navigazione'
+import { brand } from '@/lib/brand'
 
 /** Footer column group labels rendered as nav columns. */
-const COLUMN_LABELS = ['Percorso', 'Diploma360', 'Contatti'] as const
+const COLUMN_LABELS = ['Percorso', brand.name, 'Contatti'] as const
 
 export function Footer() {
   const columns = COLUMN_LABELS.map(
@@ -32,7 +33,7 @@ export function Footer() {
                 </svg>
               </span>
               <span className="brand-txt">
-                <span className="brand-name">Diploma360</span>
+                <span className="brand-name">{brand.name}</span>
                 <span className="brand-sub" style={{ color: '#80868F' }}>
                   Powered by LaScuola360
                   <br />
@@ -63,7 +64,7 @@ export function Footer() {
 
         <div className="footer-bottom">
           <div>
-            © 2026 Diploma360 · Classme S.r.l. · P.IVA 15441141007 · Viale Castrense 5, 00182 Roma
+            © 2026 {brand.name} · Classme S.r.l. · P.IVA 15441141007 · Viale Castrense 5, 00182 Roma
           </div>
           <div>
             {legalGroup.items.map((item, idx) => (

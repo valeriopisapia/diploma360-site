@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { LeadForm } from '@/components/forms/LeadForm'
 import { buildMetadata } from '@/lib/seo'
+import { brand } from '@/lib/brand'
 import { getCitta, allCittaSlugs } from '@/data/citta'
 import './citta.css'
 
@@ -55,12 +56,12 @@ function buildFaq(nome: string, provinciaLabel: string) {
       a: 'Lo seguiamo con un tutor dedicato e una coordinatrice del percorso che vi aggiorna sui progressi. Il contratto lo firma il genitore. L\'obiettivo è fargli ritrovare metodo e motivazione, non solo «passare l\'anno». Onestamente: funziona se lo studente è disposto a impegnarsi — e questo ve lo diciamo dall\'inizio.',
     },
     {
-      q: `Meglio una scuola serale a ${nome} o Diploma360 online?`,
-      a: `La scuola serale prevede orari e presenza fissi in sede; Diploma360 dà lo stesso Diploma di Stato con massima flessibilità: studi quando vuoi, con un tutor dedicato, e vai in sede solo per l'esame. Per chi lavora o ha impegni è spesso più sostenibile.`,
+      q: `Meglio una scuola serale a ${nome} o ${brand.name} online?`,
+      a: `La scuola serale prevede orari e presenza fissi in sede; ${brand.name} dà lo stesso Diploma di Stato con massima flessibilità: studi quando vuoi, con un tutor dedicato, e vai in sede solo per l'esame. Per chi lavora o ha impegni è spesso più sostenibile.`,
     },
     {
       q: `Il diploma ottenuto a ${nome} è riconosciuto?`,
-      a: `Sì: è un Diploma di Stato riconosciuto a tutti gli effetti di legge, valido per università e concorsi pubblici. Diploma360 ti prepara; il titolo è rilasciato dalla sede d'esame.`,
+      a: `Sì: è un Diploma di Stato riconosciuto a tutti gli effetti di legge, valido per università e concorsi pubblici. ${brand.name} ti prepara; il titolo è rilasciato dalla sede d'esame.`,
     },
   ]
 }
@@ -96,13 +97,13 @@ export default async function CittaPage({
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.diploma360.it/' },
-      { '@type': 'ListItem', position: 2, name: "Sedi d'esame", item: 'https://www.diploma360.it/sedi-esame/' },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${brand.domain}/` },
+      { '@type': 'ListItem', position: 2, name: "Sedi d'esame", item: `${brand.domain}/sedi-esame/` },
       {
         '@type': 'ListItem',
         position: 3,
         name: nome,
-        item: `https://www.diploma360.it/recupero-anni-scolastici-${citta}/`,
+        item: `${brand.domain}/recupero-anni-scolastici-${citta}/`,
       },
     ],
   }
@@ -236,7 +237,7 @@ export default async function CittaPage({
             </div>
           </div>
           <p className="tcard-disclaimer">
-            * Le recensioni sono rappresentative di esperienze reali di studenti Diploma360; i nomi sono stati abbreviati per privacy.
+            * Le recensioni sono rappresentative di esperienze reali di studenti {brand.name}; i nomi sono stati abbreviati per privacy.
           </p>
         </div>
       </section>
@@ -271,7 +272,7 @@ export default async function CittaPage({
                 <strong>in presenza presso una sede convenzionata della {provinciaLabel}</strong>.
               </p>
               <p style={{ color: 'var(--soft)', fontSize: '16px' }}>
-                Diploma360 è la scuola che ti <strong>prepara</strong>: il Diploma di Stato è poi rilasciato
+                {brand.name} è la scuola che ti <strong>prepara</strong>: il Diploma di Stato è poi rilasciato
                 dalla sede d&apos;esame. Stesso titolo, stesso valore legale, valido per università e concorsi pubblici.
               </p>
             </div>
@@ -465,7 +466,7 @@ export default async function CittaPage({
         <div className="wrap">
           <div className="sec-head center" style={{ textAlign: 'center' }}>
             <span className="eyebrow" style={{ justifyContent: 'center' }}>
-              Perché a {nome} scelgono Diploma360
+              Perché a {nome} scelgono {brand.name}
             </span>
             <h2 className="s-title">Tutto quello che ti serve, in un unico percorso</h2>
           </div>

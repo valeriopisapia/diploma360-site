@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { brand } from '@/lib/brand'
 
 interface Props {
   isOpen: boolean
@@ -39,7 +40,7 @@ export function MobileMenu({ isOpen, onClose }: Props) {
           <ChevronDown />
         </summary>
         <div className="m-sub">
-          <Link href="/come-funziona" onClick={onClose}>Il metodo Diploma360</Link>
+          <Link href="/come-funziona" onClick={onClose}>Il metodo {brand.name}</Link>
           <Link href="/piattaforma" onClick={onClose}>La piattaforma</Link>
           <Link href="/esami-diploma" onClick={onClose}>Il valore del diploma</Link>
           <Link href="/esami-normativa" onClick={onClose}>Esami e normativa</Link>

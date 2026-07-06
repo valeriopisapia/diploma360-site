@@ -1,20 +1,21 @@
 import { JsonLd } from '@/components/seo/JsonLd'
 import { buildMetadata } from '@/lib/seo'
+import { brand } from '@/lib/brand'
 import './piattaforma.css'
 
 export const metadata = buildMetadata({
-  title: 'La piattaforma | Diploma360',
+  title: `La piattaforma | ${brand.name}`,
   description:
-    'La piattaforma Diploma360: piano di studio, lezioni live, classi, ore con i tutor, materiali di ripasso e i tuoi avanzamenti, tutto in un posto.',
+    `La piattaforma ${brand.name}: piano di studio, lezioni live, classi, ore con i tutor, materiali di ripasso e i tuoi avanzamenti, tutto in un posto.`,
   path: '/piattaforma',
 })
 
 const jsonLdData = {
   '@context': 'https://schema.org',
   '@type': 'EducationalOrganization',
-  name: 'Diploma360',
-  url: 'https://www.diploma360.it/',
-  logo: 'https://www.diploma360.it/assets-vetrina/logo-diploma360.png',
+  name: brand.name,
+  url: `${brand.domain}/`,
+  logo: `${brand.domain}${brand.logo.header}`,
   telephone: '+390684280999',
   email: 'info@diploma360.it',
   parentOrganization: {
@@ -82,7 +83,7 @@ export default function Piattaforma() {
           <div className="sec-head center">
             <span className="eyebrow">Dentro la piattaforma</span>
             <h2 className="sec-h2">Tre momenti, <span className="grad-text">una piattaforma</span>.</h2>
-            <p className="sec-lead">Dal piano di studio alla lezione live, fino alle ore individuali con il tuo tutor: ecco i tre momenti chiave della tua giornata su Diploma360.</p>
+            <p className="sec-lead">Dal piano di studio alla lezione live, fino alle ore individuali con il tuo tutor: ecco i tre momenti chiave della tua giornata su {brand.name}.</p>
           </div>
           <div className="ptour">
             <div className="row">

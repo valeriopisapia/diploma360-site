@@ -1,9 +1,10 @@
 import { JsonLd } from '@/components/seo/JsonLd'
 import { buildMetadata } from '@/lib/seo'
+import { brand } from '@/lib/brand'
 import './faq.css'
 
 export const metadata = buildMetadata({
-  title: 'Domande frequenti | Diploma360',
+  title: `Domande frequenti | ${brand.name}`,
   description:
     'Risposte alle domande più comuni su recupero anni, esami, costi, sedi e Diploma di Stato riconosciuto.',
   path: '/faq',
@@ -12,9 +13,9 @@ export const metadata = buildMetadata({
 const orgJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'EducationalOrganization',
-  name: 'Diploma360',
-  url: 'https://www.diploma360.it/',
-  logo: 'https://www.diploma360.it/assets-vetrina/logo-diploma360.png',
+  name: brand.name,
+  url: `${brand.domain}/`,
+  logo: `${brand.domain}${brand.logo.header}`,
   telephone: '+390684280999',
   email: 'info@diploma360.it',
   parentOrganization: {
@@ -31,7 +32,7 @@ const faqJsonLd = {
   mainEntity: [
     {
       '@type': 'Question',
-      name: 'Come ci si iscrive a Diploma360 e cosa serve?',
+      name: `Come ci si iscrive a ${brand.name} e cosa serve?`,
       acceptedAnswer: {
         '@type': 'Answer',
         text: "Per iscriversi è necessario aver definito il percorso scolastico che si desidera seguire. Sono richiesti: indirizzo di studio, piano di assistenza (Basic, Plus o Max), seconda lingua straniera, percorso già effettuato, modalità di recupero, informazioni personali, modalità di pagamento, indirizzo di residenza, documento d'identità e codice fiscale.",
@@ -42,7 +43,7 @@ const faqJsonLd = {
       name: 'Cosa succede se mi bocciano?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "Con i piani Plus e Max hai la Garanzia 'Promosso o Ripreparato' gratuita. Con il piano Basic, la stessa garanzia è disponibile a 500€. La percentuale di promozione di Diploma360 è stata del 97% nel 2023/2024.",
+        text: `Con i piani Plus e Max hai la Garanzia 'Promosso o Ripreparato' gratuita. Con il piano Basic, la stessa garanzia è disponibile a 500€. La percentuale di promozione di ${brand.name} è stata del 97% nel 2023/2024.`,
       },
     },
     {
@@ -50,7 +51,7 @@ const faqJsonLd = {
       name: 'Quale corso di studi scegliere?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Diploma360 offre una consulenza personalizzata gratuita per aiutarti a scegliere il percorso più adatto. Gli indirizzi disponibili includono licei (Scienze Umane, Economico Sociale, Linguistico, Scientifico, Scienze Applicate, Sportivo) e indirizzi tecnici e professionali.',
+        text: `${brand.name} offre una consulenza personalizzata gratuita per aiutarti a scegliere il percorso più adatto. Gli indirizzi disponibili includono licei (Scienze Umane, Economico Sociale, Linguistico, Scientifico, Scienze Applicate, Sportivo) e indirizzi tecnici e professionali.`,
       },
     },
     {
@@ -58,7 +59,7 @@ const faqJsonLd = {
       name: "Quali sono le sedi in cui svolgerò l'esame?",
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "Diploma360 collabora con numerosi istituti paritari presenti in varie regioni. La sede d'esame viene assegnata in base alla tua provincia.",
+        text: `${brand.name} collabora con numerosi istituti paritari presenti in varie regioni. La sede d'esame viene assegnata in base alla tua provincia.`,
       },
     },
     {
@@ -87,15 +88,15 @@ const faqJsonLd = {
     },
     {
       '@type': 'Question',
-      name: 'Il Diploma che rilascia Diploma360 è legalmente riconosciuto?',
+      name: `Il Diploma che rilascia ${brand.name} è legalmente riconosciuto?`,
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "Sì. Diploma360 collabora unicamente con istituti paritari accreditati. I diplomi emessi hanno lo stesso valore legale di quelli delle scuole pubbliche.",
+        text: `Sì. ${brand.name} collabora unicamente con istituti paritari accreditati. I diplomi emessi hanno lo stesso valore legale di quelli delle scuole pubbliche.`,
       },
     },
     {
       '@type': 'Question',
-      name: "Posso iscrivermi all'università con il diploma di Diploma360?",
+      name: `Posso iscrivermi all'università con il diploma di ${brand.name}?`,
       acceptedAnswer: {
         '@type': 'Answer',
         text: "Sì, i diplomi ottenuti presso istituti paritari accreditati permettono l'accesso all'università e a qualsiasi concorso pubblico.",
@@ -154,7 +155,7 @@ export default function Faq() {
         <div className="wrap fhero-grid">
           <div className="fhero-copy">
             <span className="eyebrow-b">Domande frequenti</span>
-            <h1>Tutto quello che vuoi <span className="hl">sapere su Diploma360</span>.</h1>
+            <h1>Tutto quello che vuoi <span className="hl">sapere su {brand.name}</span>.</h1>
             <p className="lead">Le risposte alle domande più comuni su percorso, esami, costi e modalità. Se non trovi quello che cerchi, scrivici su WhatsApp: rispondiamo entro 24h.</p>
             <div className="cta-row">
               <a className="btn btn-primary btn-lg" href="/#lead">Scopri il tuo percorso</a>
@@ -208,7 +209,7 @@ export default function Faq() {
         <div className="wrap">
           <div className="faq-block">
             <details id="iscrizione">
-              <summary>Come ci si iscrive a Diploma360 e cosa serve?<span className="chev">+</span></summary>
+              <summary>Come ci si iscrive a {brand.name} e cosa serve?<span className="chev">+</span></summary>
               <div className="a">
                 <p>Per iscriversi, è necessario aver definito il percorso scolastico che si desidera seguire e i dettagli da includere nel modulo di iscrizione. Ecco le informazioni richieste: Informazioni relative al piano di studi</p>
                 <ol>
@@ -229,17 +230,17 @@ export default function Faq() {
             <details id="bocciatura">
               <summary>Cosa succede se mi bocciano?<span className="chev">+</span></summary>
               <div className="a">
-                <p>I percorsi offerti da Diploma360 sono il risultato di anni di esperienza nel settore, innovazione continua e un impegno totale per garantire la soddisfazione di tutti a fine anno. Tuttavia, può succedere che le cose non vadano per il verso giusto se non si seguono i consigli di tutor e docenti, se non ci si affida ai nostri consulenti, se si tenta di fare troppo in fretta o se non ci si applica con un minimo di costanza. Le scuole che promettono percentuali di promozione del 100% non sono trasparenti e probabilmente ti stanno dicendo il falso. Nel 2023/2024, la percentuale nazionale di promozioni è stata:</p>
+                <p>I percorsi offerti da {brand.name} sono il risultato di anni di esperienza nel settore, innovazione continua e un impegno totale per garantire la soddisfazione di tutti a fine anno. Tuttavia, può succedere che le cose non vadano per il verso giusto se non si seguono i consigli di tutor e docenti, se non ci si affida ai nostri consulenti, se si tenta di fare troppo in fretta o se non ci si applica con un minimo di costanza. Le scuole che promettono percentuali di promozione del 100% non sono trasparenti e probabilmente ti stanno dicendo il falso. Nel 2023/2024, la percentuale nazionale di promozioni è stata:</p>
                 <ul>
                   <li>Istituti Tecnici: 79,9%</li>
                   <li>Licei: 81,2%</li>
                   <li>Istituti Professionali: 79%</li>
-                  <li>Diploma360: 97%</li>
+                  <li>{brand.name}: 97%</li>
                 </ul>
                 <p>Se, per uno dei motivi sopra citati, le cose non dovessero andare come previsto e dovesse arrivare una non promozione, offriamo diverse formule e garanzie di qualità a seconda del percorso scelto:</p>
                 <ul>
-                  <li>Con Diploma360 Plus e Max hai la Garanzia PROMOSSO o RIPREPARATO gratuita, ciò significa che se dovessi essere bocciato ti riprepariamo gratuitamente e senza nessun tipo di spesa extra.</li>
-                  <li>Con Diploma360 Basic hai la Garanzia PROMOSSO o RIPREPARATO a soli 500€, ciò significa che se dovessi essere bocciato ti riprepariamo con la sola spesa di 500€. In questo modo, siamo certi di offrire ai nostri studenti le migliori opportunità per completare il loro percorso di studi con successo.</li>
+                  <li>Con {brand.name} Plus e Max hai la Garanzia PROMOSSO o RIPREPARATO gratuita, ciò significa che se dovessi essere bocciato ti riprepariamo gratuitamente e senza nessun tipo di spesa extra.</li>
+                  <li>Con {brand.name} Basic hai la Garanzia PROMOSSO o RIPREPARATO a soli 500€, ciò significa che se dovessi essere bocciato ti riprepariamo con la sola spesa di 500€. In questo modo, siamo certi di offrire ai nostri studenti le migliori opportunità per completare il loro percorso di studi con successo.</li>
                 </ul>
               </div>
             </details>
@@ -248,7 +249,7 @@ export default function Faq() {
               <summary>Quale corso di studi scegliere?<span className="chev">+</span></summary>
               <div className="a">
                 <p>Definire il percorso più adatto alle esigenze di ogni studente è un servizio che offriamo gratuitamente attraverso la nostra consulenza personalizzata. Se non hai ancora prenotato la tua consulenza, fallo subito!</p>
-                <p>La scelta dell&apos;indirizzo scolastico è una parte cruciale di questo processo. Livello di difficoltà, attitudini personali, esperienze precedenti e obiettivi del diploma sono tutti fattori che consideriamo per aiutarti a fare la scelta migliore. Quali sono gli indirizzi di studio disponibili? Non tutti gli indirizzi scolastici sono adatti all&apos;insegnamento online, e noi di Diploma360 lo sappiamo bene. Abbiamo selezionato percorsi che siano compatibili con le risorse offerte dalla scuola digitale. Qui di seguito trovi tutti gli indirizzi disponibili. Cliccando su ciascuno, potrai visualizzare una pagina dedicata che contenente un approfondimento del percorso di studio scelto:</p>
+                <p>La scelta dell&apos;indirizzo scolastico è una parte cruciale di questo processo. Livello di difficoltà, attitudini personali, esperienze precedenti e obiettivi del diploma sono tutti fattori che consideriamo per aiutarti a fare la scelta migliore. Quali sono gli indirizzi di studio disponibili? Non tutti gli indirizzi scolastici sono adatti all&apos;insegnamento online, e noi di {brand.name} lo sappiamo bene. Abbiamo selezionato percorsi che siano compatibili con le risorse offerte dalla scuola digitale. Qui di seguito trovi tutti gli indirizzi disponibili. Cliccando su ciascuno, potrai visualizzare una pagina dedicata che contenente un approfondimento del percorso di studio scelto:</p>
                 <p><strong>I licei:</strong></p>
                 <p>
                   Liceo Scienze Umane (Difficoltà 8/10)<br />
@@ -306,14 +307,14 @@ export default function Faq() {
             </details>
 
             <details>
-              <summary>Il Diploma che rilascia Diploma360 è legalmente riconosciuto?<span className="chev">+</span></summary>
+              <summary>Il Diploma che rilascia {brand.name} è legalmente riconosciuto?<span className="chev">+</span></summary>
               <div className="a">
                 <p>Sì. Collaboriamo unicamente con istituti paritari accreditati dal Ministero della Pubblica Istruzione. I Diplomi che questi istituti rilasciano possiedono lo stesso valore legale di quelli emessi dalle scuole pubbliche.</p>
               </div>
             </details>
 
             <details>
-              <summary>Posso iscrivermi all&apos;università con il diploma di Diploma360?<span className="chev">+</span></summary>
+              <summary>Posso iscrivermi all&apos;università con il diploma di {brand.name}?<span className="chev">+</span></summary>
               <div className="a">
                 <p>Sì, poiché i diplomi ottenuti presso istituti paritari accreditati dal Ministero della Pubblica Istruzione hanno lo stesso valore legale di quelli rilasciati dalle scuole pubbliche. Pertanto, questi diplomi permettono l&apos;accesso all&apos;università e a qualsiasi concorso pubblico.</p>
               </div>

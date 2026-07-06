@@ -1,10 +1,11 @@
 import Image from 'next/image'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { buildMetadata } from '@/lib/seo'
+import { brand } from '@/lib/brand'
 import './credibilita.css'
 
 export const metadata = buildMetadata({
-  title: 'Perché fidarti di Diploma360 — Serietà e garanzie',
+  title: `Perché fidarti di ${brand.name} — Serietà e garanzie`,
   description:
     'Non siamo un diplomificio. Scopri chi siamo, la nostra sede a Roma, le tutele per iscritto e come riconoscere una scuola seria.',
   path: '/credibilita',
@@ -13,11 +14,11 @@ export const metadata = buildMetadata({
 const jsonLdData = {
   '@context': 'https://schema.org',
   '@type': 'EducationalOrganization',
-  name: 'Diploma360',
-  url: 'https://www.diploma360.it/',
-  logo: 'https://www.diploma360.it/assets-vetrina/logo-diploma360.png',
+  name: brand.name,
+  url: `${brand.domain}/`,
+  logo: `${brand.domain}${brand.logo.header}`,
   telephone: '+390684280999',
-  email: 'info@diploma360.it',
+  email: brand.contacts.email,
   parentOrganization: {
     '@type': 'Organization',
     name: 'Classme S.r.l.',
@@ -47,7 +48,7 @@ export default function Credibilita() {
             </div>
           </div>
           <div className="nhero-vis">
-            <Image src="/assets-vetrina/studentessa.jpg" alt="Studentessa Diploma360 soddisfatta del percorso" fill style={{objectFit:'cover',objectPosition:'center 30%'}} />
+            <Image src="/assets-vetrina/studentessa.jpg" alt={`Studentessa ${brand.name} soddisfatta del percorso`} fill style={{objectFit:'cover',objectPosition:'center 30%'}} />
           </div>
         </div>
       </section>
@@ -78,7 +79,7 @@ export default function Credibilita() {
           <div className="sec-head center">
             <span className="eyebrow">Chi c&apos;è dietro</span>
             <h2 className="sec-h2">Una realtà strutturata, <span className="grad-text">non un sito improvvisato</span>.</h2>
-            <p className="sec-lead">Diploma360 è il percorso verso il Diploma di Stato di LaScuola360, marchio di Classme S.r.l. Dietro la piattaforma ci sono persone vere.</p>
+            <p className="sec-lead">{brand.name} è il percorso verso il Diploma di Stato di LaScuola360, marchio di Classme S.r.l. Dietro la piattaforma ci sono persone vere.</p>
           </div>
           <div className="who-grid">
             <div className="tut-card">
@@ -112,7 +113,7 @@ export default function Credibilita() {
           <div className="sec-head center">
             <span className="eyebrow">La nostra sede</span>
             <h2 className="sec-h2">Una scuola con una <span className="grad-text">sede vera, a Roma</span>.</h2>
-            <p className="sec-lead">Dietro Diploma360 c&apos;è LaScuola360, il network di cui facciamo parte: una sede fisica in Viale Castrense 5E, a Roma. Non un&apos;app anonima — un posto reale dove studiare, incontrare i tutor e fare due chiacchiere.</p>
+            <p className="sec-lead">Dietro {brand.name} c&apos;è LaScuola360, il network di cui facciamo parte: una sede fisica in Viale Castrense 5E, a Roma. Non un&apos;app anonima — un posto reale dove studiare, incontrare i tutor e fare due chiacchiere.</p>
           </div>
           <div className="sede-split">
             <div className="sede-photo">
@@ -127,7 +128,7 @@ export default function Credibilita() {
                 src="https://maps.google.com/maps?q=Viale%20Castrense%205E%2C%2000182%20Roma&z=15&output=embed"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Mappa della sede Diploma360 — Viale Castrense 5E, Roma"
+                title={`Mappa della sede ${brand.name} — Viale Castrense 5E, Roma`}
               />
             </div>
           </div>

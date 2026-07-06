@@ -1,3 +1,5 @@
+import { brand } from '@/lib/brand'
+
 export type City = {
   slug: string
   nome: string
@@ -15,9 +17,9 @@ export const citta: City[] = [
   {
     slug: 'ancona',
     nome: 'Ancona',
-    titoloSeo: 'Recupero anni scolastici a Ancona | Diploma360',
+    titoloSeo: `Recupero anni scolastici a Ancona | ${brand.name}`,
     descSeo:
-      'Recupero anni scolastici a Ancona con Diploma360: studi online, sostieni l\'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.',
+      `Recupero anni scolastici a Ancona con ${brand.name}: studi online, sostieni l'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.`,
     provinciaLabel: 'provincia di Ancona',
     zonaHero: ['Ancona centro', 'Piano', 'Torrette', 'Pinocchio', 'Tavernelle'],
     zonaFull: ['Ancona centro', 'Piano', 'Torrette', 'Pinocchio', 'Tavernelle', 'Senigallia', 'Jesi', 'Falconara Marittima', 'Osimo', 'Chiaravalle'],
@@ -26,9 +28,9 @@ export const citta: City[] = [
   {
     slug: 'bari',
     nome: 'Bari',
-    titoloSeo: 'Recupero anni scolastici a Bari | Diploma360',
+    titoloSeo: `Recupero anni scolastici a Bari | ${brand.name}`,
     descSeo:
-      'Recupero anni scolastici a Bari con Diploma360: studi online, sostieni l\'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.',
+      `Recupero anni scolastici a Bari con ${brand.name}: studi online, sostieni l'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.`,
     provinciaLabel: 'Città Metropolitana di Bari',
     zonaHero: ['Bari centro', 'Murat', 'Libertà', 'Carrassi', 'Poggiofranco', 'Japigia'],
     zonaFull: ['Bari centro', 'Murat', 'Libertà', 'Carrassi', 'Poggiofranco', 'Japigia', 'Modugno', 'Bitonto', 'Molfetta', 'Altamura', 'Monopoli'],
@@ -37,9 +39,9 @@ export const citta: City[] = [
   {
     slug: 'bergamo',
     nome: 'Bergamo',
-    titoloSeo: 'Recupero anni scolastici a Bergamo | Diploma360',
+    titoloSeo: `Recupero anni scolastici a Bergamo | ${brand.name}`,
     descSeo:
-      'Recupero anni scolastici a Bergamo con Diploma360: studi online, sostieni l\'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.',
+      `Recupero anni scolastici a Bergamo con ${brand.name}: studi online, sostieni l'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.`,
     provinciaLabel: 'provincia di Bergamo',
     zonaHero: ['Bergamo centro', 'Città Alta', 'Borgo Santa Caterina', 'Longuelo', 'Colognola', 'Redona'],
     zonaFull: ['Bergamo centro', 'Città Alta', 'Borgo Santa Caterina', 'Longuelo', 'Colognola', 'Redona', 'Treviglio', 'Seriate', 'Dalmine', 'Albino', 'Caravaggio'],
@@ -48,9 +50,9 @@ export const citta: City[] = [
   {
     slug: 'bologna',
     nome: 'Bologna',
-    titoloSeo: 'Recupero anni scolastici a Bologna | Diploma360',
+    titoloSeo: `Recupero anni scolastici a Bologna | ${brand.name}`,
     descSeo:
-      'Recupero anni scolastici a Bologna con Diploma360: studi online, sostieni l\'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.',
+      `Recupero anni scolastici a Bologna con ${brand.name}: studi online, sostieni l'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.`,
     provinciaLabel: 'Città Metropolitana di Bologna',
     zonaHero: ['Bologna centro', 'Bolognina', 'San Donato', 'Saragozza', 'Santo Stefano', 'Navile'],
     zonaFull: ['Bologna centro', 'Bolognina', 'San Donato', 'Saragozza', 'Santo Stefano', 'Navile', 'Casalecchio di Reno', 'San Lazzaro di Savena', 'Imola', 'Castel Maggiore', 'Zola Predosa'],
@@ -59,9 +61,9 @@ export const citta: City[] = [
   {
     slug: 'cagliari',
     nome: 'Cagliari',
-    titoloSeo: 'Recupero anni scolastici a Cagliari | Diploma360',
+    titoloSeo: `Recupero anni scolastici a Cagliari | ${brand.name}`,
     descSeo:
-      'Recupero anni scolastici a Cagliari con Diploma360: studi online, sostieni l\'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.',
+      `Recupero anni scolastici a Cagliari con ${brand.name}: studi online, sostieni l'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.`,
     provinciaLabel: 'Città Metropolitana di Cagliari',
     zonaHero: ['Cagliari centro', 'Pirri', 'Poetto', 'Genneruxi', 'San Benedetto', 'Is Mirrionis'],
     zonaFull: ['Cagliari centro', 'Pirri', 'Poetto', 'Genneruxi', 'San Benedetto', 'Is Mirrionis', "Quartu Sant'Elena", 'Selargius', 'Assemini', 'Monserrato', 'Capoterra'],
@@ -70,9 +72,9 @@ export const citta: City[] = [
   {
     slug: 'catania',
     nome: 'Catania',
-    titoloSeo: 'Recupero anni scolastici a Catania | Diploma360',
+    titoloSeo: `Recupero anni scolastici a Catania | ${brand.name}`,
     descSeo:
-      'Recupero anni scolastici a Catania con Diploma360: studi online, sostieni l\'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.',
+      `Recupero anni scolastici a Catania con ${brand.name}: studi online, sostieni l'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.`,
     provinciaLabel: 'Città Metropolitana di Catania',
     zonaHero: ['Catania centro', 'Borgo', 'Picanello', 'Nesima', 'Librino', 'Ognina'],
     zonaFull: ['Catania centro', 'Borgo', 'Picanello', 'Nesima', 'Librino', 'Ognina', 'Misterbianco', 'Acireale', 'Paternò', 'Gravina di Catania', 'Mascalucia'],
@@ -81,9 +83,9 @@ export const citta: City[] = [
   {
     slug: 'firenze',
     nome: 'Firenze',
-    titoloSeo: 'Recupero anni scolastici a Firenze | Diploma360',
+    titoloSeo: `Recupero anni scolastici a Firenze | ${brand.name}`,
     descSeo:
-      'Recupero anni scolastici a Firenze con Diploma360: studi online, sostieni l\'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.',
+      `Recupero anni scolastici a Firenze con ${brand.name}: studi online, sostieni l'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.`,
     provinciaLabel: 'Città Metropolitana di Firenze',
     zonaHero: ['Firenze centro', 'Campo di Marte', 'Novoli', 'Rifredi', 'Isolotto', 'Gavinana'],
     zonaFull: ['Firenze centro', 'Campo di Marte', 'Novoli', 'Rifredi', 'Isolotto', 'Gavinana', 'Scandicci', 'Sesto Fiorentino', 'Empoli', 'Bagno a Ripoli', 'Pontassieve'],
@@ -92,9 +94,9 @@ export const citta: City[] = [
   {
     slug: 'genova',
     nome: 'Genova',
-    titoloSeo: 'Recupero anni scolastici a Genova | Diploma360',
+    titoloSeo: `Recupero anni scolastici a Genova | ${brand.name}`,
     descSeo:
-      'Recupero anni scolastici a Genova con Diploma360: studi online, sostieni l\'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.',
+      `Recupero anni scolastici a Genova con ${brand.name}: studi online, sostieni l'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.`,
     provinciaLabel: 'Città Metropolitana di Genova',
     zonaHero: ['Genova centro', 'Sampierdarena', 'Sestri Ponente', 'Nervi', 'Marassi', 'Sturla'],
     zonaFull: ['Genova centro', 'Sampierdarena', 'Sestri Ponente', 'Nervi', 'Marassi', 'Sturla', 'Rapallo', 'Chiavari', 'Arenzano', 'Cogoleto', 'Recco'],
@@ -103,9 +105,9 @@ export const citta: City[] = [
   {
     slug: 'latina',
     nome: 'Latina',
-    titoloSeo: 'Recupero anni scolastici a Latina | Diploma360',
+    titoloSeo: `Recupero anni scolastici a Latina | ${brand.name}`,
     descSeo:
-      'Recupero anni scolastici a Latina con Diploma360: studi online, sostieni l\'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.',
+      `Recupero anni scolastici a Latina con ${brand.name}: studi online, sostieni l'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.`,
     provinciaLabel: 'provincia di Latina',
     zonaHero: ['Latina centro', 'Latina Scalo', 'Latina nord', 'Latina sud'],
     zonaFull: ['Latina centro', 'Latina Scalo', 'Latina nord', 'Latina sud', 'Aprilia', 'Cisterna di Latina', 'Terracina', 'Sabaudia', 'Sezze'],
@@ -114,9 +116,9 @@ export const citta: City[] = [
   {
     slug: 'milano',
     nome: 'Milano',
-    titoloSeo: 'Recupero anni scolastici a Milano | Diploma360',
+    titoloSeo: `Recupero anni scolastici a Milano | ${brand.name}`,
     descSeo:
-      'Recupero anni scolastici a Milano con Diploma360: studi online, sostieni l\'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.',
+      `Recupero anni scolastici a Milano con ${brand.name}: studi online, sostieni l'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.`,
     provinciaLabel: 'Città Metropolitana di Milano',
     zonaHero: ['Milano centro', 'Navigli', 'Porta Romana', 'Città Studi', 'Isola', 'Bicocca'],
     zonaFull: ['Milano centro', 'Navigli', 'Porta Romana', 'Città Studi', 'Isola', 'Bicocca', 'Lambrate', 'Sesto San Giovanni', 'Cinisello Balsamo', 'Rho', 'Cologno Monzese', 'San Donato Milanese'],
@@ -125,9 +127,9 @@ export const citta: City[] = [
   {
     slug: 'napoli',
     nome: 'Napoli',
-    titoloSeo: 'Recupero anni scolastici a Napoli | Diploma360',
+    titoloSeo: `Recupero anni scolastici a Napoli | ${brand.name}`,
     descSeo:
-      'Recupero anni scolastici a Napoli con Diploma360: studi online, sostieni l\'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.',
+      `Recupero anni scolastici a Napoli con ${brand.name}: studi online, sostieni l'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.`,
     provinciaLabel: 'Città Metropolitana di Napoli',
     zonaHero: ['Napoli centro', 'Vomero', 'Fuorigrotta', 'Chiaia', 'Posillipo', 'Soccavo'],
     zonaFull: ['Napoli centro', 'Vomero', 'Fuorigrotta', 'Chiaia', 'Posillipo', 'Soccavo', 'Pozzuoli', 'Giugliano in Campania', 'Casoria', 'Portici', 'Afragola'],
@@ -136,9 +138,9 @@ export const citta: City[] = [
   {
     slug: 'padova',
     nome: 'Padova',
-    titoloSeo: 'Recupero anni scolastici a Padova | Diploma360',
+    titoloSeo: `Recupero anni scolastici a Padova | ${brand.name}`,
     descSeo:
-      'Recupero anni scolastici a Padova con Diploma360: studi online, sostieni l\'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.',
+      `Recupero anni scolastici a Padova con ${brand.name}: studi online, sostieni l'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.`,
     provinciaLabel: 'provincia di Padova',
     zonaHero: ['Padova centro', 'Arcella', 'Stanga', 'Brusegana', 'Mortise'],
     zonaFull: ['Padova centro', 'Arcella', 'Stanga', 'Brusegana', 'Mortise', 'Albignasego', 'Selvazzano Dentro', 'Vigonza', 'Abano Terme', 'Cittadella'],
@@ -147,9 +149,9 @@ export const citta: City[] = [
   {
     slug: 'palermo',
     nome: 'Palermo',
-    titoloSeo: 'Recupero anni scolastici a Palermo | Diploma360',
+    titoloSeo: `Recupero anni scolastici a Palermo | ${brand.name}`,
     descSeo:
-      'Recupero anni scolastici a Palermo con Diploma360: studi online, sostieni l\'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.',
+      `Recupero anni scolastici a Palermo con ${brand.name}: studi online, sostieni l'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.`,
     provinciaLabel: 'Città Metropolitana di Palermo',
     zonaHero: ['Palermo centro', 'Libertà', 'Politeama', 'Brancaccio', 'Zisa', 'Mondello'],
     zonaFull: ['Palermo centro', 'Libertà', 'Politeama', 'Brancaccio', 'Zisa', 'Mondello', 'Monreale', 'Bagheria', 'Carini', 'Partinico', 'Misilmeri'],
@@ -158,9 +160,9 @@ export const citta: City[] = [
   {
     slug: 'perugia',
     nome: 'Perugia',
-    titoloSeo: 'Recupero anni scolastici a Perugia | Diploma360',
+    titoloSeo: `Recupero anni scolastici a Perugia | ${brand.name}`,
     descSeo:
-      'Recupero anni scolastici a Perugia con Diploma360: studi online, sostieni l\'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.',
+      `Recupero anni scolastici a Perugia con ${brand.name}: studi online, sostieni l'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.`,
     provinciaLabel: 'provincia di Perugia',
     zonaHero: ['Perugia centro', 'Fontivegge', 'Ponte San Giovanni', 'San Sisto', 'Madonna Alta'],
     zonaFull: ['Perugia centro', 'Fontivegge', 'Ponte San Giovanni', 'San Sisto', 'Madonna Alta', 'Foligno', 'Città di Castello', 'Assisi', 'Bastia Umbra', 'Corciano'],
@@ -169,9 +171,9 @@ export const citta: City[] = [
   {
     slug: 'pescara',
     nome: 'Pescara',
-    titoloSeo: 'Recupero anni scolastici a Pescara | Diploma360',
+    titoloSeo: `Recupero anni scolastici a Pescara | ${brand.name}`,
     descSeo:
-      'Recupero anni scolastici a Pescara con Diploma360: studi online, sostieni l\'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.',
+      `Recupero anni scolastici a Pescara con ${brand.name}: studi online, sostieni l'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.`,
     provinciaLabel: 'provincia di Pescara',
     zonaHero: ['Pescara centro', 'Pescara nord', 'Colli', 'Porta Nuova', 'Zona Universitaria'],
     zonaFull: ['Pescara centro', 'Pescara nord', 'Colli', 'Porta Nuova', 'Zona Universitaria', 'Montesilvano', 'Spoltore', "Città Sant'Angelo", 'Chieti', 'Francavilla al Mare'],
@@ -180,9 +182,9 @@ export const citta: City[] = [
   {
     slug: 'roma',
     nome: 'Roma',
-    titoloSeo: 'Recupero anni scolastici a Roma | Diploma360',
+    titoloSeo: `Recupero anni scolastici a Roma | ${brand.name}`,
     descSeo:
-      'Recupero anni scolastici a Roma con Diploma360: studi online, sostieni l\'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.',
+      `Recupero anni scolastici a Roma con ${brand.name}: studi online, sostieni l'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.`,
     provinciaLabel: 'Città Metropolitana di Roma Capitale',
     zonaHero: ['Roma centro', 'Roma nord', 'Roma est', 'Roma sud', 'EUR', 'Tuscolana'],
     zonaFull: ['Roma centro', 'Prati', 'Montesacro', 'Tuscolano', 'EUR', 'Ostia', 'Roma nord', 'Roma est', 'Guidonia', 'Pomezia', 'Tivoli', 'Fiumicino'],
@@ -192,9 +194,9 @@ export const citta: City[] = [
   {
     slug: 'salerno',
     nome: 'Salerno',
-    titoloSeo: 'Recupero anni scolastici a Salerno | Diploma360',
+    titoloSeo: `Recupero anni scolastici a Salerno | ${brand.name}`,
     descSeo:
-      'Recupero anni scolastici a Salerno con Diploma360: studi online, sostieni l\'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.',
+      `Recupero anni scolastici a Salerno con ${brand.name}: studi online, sostieni l'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.`,
     provinciaLabel: 'provincia di Salerno',
     zonaHero: ['Salerno centro', 'Torrione', 'Pastena', 'Mercatello', 'Fratte'],
     zonaFull: ['Salerno centro', 'Torrione', 'Pastena', 'Mercatello', 'Fratte', 'Battipaglia', "Cava de' Tirreni", 'Nocera Inferiore', 'Eboli', 'Scafati'],
@@ -203,9 +205,9 @@ export const citta: City[] = [
   {
     slug: 'torino',
     nome: 'Torino',
-    titoloSeo: 'Recupero anni scolastici a Torino | Diploma360',
+    titoloSeo: `Recupero anni scolastici a Torino | ${brand.name}`,
     descSeo:
-      'Recupero anni scolastici a Torino con Diploma360: studi online, sostieni l\'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.',
+      `Recupero anni scolastici a Torino con ${brand.name}: studi online, sostieni l'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.`,
     provinciaLabel: 'Città Metropolitana di Torino',
     zonaHero: ['Torino centro', 'San Salvario', 'Crocetta', 'Mirafiori', 'Barriera di Milano', 'Santa Rita'],
     zonaFull: ['Torino centro', 'San Salvario', 'Crocetta', 'Mirafiori', 'Barriera di Milano', 'Santa Rita', 'Moncalieri', 'Collegno', 'Rivoli', 'Settimo Torinese', 'Nichelino'],
@@ -214,9 +216,9 @@ export const citta: City[] = [
   {
     slug: 'verona',
     nome: 'Verona',
-    titoloSeo: 'Recupero anni scolastici a Verona | Diploma360',
+    titoloSeo: `Recupero anni scolastici a Verona | ${brand.name}`,
     descSeo:
-      'Recupero anni scolastici a Verona con Diploma360: studi online, sostieni l\'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.',
+      `Recupero anni scolastici a Verona con ${brand.name}: studi online, sostieni l'esame in una sede convenzionata vicino a te. Tutor dedicati, diploma di Stato riconosciuto, rate da 72,68€/mese.`,
     provinciaLabel: 'provincia di Verona',
     zonaHero: ['Verona centro', 'Borgo Trento', 'Borgo Roma', 'San Michele', 'Golosine'],
     zonaFull: ['Verona centro', 'Borgo Trento', 'Borgo Roma', 'San Michele', 'Golosine', 'San Giovanni Lupatoto', 'Villafranca di Verona', 'Legnago', 'Bussolengo', 'San Bonifacio'],

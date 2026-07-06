@@ -1,11 +1,11 @@
 import { buildMetadata } from '@/lib/seo'
+import { brand } from '@/lib/brand'
 import { IubendaPolicy } from '@/components/legal/IubendaPolicy'
 import './cookie.css'
 
 export const metadata = buildMetadata({
-  title: 'Cookie Policy | Diploma360',
-  description:
-    'Cookie Policy di Diploma360: cookie tecnici necessari e cookie di statistica Google Analytics previo consenso.',
+  title: `Cookie Policy | ${brand.name}`,
+  description: `Cookie Policy di ${brand.name}: cookie tecnici necessari e cookie di statistica Google Analytics previo consenso.`,
   path: '/cookie',
 })
 
