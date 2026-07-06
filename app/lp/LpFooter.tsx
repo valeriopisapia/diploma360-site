@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { brand } from '@/lib/brand'
 
 /**
  * LpFooter — footer for the Ads landing funnel (own chrome, separate from the
@@ -13,8 +14,8 @@ export function LpFooter() {
           <div className="footer-brand">
             <Image
               className="footer-logo"
-              src="/foto/logo-diploma360.png"
-              alt="Diploma360 — Powered by LaScuola360"
+              src={brand.logo.lp}
+              alt={brand.logo.alt}
               width={136}
               height={34}
               style={{ width: 'auto' }}

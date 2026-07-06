@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { MegaMenu } from './MegaMenu'
 import { MobileMenu } from './MobileMenu'
+import { brand } from '@/lib/brand'
 
 export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -29,8 +30,8 @@ export function SiteHeader() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               className="brand-logo"
-              src="/assets-vetrina/logo-diploma360.png"
-              alt="Diploma360 — Powered by LaScuola360"
+              src={brand.logo.header}
+              alt={brand.logo.alt}
               width={160}
               height={44}
             />
