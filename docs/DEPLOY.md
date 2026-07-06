@@ -138,6 +138,36 @@ Attiva i secret con `--set-secrets` come già configurato nel job. Dominio via
 
 ---
 
+## G. Multi-brand (Diploma360 + La Scuola360)
+
+Lo **stesso repo e branch `main`** serve due brand. Il brand attivo è scelto a **build-time** da
+`NEXT_PUBLIC_BRAND` (`lib/brand.ts`; default `diploma360`). Ogni brand = un **progetto Firebase**
+separato, **entrambi collegati a `main`**. Nessun branch dedicato.
+
+Per-brand differiscono solo: nome, logo, dominio, GTM id, lista Brevo (contatti/colori/copy uguali).
+
+Setup del progetto La Scuola360:
+1. Crea il progetto Firebase + backend App Hosting, collegalo al repo GitHub, branch **`main`**.
+2. Secret nel progetto (Secret Manager):
+   ```
+   firebase apphosting:secrets:set BRAND           # valore: lascuola360
+   firebase apphosting:secrets:set BREVO_API_KEY   # stessa chiave Classme (o account dedicato)
+   firebase apphosting:secrets:set BREVO_LIST_ID   # la lista Brevo di La Scuola360
+   ```
+3. GTM: crea un **container GTM dedicato** a La Scuola360 (con GA4 + Meta Pixel al suo interno) e
+   inserisci l'id in `lib/brand.ts` → `lascuola360.gtmId` (ora placeholder `GTM-XXXXXXX`).
+4. Dominio: mappa `www.lascuola360.it` sul backend.
+
+> ⚠️ **Prima di mergiare in `main`**: crea il secret `BRAND` (valore `diploma360`) **anche nel
+> progetto Diploma360 esistente**, altrimenti il suo prossimo deploy fallisce per secret mancante
+> (vedi `apphosting.yaml`). `NEXT_PUBLIC_BRAND` richiede `availability: [BUILD, RUNTIME]` perché
+> Next inlinea `NEXT_PUBLIC_*` a build-time.
+
+Verifica locale del brand: `NEXT_PUBLIC_BRAND=lascuola360 npm run build`.
+
+**Ancora da decidere:** gli URL mock decorativi `app.diploma360.it/...` nelle pagine piattaforma
+non sono ancora per-brand (serve decidere il sottodominio piattaforma per La Scuola360).
+
 ## F. Decisioni di business ancora aperte (non bloccano il deploy)
 1. **Indirizzo sede**: vetrina `Viale Castrense 5, 00182 Roma` vs landing `Via Giovanni Antonelli
    41, 00197 Roma` — da unificare.
