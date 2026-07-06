@@ -151,12 +151,17 @@ Setup del progetto La Scuola360:
 2. Secret nel progetto (Secret Manager):
    ```
    firebase apphosting:secrets:set BRAND           # valore: lascuola360
-   firebase apphosting:secrets:set BREVO_API_KEY   # stessa chiave Classme (o account dedicato)
-   firebase apphosting:secrets:set BREVO_LIST_ID   # la lista Brevo di La Scuola360
+   firebase apphosting:secrets:set BREVO_API_KEY   # stessa chiave Classme
+   firebase apphosting:secrets:set BREVO_LIST_ID   # 41 (stessa lista di Diploma360)
    ```
-3. GTM: crea un **container GTM dedicato** a La Scuola360 (con GA4 + Meta Pixel al suo interno) e
-   inserisci l'id in `lib/brand.ts` → `lascuola360.gtmId` (ora placeholder `GTM-XXXXXXX`).
+3. GTM: **stesso container di Diploma360** (`GTM-K5VMGM8C`, già in `lib/brand.ts`). Nessun setup GTM
+   aggiuntivo.
 4. Dominio: mappa `www.lascuola360.it` sul backend.
+
+> ℹ️ **Conseguenza del condividere GTM + lista Brevo:** analytics (GA4/Meta) e lead dei due brand
+> confluiscono negli **stessi** contenitori. In Brevo la lista 41 raccoglie i lead di ENTRAMBI i
+> siti; oggi il payload non registra il brand, quindi non sono distinguibili se non per dominio.
+> Se in futuro vuoi separarli, si aggiunge un marcatore brand al lead.
 
 > ⚠️ **Prima di mergiare in `main`**: crea il secret `BRAND` (valore `diploma360`) **anche nel
 > progetto Diploma360 esistente**, altrimenti il suo prossimo deploy fallisce per secret mancante

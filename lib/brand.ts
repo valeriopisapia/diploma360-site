@@ -59,7 +59,7 @@ const BRANDS: Record<BrandId, Brand> = {
       ogImage: '/og-image-lascuola360.png',
     },
     contacts: SHARED_CONTACTS,
-    gtmId: 'GTM-XXXXXXX', // PLACEHOLDER — La Scuola360 GTM container to be created.
+    gtmId: 'GTM-K5VMGM8C', // shared with Diploma360 (same GTM container / GA4 / Meta)
     legal: { entity: 'Classme S.r.l.', iubendaPolicyId: '43474147' }, // same Iubenda policy (Classme)
     platformHost: 'app.lascuola360.it',
   },
