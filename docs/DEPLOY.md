@@ -160,8 +160,8 @@ Setup del progetto La Scuola360:
 
 > ℹ️ **Conseguenza del condividere GTM + lista Brevo:** analytics (GA4/Meta) e lead dei due brand
 > confluiscono negli **stessi** contenitori. In Brevo la lista 41 raccoglie i lead di ENTRAMBI i
-> siti; oggi il payload non registra il brand, quindi non sono distinguibili se non per dominio.
-> Se in futuro vuoi separarli, si aggiunge un marcatore brand al lead.
+> siti, ma sono **distinguibili** dall'attributo **`BRAND`** (valorizzato lato server con il nome
+> del brand: `Diploma360` / `La Scuola360`). In GA4/Meta la separazione è per dominio/hostname.
 
 > ⚠️ **Prima di mergiare in `main`**: crea il secret `BRAND` (valore `diploma360`) **anche nel
 > progetto Diploma360 esistente**, altrimenti il suo prossimo deploy fallisce per secret mancante

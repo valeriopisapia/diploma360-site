@@ -75,7 +75,9 @@ replace the design system), Vitest + happy-dom, `sharp` (image optimisation).
   capped at 15 (live `onInput` filter + submit-time `^\+?\d{6,15}$` guard).
   `ConsentDefault` must render in `<head>` BEFORE `GtmScript` (root layout ordering).
 - **Brevo** (`lib/brevo.ts` + `/api/lead`): list `BREVO_LIST_ID=41`, attributes (text):
-  `NOME, TELEFONO, PER_CHI, MESSAGGIO, PAGINA_ARRIVO, ORIGINE, DATA_RICHIESTA`.
+  `NOME, TELEFONO, PER_CHI, MESSAGGIO, PAGINA_ARRIVO, ORIGINE, DATA_RICHIESTA, BRAND`.
+  `BRAND` is set **server-side** from `brand.name` (route.ts) — distinguishes the two brands that
+  share list 41 (Brevo attribute `BRAND` must exist; created 2026-07-06).
   GOTCHAS learned: use a Brevo **API key** (`xkeysib-`), NOT an SMTP key (`xsmtpsib-`) → else 401;
   disable Brevo **"Authorised IPs"** (serverless egress IPs are dynamic) → else 401. The phone
   ALWAYS goes in **`TELEFONO` (text)** — the raw value, never validated. It is ALSO written to the
