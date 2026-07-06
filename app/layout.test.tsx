@@ -11,6 +11,7 @@
 import { vi, it, expect, describe, beforeEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import React from 'react'
+import { brand } from '@/lib/brand'
 
 // Mock next/script BEFORE layout import so GtmScript renders its
 // dangerouslySetInnerHTML content inline (enabling the ordering assertion)
@@ -69,9 +70,9 @@ describe('RootLayout', () => {
     // so we read document.documentElement.outerHTML for the full source order
     const fullHtml = document.documentElement.outerHTML
     const consentIdx = fullHtml.indexOf("'consent','default'")
-    const gtmIdx = fullHtml.indexOf('GTM-K5VMGM8C')
+    const gtmIdx = fullHtml.indexOf(brand.gtmId)
     expect(consentIdx, 'ConsentDefault script not found in document HTML').toBeGreaterThan(-1)
-    expect(gtmIdx, 'GtmScript (GTM-K5VMGM8C) not found in document HTML').toBeGreaterThan(-1)
+    expect(gtmIdx, `GtmScript (${brand.gtmId}) not found in document HTML`).toBeGreaterThan(-1)
     expect(consentIdx, 'ConsentDefault must precede GtmScript in source order').toBeLessThan(
       gtmIdx,
     )

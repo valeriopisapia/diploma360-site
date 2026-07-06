@@ -1,5 +1,5 @@
 /**
- * GtmScript — loads the GTM container (GTM-K5VMGM8C) after the page becomes
+ * GtmScript — loads the active brand's GTM container (brand.gtmId) after the page becomes
  * interactive, plus the <noscript> iframe fallback for no-JS environments.
  *
  * Must be rendered AFTER ConsentDefault in the root layout so that the
@@ -7,8 +7,9 @@
  */
 
 import Script from "next/script"
+import { brand } from "@/lib/brand"
 
-const GTM_ID = "GTM-K5VMGM8C"
+const GTM_ID = brand.gtmId
 
 export function GtmScript() {
   return (
