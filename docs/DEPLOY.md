@@ -165,8 +165,8 @@ Setup del progetto La Scuola360:
 
 Verifica locale del brand: `NEXT_PUBLIC_BRAND=lascuola360 npm run build`.
 
-**Ancora da decidere:** gli URL mock decorativi `app.diploma360.it/...` nelle pagine piattaforma
-non sono ancora per-brand (serve decidere il sottodominio piattaforma per La Scuola360).
+> ℹ️ Le barre URL nei mockup piattaforma sono **testo decorativo** (`brand.platformHost`), non
+> sottodomini reali: `app.diploma360.it` / `app.lascuola360.it`.
 
 ## F. Decisioni di business ancora aperte (non bloccano il deploy)
 1. **Indirizzo sede**: vetrina `Viale Castrense 5, 00182 Roma` vs landing `Via Giovanni Antonelli

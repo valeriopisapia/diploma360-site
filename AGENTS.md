@@ -103,8 +103,8 @@ replace the design system), Vitest + happy-dom, `sharp` (image optimisation).
 - Colours, prices, copy, pages are **identical** across brands (pure rebrand) — don't diverge them.
   Verbatim-price and honest-claims constraints above apply to BOTH brands.
 - Verify a brand build with `NEXT_PUBLIC_BRAND=lascuola360 npm run build`.
-- **Known gap:** decorative platform mock URLs `app.diploma360.it/...` on the piattaforma pages are
-  NOT yet brand-aware (pending a per-brand platform-subdomain decision).
+- Decorative platform mock URL bars use `brand.platformHost` (display text only, not a real
+  subdomain): `app.diploma360.it` / `app.lascuola360.it`.
 
 ## Deploy & git
 - Two remotes, keep BOTH in sync: `origin` (GitLab, source of truth) + `github`
