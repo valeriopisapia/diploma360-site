@@ -18,6 +18,9 @@ export type Brand = {
   contacts: { telDisplay: string; telHref: string; whatsappUrl: string; email: string }
   gtmId: string
   legal: { entity: string; iubendaPolicyId: string }
+  /** Decorative host shown in the fake browser URL bars on the piattaforma mockups
+   *  (e.g. "app.diploma360.it"). Not a real subdomain — display text only. */
+  platformHost: string
 }
 
 // Contacts are shared across brands today, but modelled per-brand for a future split.
@@ -42,6 +45,7 @@ const BRANDS: Record<BrandId, Brand> = {
     contacts: SHARED_CONTACTS,
     gtmId: 'GTM-K5VMGM8C',
     legal: { entity: 'Classme S.r.l.', iubendaPolicyId: '43474147' },
+    platformHost: 'app.diploma360.it',
   },
   lascuola360: {
     id: 'lascuola360',
@@ -56,7 +60,8 @@ const BRANDS: Record<BrandId, Brand> = {
     },
     contacts: SHARED_CONTACTS,
     gtmId: 'GTM-XXXXXXX', // PLACEHOLDER — La Scuola360 GTM container to be created.
-    legal: { entity: 'Classme S.r.l.', iubendaPolicyId: '43474147' }, // confirm La Scuola360 policy id
+    legal: { entity: 'Classme S.r.l.', iubendaPolicyId: '43474147' }, // same Iubenda policy (Classme)
+    platformHost: 'app.lascuola360.it',
   },
 }
 

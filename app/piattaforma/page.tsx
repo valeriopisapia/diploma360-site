@@ -49,7 +49,7 @@ export default function Piattaforma() {
           <div className="heroshot">
             <div className="bf-bar">
               <span className="r"></span><span></span><span></span>
-              <span className="url">app.diploma360.it/diploma</span>
+              <span className="url">{brand.platformHost}/diploma</span>
             </div>
             <img src="/assets-vetrina/mocks/diploma.png" alt="Il mio diploma — piano di studio personalizzato" loading="lazy" />
           </div>
@@ -99,7 +99,7 @@ export default function Piattaforma() {
               </div>
               <div className="shotw">
                 <div className="shotcard">
-                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">app.diploma360.it/home</span></div>
+                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">{brand.platformHost}/home</span></div>
                   <img src="/assets-vetrina/mocks/home.png" alt="Home: prossima lezione, ripresa e scorciatoie" loading="lazy" />
                 </div>
               </div>
@@ -118,7 +118,7 @@ export default function Piattaforma() {
               </div>
               <div className="shotw">
                 <div className="shotcard">
-                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">app.diploma360.it/lezione</span></div>
+                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">{brand.platformHost}/lezione</span></div>
                   <img src="/assets-vetrina/mocks/lezione.png" alt="Ambiente lezione live nel browser" loading="lazy" />
                 </div>
               </div>
@@ -137,7 +137,7 @@ export default function Piattaforma() {
               </div>
               <div className="shotw">
                 <div className="shotcard">
-                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">app.diploma360.it/tutoraggio</span></div>
+                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">{brand.platformHost}/tutoraggio</span></div>
                   <img src="/assets-vetrina/mocks/1to1.png" alt="Tutoraggio 1:1: agenda, ore residue e prenotazione" loading="lazy" />
                 </div>
               </div>

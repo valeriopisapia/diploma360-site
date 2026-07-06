@@ -49,7 +49,7 @@ export default function NostraPiattaforma() {
           <div className="heroshot">
             <div className="bf-bar">
               <span className="r"></span><span></span><span></span>
-              <span className="url">app.diploma360.it/diploma</span>
+              <span className="url">{brand.platformHost}/diploma</span>
             </div>
             <img src="/assets-vetrina/mocks/diploma.png" alt="Il mio diploma — piano di studio personalizzato" loading="lazy" />
           </div>
@@ -100,7 +100,7 @@ export default function NostraPiattaforma() {
               </div>
               <div className="shotw">
                 <div className="shotcard">
-                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">app.diploma360.it/home</span></div>
+                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">{brand.platformHost}/home</span></div>
                   <img src="/assets-vetrina/mocks/home.png" alt="Home: prossima lezione, ripresa e scorciatoie" loading="lazy" />
                 </div>
               </div>
@@ -119,7 +119,7 @@ export default function NostraPiattaforma() {
               </div>
               <div className="shotw">
                 <div className="shotcard">
-                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">app.diploma360.it/diploma</span></div>
+                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">{brand.platformHost}/diploma</span></div>
                   <img src="/assets-vetrina/mocks/diploma.png" alt="Il mio diploma: avanzamento, anni e media voti" loading="lazy" />
                 </div>
               </div>
@@ -138,7 +138,7 @@ export default function NostraPiattaforma() {
               </div>
               <div className="shotw">
                 <div className="shotcard">
-                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">app.diploma360.it/classi</span></div>
+                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">{brand.platformHost}/classi</span></div>
                   <img src="/assets-vetrina/mocks/classi.png" alt="Le mie classi: materie con lezioni e novità" loading="lazy" />
                 </div>
               </div>
@@ -157,7 +157,7 @@ export default function NostraPiattaforma() {
               </div>
               <div className="shotw">
                 <div className="shotcard">
-                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">app.diploma360.it/calendario</span></div>
+                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">{brand.platformHost}/calendario</span></div>
                   <img src="/assets-vetrina/mocks/calendario.png" alt="Calendario settimanale di lezioni e ripetizioni" loading="lazy" />
                 </div>
               </div>
@@ -176,7 +176,7 @@ export default function NostraPiattaforma() {
               </div>
               <div className="shotw">
                 <div className="shotcard">
-                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">app.diploma360.it/lezione</span></div>
+                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">{brand.platformHost}/lezione</span></div>
                   <img src="/assets-vetrina/mocks/lezione.png" alt="Ambiente lezione live nel browser" loading="lazy" />
                 </div>
               </div>
@@ -195,7 +195,7 @@ export default function NostraPiattaforma() {
               </div>
               <div className="shotw">
                 <div className="shotcard">
-                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">app.diploma360.it/aula</span></div>
+                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">{brand.platformHost}/aula</span></div>
                   <img src="/assets-vetrina/mocks/aula.png" alt="Aula interattiva: lavagna collaborativa della lezione live" loading="lazy" />
                 </div>
               </div>
@@ -214,7 +214,7 @@ export default function NostraPiattaforma() {
               </div>
               <div className="shotw">
                 <div className="shotcard">
-                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">app.diploma360.it/tutoraggio</span></div>
+                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">{brand.platformHost}/tutoraggio</span></div>
                   <img src="/assets-vetrina/mocks/1to1.png" alt="Tutoraggio 1:1: agenda, ore residue e prenotazione" loading="lazy" />
                 </div>
               </div>
@@ -233,7 +233,7 @@ export default function NostraPiattaforma() {
               </div>
               <div className="shotw">
                 <div className="shotcard">
-                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">app.diploma360.it/tutor</span></div>
+                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">{brand.platformHost}/tutor</span></div>
                   <img src="/assets-vetrina/mocks/tutor.png" alt="I miei tutor: un docente per ogni materia" loading="lazy" />
                 </div>
               </div>
@@ -252,7 +252,7 @@ export default function NostraPiattaforma() {
               </div>
               <div className="shotw">
                 <div className="shotcard">
-                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">app.diploma360.it/registrazioni</span></div>
+                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">{brand.platformHost}/registrazioni</span></div>
                   <img src="/assets-vetrina/mocks/player_ai.png" alt="Registrazioni delle lezioni con materiali pronti" loading="lazy" />
                 </div>
               </div>
@@ -271,7 +271,7 @@ export default function NostraPiattaforma() {
               </div>
               <div className="shotw">
                 <div className="shotcard">
-                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">app.diploma360.it/podcast</span></div>
+                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">{brand.platformHost}/podcast</span></div>
                   <img src="/assets-vetrina/mocks/podcast.png" alt="Podcast: la lezione in versione audio" loading="lazy" />
                 </div>
               </div>
@@ -290,7 +290,7 @@ export default function NostraPiattaforma() {
               </div>
               <div className="shotw">
                 <div className="shotcard">
-                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">app.diploma360.it/quiz</span></div>
+                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">{brand.platformHost}/quiz</span></div>
                   <img src="/assets-vetrina/mocks/quiz.png" alt="Quiz di verifica sulla lezione" loading="lazy" />
                 </div>
               </div>
@@ -309,7 +309,7 @@ export default function NostraPiattaforma() {
               </div>
               <div className="shotw">
                 <div className="shotcard">
-                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">app.diploma360.it/flashcard</span></div>
+                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">{brand.platformHost}/flashcard</span></div>
                   <img src="/assets-vetrina/mocks/flashcard.png" alt="Flashcard con domanda e risposta" loading="lazy" />
                 </div>
               </div>
@@ -328,7 +328,7 @@ export default function NostraPiattaforma() {
               </div>
               <div className="shotw">
                 <div className="shotcard">
-                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">app.diploma360.it/notifiche</span></div>
+                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">{brand.platformHost}/notifiche</span></div>
                   <img src="/assets-vetrina/mocks/notifiche.png" alt="Notifiche ordinate per priorità" loading="lazy" />
                 </div>
               </div>
@@ -347,7 +347,7 @@ export default function NostraPiattaforma() {
               </div>
               <div className="shotw">
                 <div className="shotcard">
-                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">app.diploma360.it/assistente</span></div>
+                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">{brand.platformHost}/assistente</span></div>
                   <img src="/assets-vetrina/mocks/tutor_ai.png" alt="Assistente di studio: spiegazioni, quiz e flashcard" loading="lazy" />
                 </div>
               </div>
