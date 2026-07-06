@@ -1,8 +1,9 @@
 import type { MetadataRoute } from 'next'
 import { allCittaSlugs } from '@/data/citta'
 import { allDiplomaSlugs } from '@/data/diplomi'
+import { brand } from '@/lib/brand'
 
-const BASE = 'https://www.diploma360.it'
+const BASE = brand.domain
 
 const STATIC_ROUTES = [
   '/',
