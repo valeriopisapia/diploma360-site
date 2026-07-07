@@ -1,8 +1,9 @@
 import { buildMetadata } from '@/lib/seo'
+import { brand } from '@/lib/brand'
 import './not-found.css'
 
 export const metadata = buildMetadata({
-  title: 'Pagina non trovata | Diploma360',
+  title: `Pagina non trovata | ${brand.name}`,
   description: 'La pagina che cerchi non esiste o è stata spostata.',
   path: '/404',
   noindex: true,

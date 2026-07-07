@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
+import { brand } from './brand'
 
-const SITE = 'https://www.diploma360.it'
-const SITE_NAME = 'Diploma360'
-const DEFAULT_OG_IMAGE = `${SITE}/og-image.png` // branded 1200x630
+const SITE = brand.domain
+const SITE_NAME = brand.name
+const DEFAULT_OG_IMAGE = `${SITE}${brand.logo.ogImage}` // absolute, branded 1200x630
 
 interface BuildMetadataOpts {
   title: string

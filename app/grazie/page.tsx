@@ -1,8 +1,9 @@
 import { buildMetadata } from '@/lib/seo'
+import { brand } from '@/lib/brand'
 import './grazie.css'
 
 export const metadata = buildMetadata({
-  title: 'Grazie! Richiesta ricevuta — Diploma360',
+  title: `Grazie! Richiesta ricevuta — ${brand.name}`,
   description:
     'Abbiamo ricevuto la tua richiesta. Una coordinatrice del percorso ti ricontatta entro 24 ore.',
   path: '/grazie',

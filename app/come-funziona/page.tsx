@@ -1,21 +1,22 @@
 import Image from 'next/image'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { buildMetadata } from '@/lib/seo'
+import { brand } from '@/lib/brand'
 import './come-funziona.css'
 
 export const metadata = buildMetadata({
-  title: 'Come funziona | Diploma360',
+  title: `Come funziona | ${brand.name}`,
   description:
-    'Il metodo Diploma360: piano personalizzato, lezioni live e tutor che ti seguono passo passo fino al Diploma di Stato.',
+    `Il metodo ${brand.name}: piano personalizzato, lezioni live e tutor che ti seguono passo passo fino al Diploma di Stato.`,
   path: '/come-funziona',
 })
 
 const jsonLdData = {
   '@context': 'https://schema.org',
   '@type': 'EducationalOrganization',
-  name: 'Diploma360',
-  url: 'https://www.diploma360.it/',
-  logo: 'https://www.diploma360.it/assets-vetrina/logo-diploma360.png',
+  name: brand.name,
+  url: `${brand.domain}/`,
+  logo: `${brand.domain}${brand.logo.header}`,
   telephone: '+390684280999',
   email: 'info@diploma360.it',
   parentOrganization: {
@@ -38,8 +39,8 @@ export default function ComeFunziona() {
       <section className="mhero">
         <div className="wrap mhero-grid">
           <div className="mhero-copy">
-            <span className="eyebrow-b">Cos&apos;è Diploma360</span>
-            <h1>Perché Diploma360 <span className="hl">è diverso</span>.</h1>
+            <span className="eyebrow-b">Cos&apos;è {brand.name}</span>
+            <h1>Perché {brand.name} <span className="hl">è diverso</span>.</h1>
             <p className="lead">Non ti diamo solo contenuti da studiare. Organizziamo un percorso: partiamo dagli anni da recuperare, costruiamo un piano, mettiamo a disposizione materiali e tutor, e ti accompagniamo fino agli esami.</p>
             <p className="diff"><em>La differenza è questa:</em> non devi capire da solo cosa studiare. Il percorso viene organizzato intorno alla tua situazione, ai tuoi tempi e all&apos;esame da sostenere.</p>
             <div className="cta-row">
@@ -48,12 +49,12 @@ export default function ComeFunziona() {
             </div>
           </div>
           <div className="mhero-photo">
-            <Image src="/assets-vetrina/lezione-live.jpg" alt="Tutor Diploma360 in lezione live" fill style={{objectFit:'cover',objectPosition:'center top'}} />
+            <Image src="/assets-vetrina/lezione-live.jpg" alt={`Tutor ${brand.name} in lezione live`} fill style={{objectFit:'cover',objectPosition:'center top'}} />
             <span className="live">Lezione live in corso</span>
             <div className="quote">
               <span className="qlbl">Il nostro obiettivo</span>
               <p>«Far sentire ogni studente seguito: con qualcuno che spiega, corregge e accompagna fino agli esami.»</p>
-              <span>— Diploma360</span>
+              <span>— {brand.name}</span>
             </div>
           </div>
         </div>
@@ -230,13 +231,13 @@ export default function ComeFunziona() {
           </div>
           <div className="coord-block">
             <div className="coord-photo">
-              <Image src="/assets-vetrina/coordinatrice.jpg" alt="Marcella M., coordinatrice didattica Diploma360" fill style={{objectFit:'cover',objectPosition:'center top'}} />
+              <Image src="/assets-vetrina/coordinatrice.jpg" alt={`Marcella M., coordinatrice didattica ${brand.name}`} fill style={{objectFit:'cover',objectPosition:'center top'}} />
               <span className="tag">La tua coordinatrice</span>
               <div className="info">
                 <h4>Una delle nostre coordinatrici</h4>
                 <h3>Marcella M.</h3>
                 <div className="rolex">Coordinatrice didattica · 12 anni di esperienza</div>
-                <p>Segue ogni anno 15-20 studenti. Ha lavorato 8 anni in licei pubblici prima di passare a Diploma360. Risponde personalmente in chat, al telefono o in videocall — sia agli studenti che ai genitori.</p>
+                <p>Segue ogni anno 15-20 studenti. Ha lavorato 8 anni in licei pubblici prima di passare a {brand.name}. Risponde personalmente in chat, al telefono o in videocall — sia agli studenti che ai genitori.</p>
               </div>
             </div>
             <div className="coord-rows">
@@ -285,7 +286,7 @@ export default function ComeFunziona() {
           <div className="bro-head center">
             <span className="eyebrow-b">Esami &amp; diploma</span>
             <h2>Un percorso serio verso un <span className="hl">Diploma di Stato riconosciuto</span>.</h2>
-            <p>Diploma360 ti accompagna nella preparazione agli esami necessari per conseguire un Diploma di Stato riconosciuto. Non solo nello studio, ma anche nei passaggi pratici che portano agli esami.</p>
+            <p>{brand.name} ti accompagna nella preparazione agli esami necessari per conseguire un Diploma di Stato riconosciuto. Non solo nello studio, ma anche nei passaggi pratici che portano agli esami.</p>
           </div>
           <div className="steps-row">
             <div className="step">
@@ -315,7 +316,7 @@ export default function ComeFunziona() {
           </div>
           <div className="disclaim">
             <span className="tag">Trasparenza</span>
-            <strong>Diploma360 prepara, non rilascia.</strong> Ti prepariamo agli esami necessari per conseguire un Diploma di Stato riconosciuto: l&apos;esame si sostiene in una sede convenzionata, secondo le modalità previste dalla normativa vigente.
+            <strong>{brand.name} prepara, non rilascia.</strong> Ti prepariamo agli esami necessari per conseguire un Diploma di Stato riconosciuto: l&apos;esame si sostiene in una sede convenzionata, secondo le modalità previste dalla normativa vigente.
           </div>
         </div>
       </section>
@@ -324,7 +325,7 @@ export default function ComeFunziona() {
         <div className="wrap">
           <div className="bro-head">
             <span className="eyebrow-b">Come selezioniamo i tutor</span>
-            <h2>Solo <span className="hl">1 candidato su 7</span> diventa tutor Diploma360.</h2>
+            <h2>Solo <span className="hl">1 candidato su 7</span> diventa tutor {brand.name}.</h2>
             <p>Riceviamo centinaia di candidature ogni mese. Selezioniamo solo chi ha le competenze didattiche, l&apos;esperienza e l&apos;empatia per accompagnare uno studente che spesso riparte da zero.</p>
           </div>
           <div className="tut-selez">
@@ -353,7 +354,7 @@ export default function ComeFunziona() {
                 <span className="n">01</span>
                 <div>
                   <h4>Candidatura</h4>
-                  <p>Verifichiamo titoli di studio, esperienza di insegnamento e specializzazione sulle materie di Diploma360.</p>
+                  <p>Verifichiamo titoli di studio, esperienza di insegnamento e specializzazione sulle materie di {brand.name}.</p>
                 </div>
               </div>
               <div className="tut-step">
@@ -387,7 +388,7 @@ export default function ComeFunziona() {
           <div className="bro-head">
             <span className="eyebrow-b">Accessibilità · DSA e BES</span>
             <h2>Strumenti compensativi <span className="hl">di serie, non a richiesta</span>.</h2>
-            <p>Ogni materiale di Diploma360 esiste in più formati — video, audio, schema, mappa, flashcard. Lo studente sceglie quello che funziona meglio per lui: niente da chiedere, niente da spiegare.</p>
+            <p>Ogni materiale di {brand.name} esiste in più formati — video, audio, schema, mappa, flashcard. Lo studente sceglie quello che funziona meglio per lui: niente da chiedere, niente da spiegare.</p>
           </div>
           <div className="acc-chips">
             <span>Video lezioni</span>
@@ -411,7 +412,7 @@ export default function ComeFunziona() {
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </div>
             <div className="acc-card pos">
-              <div className="acc-tag">Con Diploma360</div>
+              <div className="acc-tag">Con {brand.name}</div>
               <ul>
                 <li>Mappe, schemi e audio inclusi di default</li>
                 <li>Tempi più flessibili nelle lezioni 1:1</li>

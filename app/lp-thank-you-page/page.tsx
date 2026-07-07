@@ -1,4 +1,5 @@
 import { buildMetadata } from '@/lib/seo'
+import { brand } from '@/lib/brand'
 import { LpHeader } from '../lp/LpHeader'
 import { LpFooter } from '../lp/LpFooter'
 import { LpFloatActions } from '../lp/LpFloatActions'
@@ -13,7 +14,7 @@ import './lp-thank-you-page.css'
  * disallows the /lp prefix, and ChromeGate hides the site header/footer here.
  */
 export const metadata = buildMetadata({
-  title: 'Grazie! Richiesta ricevuta — Diploma360',
+  title: `Grazie! Richiesta ricevuta — ${brand.name}`,
   description:
     'Abbiamo ricevuto la tua richiesta. Una coordinatrice del percorso ti ricontatta entro 24 ore.',
   path: '/lp-thank-you-page',

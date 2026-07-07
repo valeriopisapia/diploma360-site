@@ -1,11 +1,12 @@
 import { JsonLd } from '@/components/seo/JsonLd'
 import { buildMetadata } from '@/lib/seo'
+import { brand } from '@/lib/brand'
 import './recuperare-due-anni-in-uno.css'
 
 export const metadata = buildMetadata({
   title: 'Recuperare due anni in uno: come funziona e quanto costa',
   description:
-    "Recuperare due anni in uno: le regole 2025/26, come funziona l'esame di idoneità, requisiti, tempi e costi. Studi online con Diploma360 ed esame in sede vicino a te.",
+    `Recuperare due anni in uno: le regole 2025/26, come funziona l'esame di idoneità, requisiti, tempi e costi. Studi online con ${brand.name} ed esame in sede vicino a te.`,
   path: '/recuperare-due-anni-in-uno',
 })
 
@@ -34,7 +35,7 @@ const faqJsonLd = {
       name: "Dove si sostiene l'esame di idoneità?",
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Presso una scuola statale come candidato esterno o un istituto paritario convenzionato. Diploma360 assegna la sede più comoda nella provincia dello studente.',
+        text: `Presso una scuola statale come candidato esterno o un istituto paritario convenzionato. ${brand.name} assegna la sede più comoda nella provincia dello studente.`,
       },
     },
     {
@@ -50,7 +51,7 @@ const faqJsonLd = {
       name: 'Quanto costa recuperare due anni in uno?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'La preparazione con Diploma360 parte da 72,68€/mese in 24 rate; le tasse d\'esame sono a parte e variano per sede. In consulenza gratuita si riceve il costo esatto su misura.',
+        text: `La preparazione con ${brand.name} parte da 72,68€/mese in 24 rate; le tasse d'esame sono a parte e variano per sede. In consulenza gratuita si riceve il costo esatto su misura.`,
       },
     },
   ],
@@ -62,29 +63,29 @@ const articleJsonLd = {
   headline: 'Recuperare due anni in uno: come funziona, requisiti e costi',
   datePublished: '2026-06-10',
   dateModified: '2026-06-10',
-  author: { '@type': 'Organization', name: 'Diploma360' },
+  author: { '@type': 'Organization', name: brand.name },
   publisher: {
     '@type': 'Organization',
-    name: 'Diploma360',
+    name: brand.name,
     logo: {
       '@type': 'ImageObject',
-      url: 'https://www.diploma360.it/wp-content/uploads/2025/04/Diploma360.png',
+      url: `${brand.domain}${brand.logo.header}`,
     },
   },
-  mainEntityOfPage: 'https://www.diploma360.it/blog/recuperare-due-anni-in-uno/',
+  mainEntityOfPage: `${brand.domain}/blog/recuperare-due-anni-in-uno/`,
 }
 
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.diploma360.it/' },
-    { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://www.diploma360.it/blog/' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${brand.domain}/` },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: `${brand.domain}/blog/` },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Recuperare due anni in uno',
-      item: 'https://www.diploma360.it/blog/recuperare-due-anni-in-uno/',
+      item: `${brand.domain}/blog/recuperare-due-anni-in-uno/`,
     },
   ],
 }
@@ -116,7 +117,7 @@ export default function RecuperareDueAnniInUno() {
               <span className="dot"></span>
               <span>Lettura 7 min</span>
               <span className="dot"></span>
-              <span>A cura della redazione Diploma360</span>
+              <span>A cura della redazione {brand.name}</span>
             </div>
           </div>
 
@@ -131,7 +132,7 @@ export default function RecuperareDueAnniInUno() {
               <li>Sì, si possono recuperare <strong>due anni in uno</strong> tramite l&apos;<strong>esame di idoneità</strong> come candidato esterno.</li>
               <li>Dall&apos;anno scolastico <strong>2025/26</strong> il limite è di <strong>massimo due anni per sessione</strong> e, in questo caso, la commissione ha un <strong>presidente esterno</strong> nominato dall&apos;Ufficio Scolastico Regionale.</li>
               <li>L&apos;esame verte su <strong>tutte le materie</strong> degli anni che vuoi recuperare e si svolge in <strong>un&apos;unica sessione</strong> (di norma a inizio settembre).</li>
-              <li>Con Diploma360 <strong>studi online</strong> e sostieni l&apos;esame in una <strong>sede convenzionata vicino a te</strong>; i percorsi partono da <strong>72,68&euro;/mese</strong>, con le tasse d&apos;esame indicate a parte.</li>
+              <li>Con {brand.name} <strong>studi online</strong> e sostieni l&apos;esame in una <strong>sede convenzionata vicino a te</strong>; i percorsi partono da <strong>72,68&euro;/mese</strong>, con le tasse d&apos;esame indicate a parte.</li>
             </ul>
           </div>
 
@@ -171,19 +172,19 @@ export default function RecuperareDueAnniInUno() {
             <h2>Quanto costa recuperare due anni in uno?</h2>
             <p>Il costo si compone di due voci, ed è giusto vederle separate per non avere sorprese:</p>
             <ul>
-              <li><strong>La preparazione</strong> (tutor, materiali, piattaforma): con Diploma360 i percorsi partono da <strong>72,68&euro;/mese</strong> in 24 rate. Il totale dipende da quanti anni recuperi e dall&apos;indirizzo. Trovi tutti i dettagli nella <a href="/prezzi">pagina prezzi</a>.</li>
+              <li><strong>La preparazione</strong> (tutor, materiali, piattaforma): con {brand.name} i percorsi partono da <strong>72,68&euro;/mese</strong> in 24 rate. Il totale dipende da quanti anni recuperi e dall&apos;indirizzo. Trovi tutti i dettagli nella <a href="/prezzi">pagina prezzi</a>.</li>
               <li><strong>Le tasse d&apos;esame</strong>, che <strong>non</strong> sono incluse e variano in base alla sede: te le indichiamo sempre in chiaro fin dall&apos;inizio.</li>
             </ul>
             <p>Diffida di chi promette il recupero &laquo;a poco e in pochissimo tempo&raquo;: la trasparenza sui costi è uno dei segnali per riconoscere un percorso serio. Approfondisci nella nostra guida su <a href="/prezzi">prezzi e piani</a>.</p>
 
             <h2>Si può fare nella scuola pubblica, al serale o online?</h2>
-            <p>Puoi prepararti da solo e presentarti da privatista, frequentare un corso serale, oppure seguire un percorso online. La differenza la fa la <strong>flessibilità</strong>: il serale ha orari e presenza fissi, mentre con Diploma360 <strong>studi quando vuoi</strong>, con un tutor dedicato per ogni materia, e vai in sede solo per l&apos;esame. Per chi lavora o ha avuto un percorso interrotto, online è spesso la soluzione più sostenibile. Vedi <a href="/recupero-anni-scolastici-roma">come funziona il recupero anni</a> passo per passo.</p>
+            <p>Puoi prepararti da solo e presentarti da privatista, frequentare un corso serale, oppure seguire un percorso online. La differenza la fa la <strong>flessibilità</strong>: il serale ha orari e presenza fissi, mentre con {brand.name} <strong>studi quando vuoi</strong>, con un tutor dedicato per ogni materia, e vai in sede solo per l&apos;esame. Per chi lavora o ha avuto un percorso interrotto, online è spesso la soluzione più sostenibile. Vedi <a href="/recupero-anni-scolastici-roma">come funziona il recupero anni</a> passo per passo.</p>
 
             <h2>In quanto tempo e quanto è difficile?</h2>
             <p>Recuperare due anni in uno è possibile, ma <strong>impegnativo</strong>: stai preparando il programma di due annualità in pochi mesi. Con un piano personalizzato, tutor che ti seguono e costanza, è un obiettivo realistico — ma serve metterci impegno. Per questo il primo passo è capire onestamente da dove parti e costruire un calendario sostenibile.</p>
 
             <h2>Dove sostengo l&apos;esame?</h2>
-            <p>L&apos;esame si svolge in presenza in una <strong>sede convenzionata vicino a te</strong>. Diploma360 collabora con istituti paritari in più città: puoi vedere le sedi nella pagina <a href="/sedi-esame">Sedi d&apos;esame</a> e le pagine dedicate, ad esempio <a href="/recupero-anni-scolastici-roma">recupero anni a Roma</a> o <a href="/recupero-anni-scolastici-milano">a Milano</a>.</p>
+            <p>L&apos;esame si svolge in presenza in una <strong>sede convenzionata vicino a te</strong>. {brand.name} collabora con istituti paritari in più città: puoi vedere le sedi nella pagina <a href="/sedi-esame">Sedi d&apos;esame</a> e le pagine dedicate, ad esempio <a href="/recupero-anni-scolastici-roma">recupero anni a Roma</a> o <a href="/recupero-anni-scolastici-milano">a Milano</a>.</p>
 
             <div className="inline-cta">
               <div className="t">Scopri in 2 minuti il percorso giusto per te, senza impegno.</div>
@@ -203,7 +204,7 @@ export default function RecuperareDueAnniInUno() {
             </details>
             <details>
               <summary>Dove si sostiene l&apos;esame?<span className="chev">+</span></summary>
-              <div className="a">Presso una <strong>scuola statale</strong> (come candidato esterno) o un <strong>istituto paritario convenzionato</strong>. Con Diploma360 ti assegniamo la sede più comoda nella tua provincia.</div>
+              <div className="a">Presso una <strong>scuola statale</strong> (come candidato esterno) o un <strong>istituto paritario convenzionato</strong>. Con {brand.name} ti assegniamo la sede più comoda nella tua provincia.</div>
             </details>
             <details>
               <summary>Il diploma ottenuto così è valido?<span className="chev">+</span></summary>
@@ -211,7 +212,7 @@ export default function RecuperareDueAnniInUno() {
             </details>
             <details>
               <summary>Quanto costa recuperare due anni in uno?<span className="chev">+</span></summary>
-              <div className="a">La preparazione con Diploma360 parte da <strong>72,68&euro;/mese</strong> in 24 rate; le tasse d&apos;esame sono a parte e variano per sede. In consulenza ti diamo il costo esatto su misura. Vedi la <a href="/prezzi">pagina prezzi</a>.</div>
+              <div className="a">La preparazione con {brand.name} parte da <strong>72,68&euro;/mese</strong> in 24 rate; le tasse d&apos;esame sono a parte e variano per sede. In consulenza ti diamo il costo esatto su misura. Vedi la <a href="/prezzi">pagina prezzi</a>.</div>
             </details>
           </div>
 

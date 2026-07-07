@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+import { brand } from '@/lib/brand'
 import { ConsentDefault } from '@/components/gtm/ConsentDefault'
 import { GtmScript } from '@/components/gtm/GtmScript'
 import { SiteHeader } from '@/components/layout/SiteHeader'
@@ -9,9 +10,9 @@ import './globals.css'
 
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  title: 'Diploma360',
-  description: 'Consegui il diploma online con Diploma360',
-  metadataBase: new URL('https://www.diploma360.it'),
+  title: brand.name,
+  description: `Consegui il diploma online con ${brand.name}`,
+  metadataBase: new URL(brand.domain),
 }
 
 export const viewport: Viewport = {

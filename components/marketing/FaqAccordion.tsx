@@ -1,9 +1,11 @@
+import { brand } from '@/lib/brand'
+
 export function FaqAccordion() {
   return (
     <div className="faq cols2">
       <details open>
         <summary>
-          Come ci si iscrive a Diploma360 e cosa serve?
+          Come ci si iscrive a {brand.name} e cosa serve?
           <span className="chev">+</span>
         </summary>
         <div className="a">
@@ -60,7 +62,7 @@ export function FaqAccordion() {
         </summary>
         <div className="a">
           <p>
-            I percorsi offerti da Diploma360 sono il risultato di anni di esperienza nel settore,
+            I percorsi offerti da {brand.name} sono il risultato di anni di esperienza nel settore,
             innovazione continua e un impegno totale per garantire la soddisfazione di tutti a fine
             anno. Tuttavia, può succedere che le cose non vadano per il verso giusto se non si
             seguono i consigli di tutor e docenti, se non ci si affida ai nostri consulenti, se si
@@ -73,7 +75,7 @@ export function FaqAccordion() {
             <li>Istituti Tecnici: 79,9%</li>
             <li>Licei: 81,2%</li>
             <li>Istituti Professionali: 79%</li>
-            <li>Diploma360: 97%</li>
+            <li>{brand.name}: 97%</li>
           </ul>
           <p>
             Se, per uno dei motivi sopra citati, le cose non dovessero andare come previsto e
@@ -82,12 +84,12 @@ export function FaqAccordion() {
           </p>
           <ul>
             <li>
-              Con Diploma360 Plus e Max hai la Garanzia PROMOSSO o RIPREPARATO gratuita, ciò
+              Con {brand.name} Plus e Max hai la Garanzia PROMOSSO o RIPREPARATO gratuita, ciò
               significa che se dovessi essere bocciato ti riprepariamo gratuitamente e senza nessun
               tipo di spesa extra.
             </li>
             <li>
-              Con Diploma360 Basic hai la Garanzia PROMOSSO o RIPREPARATO a soli 500€, ciò
+              Con {brand.name} Basic hai la Garanzia PROMOSSO o RIPREPARATO a soli 500€, ciò
               significa che se dovessi essere bocciato ti riprepariamo con la sola spesa di 500€.
               In questo modo, siamo certi di offrire ai nostri studenti le migliori opportunità
               per completare il loro percorso di studi con successo.
@@ -112,7 +114,7 @@ export function FaqAccordion() {
             Livello di difficoltà, attitudini personali, esperienze precedenti e obiettivi del
             diploma sono tutti fattori che consideriamo per aiutarti a fare la scelta migliore.
             Quali sono gli indirizzi di studio disponibili? Non tutti gli indirizzi scolastici
-            sono adatti all&apos;insegnamento online, e noi di Diploma360 lo sappiamo bene. Abbiamo
+            sono adatti all&apos;insegnamento online, e noi di {brand.name} lo sappiamo bene. Abbiamo
             selezionato percorsi che siano compatibili con le risorse offerte dalla scuola digitale.
             Qui di seguito trovi tutti gli indirizzi disponibili. Cliccando su ciascuno, potrai
             visualizzare una pagina dedicata che contenente un approfondimento del percorso di
@@ -253,7 +255,7 @@ export function FaqAccordion() {
 
       <details>
         <summary>
-          Il Diploma che rilascia Diploma360 è legalmente riconosciuto?
+          Il Diploma che rilascia {brand.name} è legalmente riconosciuto?
           <span className="chev">+</span>
         </summary>
         <div className="a">
@@ -267,7 +269,7 @@ export function FaqAccordion() {
 
       <details>
         <summary>
-          Posso iscrivermi all&apos;università con il diploma di Diploma360?
+          Posso iscrivermi all&apos;università con il diploma di {brand.name}?
           <span className="chev">+</span>
         </summary>
         <div className="a">

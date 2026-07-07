@@ -1,20 +1,21 @@
 import { JsonLd } from '@/components/seo/JsonLd'
 import { buildMetadata } from '@/lib/seo'
+import { brand } from '@/lib/brand'
 import './piattaforma.css'
 
 export const metadata = buildMetadata({
-  title: 'La piattaforma | Diploma360',
+  title: `La piattaforma | ${brand.name}`,
   description:
-    'La piattaforma Diploma360: piano di studio, lezioni live, classi, ore con i tutor, materiali di ripasso e i tuoi avanzamenti, tutto in un posto.',
+    `La piattaforma ${brand.name}: piano di studio, lezioni live, classi, ore con i tutor, materiali di ripasso e i tuoi avanzamenti, tutto in un posto.`,
   path: '/piattaforma',
 })
 
 const jsonLdData = {
   '@context': 'https://schema.org',
   '@type': 'EducationalOrganization',
-  name: 'Diploma360',
-  url: 'https://www.diploma360.it/',
-  logo: 'https://www.diploma360.it/assets-vetrina/logo-diploma360.png',
+  name: brand.name,
+  url: `${brand.domain}/`,
+  logo: `${brand.domain}${brand.logo.header}`,
   telephone: '+390684280999',
   email: 'info@diploma360.it',
   parentOrganization: {
@@ -48,7 +49,7 @@ export default function Piattaforma() {
           <div className="heroshot">
             <div className="bf-bar">
               <span className="r"></span><span></span><span></span>
-              <span className="url">app.diploma360.it/diploma</span>
+              <span className="url">{brand.platformHost}/diploma</span>
             </div>
             <img src="/assets-vetrina/mocks/diploma.png" alt="Il mio diploma — piano di studio personalizzato" loading="lazy" />
           </div>
@@ -82,7 +83,7 @@ export default function Piattaforma() {
           <div className="sec-head center">
             <span className="eyebrow">Dentro la piattaforma</span>
             <h2 className="sec-h2">Tre momenti, <span className="grad-text">una piattaforma</span>.</h2>
-            <p className="sec-lead">Dal piano di studio alla lezione live, fino alle ore individuali con il tuo tutor: ecco i tre momenti chiave della tua giornata su Diploma360.</p>
+            <p className="sec-lead">Dal piano di studio alla lezione live, fino alle ore individuali con il tuo tutor: ecco i tre momenti chiave della tua giornata su {brand.name}.</p>
           </div>
           <div className="ptour">
             <div className="row">
@@ -98,7 +99,7 @@ export default function Piattaforma() {
               </div>
               <div className="shotw">
                 <div className="shotcard">
-                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">app.diploma360.it/home</span></div>
+                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">{brand.platformHost}/home</span></div>
                   <img src="/assets-vetrina/mocks/home.png" alt="Home: prossima lezione, ripresa e scorciatoie" loading="lazy" />
                 </div>
               </div>
@@ -117,7 +118,7 @@ export default function Piattaforma() {
               </div>
               <div className="shotw">
                 <div className="shotcard">
-                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">app.diploma360.it/lezione</span></div>
+                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">{brand.platformHost}/lezione</span></div>
                   <img src="/assets-vetrina/mocks/lezione.png" alt="Ambiente lezione live nel browser" loading="lazy" />
                 </div>
               </div>
@@ -136,7 +137,7 @@ export default function Piattaforma() {
               </div>
               <div className="shotw">
                 <div className="shotcard">
-                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">app.diploma360.it/tutoraggio</span></div>
+                  <div className="bf-bar"><span className="r"></span><span></span><span></span><span className="url">{brand.platformHost}/tutoraggio</span></div>
                   <img src="/assets-vetrina/mocks/1to1.png" alt="Tutoraggio 1:1: agenda, ore residue e prenotazione" loading="lazy" />
                 </div>
               </div>

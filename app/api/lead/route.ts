@@ -1,4 +1,5 @@
 import { createBrevoContact, LeadPayload } from '@/lib/brevo'
+import { brand } from '@/lib/brand'
 
 export const runtime = 'nodejs'
 
@@ -35,6 +36,8 @@ export async function POST(req: Request) {
     pagina: pagina as string | undefined,
     origine: origine as string | undefined,
     ts: ts as string | undefined,
+    // Server-authoritative: the brand of THIS deployment, not client-supplied.
+    brand: brand.name,
   }
   const result = await createBrevoContact(payload, { apiKey, listId })
 

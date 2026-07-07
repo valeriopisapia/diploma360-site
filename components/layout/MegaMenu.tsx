@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { headerNav } from '@/data/navigazione'
+import { brand } from '@/lib/brand'
 import styles from './MegaMenu.module.css'
 
 /**
@@ -11,7 +12,7 @@ import styles from './MegaMenu.module.css'
  */
 const MEGA_NAV = [
   { label: 'Come funziona', groupLabels: ['Il metodo', 'Diploma ed esami'] },
-  { label: 'Chi siamo', groupLabels: ['Diploma360'] },
+  { label: 'Chi siamo', groupLabels: [brand.name] },
 ] as const
 
 export function MegaMenu() {

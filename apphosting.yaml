@@ -1,10 +1,17 @@
 # Firebase App Hosting — backend runtime config.
 # Docs: https://firebase.google.com/docs/app-hosting/configure
 #
-# Secrets are stored in Cloud Secret Manager and injected as env vars into the
-# Next.js server at runtime (read by app/api/lead/route.ts). Create them once with:
+# Secrets are stored in Cloud Secret Manager and injected as env vars. Create them
+# once per Firebase PROJECT (each brand = its own project, both build `main`):
 #   firebase apphosting:secrets:set BREVO_API_KEY
 #   firebase apphosting:secrets:set BREVO_LIST_ID
+#   firebase apphosting:secrets:set BRAND        # 'diploma360' or 'lascuola360'
+#
+# ⚠️ BEFORE merging this to main: the `BRAND` secret MUST exist in the EXISTING
+# diploma360 project (value 'diploma360'), or its next deploy fails on a missing
+# secret. NEXT_PUBLIC_BRAND selects the brand config (lib/brand.ts) and — because
+# Next inlines NEXT_PUBLIC_* — it must be available at BUILD (and RUNTIME for the
+# lead route). See docs/DEPLOY.md §G.
 
 runConfig:
   minInstances: 0
@@ -18,4 +25,9 @@ env:
   - variable: BREVO_LIST_ID
     secret: BREVO_LIST_ID
     availability:
+      - RUNTIME
+  - variable: NEXT_PUBLIC_BRAND
+    secret: BRAND
+    availability:
+      - BUILD
       - RUNTIME

@@ -1,22 +1,23 @@
 import { JsonLd } from '@/components/seo/JsonLd'
 import { buildMetadata } from '@/lib/seo'
+import { brand } from '@/lib/brand'
 import './esami-diploma.css'
 
 export const metadata = buildMetadata({
-  title: 'Il valore del diploma | Diploma di Stato riconosciuto — Diploma360',
+  title: `Il valore del diploma | Diploma di Stato riconosciuto — ${brand.name}`,
   description:
-    'Il Diploma di Stato che ottieni con Diploma360 è valido ovunque: università, concorsi, lavoro. Spieghiamo perché conta e cosa cambia nella tua vita.',
+    `Il Diploma di Stato che ottieni con ${brand.name} è valido ovunque: università, concorsi, lavoro. Spieghiamo perché conta e cosa cambia nella tua vita.`,
   path: '/esami-diploma',
 })
 
 const jsonLdData = {
   '@context': 'https://schema.org',
   '@type': 'EducationalOrganization',
-  name: 'Diploma360',
-  url: 'https://www.diploma360.it/',
-  logo: 'https://www.diploma360.it/assets-vetrina/logo-diploma360.png',
+  name: brand.name,
+  url: `${brand.domain}/`,
+  logo: `${brand.domain}${brand.logo.header}`,
   telephone: '+390684280999',
-  email: 'info@diploma360.it',
+  email: brand.contacts.email,
   parentOrganization: {
     '@type': 'Organization',
     name: 'Classme S.r.l.',
@@ -39,7 +40,7 @@ export default function EsamiDiploma() {
           <div className="ehero-copy">
             <span className="eyebrow-b">Il valore del diploma</span>
             <h1>Un <span className="hl">Diploma di Stato riconosciuto</span>. Valido davvero, ovunque.</h1>
-            <p className="lead">Il diploma che ottieni con Diploma360 è un Diploma di Stato: lo stesso titolo di una scuola statale, con lo stesso valore legale. Noi ti prepariamo all&apos;esame, il diploma lo rilascia la scuola in sede ufficiale. Qui ti spieghiamo perché conta e a cosa ti serve davvero.</p>
+            <p className="lead">Il diploma che ottieni con {brand.name} è un Diploma di Stato: lo stesso titolo di una scuola statale, con lo stesso valore legale. Noi ti prepariamo all&apos;esame, il diploma lo rilascia la scuola in sede ufficiale. Qui ti spieghiamo perché conta e a cosa ti serve davvero.</p>
             <div className="cta-row">
               <a className="btn btn-primary btn-lg" href="/#lead">Scopri il tuo percorso</a>
               <a className="btn btn-out btn-lg" href="https://wa.me/393517214644" target="_blank" rel="noopener">WhatsApp</a>
@@ -103,7 +104,7 @@ export default function EsamiDiploma() {
           </div>
           <div className="callout">
             <span className="tag">In una riga</span>
-            <p>Diploma360 <strong>prepara, non rilascia</strong>: il titolo che ottieni è identico a quello di chi ha frequentato in classe — <em>stesso valore legale, stessa spendibilità</em>.</p>
+            <p>{brand.name} <strong>prepara, non rilascia</strong>: il titolo che ottieni è identico a quello di chi ha frequentato in classe — <em>stesso valore legale, stessa spendibilità</em>.</p>
           </div>
         </div>
       </section>

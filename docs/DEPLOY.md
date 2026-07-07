@@ -138,6 +138,41 @@ Attiva i secret con `--set-secrets` come già configurato nel job. Dominio via
 
 ---
 
+## G. Multi-brand (Diploma360 + La Scuola360)
+
+Lo **stesso repo e branch `main`** serve due brand. Il brand attivo è scelto a **build-time** da
+`NEXT_PUBLIC_BRAND` (`lib/brand.ts`; default `diploma360`). Ogni brand = un **progetto Firebase**
+separato, **entrambi collegati a `main`**. Nessun branch dedicato.
+
+Per-brand differiscono solo: nome, logo, dominio, GTM id, lista Brevo (contatti/colori/copy uguali).
+
+Setup del progetto La Scuola360:
+1. Crea il progetto Firebase + backend App Hosting, collegalo al repo GitHub, branch **`main`**.
+2. Secret nel progetto (Secret Manager):
+   ```
+   firebase apphosting:secrets:set BRAND           # valore: lascuola360
+   firebase apphosting:secrets:set BREVO_API_KEY   # stessa chiave Classme
+   firebase apphosting:secrets:set BREVO_LIST_ID   # 41 (stessa lista di Diploma360)
+   ```
+3. GTM: **stesso container di Diploma360** (`GTM-K5VMGM8C`, già in `lib/brand.ts`). Nessun setup GTM
+   aggiuntivo.
+4. Dominio: mappa `www.lascuola360.it` sul backend.
+
+> ℹ️ **Conseguenza del condividere GTM + lista Brevo:** analytics (GA4/Meta) e lead dei due brand
+> confluiscono negli **stessi** contenitori. In Brevo la lista 41 raccoglie i lead di ENTRAMBI i
+> siti, ma sono **distinguibili** dall'attributo **`BRAND`** (valorizzato lato server con il nome
+> del brand: `Diploma360` / `La Scuola360`). In GA4/Meta la separazione è per dominio/hostname.
+
+> ⚠️ **Prima di mergiare in `main`**: crea il secret `BRAND` (valore `diploma360`) **anche nel
+> progetto Diploma360 esistente**, altrimenti il suo prossimo deploy fallisce per secret mancante
+> (vedi `apphosting.yaml`). `NEXT_PUBLIC_BRAND` richiede `availability: [BUILD, RUNTIME]` perché
+> Next inlinea `NEXT_PUBLIC_*` a build-time.
+
+Verifica locale del brand: `NEXT_PUBLIC_BRAND=lascuola360 npm run build`.
+
+> ℹ️ Le barre URL nei mockup piattaforma sono **testo decorativo** (`brand.platformHost`), non
+> sottodomini reali: `app.diploma360.it` / `app.lascuola360.it`.
+
 ## F. Decisioni di business ancora aperte (non bloccano il deploy)
 1. **Indirizzo sede**: vetrina `Viale Castrense 5, 00182 Roma` vs landing `Via Giovanni Antonelli
    41, 00197 Roma` — da unificare.

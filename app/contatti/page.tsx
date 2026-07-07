@@ -1,10 +1,11 @@
 import Image from 'next/image'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { buildMetadata } from '@/lib/seo'
+import { brand } from '@/lib/brand'
 import './contatti.css'
 
 export const metadata = buildMetadata({
-  title: 'Contatti | Diploma360',
+  title: `Contatti | ${brand.name}`,
   description:
     'Parla con la coordinatrice del percorso: telefono, WhatsApp ed email per scoprire gratis il tuo percorso verso il diploma.',
   path: '/contatti',
@@ -13,9 +14,9 @@ export const metadata = buildMetadata({
 const orgJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'EducationalOrganization',
-  name: 'Diploma360',
-  url: 'https://www.diploma360.it/',
-  logo: 'https://www.diploma360.it/assets-vetrina/logo-diploma360.png',
+  name: brand.name,
+  url: `${brand.domain}/`,
+  logo: `${brand.domain}${brand.logo.header}`,
   telephone: '+390684280999',
   email: 'info@diploma360.it',
   parentOrganization: {
@@ -49,7 +50,7 @@ export default function Contatti() {
           <div className="chero-photo">
             <Image
               src="/assets-vetrina/coordinatrice.jpg"
-              alt="Marcella M., coordinatrice del percorso Diploma360"
+              alt={`Marcella M., coordinatrice del percorso ${brand.name}`}
               fill
               style={{ objectFit: 'cover', objectPosition: 'center top' }}
             />
@@ -136,7 +137,7 @@ export default function Contatti() {
           <div className="legal-info">
             <div className="item"><h4>Sede legale</h4><p>Classme S.r.l. &middot; Viale Castrense 5, 00182 Roma</p></div>
             <div className="item"><h4>P.IVA &amp; informazioni fiscali</h4><p>P.IVA 15441141007 &middot; C.F. 15441141007</p></div>
-            <div className="item"><h4>Sito web</h4><p>www.diploma360.it &middot; Powered by LaScuola360</p></div>
+            <div className="item"><h4>Sito web</h4><p>{brand.domain.replace('https://', '')} &middot; Powered by LaScuola360</p></div>
             <div className="item"><h4>Lavora con noi</h4><p>Vuoi candidarti come tutor? Scrivici a info@diploma360.it con CV.</p></div>
           </div>
         </div>

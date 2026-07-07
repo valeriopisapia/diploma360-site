@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next'
+import { brand } from '@/lib/brand'
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -7,7 +8,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/lp', '/api/'],
     },
-    sitemap: 'https://www.diploma360.it/sitemap.xml',
-    host: 'https://www.diploma360.it',
+    sitemap: `${brand.domain}/sitemap.xml`,
+    host: brand.domain,
   }
 }

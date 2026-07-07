@@ -75,7 +75,9 @@ replace the design system), Vitest + happy-dom, `sharp` (image optimisation).
   capped at 15 (live `onInput` filter + submit-time `^\+?\d{6,15}$` guard).
   `ConsentDefault` must render in `<head>` BEFORE `GtmScript` (root layout ordering).
 - **Brevo** (`lib/brevo.ts` + `/api/lead`): list `BREVO_LIST_ID=41`, attributes (text):
-  `NOME, TELEFONO, PER_CHI, MESSAGGIO, PAGINA_ARRIVO, ORIGINE, DATA_RICHIESTA`.
+  `NOME, TELEFONO, PER_CHI, MESSAGGIO, PAGINA_ARRIVO, ORIGINE, DATA_RICHIESTA, BRAND`.
+  `BRAND` is set **server-side** from `brand.name` (route.ts) — distinguishes the two brands that
+  share list 41 (Brevo attribute `BRAND` must exist; created 2026-07-06).
   GOTCHAS learned: use a Brevo **API key** (`xkeysib-`), NOT an SMTP key (`xsmtpsib-`) → else 401;
   disable Brevo **"Authorised IPs"** (serverless egress IPs are dynamic) → else 401. The phone
   ALWAYS goes in **`TELEFONO` (text)** — the raw value, never validated. It is ALSO written to the
@@ -90,7 +92,21 @@ replace the design system), Vitest + happy-dom, `sharp` (image optimisation).
   silently drops the lead) — only a duplicate on the no-`SMS` attempt = genuine already-exists = ok.
   Key/secret are server-side only.
 - **Legal pages** (`/privacy`, `/termini`, `/cookie`): `components/legal/IubendaPolicy.tsx`
-  renders the Iubenda policy (id `43474147`, Classme S.r.l.) as a direct **iframe** — no CTA.
+  renders the Iubenda policy (from `brand.legal.iubendaPolicyId`) as a direct **iframe** — no CTA.
+
+## Brands (multi-brand: Diploma360 + La Scuola360)
+- The SAME repo/content serves TWO brands. **`lib/brand.ts` is the single source of truth**: it
+  exports the active `brand` selected at BUILD time by `NEXT_PUBLIC_BRAND` (default `diploma360`;
+  unknown value → throws). Per-brand fields: `name`, `domain`, `logo.{header,lp,alt,ogImage}`,
+  `contacts`, `gtmId`, `legal.{entity,iubendaPolicyId}`. Secrets (`BREVO_*`) stay runtime env.
+- **NEVER hardcode the brand name `Diploma360` or the domain `www.diploma360.it`** in
+  `app/`,`components/`,`data/` — use `brand.name` / `brand.domain` / `brand.logo.*`. A guard test
+  (`test/no-hardcoded-brand.test.ts`) fails the build if either literal reappears outside `brand.ts`.
+- Colours, prices, copy, pages are **identical** across brands (pure rebrand) — don't diverge them.
+  Verbatim-price and honest-claims constraints above apply to BOTH brands.
+- Verify a brand build with `NEXT_PUBLIC_BRAND=lascuola360 npm run build`.
+- Decorative platform mock URL bars use `brand.platformHost` (display text only, not a real
+  subdomain): `app.diploma360.it` / `app.lascuola360.it`.
 
 ## Deploy & git
 - Two remotes, keep BOTH in sync: `origin` (GitLab, source of truth) + `github`

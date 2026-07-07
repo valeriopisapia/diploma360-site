@@ -3,10 +3,11 @@ import Link from 'next/link'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { buildMetadata } from '@/lib/seo'
 import { diplomi } from '@/data/diplomi'
+import { brand } from '@/lib/brand'
 import './diplomi.css'
 
 export const metadata = buildMetadata({
-  title: 'Diplomi e indirizzi online | Diploma360',
+  title: `Diplomi e indirizzi online | ${brand.name}`,
   description:
     'Tutti gli indirizzi: licei, istituti tecnici e professionali. Trova il percorso giusto per recuperare gli anni e diplomarti.',
   path: '/diplomi',
@@ -15,11 +16,11 @@ export const metadata = buildMetadata({
 const jsonLdData = {
   '@context': 'https://schema.org',
   '@type': 'EducationalOrganization',
-  name: 'Diploma360',
-  url: 'https://www.diploma360.it/',
-  logo: 'https://www.diploma360.it/assets-vetrina/logo-diploma360.png',
+  name: brand.name,
+  url: `${brand.domain}/`,
+  logo: `${brand.domain}${brand.logo.header}`,
   telephone: '+390684280999',
-  email: 'info@diploma360.it',
+  email: brand.contacts.email,
   parentOrganization: {
     '@type': 'Organization',
     name: 'Classme S.r.l.',
@@ -46,19 +47,19 @@ export default function Diplomi() {
           <div className="dhero-copy">
             <span className="eb">Indirizzi di studio</span>
             <h1>18+ indirizzi di studio. <span className="hl">Quello giusto è uno solo: il tuo</span>.</h1>
-            <p className="lead">Licei, Tecnici, Professionali: in Diploma360 prepariamo tutti gli indirizzi di Stato. Durante la consulenza valutiamo insieme quale è il più adatto alla tua storia scolastica, agli anni da recuperare e a quello che vuoi fare dopo.</p>
+            <p className="lead">Licei, Tecnici, Professionali: in {brand.name} prepariamo tutti gli indirizzi di Stato. Durante la consulenza valutiamo insieme quale è il più adatto alla tua storia scolastica, agli anni da recuperare e a quello che vuoi fare dopo.</p>
             <div className="cta-row">
               <a className="btn btn-primary btn-lg" href="/#lead">Scopri quale fa per te</a>
               <Link className="btn btn-out btn-lg" href="/come-funziona">Scopri il metodo</Link>
             </div>
           </div>
           <div className="dhero-photo">
-            <Image src="/assets-vetrina/p_group.jpg" alt="Studenti Diploma360" fill style={{objectFit:'cover',objectPosition:'center'}} />
+            <Image src="/assets-vetrina/p_group.jpg" alt={`Studenti ${brand.name}`} fill style={{objectFit:'cover',objectPosition:'center'}} />
             <span className="tag">Diploma di Stato riconosciuto</span>
             <div className="quote">
               <span className="ql">Il punto d&apos;arrivo</span>
               <p>«Un Diploma di Stato vero, conseguito presso sedi convenzionate — lo stesso che otterresti in qualsiasi scuola pubblica.»</p>
-              <span>— Diploma360</span>
+              <span>— {brand.name}</span>
             </div>
           </div>
         </div>

@@ -1,9 +1,10 @@
 import { JsonLd } from '@/components/seo/JsonLd'
 import { buildMetadata } from '@/lib/seo'
+import { brand } from '@/lib/brand'
 import './esami-normativa.css'
 
 export const metadata = buildMetadata({
-  title: 'Esami e normativa | Come funzionano gli esami — Diploma360',
+  title: `Esami e normativa | Come funzionano gli esami — ${brand.name}`,
   description:
     'I quattro esami possibili, candidato esterno o interno, tempi e cornice normativa spiegati in modo semplice.',
   path: '/esami-normativa',
@@ -12,11 +13,11 @@ export const metadata = buildMetadata({
 const jsonLdData = {
   '@context': 'https://schema.org',
   '@type': 'EducationalOrganization',
-  name: 'Diploma360',
-  url: 'https://www.diploma360.it/',
-  logo: 'https://www.diploma360.it/assets-vetrina/logo-diploma360.png',
+  name: brand.name,
+  url: `${brand.domain}/`,
+  logo: `${brand.domain}${brand.logo.header}`,
   telephone: '+390684280999',
-  email: 'info@diploma360.it',
+  email: brand.contacts.email,
   parentOrganization: {
     '@type': 'Organization',
     name: 'Classme S.r.l.',
@@ -56,7 +57,7 @@ export default function EsamiNormativa() {
             </div>
             <div className="etl-step">
               <span className="etl-dot">02</span>
-              <h4>Preparazione con Diploma360</h4>
+              <h4>Preparazione con {brand.name}</h4>
               <div className="who">Online &middot; tutor + materiali + piattaforma</div>
               <p>Studi sulla piattaforma, segui i tutor, ripassi con i materiali già pronti. Ti accompagniamo fino al giorno dell&apos;esame.</p>
             </div>
@@ -99,7 +100,7 @@ export default function EsamiNormativa() {
           <div className="ahd">
             <span className="eb">Il tuo ruolo</span>
             <h2>Studi con noi, l&apos;esame lo dai <span className="hl">in una scuola statale o paritaria</span>.</h2>
-            <p>Diploma360 è il tuo <strong>centro di preparazione</strong>: ti segue, ti organizza lo studio e ti porta pronto all&apos;esame. L&apos;esame vero e proprio lo sostieni come <strong>candidato esterno</strong> (privatista) presso una scuola del sistema nazionale d&apos;istruzione — <strong>statale o paritaria</strong> — indipendente da noi. È la strada prevista dalla legge per chi non frequenta in classe: la stessa di sportivi, lavoratori e di chi recupera anni.</p>
+            <p>{brand.name} è il tuo <strong>centro di preparazione</strong>: ti segue, ti organizza lo studio e ti porta pronto all&apos;esame. L&apos;esame vero e proprio lo sostieni come <strong>candidato esterno</strong> (privatista) presso una scuola del sistema nazionale d&apos;istruzione — <strong>statale o paritaria</strong> — indipendente da noi. È la strada prevista dalla legge per chi non frequenta in classe: la stessa di sportivi, lavoratori e di chi recupera anni.</p>
           </div>
           <div className="callout">
             <span className="tag">Una garanzia, per legge</span>
@@ -217,7 +218,7 @@ export default function EsamiNormativa() {
           <div className="ahd">
             <span className="eb">Tempi e scadenze</span>
             <h2>Quanti anni in uno e <span className="hl">le date che contano</span>.</h2>
-            <p>Dal 2025/26 si possono recuperare fino a <strong>due anni scolastici con un solo esame</strong> (entro il limite del pari età). Le iscrizioni a Diploma360 sono aperte tutto l&apos;anno, ma le candidature agli esami hanno scadenze fisse: ce ne occupiamo noi, tu devi solo saperle.</p>
+            <p>Dal 2025/26 si possono recuperare fino a <strong>due anni scolastici con un solo esame</strong> (entro il limite del pari età). Le iscrizioni a {brand.name} sono aperte tutto l&apos;anno, ma le candidature agli esami hanno scadenze fisse: ce ne occupiamo noi, tu devi solo saperle.</p>
           </div>
           <div className="iter-steps">
             <div className="iter-step">

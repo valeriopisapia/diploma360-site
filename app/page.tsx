@@ -4,9 +4,10 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { PartnerCarousel } from '@/components/marketing/PartnerCarousel'
 import { FaqAccordion } from '@/components/marketing/FaqAccordion'
 import { buildMetadata } from '@/lib/seo'
+import { brand } from '@/lib/brand'
 
 export const metadata = buildMetadata({
-  title: 'Diploma online e recupero anni scolastici | Diploma360',
+  title: `Diploma online e recupero anni scolastici | ${brand.name}`,
   description:
     'Recupera gli anni persi e prendi il Diploma di Stato da casa: lezioni live, tutor dedicati e materiali pronti. Scopri gratis il tuo percorso.',
   path: '/',
@@ -15,10 +16,10 @@ export const metadata = buildMetadata({
 const jsonLdData = {
   '@context': 'https://schema.org',
   '@type': 'EducationalOrganization',
-  name: 'Diploma360',
-  alternateName: 'Diploma360 by Classme S.r.l.',
-  url: 'https://www.diploma360.it/',
-  logo: 'https://www.diploma360.it/assets-vetrina/logo-diploma360.png',
+  name: brand.name,
+  alternateName: `${brand.name} by Classme S.r.l.`,
+  url: `${brand.domain}/`,
+  logo: `${brand.domain}${brand.logo.header}`,
   description:
     'Diploma online e recupero anni scolastici per il Diploma di Stato. Lezioni live, tutor 1:1 e materiali pronti.',
   telephone: '+390684280999',
@@ -54,7 +55,7 @@ export default function Home() {
               casa.
             </h1>
             <p className="hero-lead">
-              Con Diploma360 hai un piano di studio costruito sui tuoi anni reali, tutor per ogni
+              Con {brand.name} hai un piano di studio costruito sui tuoi anni reali, tutor per ogni
               materia e una piattaforma che ti accompagna fino agli esami. Diploma di Stato
               riconosciuto.
             </p>
@@ -127,7 +128,7 @@ export default function Home() {
           </span>
           <span className="tb-item">
             <a
-              href="https://www.google.com/search?q=Diploma360+recensioni"
+              href={`https://www.google.com/search?q=${brand.name}+recensioni`}
               target="_blank"
               rel="noopener"
             >
@@ -191,7 +192,7 @@ export default function Home() {
               </h2>
               <p className="sec-lead">
                 Che tu abbia lasciato la scuola, sia stato bocciato, lavori, faccia sport o abbia
-                bisogno di un percorso più flessibile, Diploma360 ti aiuta a rientrare in
+                bisogno di un percorso più flessibile, {brand.name} ti aiuta a rientrare in
                 carreggiata.
               </p>
             </div>
@@ -329,7 +330,7 @@ export default function Home() {
             <div className="support-visual">
               <Image
                 src="/assets-vetrina/studentessa.jpg"
-                alt="Studente Diploma360"
+                alt={`Studente ${brand.name}`}
                 width={820}
                 height={546}
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
@@ -429,7 +430,7 @@ export default function Home() {
               <span className="grad-text">sempre cosa studiare dopo</span>.
             </h2>
             <p className="sec-lead">
-              Dentro Diploma360 trovi lezioni, materiali, quiz, avanzamento e strumenti di
+              Dentro {brand.name} trovi lezioni, materiali, quiz, avanzamento e strumenti di
               ripasso. Non devi organizzarti da solo: hai un percorso chiaro, materia per materia.
             </p>
           </div>
@@ -441,7 +442,7 @@ export default function Home() {
             </div>
             <Image
               src="/assets-vetrina/piattaforma.png"
-              alt="La piattaforma di studio Diploma360"
+              alt={`La piattaforma di studio ${brand.name}`}
               width={820}
               height={525}
               style={{ width: '100%', display: 'block' }}
@@ -609,7 +610,7 @@ export default function Home() {
               Studi online, ma <span className="grad-text">non sei mai lasciato solo</span>.
             </h2>
             <p className="sec-lead">
-              La differenza di Diploma360 non è solo la piattaforma: ti accompagniamo con tutor per
+              La differenza di {brand.name} non è solo la piattaforma: ti accompagniamo con tutor per
               materia, metodo e supporto fino agli esami. Ecco alcuni dei nostri tutor.
             </p>
           </div>
@@ -726,7 +727,7 @@ export default function Home() {
           <div className="sec-head center">
             <span className="eyebrow">Migliaia di studenti</span>
             <h2 className="sec-h2">
-              I <span className="grad-text">numeri</span> di Diploma360.
+              I <span className="grad-text">numeri</span> di {brand.name}.
             </h2>
           </div>
           <div className="numbers">
@@ -758,7 +759,7 @@ export default function Home() {
               marginRight: 'auto',
             }}
           >
-            *Dati interni Diploma360. I risultati possono variare in base alla situazione di
+            *Dati interni {brand.name}. I risultati possono variare in base alla situazione di
             partenza, al percorso scelto e all&apos;impegno dello studente.
           </p>
         </div>
@@ -781,7 +782,7 @@ export default function Home() {
               <span className="grad-text">seguiamo ogni giorno</span>.
             </h2>
             <p className="sec-lead">
-              Tipologie di studenti che accompagniamo nel percorso Diploma360, ricostruite a
+              Tipologie di studenti che accompagniamo nel percorso {brand.name}, ricostruite a
               partire da feedback ricorrenti di chi lo ha fatto.
             </p>
           </div>
@@ -857,7 +858,7 @@ export default function Home() {
               <span className="grad-text">Ti prepariamo davvero</span>.
             </h2>
             <p className="sec-lead">
-              Il diploma non si compra: si prepara. Diploma360 ti aiuta a recuperare anni scolastici
+              Il diploma non si compra: si prepara. {brand.name} ti aiuta a recuperare anni scolastici
               con un percorso serio, organizzato e sostenibile, fatto di studio, tutor, materiali,
               verifiche e supporto fino agli esami.
             </p>
@@ -1063,7 +1064,7 @@ export default function Home() {
               Un percorso per diplomarti, <span className="grad-text">anche a rate</span>.
             </h2>
             <p className="sec-lead">
-              I piani Diploma360 partono da 72,68€/mese. In consulenza gratuita ti aiutiamo a
+              I piani {brand.name} partono da 72,68€/mese. In consulenza gratuita ti aiutiamo a
               capire quale piano è più adatto alla tua situazione, in base agli anni da recuperare,
               al supporto di cui hai bisogno e al tempo che puoi dedicare allo studio.
             </p>
@@ -1186,7 +1187,7 @@ export default function Home() {
             <div className="eco-lead">
               <span className="eb">Chi c&apos;è dietro</span>
               <h2>
-                Diploma360 è il percorso verso il Diploma di Stato di{' '}
+                {brand.name} è il percorso verso il Diploma di Stato di{' '}
                 <span className="hl">LaScuola360</span>.
               </h2>
               <p className="sub">
@@ -1249,7 +1250,7 @@ export default function Home() {
                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
                 <polyline points="22 4 12 14.01 9 11.01" />
               </svg>
-              Diploma360 è il marchio di <strong>Classme S.r.l.</strong>
+              {brand.name} è il marchio di <strong>Classme S.r.l.</strong>
             </span>
             <span>
               <svg viewBox="0 0 24 24">

@@ -1,10 +1,11 @@
 import Image from 'next/image'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { buildMetadata } from '@/lib/seo'
+import { brand } from '@/lib/brand'
 import './prezzi.css'
 
 export const metadata = buildMetadata({
-  title: 'Prezzi e piani | Diploma360',
+  title: `Prezzi e piani | ${brand.name}`,
   description:
     'Tre piani, tre percorsi. Basic 1.500 €, Plus 1.900 €, Max 2.900 €. Prezzi in chiaro, tutto incluso. Scopri quale piano fa per te.',
   path: '/prezzi',
@@ -13,11 +14,11 @@ export const metadata = buildMetadata({
 const jsonLdData = {
   '@context': 'https://schema.org',
   '@type': 'EducationalOrganization',
-  name: 'Diploma360',
-  url: 'https://www.diploma360.it/',
-  logo: 'https://www.diploma360.it/assets-vetrina/logo-diploma360.png',
+  name: brand.name,
+  url: `${brand.domain}/`,
+  logo: `${brand.domain}${brand.logo.header}`,
   telephone: '+390684280999',
-  email: 'info@diploma360.it',
+  email: brand.contacts.email,
   parentOrganization: {
     '@type': 'Organization',
     name: 'Classme S.r.l.',
@@ -40,19 +41,19 @@ export default function Prezzi() {
           <div className="ahero-copy">
             <span className="eyebrow-b">Prezzi</span>
             <h1>Tre piani, <span className="hl">tre percorsi</span>.</h1>
-            <p className="lead">In Diploma360 hai tre piani — cambia quanto vuoi essere seguito. Stessa preparazione di base, stesso Diploma di Stato riconosciuto. Cambia il livello di accompagnamento, la garanzia esame e la profondità del supporto 1:1.</p>
+            <p className="lead">In {brand.name} hai tre piani — cambia quanto vuoi essere seguito. Stessa preparazione di base, stesso Diploma di Stato riconosciuto. Cambia il livello di accompagnamento, la garanzia esame e la profondità del supporto 1:1.</p>
             <div className="cta-row">
               <a className="btn btn-primary btn-lg" href="#piani">Scopri i tre piani</a>
               <a className="btn btn-out btn-lg" href="https://wa.me/393517214644" target="_blank" rel="noopener">Parla con noi su WhatsApp</a>
             </div>
           </div>
           <div className="ahero-photo">
-            <Image src="/assets-vetrina/studio.jpg" alt="Studente Diploma360" fill style={{objectFit:'cover',objectPosition:'center'}} />
-            <span className="ptag">Studente Diploma360</span>
+            <Image src="/assets-vetrina/studio.jpg" alt={`Studente ${brand.name}`} fill style={{objectFit:'cover',objectPosition:'center'}} />
+            <span className="ptag">Studente {brand.name}</span>
             <div className="pquoteBox">
               <span className="ql">Trasparenza prima di tutto</span>
               <p>«Niente preventivi misteriosi. I tre piani sono pubblici, in chiaro: scegli quanto vuoi essere accompagnato.»</p>
-              <span>— Diploma360</span>
+              <span>— {brand.name}</span>
             </div>
           </div>
         </div>
@@ -81,7 +82,7 @@ export default function Prezzi() {
           <div className="ahd">
             <span className="eb">3 piani</span>
             <h2>Trasparenza prima di tutto: <span className="hl">i prezzi sono qui</span>.</h2>
-            <p>I tre piani Diploma360 nascono da tre situazioni reali che incontriamo ogni mese. Sotto trovi cosa includono, in cosa si differenziano e quanto costano — tutto in chiaro.</p>
+            <p>I tre piani {brand.name} nascono da tre situazioni reali che incontriamo ogni mese. Sotto trovi cosa includono, in cosa si differenziano e quanto costano — tutto in chiaro.</p>
           </div>
           <div className="total-band">
             <div className="plans">
@@ -169,7 +170,7 @@ export default function Prezzi() {
                 </span>
                 <div>
                   <h3>Le tasse esterne per l&apos;esame</h3>
-                  <p className="fsub">I prezzi sopra riguardano il percorso di preparazione con Diploma360 (piattaforma, materiali, tutor, supporto). Per <strong>sostenere gli esami</strong> sono previste due tasse esterne, dovute alle sedi convenzionate e allo Stato, non incluse nei piani.</p>
+                  <p className="fsub">I prezzi sopra riguardano il percorso di preparazione con {brand.name} (piattaforma, materiali, tutor, supporto). Per <strong>sostenere gli esami</strong> sono previste due tasse esterne, dovute alle sedi convenzionate e allo Stato, non incluse nei piani.</p>
                 </div>
               </div>
               <div className="fees-rows">
@@ -192,7 +193,7 @@ export default function Prezzi() {
                 </span>
                 <div>
                   <b>La tassa di idoneità la incassiamo noi</b>
-                  <p>Per renderti tutto più semplice, la tassa di idoneità (~600 €) puoi versarla direttamente a Diploma360: la <strong>rateizziamo insieme al corso</strong>, senza dover gestire un pagamento separato alla scuola. Te lo confermiamo nella consulenza gratuita, in base alla tua situazione e alla sede d&apos;esame scelta.</p>
+                  <p>Per renderti tutto più semplice, la tassa di idoneità (~600 €) puoi versarla direttamente a {brand.name}: la <strong>rateizziamo insieme al corso</strong>, senza dover gestire un pagamento separato alla scuola. Te lo confermiamo nella consulenza gratuita, in base alla tua situazione e alla sede d&apos;esame scelta.</p>
                 </div>
               </div>
             </div>

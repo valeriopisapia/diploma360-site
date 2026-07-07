@@ -7,6 +7,9 @@ export type LeadPayload = {
   pagina?: string
   origine?: string
   ts?: string
+  /** Brand that produced the lead (e.g. "Diploma360" / "La Scuola360") — set
+   *  server-side, distinguishes brands that share one Brevo list. */
+  brand?: string
 }
 
 type BrevoEnv = { apiKey: string; listId: string }
@@ -52,6 +55,7 @@ export async function createBrevoContact(
     PAGINA_ARRIVO: p.pagina,
     ORIGINE: p.origine,
     DATA_RICHIESTA: p.ts,
+    BRAND: p.brand,
   }
   const sms = toE164Mobile(p.telefono)
 

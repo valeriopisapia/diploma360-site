@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { brand } from '@/lib/brand'
 
 /**
  * LpFooter — footer for the Ads landing funnel (own chrome, separate from the
@@ -13,8 +14,8 @@ export function LpFooter() {
           <div className="footer-brand">
             <Image
               className="footer-logo"
-              src="/foto/logo-diploma360.png"
-              alt="Diploma360 — Powered by LaScuola360"
+              src={brand.logo.lp}
+              alt={brand.logo.alt}
               width={136}
               height={34}
               style={{ width: 'auto' }}
@@ -78,12 +79,12 @@ export function LpFooter() {
             <b>*</b>Fino a 2 anni in uno: dove la normativa lo consente.{' '}
             <b>*</b>Promosso o Ripreparato: garanzia inclusa nei piani Plus e Max, secondo
             condizioni; se non passi l&apos;esame ti riprepariamo gratis.{' '}
-            <b>*</b>97% promossi e dati indicati: dati interni Diploma360; i risultati possono
+            <b>*</b>97% promossi e dati indicati: dati interni {brand.name}; i risultati possono
             variare in base alla situazione di partenza, al percorso scelto e all&apos;impegno dello
             studente.
           </p>
           <div className="footer-copy">
-            © 2026 <b>Diploma360</b> — Powered by LaScuola360. Tutti i diritti riservati.
+            © 2026 <b>{brand.name}</b> — Powered by LaScuola360. Tutti i diritti riservati.
             {/* Company block preserved verbatim from source — note: address differs from showcase site */}
             <span className="footer-company">
               Classme S.r.l. · P.IVA IT15441141007 · C.F. 15441141007 · Sede legale Via

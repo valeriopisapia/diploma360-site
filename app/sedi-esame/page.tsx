@@ -2,10 +2,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { buildMetadata } from '@/lib/seo'
+import { brand } from '@/lib/brand'
 import './sedi-esame.css'
 
 export const metadata = buildMetadata({
-  title: "Sedi d'esame in tutta Italia — Diploma360",
+  title: `Sedi d'esame in tutta Italia — ${brand.name}`,
   description:
     "Studi online, l'esame lo fai vicino a te. Sedi convenzionate in tutta Italia: Milano, Roma, Napoli, Torino e molte altre province.",
   path: '/sedi-esame',
@@ -14,9 +15,9 @@ export const metadata = buildMetadata({
 const jsonLdData = {
   '@context': 'https://schema.org',
   '@type': 'EducationalOrganization',
-  name: 'Diploma360',
-  url: 'https://www.diploma360.it/',
-  logo: 'https://www.diploma360.it/assets-vetrina/logo-diploma360.png',
+  name: brand.name,
+  url: `${brand.domain}/`,
+  logo: `${brand.domain}${brand.logo.header}`,
   telephone: '+390684280999',
   email: 'info@diploma360.it',
   parentOrganization: {
@@ -70,7 +71,7 @@ export default function SediEsame() {
           <div>
             <span className="eyebrow">Sedi d&apos;esame</span>
             <h1>Studi da casa. <span className="grad-text">L&apos;esame lo fai vicino a te.</span></h1>
-            <p className="lead">Con Diploma360 prepari il diploma online, in totale flessibilità. Ti sposti una sola volta: per sostenere l&apos;esame, in una scuola statale o paritaria convenzionata nella provincia più vicina a te. Alla burocrazia della candidatura pensiamo noi.</p>
+            <p className="lead">Con {brand.name} prepari il diploma online, in totale flessibilità. Ti sposti una sola volta: per sostenere l&apos;esame, in una scuola statale o paritaria convenzionata nella provincia più vicina a te. Alla burocrazia della candidatura pensiamo noi.</p>
             <div className="ph-cta">
               <a className="btn btn-primary btn-lg" href="/#lead">Scopri il tuo percorso</a>
               <a className="btn btn-out btn-lg" href="https://wa.me/393517214644" target="_blank" rel="noopener">Chiedi su WhatsApp</a>

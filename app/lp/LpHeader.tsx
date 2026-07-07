@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
+import { brand } from '@/lib/brand'
 
 export function LpHeader() {
   const [isHidden, setIsHidden] = useState(false)
@@ -23,8 +24,8 @@ export function LpHeader() {
         <a className="brand" href="#">
           <Image
             className="brand-logo"
-            src="/foto/logo-diploma360.png"
-            alt="Diploma360 — Powered by LaScuola360"
+            src={brand.logo.lp}
+            alt={brand.logo.alt}
             width={160}
             height={38}
             priority

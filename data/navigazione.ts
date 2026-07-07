@@ -1,3 +1,5 @@
+import { brand } from '@/lib/brand'
+
 export type NavGroup = {
   label: string
   items: { label: string; href: string }[]
@@ -7,14 +9,14 @@ export type NavGroup = {
  * Mega-menu columns. Each NavGroup represents one visual column in a dropdown.
  * MegaMenu.tsx maps these to top-level nav items via its internal MEGA_NAV constant:
  *   "Come funziona" → columns ['Il metodo', 'Diploma ed esami']
- *   "Chi siamo"     → column  ['Diploma360']
+ *   "Chi siamo"     → column  [brand.name]
  */
 export const headerNav: NavGroup[] = [
   // ── Come funziona dropdown ────────────────────────────────────────────────
   {
     label: 'Il metodo',
     items: [
-      { label: 'Il metodo Diploma360', href: '/come-funziona' },
+      { label: `Il metodo ${brand.name}`, href: '/come-funziona' },
       { label: 'La piattaforma', href: '/piattaforma' },
     ],
   },
@@ -29,7 +31,7 @@ export const headerNav: NavGroup[] = [
   },
   // ── Chi siamo dropdown ────────────────────────────────────────────────────
   {
-    label: 'Diploma360',
+    label: `${brand.name}`,
     items: [
       { label: 'Chi siamo', href: '/chi-siamo' },
       { label: 'Perché fidarti', href: '/credibilita' },
@@ -41,7 +43,7 @@ export const headerNav: NavGroup[] = [
 
 /**
  * Footer column groups.
- * 'Percorso', 'Diploma360', 'Contatti' → rendered as footer columns.
+ * 'Percorso', brand.name, 'Contatti' → rendered as footer columns.
  * 'Legale' → rendered in footer-bottom legal row; contains /privacy, /cookie, /termini.
  */
 export const footerNav: NavGroup[] = [
@@ -56,7 +58,7 @@ export const footerNav: NavGroup[] = [
     ],
   },
   {
-    label: 'Diploma360',
+    label: `${brand.name}`,
     items: [
       { label: 'Chi siamo', href: '/chi-siamo' },
       { label: 'Perché fidarti', href: '/credibilita' },
@@ -70,7 +72,7 @@ export const footerNav: NavGroup[] = [
     items: [
       { label: '06 84 280 999', href: 'tel:0684280999' },
       { label: 'WhatsApp 351 721 4644', href: 'https://wa.me/393517214644' },
-      { label: 'info@diploma360.it', href: 'mailto:info@diploma360.it' },
+      { label: brand.contacts.email, href: `mailto:${brand.contacts.email}` },
     ],
   },
   {

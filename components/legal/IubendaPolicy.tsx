@@ -1,12 +1,13 @@
 import './IubendaPolicy.css'
+import { brand } from '@/lib/brand'
 
 /**
  * Embeds an Iubenda legal document directly via iframe — the full policy text
- * shows immediately, no click/CTA step. One Iubenda policy id (43474147,
- * Classme S.r.l. — shared with schoolr.net) with sub-documents for privacy,
- * cookie and terms. Always reflects the current Iubenda version.
+ * shows immediately, no click/CTA step. The per-brand Iubenda policy id
+ * (brand.legal.iubendaPolicyId) has sub-documents for privacy, cookie and terms.
+ * Always reflects the current Iubenda version.
  */
-const IUBENDA_ID = '43474147'
+const IUBENDA_ID = brand.legal.iubendaPolicyId
 
 const POLICIES = {
   privacy: {

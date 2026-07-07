@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { buildMetadata } from '@/lib/seo'
+import { brand } from '@/lib/brand'
 import { LeadForm } from '@/components/forms/LeadForm'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { LpHeader } from './LpHeader'
@@ -7,7 +8,7 @@ import { LpFooter } from './LpFooter'
 import { LpFloatActions } from './LpFloatActions'
 
 export const metadata = buildMetadata({
-  title: 'Diploma360 — Recupera gli anni persi e preparati al diploma senza stress',
+  title: `${brand.name} — Recupera gli anni persi e preparati al diploma senza stress`,
   description:
     'Recupera gli anni persi e preparati al diploma valido e riconosciuto dallo Stato italiano, online. Tutor per materia, materiali già organizzati e supporto fino agli esami. 97% promossi. Da 72,68€/mese in 24 rate.',
   path: '/lp',
@@ -17,9 +18,9 @@ export const metadata = buildMetadata({
 const orgSchema = {
   '@context': 'https://schema.org',
   '@type': 'EducationalOrganization',
-  name: 'Diploma360',
-  url: 'https://www.diploma360.it/',
-  logo: 'https://www.diploma360.it/foto/logo-diploma360.png',
+  name: brand.name,
+  url: `${brand.domain}/`,
+  logo: `${brand.domain}${brand.logo.lp}`,
   description:
     'Preparazione al diploma di Stato riconosciuto, online. Recupero anni scolastici con tutor per materia e accompagnamento fino agli esami.',
   telephone: '+39 06 84 280 999',
@@ -61,7 +62,7 @@ const faqSchema = {
       name: 'Il diploma è riconosciuto?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "Sì: Diploma360 ti accompagna nella preparazione agli esami necessari per conseguire un diploma valido e riconosciuto dallo Stato italiano. Diploma360 non rilascia direttamente il diploma: l'esame si sostiene presso scuole paritarie o statali.",
+        text: `Sì: ${brand.name} ti accompagna nella preparazione agli esami necessari per conseguire un diploma valido e riconosciuto dallo Stato italiano. ${brand.name} non rilascia direttamente il diploma: l'esame si sostiene presso scuole paritarie o statali.`,
       },
     },
     {
@@ -74,7 +75,7 @@ const faqSchema = {
     },
     {
       '@type': 'Question',
-      name: 'Quanto costa Diploma360?',
+      name: `Quanto costa ${brand.name}?`,
       acceptedAnswer: {
         '@type': 'Answer',
         text: 'Si parte da 72,68€/mese in 24 rate.',
@@ -217,7 +218,7 @@ export default function LpPage() {
           <p className="asterisk-note" style={{ textAlign: 'center', padding: '14px 24px 18px', margin: 0 }}>
             <b>*</b>Promosso o Ripreparato: garanzia inclusa nei piani Plus e Max, secondo condizioni.
             Se non passi l'esame, ti riprepariamo gratis.{' '}
-            <b style={{ marginLeft: '10px' }}>*</b>97% promossi: dati interni Diploma360; i risultati
+            <b style={{ marginLeft: '10px' }}>*</b>97% promossi: dati interni {brand.name}; i risultati
             possono variare in base alla situazione di partenza e all'impegno dello studente.
           </p>
         </section>
@@ -248,7 +249,7 @@ export default function LpPage() {
                   </span>
                   <span className="pf-body">
                     <b>Sei un genitore preoccupato per tuo figlio?</b>
-                    <span className="pf-sub">Ti aiutiamo a capire se Diploma360 può funzionare nella sua situazione.</span>
+                    <span className="pf-sub">Ti aiutiamo a capire se {brand.name} può funzionare nella sua situazione.</span>
                   </span>
                   <span className="pf-arrow">→</span>
                 </a>
@@ -287,12 +288,12 @@ export default function LpPage() {
         </section>
 
         {/* METODO 4 PILLARS */}
-        <section className="section white" id="metodo" data-screen-label="Cos'è Diploma360">
+        <section className="section white" id="metodo" data-screen-label={`Cos'è ${brand.name}`}>
           <div className="wrap">
             <div className="metodo-top">
               <div className="sec-head">
-                <div className="tag">Cos'è Diploma360</div>
-                <h2>Perché Diploma360 è diverso.</h2>
+                <div className="tag">Cos'è {brand.name}</div>
+                <h2>Perché {brand.name} è diverso.</h2>
                 <p className="sec-lead">
                   Non ti diamo solo contenuti da studiare. Organizziamo un percorso: partiamo dagli
                   anni da recuperare, costruiamo un piano, mettiamo a disposizione materiali e tutor,
@@ -302,7 +303,7 @@ export default function LpPage() {
               <div className="metodo-photo">
                 <Image
                   src="/foto/studio.jpg"
-                  alt="Studente che segue le lezioni online sulla piattaforma Diploma360"
+                  alt={`Studente che segue le lezioni online sulla piattaforma ${brand.name}`}
                   fill
                   sizes="(max-width:640px) 100vw, (max-width:1000px) 100vw, 480px"
                   style={{ objectFit: 'cover', objectPosition: 'center 28%' }}
@@ -506,7 +507,7 @@ export default function LpPage() {
                 <div className="family-photo">
                   <Image
                     src="/foto/p_male.jpg"
-                    alt="Tutor Diploma360 — laureato e abilitato"
+                    alt={`Tutor ${brand.name} — laureato e abilitato`}
                     fill
                     sizes="(max-width:640px) 100vw, (max-width:1000px) 100vw, 520px"
                     style={{ objectFit: 'cover', objectPosition: 'center top' }}
@@ -531,7 +532,7 @@ export default function LpPage() {
             <div className="guarantee">
               <div className="seal"><span>♥</span></div>
               <div>
-                <span className="guarantee-badge">♥ Garanzia Diploma360</span>
+                <span className="guarantee-badge">♥ Garanzia {brand.name}</span>
                 <h2>Promosso o Ripreparato.</h2>
                 <p>
                   Non promettiamo scorciatoie: il diploma non si compra, si prepara. Nei piani Plus
@@ -667,7 +668,7 @@ export default function LpPage() {
               </details>
               <details>
                 <summary>Il diploma è riconosciuto?</summary>
-                <div className="answer">Sì: Diploma360 ti accompagna nella preparazione agli esami necessari per conseguire un diploma valido e riconosciuto dallo Stato italiano. Diploma360 non rilascia direttamente il diploma: l&apos;esame si sostiene presso scuole paritarie o statali.</div>
+                <div className="answer">Sì: {brand.name} ti accompagna nella preparazione agli esami necessari per conseguire un diploma valido e riconosciuto dallo Stato italiano. {brand.name} non rilascia direttamente il diploma: l&apos;esame si sostiene presso scuole paritarie o statali.</div>
               </details>
               <details>
                 <summary>Come posso seguire il percorso di mio figlio?</summary>
@@ -678,7 +679,7 @@ export default function LpPage() {
                 <div className="answer">Il tutor si accorge subito dei rallentamenti e interviene. Riceverai un alert dal profilo genitore.</div>
               </details>
               <details>
-                <summary>Quanto costa Diploma360?</summary>
+                <summary>Quanto costa {brand.name}?</summary>
                 <div className="answer">Si parte da 72,68€/mese in 24 rate.</div>
               </details>
               <details>
