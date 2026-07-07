@@ -1,17 +1,17 @@
 # Firebase App Hosting — backend runtime config.
 # Docs: https://firebase.google.com/docs/app-hosting/configure
 #
-# Secrets are stored in Cloud Secret Manager and injected as env vars. Create them
-# once per Firebase PROJECT (each brand = its own project, both build `main`):
+# Brevo secrets (Cloud Secret Manager), set once per project — grant access when prompted:
 #   firebase apphosting:secrets:set BREVO_API_KEY
 #   firebase apphosting:secrets:set BREVO_LIST_ID
-#   firebase apphosting:secrets:set BRAND        # 'diploma360' or 'lascuola360'
 #
-# ⚠️ BEFORE merging this to main: the `BRAND` secret MUST exist in the EXISTING
-# diploma360 project (value 'diploma360'), or its next deploy fails on a missing
-# secret. NEXT_PUBLIC_BRAND selects the brand config (lib/brand.ts) and — because
-# Next inlines NEXT_PUBLIC_* — it must be available at BUILD (and RUNTIME for the
-# lead route). See docs/DEPLOY.md §G.
+# BRAND SELECTION — NOT here. Both brands run as separate BACKENDS in the SAME project
+# (`diploma360-site`, `lascuola360-site`), so a per-project secret can't differ between
+# them. Brand is set PER-BACKEND via `NEXT_PUBLIC_BRAND` (console: App Hosting → backend
+# → Settings → Environment; console values override this file, at BUILD too):
+#   - diploma360-site : nothing to set — lib/brand.ts defaults to 'diploma360'
+#   - lascuola360-site: NEXT_PUBLIC_BRAND = lascuola360
+# See docs/DEPLOY.md §G.
 
 runConfig:
   minInstances: 0
@@ -25,9 +25,4 @@ env:
   - variable: BREVO_LIST_ID
     secret: BREVO_LIST_ID
     availability:
-      - RUNTIME
-  - variable: NEXT_PUBLIC_BRAND
-    secret: BRAND
-    availability:
-      - BUILD
       - RUNTIME

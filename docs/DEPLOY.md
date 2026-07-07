@@ -141,32 +141,37 @@ Attiva i secret con `--set-secrets` come già configurato nel job. Dominio via
 ## G. Multi-brand (Diploma360 + La Scuola360)
 
 Lo **stesso repo e branch `main`** serve due brand. Il brand attivo è scelto a **build-time** da
-`NEXT_PUBLIC_BRAND` (`lib/brand.ts`; default `diploma360`). Ogni brand = un **progetto Firebase**
-separato, **entrambi collegati a `main`**. Nessun branch dedicato.
+`NEXT_PUBLIC_BRAND` (`lib/brand.ts`; default `diploma360`). I due brand girano come **due backend
+App Hosting nello STESSO progetto Firebase `schoolrcloud`** — `diploma360-site` e `lascuola360-site`
+— entrambi collegati a `main`.
 
-Per-brand differiscono solo: nome, logo, dominio, GTM id, lista Brevo (contatti/colori/copy uguali).
+> ⚠️ **Perché NON un secret per il brand:** un secret di Secret Manager è **per-progetto** (un solo
+> valore). Con due backend nello stesso progetto non può differire tra loro. Quindi il brand si
+> imposta **per-backend** come env var, non come secret. (`apphosting.yaml` NON contiene più `BRAND`.)
 
-Setup del progetto La Scuola360:
-1. Crea il progetto Firebase + backend App Hosting, collegalo al repo GitHub, branch **`main`**.
-2. Secret nel progetto (Secret Manager):
-   ```
-   firebase apphosting:secrets:set BRAND           # valore: lascuola360
-   firebase apphosting:secrets:set BREVO_API_KEY   # stessa chiave Classme
-   firebase apphosting:secrets:set BREVO_LIST_ID   # 41 (stessa lista di Diploma360)
-   ```
-3. GTM: **stesso container di Diploma360** (`GTM-K5VMGM8C`, già in `lib/brand.ts`). Nessun setup GTM
-   aggiuntivo.
-4. Dominio: mappa `www.lascuola360.it` sul backend.
+Per-brand differiscono solo: nome, logo, dominio (GTM id, lista Brevo, contatti, colori, copy uguali).
+
+**Impostare il brand per-backend** (Console: *App Hosting → \<backend\> → Settings → Environment*;
+i valori della console hanno precedenza su `apphosting.yaml`, anche a BUILD):
+- **`diploma360-site`**: niente da impostare — il default del codice è `diploma360`.
+- **`lascuola360-site`**: aggiungi `NEXT_PUBLIC_BRAND = lascuola360`.
+  > Verifica che sia applicata a **build-time** (Next inlinea `NEXT_PUBLIC_*`): dopo il deploy
+  > l'HTML servito deve mostrare "La Scuola360". Se la console non supportasse il build-time, usa in
+  > alternativa un file `apphosting.lascuola360.yaml` con
+  > `env: [{ variable: NEXT_PUBLIC_BRAND, value: lascuola360, availability: [BUILD, RUNTIME] }]`
+  > e associa quel backend all'environment `lascuola360`.
+
+Setup restante di `lascuola360-site`:
+1. Collega il backend al repo, branch **`main`**.
+2. Secret Brevo nel progetto (già presenti se condivisi con Diploma360): `BREVO_API_KEY`,
+   `BREVO_LIST_ID=41` (stessa lista — i lead sono distinti dall'attributo `BRAND`).
+3. GTM: stesso container (`GTM-K5VMGM8C`, già in `lib/brand.ts`).
+4. Dominio: mappa `www.lascuola360.it` su questo backend.
 
 > ℹ️ **Conseguenza del condividere GTM + lista Brevo:** analytics (GA4/Meta) e lead dei due brand
 > confluiscono negli **stessi** contenitori. In Brevo la lista 41 raccoglie i lead di ENTRAMBI i
-> siti, ma sono **distinguibili** dall'attributo **`BRAND`** (valorizzato lato server con il nome
-> del brand: `Diploma360` / `La Scuola360`). In GA4/Meta la separazione è per dominio/hostname.
-
-> ⚠️ **Prima di mergiare in `main`**: crea il secret `BRAND` (valore `diploma360`) **anche nel
-> progetto Diploma360 esistente**, altrimenti il suo prossimo deploy fallisce per secret mancante
-> (vedi `apphosting.yaml`). `NEXT_PUBLIC_BRAND` richiede `availability: [BUILD, RUNTIME]` perché
-> Next inlinea `NEXT_PUBLIC_*` a build-time.
+> siti, ma sono **distinguibili** dall'attributo **`BRAND`** (valorizzato lato server: `Diploma360`
+> / `La Scuola360`). In GA4/Meta la separazione è per dominio/hostname.
 
 Verifica locale del brand: `NEXT_PUBLIC_BRAND=lascuola360 npm run build`.
 

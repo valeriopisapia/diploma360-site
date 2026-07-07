@@ -105,6 +105,11 @@ replace the design system), Vitest + happy-dom, `sharp` (image optimisation).
 - Colours, prices, copy, pages are **identical** across brands (pure rebrand) — don't diverge them.
   Verbatim-price and honest-claims constraints above apply to BOTH brands.
 - Verify a brand build with `NEXT_PUBLIC_BRAND=lascuola360 npm run build`.
+- **Deploy:** both brands are separate BACKENDS in the SAME Firebase project `schoolrcloud`
+  (`diploma360-site`, `lascuola360-site`), both on `main`. `NEXT_PUBLIC_BRAND` is set **per-backend**
+  (App Hosting console env) — NOT a secret (a secret is per-project, can't differ between backends).
+  `diploma360-site` uses the default; `lascuola360-site` sets `NEXT_PUBLIC_BRAND=lascuola360`.
+  Leads share Brevo list 41 but carry a server-set `BRAND` attribute. See `docs/DEPLOY.md §G`.
 - Decorative platform mock URL bars use `brand.platformHost` (display text only, not a real
   subdomain): `app.diploma360.it` / `app.lascuola360.it`.
 
