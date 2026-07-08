@@ -1,0 +1,10 @@
+/* RipFooter — La Scuola360 footer. Layout/colours reuse the global .site-footer
+   design system (styles/site.css); these rules cover the bits that footer has
+   no existing class for. */
+
+.rip-footer-disclaimer {
+  margin-top: 20px;
+  font-size: 11.5px;
+  color: #6b7280;
+  line-height: 1.5;
+}
