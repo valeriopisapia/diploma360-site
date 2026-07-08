@@ -1,5 +1,5 @@
 import { it, expect } from 'vitest'
-import { headerNav, footerNav, getHeaderNav } from './navigazione'
+import { footerNav, getHeaderNav } from './navigazione'
 
 it('diploma360 nav: Home, Come funziona▾, Diplomi, Prezzi, Chi siamo', () => {
   // resolveBrand default is diploma360 in the test env
@@ -10,10 +10,17 @@ it('diploma360 nav: Home, Come funziona▾, Diplomi, Prezzi, Chi siamo', () => {
 })
 
 it('header is non-empty and all hrefs are clean routes', () => {
-  expect(headerNav.length).toBeGreaterThan(0)
-  for (const g of headerNav) {
-    for (const i of g.items) {
-      expect(i.href.endsWith('.html')).toBe(false)
+  const nav = getHeaderNav()
+  expect(nav.length).toBeGreaterThan(0)
+  for (const item of nav) {
+    if (item.kind === 'link') {
+      expect(item.href.endsWith('.html')).toBe(false)
+    } else {
+      for (const col of item.columns) {
+        for (const link of col.items) {
+          expect(link.href.endsWith('.html')).toBe(false)
+        }
+      }
     }
   }
 })

@@ -1,11 +1,6 @@
 import { brand } from '@/lib/brand'
 
-export type NavGroup = {
-  label: string
-  items: { label: string; href: string }[]
-}
-
-// ── Brand-aware nav data model (consumed by MegaMenu/MobileMenu — Task 2+) ──
+// ── Brand-aware nav data model (consumed by MegaMenu/MobileMenu) ──
 export type NavLink = { label: string; href: string }
 export type NavColumn = { label: string; items: NavLink[] }
 export type NavItem =
@@ -78,47 +73,11 @@ export function getHeaderNav(): NavItem[] {
 }
 
 /**
- * Mega-menu columns. Each NavGroup represents one visual column in a dropdown.
- * MegaMenu.tsx maps these to top-level nav items via its internal MEGA_NAV constant:
- *   "Come funziona" → columns ['Il metodo', 'Diploma ed esami']
- *   "Chi siamo"     → column  [brand.name]
- */
-export const headerNav: NavGroup[] = [
-  // ── Come funziona dropdown ────────────────────────────────────────────────
-  {
-    label: 'Il metodo',
-    items: [
-      { label: `Il metodo ${brand.name}`, href: '/come-funziona' },
-      { label: 'La piattaforma', href: '/piattaforma' },
-    ],
-  },
-  {
-    label: 'Diploma ed esami',
-    items: [
-      { label: 'Il valore del diploma', href: '/esami-diploma' },
-      { label: 'Esami e normativa', href: '/esami-normativa' },
-      { label: 'Iscrizioni', href: '/iscrizioni' },
-      { label: "Sedi d'esame", href: '/sedi-esame' },
-    ],
-  },
-  // ── Chi siamo dropdown ────────────────────────────────────────────────────
-  {
-    label: `${brand.name}`,
-    items: [
-      { label: 'Chi siamo', href: '/chi-siamo' },
-      { label: 'Perché fidarti', href: '/credibilita' },
-      { label: 'Partner', href: '/chi-siamo#partner' },
-      { label: 'Lavora con noi', href: '/contatti' },
-    ],
-  },
-]
-
-/**
  * Footer column groups.
  * 'Percorso', brand.name, 'Contatti' → rendered as footer columns.
  * 'Legale' → rendered in footer-bottom legal row; contains /privacy, /cookie, /termini.
  */
-export const footerNav: NavGroup[] = [
+export const footerNav: NavColumn[] = [
   {
     label: 'Percorso',
     items: [
