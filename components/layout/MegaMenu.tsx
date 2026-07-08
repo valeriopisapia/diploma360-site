@@ -2,21 +2,12 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { headerNav } from '@/data/navigazione'
-import { brand } from '@/lib/brand'
+import { getHeaderNav, type NavItem } from '@/data/navigazione'
 import styles from './MegaMenu.module.css'
-
-/**
- * Maps top-level nav items to their mega-menu column group labels in headerNav.
- * Columns are looked up by label to populate the dropdown panels.
- */
-const MEGA_NAV = [
-  { label: 'Come funziona', groupLabels: ['Il metodo', 'Diploma ed esami'] },
-  { label: 'Chi siamo', groupLabels: [brand.name] },
-] as const
 
 export function MegaMenu() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const nav = getHeaderNav()
 
   // Close all when clicking outside the nav or pressing global Esc
   useEffect(() => {
@@ -36,12 +27,10 @@ export function MegaMenu() {
     }
   }, [])
 
-  function renderDropdown(topItem: (typeof MEGA_NAV)[number], i: number) {
-    const cols = topItem.groupLabels
-      .map(gl => headerNav.find(g => g.label === gl))
-      .filter((g): g is NonNullable<typeof g> => Boolean(g))
+  function renderMega(topItem: Extract<NavItem, { kind: 'mega' }>, i: number) {
+    const cols = topItem.columns
 
-    const panelId = `mega-${i + 1}`
+    const panelId = `mega-${i}`
     const isOpen = openIndex === i
 
     function toggle() {
@@ -119,14 +108,17 @@ export function MegaMenu() {
     )
   }
 
-  // Desktop order matches source and MobileMenu: Home → Come funziona → Diplomi → Prezzi → Chi siamo
   return (
     <nav className="mainnav">
-      <Link className="navlink" href="/">Home</Link>
-      {renderDropdown(MEGA_NAV[0], 0)}
-      <Link className="navlink" href="/diplomi">Diplomi</Link>
-      <Link className="navlink" href="/prezzi">Prezzi</Link>
-      {renderDropdown(MEGA_NAV[1], 1)}
+      {nav.map((item, i) =>
+        item.kind === 'link' ? (
+          <Link key={item.label} className="navlink" href={item.href}>
+            {item.label}
+          </Link>
+        ) : (
+          renderMega(item, i)
+        )
+      )}
     </nav>
   )
 }
