@@ -17,7 +17,7 @@ import { useRouter } from 'next/navigation'
 import { pushLead } from '@/lib/analytics'
 import styles from './LeadForm.module.css'
 
-type Origine = 'vetrina' | 'landing-ads'
+type Origine = 'vetrina' | 'landing-ads' | 'ripetizioni'
 
 interface LeadFormProps {
   origine: Origine
@@ -31,9 +31,11 @@ type UIStatus = 'idle' | 'loading' | 'ok' | 'err'
 
 // Thank-you route per origin: the vetrina forms land on /grazie, the ads
 // landing form on its own /lp-thank-you-page (own chrome, separate conversion URL).
+// Ripetizioni reuses /grazie until a dedicated thank-you page exists.
 const THANK_YOU_ROUTE: Record<Origine, string> = {
   vetrina: '/grazie',
   'landing-ads': '/lp-thank-you-page',
+  ripetizioni: '/grazie',
 }
 
 const MAX_PHONE_DIGITS = 15 // E.164 ceiling
