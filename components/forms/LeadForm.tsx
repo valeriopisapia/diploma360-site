@@ -22,6 +22,9 @@ type Origine = 'vetrina' | 'landing-ads'
 interface LeadFormProps {
   origine: Origine
   showPerChi?: boolean
+  /** Product this lead is for (e.g. "Diploma" / "Ripetizioni"), sent to Brevo
+   *  as PRODOTTO. Defaults to "Diploma" for existing forms. */
+  prodotto?: string
 }
 
 type UIStatus = 'idle' | 'loading' | 'ok' | 'err'
@@ -47,7 +50,7 @@ function sanitizePhone(raw: string): string {
   return (hasPlus ? '+' : '') + digits
 }
 
-export function LeadForm({ origine, showPerChi = false }: LeadFormProps) {
+export function LeadForm({ origine, showPerChi = false, prodotto = 'Diploma' }: LeadFormProps) {
   const router = useRouter()
   const [uiStatus, setUiStatus] = useState<UIStatus>('idle')
 
@@ -117,6 +120,7 @@ export function LeadForm({ origine, showPerChi = false }: LeadFormProps) {
         pagina,
         origine,
         ts: new Date().toISOString(),
+        prodotto,
       }
       if (per_chi) payload.per_chi = per_chi
 
