@@ -6,7 +6,7 @@ import { brand } from '@/lib/brand'
  * RipFooter — La Scuola360 footer, ported from
  * `materiale/consegna-valerio 2/RipFooter.dc.html`. Reuses the same
  * `.site-footer`/`.footer-top`/`.fcol`/`.footer-bottom` classes as the
- * Diploma360 `Footer` (styles/site.css already matches the reference 1:1);
+ * the sibling brand's `Footer` (styles/site.css already matches the reference 1:1);
  * only the footer-exclusive disclaimer paragraph gets its own class
  * (`RipFooter.css`). Rendered on all La Scuola360 pages (Home, Chi siamo,
  * Ripetizioni, and the shared Diploma pages) via `BrandFooter`.
