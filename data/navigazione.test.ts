@@ -1,5 +1,13 @@
 import { it, expect } from 'vitest'
-import { headerNav, footerNav } from './navigazione'
+import { headerNav, footerNav, getHeaderNav } from './navigazione'
+
+it('diploma360 nav: Home, Come funziona▾, Diplomi, Prezzi, Chi siamo', () => {
+  // resolveBrand default is diploma360 in the test env
+  const nav = getHeaderNav()
+  expect(nav.map(i => i.label)).toEqual(['Home', 'Come funziona', 'Diplomi', 'Prezzi', 'Chi siamo'])
+  const mega = nav.filter(i => i.kind === 'mega')
+  expect(mega).toHaveLength(2)
+})
 
 it('header is non-empty and all hrefs are clean routes', () => {
   expect(headerNav.length).toBeGreaterThan(0)
