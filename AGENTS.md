@@ -11,8 +11,11 @@ state-diploma / "recupero anni scolastici" service. Next.js port of the static s
 `materiale/` (READ-ONLY reference — never edit `materiale/`).
 
 ## Commands
-- `npm run dev` — dev server
-- `npm run build` — production build (verify changes with this; page ports have no unit tests)
+- `npm run dev` — dev server (uses `.env.local`'s `NEXT_PUBLIC_BRAND` if set)
+- `npm run dev:diploma360` / `npm run dev:lascuola360` — dev server forced to a brand (inline env
+  wins over `.env.local`). Multi-brand: the active brand is chosen at BUILD by `NEXT_PUBLIC_BRAND`.
+- `npm run build` — production build (verify changes with this; page ports have no unit tests).
+  Verify a specific brand with `NEXT_PUBLIC_BRAND=<brand> npm run build`.
 - `npm test` — Vitest (happy-dom). Output must be pristine (no warnings). Component tests that use
   `next/navigation` (e.g. `LeadForm`'s `useRouter`) must `vi.mock('next/navigation', …)`. The benign
   Google-Fonts `fetch` errors from `layout.test.tsx` are happy-dom noise, not failures.
@@ -31,8 +34,15 @@ replace the design system), Vitest + happy-dom, `sharp` (image optimisation).
 - **Diplomas (20):** `app/diplomi/[slug]/page.tsx` (valid nested dynamic segment) + `app/diplomi/page.tsx` (index).
 - **Landing:** `app/lp/` — `noindex`, excluded from sitemap/menu, its OWN chrome. The site
   header/footer are hidden on `/lp` by `components/layout/ChromeGate.tsx` (client, `usePathname`),
-  which wraps `<SiteHeader/>`/`<Footer/>` in the root layout. GTM/consent/cookie banner still apply.
-  LP chrome is componentised in `app/lp/`: `LpHeader`, `LpFooter`, `LpFloatActions`.
+  which wraps `<SiteHeader/>` and `<BrandFooter/>` in the root layout. GTM/consent/cookie banner
+  still apply. LP chrome is componentised in `app/lp/`: `LpHeader`, `LpFooter`, `LpFloatActions`.
+- **Per-brand pages (multi-brand):** `/` and `/chi-siamo` are thin **selectors** on `brand.id`
+  (`HomeDiploma`/`HomeLaScuola`, `ChiSiamoDiploma`/`ChiSiamoLaScuola`). La-Scuola360-ONLY routes
+  `app/ripetizioni/*` (landing + come-funziona + prezzi + materie) call `assertBrand('lascuola360')`
+  (→ 404 on Diploma360, excluded from its sitemap). Footer is per-brand via `BrandFooter`
+  (`RipFooter` for La Scuola360, `Footer` for Diploma360). Nav is data-driven per brand
+  (`data/navigazione.ts` `getHeaderNav()` → `MegaMenu`/`MobileMenu`). Scroll/counter motion:
+  `components/motion/Reveal.tsx` (honors `prefers-reduced-motion`). See the **Brands** section.
 - **Thank-you pages:** `/grazie` (vetrina) + `/lp-thank-you-page` (ads funnel). On success `LeadForm`
   redirects here by `origine` (client-side `router.push`, AFTER the GTM event). `/lp-thank-you-page`
   is a top-level route (outside `app/lp/`), so it imports `../lp/lp.css` and reuses the LP chrome
@@ -61,7 +71,9 @@ replace the design system), Vitest + happy-dom, `sharp` (image optimisation).
   "MIM"/"MIUR"); "Coordinatrice del percorso". **No AI-capability claims** (the honest
   "study tools / Riepilogo360" framing is fine; the `tutor_ai.png` mock + `--ai-*` css var are
   faithful-to-source and OK).
-- Contacts: `tel:0684280999`, WhatsApp `https://wa.me/393517214644`, `info@diploma360.it`.
+- Contacts: `tel:0684280999`, WhatsApp `https://wa.me/393517214644`. Email is **per-brand**
+  (`brand.contacts.email`): Diploma360 `info@diploma360.it`, La Scuola360 `info@lascuola360.it`
+  (phone/WhatsApp shared). Never hardcode — use `brand.contacts.*`.
 - Partner logos: fake/placeholder stay with disclaimer. **Luxottica was removed on request — do
   not re-add it** even though the asset file exists.
 
@@ -75,9 +87,11 @@ replace the design system), Vitest + happy-dom, `sharp` (image optimisation).
   capped at 15 (live `onInput` filter + submit-time `^\+?\d{6,15}$` guard).
   `ConsentDefault` must render in `<head>` BEFORE `GtmScript` (root layout ordering).
 - **Brevo** (`lib/brevo.ts` + `/api/lead`): list `BREVO_LIST_ID=41`, attributes (text):
-  `NOME, TELEFONO, PER_CHI, MESSAGGIO, PAGINA_ARRIVO, ORIGINE, DATA_RICHIESTA, BRAND`.
-  `BRAND` is set **server-side** from `brand.name` (route.ts) — distinguishes the two brands that
-  share list 41 (Brevo attribute `BRAND` must exist; created 2026-07-06).
+  `NOME, TELEFONO, PER_CHI, MESSAGGIO, PAGINA_ARRIVO, ORIGINE, DATA_RICHIESTA, BRAND, PRODOTTO`.
+  `BRAND` is set **server-side** from `brand.name` (route.ts) — distinguishes the two brands sharing
+  list 41. `PRODOTTO` is **client-supplied** (`LeadForm` prop, default `'Diploma'`; `RipForm` sends
+  `'Ripetizioni'`) — distinguishes the two products. Both Brevo attributes must exist (created
+  2026-07; `BRAND` 2026-07-06, `PRODOTTO` 2026-07-08).
   GOTCHAS learned: use a Brevo **API key** (`xkeysib-`), NOT an SMTP key (`xsmtpsib-`) → else 401;
   disable Brevo **"Authorised IPs"** (serverless egress IPs are dynamic) → else 401. The phone
   ALWAYS goes in **`TELEFONO` (text)** — the raw value, never validated. It is ALSO written to the
@@ -98,13 +112,24 @@ replace the design system), Vitest + happy-dom, `sharp` (image optimisation).
 - The SAME repo/content serves TWO brands. **`lib/brand.ts` is the single source of truth**: it
   exports the active `brand` selected at BUILD time by `NEXT_PUBLIC_BRAND` (default `diploma360`;
   unknown value → throws). Per-brand fields: `name`, `domain`, `logo.{header,lp,alt,ogImage}`,
-  `contacts`, `gtmId`, `legal.{entity,iubendaPolicyId}`. Secrets (`BREVO_*`) stay runtime env.
+  `contacts` (incl. per-brand `email`), `gtmId`, `legal.{entity,iubendaPolicyId}`, `platformHost`.
+  Secrets (`BREVO_*`) stay runtime env. GTM/Iubenda id are SHARED; email/domain/logo differ.
 - **NEVER hardcode the brand name `Diploma360` or the domain `www.diploma360.it`** in
   `app/`,`components/`,`data/` — use `brand.name` / `brand.domain` / `brand.logo.*`. A guard test
-  (`test/no-hardcoded-brand.test.ts`) fails the build if either literal reappears outside `brand.ts`.
-- Colours, prices, copy, pages are **identical** across brands (pure rebrand) — don't diverge them.
-  Verbatim-price and honest-claims constraints above apply to BOTH brands.
-- Verify a brand build with `NEXT_PUBLIC_BRAND=lascuola360 npm run build`.
+  (`test/no-hardcoded-brand.test.ts`) fails the build if either literal reappears outside `brand.ts`
+  (it matches capital `Diploma360` + host `www.diploma360.it`; the contact email is not matched).
+- **La Scuola360 is a SUPERSET, not a pure rebrand.** Colours/prices/design-system are identical, but
+  La Scuola360 diverges: its own restructured **nav** (`getHeaderNav()`), umbrella **Home** and
+  unified **Chi siamo** (`/` and `/chi-siamo` are per-brand selectors → `*Diploma`/`*LaScuola`
+  components; extract-verbatim so Diploma360 stays byte-identical), a **Ripetizioni** section
+  (`app/ripetizioni/*`: landing + come-funziona + prezzi + materie, gated by
+  `assertBrand('lascuola360')` → 404 on Diploma360, absent from its sitemap), and its own footer
+  (`RipFooter` via `BrandFooter`). Ripetizioni leads use `RipForm` (→ `PRODOTTO='Ripetizioni'`).
+  Motion via `components/motion/Reveal.tsx`. La Scuola360 page assets live under `public/lascuola360/`
+  (**Luxottica excluded** from the partner carousel). **Verbatim-price + honest-claims constraints
+  apply to BOTH brands.** When editing shared components, keep Diploma360's output UNCHANGED.
+- Verify each brand: `NEXT_PUBLIC_BRAND=lascuola360 npm run build` (and `=diploma360`); Diploma360's
+  `/`,`/chi-siamo`, nav, footer, sitemap must remain unchanged.
 - **Deploy:** both brands are separate BACKENDS in the SAME Firebase project `schoolrcloud`
   (`diploma360-site`, `lascuola360-site`), both on `main`. `NEXT_PUBLIC_BRAND` is set **per-backend**
   (App Hosting console env) — NOT a secret (a secret is per-project, can't differ between backends).
