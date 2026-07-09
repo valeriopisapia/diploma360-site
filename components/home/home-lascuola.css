@@ -1,0 +1,56 @@
+/* === Home — La Scuola360 umbrella variant ===
+   Ported from `materiale/consegna-valerio 2/Home Scuola360.dc.html` (fully
+   inline-styled reference, header/footer excluded — those come from the root
+   layout). Reuses global design-system classes wherever the reference's
+   visual matches one 1:1: .hero/.hero-copy/.hero-eyebrow/.hero-chip-row,
+   .hero-visual/.hv-photo/.hv-live/.hv-stat/.hv-card, .av-cluster, .trustbar,
+   .section/.sec-head/.eyebrow/.sec-h2/.grad-text, .support/.srow,
+   .browser-frame, .r360-bro/.r360-head/.r360-grid/.r360-card, .tutors/.tutorc,
+   .numbers/.stat, .testi.v6-photo, .trust-eco/.eco-band/.eco-lead/.eco-facts,
+   .partner-mq/.marquee, .cta-band, .btn* — all already in styles/site.css.
+   Only the genuinely new shapes below (the "scegli da dove iniziare" 2-card
+   service picker and the "il metodo" 3-col bordered flow) get their own rules. */
+
+/* .av-cluster is defined in site.css but its rating line has no .stars color
+   rule yet (same gap app/ripetizioni/ripetizioni.css already patches) */
+.av-cluster .stars{color:var(--amber);letter-spacing:1px}
+
+/* Scegli da dove iniziare — asymmetric 2-card service picker */
+.lsh-picks{display:grid;grid-template-columns:1.4fr 1fr;gap:22px}
+.lsh-pick{text-decoration:none;position:relative;overflow:hidden;border-radius:var(--radius-xl);min-height:340px;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
+.lsh-pick:hover{transform:translateY(-3px)}
+.lsh-pick-a{color:#fff;padding:44px;background:linear-gradient(150deg,#E3815A 0%,#E0709A 62%,#EC89C0 120%);box-shadow:0 12px 40px rgba(228,130,103,.28)}
+.lsh-pick-a:hover{box-shadow:0 22px 55px rgba(228,130,103,.42)}
+.lsh-pick-b{color:var(--text);padding:40px;background:#fff;border:1px solid var(--border);box-shadow:var(--shadow)}
+.lsh-pick-b:hover{box-shadow:0 20px 46px rgba(91,55,40,.14)}
+.lsh-pick-tag{display:inline-flex;align-self:flex-start;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:6px 13px;border-radius:999px}
+.lsh-pick-a .lsh-pick-tag{background:rgba(255,255,255,.2)}
+.lsh-pick-b .lsh-pick-tag{color:var(--rosa-dk);background:var(--rosa-lt)}
+.lsh-pick h3{font-family:'Poppins',sans-serif;font-weight:800;letter-spacing:-.02em;margin:22px 0 12px}
+.lsh-pick-a h3{font-size:38px}
+.lsh-pick-b h3{font-size:31px}
+.lsh-pick p{font-size:17px;line-height:1.55;margin:0 0 auto;max-width:46ch}
+.lsh-pick-b p{font-size:16px;color:var(--soft);max-width:38ch}
+.lsh-pick-cta{display:inline-flex;align-items:center;gap:10px;font-family:'Poppins',sans-serif;font-weight:600;font-size:16px;margin-top:30px}
+.lsh-pick-cta .arr{width:32px;height:32px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.lsh-pick-a .lsh-pick-cta .arr{background:rgba(255,255,255,.22)}
+.lsh-pick-b .lsh-pick-cta{color:var(--rosa-dk)}
+.lsh-pick-b .lsh-pick-cta .arr{background:var(--rosa-lt)}
+.lsh-pick-foot{display:flex;align-items:center;gap:22px;margin-top:30px;flex-wrap:wrap}
+.lsh-pick-foot span{font-size:14px;opacity:.88}
+@media (max-width:900px){.lsh-picks{grid-template-columns:1fr}}
+
+/* Il metodo — 3-col bordered flow (icon + eyebrow-label + h3 + p) */
+.lsh-flow-box{border:1px solid var(--border);border-radius:var(--radius-xl);background:linear-gradient(180deg,#FFFFFF,#FDF3EE);box-shadow:var(--shadow-sm),0 12px 34px rgba(91,55,40,.06);overflow:hidden}
+.lsh-flow{display:grid;grid-template-columns:repeat(3,1fr)}
+.lsh-flow-item{padding:34px 32px;border-left:1px solid var(--border)}
+.lsh-flow-item:first-child{border-left:none}
+.lsh-flow-item .top{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.lsh-flow-item .ic{width:46px;height:46px;border-radius:14px;background:var(--coral-lt);color:var(--coral-dk);display:grid;place-items:center;flex-shrink:0}
+.lsh-flow-item .ic svg{width:22px;height:22px}
+.lsh-flow-item.alt .ic{background:var(--rosa-lt);color:var(--rosa-dk)}
+.lsh-flow-item .step{font-family:'Poppins',sans-serif;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--coral-dk)}
+.lsh-flow-item.alt .step{color:var(--rosa-dk)}
+.lsh-flow-item h3{font-size:18px;font-weight:700;margin:0 0 8px;color:var(--text);line-height:1.25}
+.lsh-flow-item p{font-size:14.5px;color:var(--soft);line-height:1.58;margin:0}
+@media (max-width:900px){.lsh-flow{grid-template-columns:1fr}.lsh-flow-item{border-left:none;border-top:1px solid var(--border)}.lsh-flow-item:first-child{border-top:none}}
