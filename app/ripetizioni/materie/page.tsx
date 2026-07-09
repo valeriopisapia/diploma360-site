@@ -9,7 +9,7 @@ import { brand } from '@/lib/brand'
 import './materie.css'
 
 /**
- * /ripetizioni/materie — La Scuola360 only (brand-exclusive; 404s on Diploma360).
+ * /ripetizioni/materie — La Scuola360 only (brand-exclusive; 404s on the other brand).
  * Ported 1:1 from `materiale/consegna-valerio 2/Ripetizioni-Materie.dc.html`.
  * Anchors `#livello` and `#esigenza` are targeted by the header nav
  * (`data/navigazione.ts` → LASCUOLA_NAV "Per livello" / "Recupero debiti · aiuto compiti").
