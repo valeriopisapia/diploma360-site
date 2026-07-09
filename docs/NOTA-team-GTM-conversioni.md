@@ -1,51 +1,66 @@
-# Nota per il team GTM — conversioni Google Ads a zero
+# Nota per il team GTM — perché "non scatena nulla" (root cause definitiva)
 
-**Data:** 2026-07-09 · **Container:** `GTM-K5VMGM8C` · **Dominio:** `www.diploma360.it` (ora è il sito Next.js)
+**Data:** 2026-07-09 · **Container:** `GTM-K5VMGM8C` · **Dominio:** `www.diploma360.it` (ora è il sito Next.js SPA)
 
-## Diagnosi (verificata in browser sul sito live)
+## Cosa ho verificato (browser + analisi del `gtm.js` pubblicato)
 
-Il tracciamento è stato testato end-to-end. **Funziona tutto tranne una cosa:**
+Sulla thank-you page, dopo un submit reale, scattano SOLO i tag "All Pages":
+**GA4 Pageview ✅, Linker ✅, Meta Pixel base ✅**. NON scattano:
+`GA4 Lead Tutti I Moduli`, `GA4 Lead Landing Page`, `Conversioni` (Meta). *(`GA4 Chiama ora` e
+`Whatsapp` non scattano perché non c'è stato un click a telefono/WhatsApp — è normale.)*
 
-| Componente | Stato |
-|---|---|
-| gclid/utm catturati sul sito (cookie `mkt_attr`) | ✅ OK |
-| Consent Mode v2 (default denied → granted) | ✅ OK |
-| GA4 (`G-3QLZTYR5WK`) invia `/g/collect` | ✅ OK |
-| Google Ads **Conversion Linker + remarketing** (`ga-audiences`, `set_partitioned_cookie`) | ✅ OK |
-| Auto-tagging Ads + property GA4 | ✅ confermati dal team |
-| **Google Ads — tag di CONVERSIONE** (`googleadservices.com/pagead/conversion/…`) | ❌ **NON scatta MAI** |
-| Meta — evento lead sul thank-you | ❌ non scatta |
+Analizzando il container pubblicato (`gtm.js`):
 
-**Prova:** né simulando l'evento `lead_submit` (e `generate_lead`/`form_submit`/`conversion`), né
-caricando la thank-you page `/lp-thank-you-page` con consenso concesso e `gclid` nell'URL, parte
-alcuna richiesta di conversione Google Ads. Partono solo Linker e remarketing (page-load).
+- ❌ **Nessun tag di conversione Google Ads**: non esiste alcun `AW-…` nel container. Solo il *Linker*.
+  → Le conversioni Google Ads NON hanno un tag proprio: arrivavano (o dovrebbero arrivare) via
+  **import degli eventi chiave GA4** in Google Ads.
+- ❌ **`lead_submit` non è presente da nessuna parte** nel container → nessun trigger ascolta
+  l'evento che il sito emette a ogni lead.
+- ✅ Trigger presenti: **Form Submit** (`gtm.formSubmit`), **Page View** (`gtm.js`/`gtm.dom`/`gtm.load`), Click.
+- ❌ **Nessun trigger History Change** (`gtm.historyChange`).
 
-**Perché spiega tutto:** il traffico/remarketing gira → click coerenti e audience popolate; ma senza
-tag di conversione che scatta, **Google Ads non registra conversioni**. GA4 continua a contare perché
-spara comunque.
+## Perché non scatta nulla (la causa)
 
-## Cosa fare (in ordine)
+I tag lead/conversione sono agganciati a trigger **Form Submit** e/o **Page View**, pensati per il
+**vecchio sito WordPress** (form con POST + navigazione a una pagina reale). Il **nuovo sito è una
+SPA (Next.js)**:
 
-1. **Verificare che esista un tag "Google Ads Conversion Tracking"** nel container e che sia
-   **abilitato** (non in pausa).
-2. **Controllare il trigger del tag conversione**: deve scattare o sull'evento custom **`lead_submit`**
-   (nome ESATTO — è quello che il sito pusha nel dataLayer, con dentro `gclid` e `user_data`) **oppure**
-   sul **page-view della thank-you** (`/lp-thank-you-page` per gli ads, `/grazie` per la vetrina).
-   → Oggi non è agganciato a nessuno dei due, o il tag manca.
-3. **Enhanced Conversions for Leads**: sul tag conversione, mappare i dati utente dal dataLayer
-   `lead_submit` → variabili `user_data.email` e `user_data.phone_number` (GTM li hasha da sé).
-4. **PUBBLICARE il container** (non basta salvare il workspace). Verificare data/versione pubblicata.
-5. Ripetere per il tag **Meta lead** (stesso trigger).
+1. il form invia in **AJAX con `preventDefault()`** → il **Form Submit nativo di GTM non scatta**;
+2. la thank-you si raggiunge con **`router.push` = History Change** (nessun caricamento pagina reale)
+   → i tag su **Page View non scattano**, e nel container **non c'è un trigger History Change**.
+
+Il sito Next.js emette apposta un evento dataLayer **`lead_submit`** — affidabile e SPA-safe — a ogni
+lead andato a buon fine, con dentro `gclid`, gli `utm_*` e `user_data:{email, phone_number, name}`.
+**Ma nessun tag del container è agganciato a `lead_submit`.** Ecco perché "non scatena nulla".
+
+## Il fix (tutto lato container GTM — il sito è già a posto)
+
+1. **Creare un trigger "Evento personalizzato"** con Nome evento **esattamente** `lead_submit`.
+2. **Riagganciare a questo trigger** i tag che oggi non scattano (togliendo i vecchi trigger Form
+   Submit / Page View che non funzionano sulla SPA):
+   - `GA4 Lead Tutti I Moduli`
+   - `GA4 Lead Landing Page`
+   - `Conversioni` (Meta Pixel — evento Lead)
+3. **Conversioni Google Ads** (oggi NON esiste un tag Ads di conversione):
+   - se le conversioni Ads sono **importate dagli eventi chiave GA4** → sistemando i tag GA4 Lead
+     (punto 2) tornano automaticamente; **oppure**
+   - creare un vero **tag "Conversione di Google Ads"** (`AW-xxxx/label`) sul trigger `lead_submit`,
+     con **Conversioni ottimizzate (Enhanced Conversions)** che leggono `user_data.email` e
+     `user_data.phone_number` dall'evento `lead_submit` (GTM li hasha da sé).
+   → confermare quale dei due modelli è in uso e completarlo.
+4. Variabili dataLayer da creare (se non esistono): `user_data.email`, `user_data.phone_number`
+   (dot notation), più `gclid` se serve al tag.
+5. Lasciare `GA4 Chiama ora` e `Whatsapp` come sono (scattano sui click a telefono/WhatsApp).
+6. **PUBBLICARE** il container (non basta salvare il workspace).
 
 ## Verifica finale (GTM Preview)
+Inviare un lead di test → nell'evento **`lead_submit`** i tag `GA4 Lead…`, `Conversioni` (e il tag
+Ads) devono risultare **Fired**, con `gclid` e `user_data` valorizzati. Controprova in
+**Google Ads → azione di conversione → Diagnostica** e in **GA4 → DebugView**.
 
-Aprire GTM Preview su `www.diploma360.it`, inviare un lead di test, e confermare che sul thank-you il
-tag **Google Ads Conversion** risulti **Fired** con `gclid` e `user_data` valorizzati. Controprova in
-**Google Ads → azione di conversione → Diagnostica**.
-
-## Nota su GA4 (visite paid)
+## Nota GA4 visite paid
 GA4 ora riceve il `gclid` dall'URL: l'attribuzione paid riparte da adesso; il crollo storico è la
-finestra rotta precedente e rientra col ricircolo dati (24–72h). Property confermata dal team.
+finestra rotta precedente e rientra col ricircolo dati (24–72h). Property `G-3QLZTYR5WK` confermata dal team.
 
 ---
-*Dettaglio tecnico completo del setup: `docs/GTM-tracking-runbook.md` (Step 3).*
+*Riferimento tecnico completo: `docs/GTM-tracking-runbook.md`. Meta Pixel live: `1020929560296043`.*
