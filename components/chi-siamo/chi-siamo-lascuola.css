@@ -1,0 +1,84 @@
+/* === Chi siamo — La Scuola360 unified variant ===
+   Ported from `materiale/consegna-valerio 2/Chi-Siamo.dc.html` (fully inline-styled
+   reference). Reuses global design-system classes wherever the reference's visual
+   matches one 1:1 (.chero, .csec/.chd, .cstats, .values, .cta-band, .partner-mq,
+   .btn*, .wrap/.section — all already in styles/site.css or chi-siamo.css). Only
+   the genuinely new shapes below (10-motivi numbered cards, gradient trust
+   banner, comparison lists, sede/gallery/contatti layout) get their own rules. */
+
+/* 10 motivi — 4-col numbered cards (gradient badge, unlike .cvant's flat pastel one) */
+.ls-reasons{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px}
+.ls-reasons .r{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:22px;display:flex;flex-direction:column;gap:12px;box-shadow:var(--shadow-sm)}
+.ls-reasons .r .n{width:42px;height:42px;border-radius:12px;background:var(--grad);color:#fff;font-family:'Poppins',sans-serif;font-weight:800;font-size:16px;display:grid;place-items:center;box-shadow:0 4px 12px rgba(228,130,103,.3)}
+.ls-reasons .r p{margin:0;font-size:14px;color:#3F4754;line-height:1.5}
+@media (max-width:900px){.ls-reasons{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.ls-reasons{grid-template-columns:1fr}}
+
+/* Perché fidarti — gradient trust banner with frosted icon cards */
+.ls-trust{border-radius:var(--radius-xl);background:linear-gradient(150deg,#E3815A 0%,#E0709A 60%,#EC89C0 120%);box-shadow:0 12px 40px rgba(228,130,103,.3);padding:clamp(30px,4vw,52px);color:#fff}
+.ls-trust .chd .eb,.ls-trust .chd h2,.ls-trust .chd p{color:#fff}
+.ls-trust .chd .eb{opacity:.9}
+.ls-trust .chd .eb::before{background:#fff}
+.ls-trust .chd p{opacity:.95}
+.ls-trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.ls-trust-grid .c{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:var(--radius-lg);padding:26px}
+.ls-trust-grid .ic{width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.2);display:grid;place-items:center;margin-bottom:14px}
+.ls-trust-grid .ic svg{width:23px;height:23px;stroke:#fff;fill:none;stroke-width:2}
+.ls-trust-grid h3{font-size:16px;font-weight:700;margin:0 0 6px;color:#fff}
+.ls-trust-grid p{font-size:14px;line-height:1.55;margin:0;opacity:.94}
+@media (max-width:900px){.ls-trust-grid{grid-template-columns:1fr}}
+
+/* Garanzie — plain white cards, left-aligned (no icon, no alternating pastel) */
+.ls-guarantees{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+.ls-guarantees .g{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow-sm)}
+.ls-guarantees .g h3{font-size:16px;font-weight:700;margin:0 0 6px;color:#1F1F1F}
+.ls-guarantees .g p{font-size:14px;color:#5A626D;line-height:1.55;margin:0}
+@media (max-width:900px){.ls-guarantees{grid-template-columns:1fr}}
+
+/* Comparison lists — "come riconoscere" (seria/diffida) + "promesse" (sì/no) */
+.ls-compare{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:26px}
+.ls-compare .p{background:#fff;border-radius:var(--radius-lg);padding:30px}
+.ls-compare .p.ok{border:1px solid var(--green-lt)}
+.ls-compare .p.warn{border:1px solid #F0D2C6}
+.ls-compare .p-head{font-family:'Poppins',sans-serif;font-size:16px;font-weight:800;margin-bottom:16px}
+.ls-compare .p.ok .p-head{color:var(--green-dk)}
+.ls-compare .p.warn .p-head{color:var(--coral-dk)}
+.ls-compare ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px}
+.ls-compare li{display:flex;align-items:flex-start;gap:10px;font-size:14.5px;color:#374151}
+.ls-compare li svg{width:18px;height:18px;flex-shrink:0;margin-top:2px}
+.ls-compare .p.ok li svg{stroke:#16a34a}
+.ls-compare .p.warn li svg{stroke:var(--coral-dk)}
+@media (max-width:800px){.ls-compare{grid-template-columns:1fr}}
+
+/* Sede — text + photo, equal columns (reference uses 1fr 1fr, not .lasc's 1.05/.95) */
+.ls-sede{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.ls-sede .addr{font-size:14.5px;color:#3F4754;line-height:1.7;margin-top:18px}
+.ls-sede .addr strong{color:#1F1F1F}
+@media (max-width:900px){.ls-sede{grid-template-columns:1fr;gap:24px}}
+
+.ls-photoframe{position:relative;border-radius:var(--radius-xl);overflow:hidden;box-shadow:0 16px 44px rgba(91,55,40,.16);border:1px solid var(--border);aspect-ratio:4/3}
+
+.ls-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.ls-gallery .ph{position:relative;border-radius:var(--radius-lg);overflow:hidden;height:220px;box-shadow:0 8px 24px rgba(91,55,40,.1);border:1px solid var(--border)}
+@media (max-width:900px){.ls-gallery{grid-template-columns:1fr}}
+
+/* Contatti — testimonial quote bar + 3 channel cards + "lavora con noi" banner */
+.ls-quotebar{background:linear-gradient(180deg,#FFFFFF,#FDF3EE);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 30px;margin-bottom:20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.ls-quotebar img{width:66px;height:66px;border-radius:50%;object-fit:cover;flex-shrink:0}
+.ls-quotebar blockquote{flex:1;min-width:260px;margin:0;font-size:16px;color:#3F4754;line-height:1.6;font-style:italic}
+.ls-quotebar cite{display:block;margin-top:8px;font-family:'Poppins',sans-serif;font-weight:700;font-size:14px;color:#1F1F1F;font-style:normal}
+.ls-quotebar cite span{font-weight:500;color:var(--muted)}
+
+.ls-contact-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.ls-contact-cards a{text-decoration:none;color:#1F1F1F;background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:30px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:8px}
+.ls-contact-cards a:hover{box-shadow:var(--shadow-lg)}
+.ls-contact-cards .ic{width:46px;height:46px;border-radius:13px;background:var(--coral-lt);color:var(--coral-dk);display:grid;place-items:center;margin-bottom:6px}
+.ls-contact-cards .ic svg{width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:2}
+.ls-contact-cards h3{font-family:'Poppins',sans-serif;font-weight:700;font-size:17px;margin:0}
+.ls-contact-cards .detail{font-size:14px;color:#5A626D}
+.ls-contact-cards .hours{font-size:13px;color:var(--muted)}
+@media (max-width:900px){.ls-contact-cards{grid-template-columns:1fr}}
+
+.ls-workbanner{margin-top:20px;background:var(--rosa-lt);border:1px solid #F3CFE1;border-radius:var(--radius);padding:22px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.ls-workbanner h3{font-family:'Poppins',sans-serif;font-weight:700;font-size:16px;color:var(--rosa-dk);margin:0}
+.ls-workbanner p{font-size:14px;color:#5A3448;margin:4px 0 0}
