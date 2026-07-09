@@ -1,0 +1,95 @@
+/* === Ripetizioni landing (La Scuola360) ===
+   Ported from `materiale/consegna-valerio 2/Ripetizioni.dc.html` (fully
+   inline-styled reference). Reuses global design-system classes wherever the
+   reference's visual matches one 1:1: .hero/.hero-copy/.hero-eyebrow/.pill/
+   .grad-text/.hero-lead/.av-cluster (hero + split lead form — same shape as
+   the vetrina home/[slug]/lp heroes), .form-card/.form-flag/.dotpulse/
+   .form-sub/.field (lead form card), .trustbar/.tb-item, .section/.wrap/
+   .eyebrow/.sec-h2/.sec-lead/.sec-head, .browser-frame/.bf-bar (piattaforma
+   mockup), .feat-grid/.fc (supporto cards), .faq (FAQ accordion), .cta-band
+   (closing CTA) — all already in styles/site.css. Only the genuinely new
+   shapes below (subject chip row + floating stat badge, emotional banner,
+   numbered step cards, per-livello/per-esigenza tinted cards, hourly pricing
+   cards, standalone stat cards) get their own rules here (prefixed `.rl-`). */
+
+/* Hero — checklist bullets (reference: 3 rows, check icon + text) */
+.rl-checks{display:flex;flex-direction:column;gap:10px;margin:0 0 6px}
+.rl-checks li{display:inline-flex;align-items:center;gap:9px;font-size:15px;color:#374151;font-weight:500;list-style:none}
+.rl-checks li svg{width:18px;height:18px;flex-shrink:0;stroke:#16a34a}
+
+/* .av-cluster is defined in site.css but never yet paired with a rating line
+   that needs `.stars` coloring — fill that gap here rather than in site.css. */
+.av-cluster .stars{color:var(--amber);letter-spacing:1px}
+
+/* Materie — 2-col: copy + chips | photo with floating stat badge */
+.rl-materie-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}
+.rl-chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 26px}
+.rl-chip{font-size:13.5px;font-weight:600;color:#374151;background:#fff;border:1px solid #E7DCD4;padding:8px 14px;border-radius:99px}
+.rl-chip.hl{color:var(--rosa-dk);background:var(--rosa-lt);border-color:#F3CFE1}
+.rl-arrow{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.22);display:inline-flex;align-items:center;justify-content:center;margin-left:4px}
+.rl-materie-photo{position:relative;border-radius:24px;overflow:hidden;box-shadow:0 16px 44px rgba(91,55,40,.16);border:1px solid var(--border);aspect-ratio:4/3.6}
+.rl-materie-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.rl-stat-badge{position:absolute;left:18px;bottom:18px;background:rgba(255,255,255,.94);backdrop-filter:blur(6px);border-radius:16px;padding:14px 18px;box-shadow:0 8px 24px rgba(0,0,0,.14);display:flex;align-items:center;gap:12px}
+.rl-stat-badge .n{font-family:'Poppins',sans-serif;font-weight:800;font-size:26px}
+.rl-stat-badge .l{font-size:12.5px;color:var(--soft);font-weight:500;line-height:1.35}
+@media (max-width:920px){.rl-materie-grid{grid-template-columns:1fr;gap:30px}}
+
+/* Emotional banner ("lezioni pensate per farti sentire...") */
+.rl-emo{border-radius:28px;background:linear-gradient(180deg,#FFFFFF,#FDF3EE);border:1px solid #F0E4DC;box-shadow:0 1px 2px rgba(91,55,40,.04),0 12px 34px rgba(91,55,40,.06);padding:clamp(30px,4vw,56px);text-align:center}
+.rl-emo h2{font-size:clamp(26px,3.6vw,38px);line-height:1.16;letter-spacing:-.025em;margin:0 auto 16px;max-width:22ch}
+.rl-emo p{font-size:17px;color:var(--soft);line-height:1.65;margin:0 auto;max-width:64ch}
+
+/* Come funziona — numbered step cards (inside the generic .steps grid) */
+.rl-step{background:#fff;border:1px solid var(--border);border-radius:22px;padding:30px;box-shadow:var(--shadow-sm)}
+.rl-step .n{width:40px;height:40px;border-radius:50%;background:var(--grad);color:#fff;font-family:'Poppins',sans-serif;font-weight:700;font-size:17px;display:grid;place-items:center;margin-bottom:16px;box-shadow:0 4px 12px rgba(228,130,103,.32)}
+.rl-step h3{font-size:18px;margin:0 0 8px}
+.rl-step p{font-size:14.5px;color:var(--soft);line-height:1.6;margin:0}
+
+/* Piattaforma — asymmetric grid (matches reference's .92fr/1.08fr) */
+.rl-piattaforma-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:48px;align-items:center}
+@media (max-width:920px){.rl-piattaforma-grid{grid-template-columns:1fr;gap:30px}}
+
+/* Per livello / Per esigenza — 2 tinted cards */
+.rl-esigenza-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.rl-esigenza-card{border-radius:20px;padding:32px}
+.rl-esigenza-card.c1{background:#FBD9C2}
+.rl-esigenza-card.c2{background:#F8DDE7}
+.rl-esigenza-lbl{font-family:'Poppins',sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px}
+.rl-esigenza-card.c1 .rl-esigenza-lbl{color:#993C1D}
+.rl-esigenza-card.c2 .rl-esigenza-lbl{color:#A8366D}
+.rl-esigenza-list{display:flex;flex-direction:column;gap:12px}
+.rl-esigenza-list .item{background:rgba(255,255,255,.7);border-radius:12px;padding:14px 16px}
+.rl-esigenza-list .item b{display:block;font-family:'Poppins',sans-serif;font-size:15px}
+.rl-esigenza-list .item span{display:block;font-size:13px;margin-top:2px}
+.rl-esigenza-card.c1 .item span{color:#5A4030}
+.rl-esigenza-card.c2 .item span{color:#5A3448}
+@media (max-width:920px){.rl-esigenza-grid{grid-template-columns:1fr}}
+
+/* Prezzi — 4 hourly-rate cards, one highlighted */
+.rl-pricing{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.rl-price-card{background:#fff;border:1px solid var(--border);border-radius:20px;padding:26px 24px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column}
+.rl-price-card .hrs{font-family:'Poppins',sans-serif;font-weight:700;font-size:15px;color:#1F1F1F}
+.rl-price-card .amt{font-family:'Poppins',sans-serif;font-weight:800;font-size:34px;line-height:1;margin:12px 0 2px}
+.rl-price-card .amt span{font-size:14px;color:var(--muted);font-weight:600}
+.rl-price-card .tot{font-size:13px;color:var(--soft);margin-bottom:18px}
+.rl-price-card .tot.save{color:var(--green-dk);font-weight:600}
+.rl-price-card .cta{margin-top:auto;text-align:center;font-family:'Poppins',sans-serif;font-weight:600;font-size:14px;color:var(--coral-dk);background:var(--coral-lt);text-decoration:none;padding:11px;border-radius:999px}
+.rl-price-card.featured{background:var(--grad);border-color:transparent;box-shadow:0 12px 32px rgba(228,130,103,.3);color:#fff;position:relative}
+.rl-price-card.featured .hrs{color:#fff}
+.rl-price-card.featured .amt span{color:rgba(255,255,255,.85)}
+.rl-price-card.featured .tot{color:rgba(255,255,255,.95);font-weight:600}
+.rl-price-card.featured .cta{color:var(--coral-dk);background:#fff}
+.rl-price-badge{position:absolute;top:14px;right:14px;background:rgba(255,255,255,.22);font-family:'Poppins',sans-serif;font-weight:700;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+.rl-pricing-notes{display:flex;flex-wrap:wrap;gap:10px 26px;justify-content:center;margin-top:24px;font-size:13.5px;color:var(--soft)}
+.rl-pricing-notes span{display:inline-flex;align-items:center;gap:7px}
+.rl-pricing-notes svg{width:15px;height:15px;stroke:#16a34a}
+@media (max-width:900px){.rl-pricing{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.rl-pricing{grid-template-columns:1fr}}
+
+/* Numeri — 4 standalone stat cards (unlike the bordered/divided .numbers container) */
+.rl-numbers{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.rl-stat{background:#fff;border:1px solid var(--border);border-radius:18px;padding:28px 22px;text-align:center;box-shadow:var(--shadow-sm)}
+.rl-stat .v{font-family:'Poppins',sans-serif;font-weight:800;font-size:34px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
+.rl-stat .l{font-size:14px;color:var(--soft);margin-top:8px}
+@media (max-width:900px){.rl-numbers{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.rl-numbers{grid-template-columns:1fr}}
