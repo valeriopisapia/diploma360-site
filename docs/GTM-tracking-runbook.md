@@ -4,7 +4,12 @@
 and `www.lascuola360.it`).
 **Date:** 2026-07-09
 **Goal:** Restore GA4 paid-channel attribution and Google Ads conversion tracking after the new
-Next.js landing went live, and make the shared container route cleanly per brand.
+Next.js landing went live.
+
+**Setup (confirmed 2026-07-09):** Google Ads and GA4 are **shared** (single account / single
+property for both brands); the **Meta Pixel is configured inside GTM**; **cookie disclosure is handled
+by Iubenda**. So there is **no per-brand tag splitting** — all tags are single and shared. The `brand`
+field is used only to **segment reporting** (a GA4 custom dimension), not to route tags.
 
 This runbook is the **non-code half** of the fix. The code half (branch `fix/tracking-attribution`)
 now pushes, on `lead_submit`:
@@ -12,7 +17,7 @@ now pushes, on `lead_submit`:
 ```
 event: 'lead_submit'
 origine, pagina
-brand:      'diploma360' | 'lascuola360'      ← routing key
+brand:      'diploma360' | 'lascuola360'      ← reporting segmentation key (not routing)
 gclid / gbraid / wbraid / msclkid / fbclid    ← whichever were on the landing URL
 utm_source / utm_medium / utm_campaign / utm_term / utm_content
 user_data: { email, phone_number, name }      ← for Enhanced Conversions (raw; GTM hashes)
@@ -36,15 +41,16 @@ attributed, consented hit.
 
 ---
 
-## Step 0 — Create the `brand` routing variable
+## Step 0 — Create the `brand` segmentation variable
 
-This is the key that lets ONE container serve TWO brands cleanly.
+Since Ads/GA4/Meta are all shared, `brand` is **not** used to route tags — it's used to keep the two
+brands' data distinguishable inside the single property (a GA4 custom dimension) and for validation.
 
 1. **Variables → New → Data Layer Variable**
    - Name: `DLV - brand`
    - Data Layer Variable Name: `brand`
    - Default Value: *(leave empty)*
-2. Add a **hostname fallback** for tags that fire on page views (before any `lead_submit`):
+2. Add a **hostname fallback** for page-view-scoped use (before any `lead_submit` fires):
    - **Variables → New → Custom JavaScript**, name `JS - brand (hostname fallback)`:
      ```js
      function () {
@@ -55,10 +61,8 @@ This is the key that lets ONE container serve TWO brands cleanly.
      }
      ```
    - (Enable the built-in **Page Hostname** variable if not already: Variables → Configure → Page Hostname.)
-3. Create trigger-side helpers you'll reuse below:
-   - **Trigger → Custom Event**, event name `lead_submit`, name `CE - lead_submit`.
-   - Two brand filters you'll apply per tag: `{{DLV - brand}} equals diploma360` /
-     `... equals lascuola360` for `lead_submit` tags, and the JS fallback equivalent for page-view tags.
+3. **Trigger → Custom Event**, event name `lead_submit`, name `CE - lead_submit` (used by all the
+   conversion tags below — no brand filter needed, since accounts are shared).
 
 ---
 
@@ -94,32 +98,26 @@ cookie.
 
 ---
 
-## Step 3 — Google Ads conversion + Enhanced Conversions for Leads (PER BRAND)
+## Step 3 — Google Ads conversion + Enhanced Conversions for Leads (shared account)
 
-This is the decisive step for recovering Ads conversions under consent-denied.
-
-For **each brand's Google Ads account** (Diploma360 and La Scuola360 are almost certainly separate
-accounts — confirm):
+This is the decisive step for recovering Ads conversions under consent-denied. Google Ads is a
+**single shared account**, so this is **one tag** — no per-brand split.
 
 1. In **Google Ads → Goals → Conversions**, open the lead conversion action → turn ON
    **Enhanced conversions for leads**, method **Google Tag Manager**. Accept the customer-data terms.
 2. In GTM, **Tags → New → Google Ads Conversion Tracking**:
-   - Conversion ID / Label: the brand's values.
+   - Conversion ID / Label: the account's values.
    - **Include user-provided data** → **New Variable → User-Provided Data → Manual configuration**:
      - Email: `{{DLV - user_data.email}}`
      - Phone: `{{DLV - user_data.phone_number}}`
      - (create these Data Layer Variables: `user_data.email`, `user_data.phone_number` — DLV supports
        dot notation)
    - GTM hashes automatically; do **not** pre-hash.
-3. **Trigger:** `CE - lead_submit` **+ this brand's filter** (`{{DLV - brand}} equals diploma360` or
-   `... equals lascuola360`). This ensures the diploma lead never fires into the scuola account and
-   vice-versa.
-4. Duplicate the tag for the second brand with the other account's ID/label and the other brand filter.
-5. Consent: gate on `ad_storage` + `ad_user_data` (default Google Ads consent behavior).
+3. **Trigger:** `CE - lead_submit` (no brand filter — single account handles both brands).
+4. Consent: gate on `ad_storage` + `ad_user_data` (default Google Ads consent behavior).
 
-> If the two brands share ONE Ads account, you still split by `brand` only if you want separate
-> conversion actions; otherwise one tag on `CE - lead_submit` is enough. Confirm the account setup
-> before deciding.
+> Optional: if you later want to tell diploma vs scuola leads apart *inside* the shared Ads account,
+> pass `{{DLV - brand}}` as a custom parameter on the conversion — reporting only, still one tag.
 
 ---
 
@@ -133,14 +131,10 @@ Symptom to fix: GA4 paid channel collapse + possible under-measurement.
    Data Streams, cross-check the stream's measurement ID against what the tag sends.
 2. **Fires on All Pages**, not consent-blocked incorrectly: with Consent Mode, GA4 should still send
    **cookieless pings** when `analytics_storage=denied` (do NOT add a blocking trigger exception).
-3. **Per brand:** decide the property strategy and document it:
-   - **Single roll-up property** (simplest): keep one GA4 config; segment/filter reports by the
-     `brand` event parameter. To make `brand` available in GA4, add it as an **event parameter** on
-     the config or on key events, and register it as a **custom dimension** (Admin → Custom
-     definitions → `brand`).
-   - **Separate property per brand:** create a second GA4 config tag with the other property's
-     measurement ID, each gated by the brand variable (use the `JS - brand (hostname fallback)` for
-     page-view scope).
+3. **Single shared property:** keep the one GA4 config. To keep diploma vs scuola distinguishable,
+   send `brand` as an **event parameter** (map `{{DLV - brand}}` on the config/key events) and register
+   it as a **custom dimension** (GA4 Admin → Custom definitions → `brand`). Then filter/segment reports
+   by `brand`. No second property, no brand-gated config tag.
 4. **Validate paid attribution:** in GA4 **DebugView**, land on a URL with `?gclid=test123` on each
    domain and confirm the session source/medium resolves to `google / cpc` (auto-tagging), not
    `(direct)`.
@@ -152,14 +146,16 @@ Symptom to fix: GA4 paid channel collapse + possible under-measurement.
 The project docs record `1460557338306322`, but the live container currently inits
 `1020929560296043`. Two pixels = split/duplicated Meta conversions.
 
-1. Decide the **single correct pixel ID** with the founder / Meta Business Manager owner.
+Meta lives **inside GTM** and is **shared** (one pixel, one audience pool for both brands) — no
+per-brand split. The only open item is the ID discrepancy:
+
+1. Decide the **single correct pixel ID** with the founder / Meta Business Manager owner
+   (docs `1460557338306322` vs live `1020929560296043`).
 2. Remove the duplicate pixel tag; keep exactly one base-code tag on All Pages + the lead event tag on
    `CE - lead_submit`.
-3. **Per brand:** confirm whether both brands share one pixel (one audience pool) or need separate
-   pixels. If separate, split the Meta tags by `{{DLV - brand}}` exactly like Step 3.
-4. Meta lead event can also receive `user_data` (email/phone) for Advanced Matching — map from the
+3. Meta lead event can also receive `user_data` (email/phone) for Advanced Matching — map from the
    same DLVs; Meta hashes.
-5. Consent: gate Meta on `ad_storage` / marketing consent.
+4. Consent: gate Meta on `ad_storage` / marketing consent.
 
 ---
 
@@ -178,7 +174,7 @@ over):
 4. Confirm the thank-you URL carries `?gclid=TEST_GCLID` (and `gbraid`/`wbraid` if present).
 5. **GA4 DebugView:** the `lead_submit`/conversion event appears with source = google/cpc.
 6. **Google Ads → the conversion action → Diagnostics / "Recent conversions":** the Enhanced
-   Conversions status shows "recording" and a test conversion lands in the RIGHT account.
+   Conversions status shows "recording" and a test conversion lands in the shared account.
 7. Only when all green on both domains → **Submit / Publish** the container version. Name the version
    e.g. `attribution-recovery-2026-07-09`.
 
@@ -191,11 +187,18 @@ over):
 - Google Ads conversions resume, matched via gclid where present and via Enhanced Conversions where
   not.
 - GA4 and Google Ads conversion counts move back into a sane ratio.
-- `brand` correctly separates diploma vs scuola data in whichever property strategy you chose.
+- `brand` (custom dimension) cleanly separates diploma vs scuola data inside the shared property.
 
-## Open decisions to confirm with the founder / marketing owner
+## Setup decisions — RESOLVED 2026-07-09
 
-- [ ] Diploma360 and La Scuola360: separate Google Ads accounts? (drives Step 3 splitting)
-- [ ] GA4: single roll-up property vs one per brand? (Step 4.3)
-- [ ] Meta Pixel: the correct single ID, and shared vs per-brand? (Step 5)
-- [ ] Add `mkt_attr` (first-party attribution cookie, 90 days) to the cookie/privacy policy.
+- [x] **Google Ads / GA4: shared** (single account / single property). → No per-brand tag split;
+      `brand` is a GA4 custom dimension for reporting (Steps 0, 3, 4).
+- [x] **Meta: shared, configured inside GTM** (one pixel). → No per-brand split (Step 5).
+- [x] **Cookie disclosure: handled by Iubenda.** → No manual policy edit; instead make sure `mkt_attr`
+      (first-party, 90 days, attribution) is picked up by the Iubenda cookie scan / declared in the
+      Iubenda cookie policy.
+
+## Still open
+
+- [ ] **Meta Pixel ID:** confirm the single correct ID — docs `1460557338306322` vs live
+      `1020929560296043` — and remove the duplicate (Step 5).
