@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { brand } from '@/lib/brand'
+import { getHeaderNav } from '@/data/navigazione'
 
 interface Props {
   isOpen: boolean
@@ -24,50 +24,37 @@ const ChevronDown = () => (
 )
 
 export function MobileMenu({ isOpen, onClose }: Props) {
+  const nav = getHeaderNav()
+
   return (
     <div
       id="mobile-nav"
       className={`mobile-menu${isOpen ? ' open' : ''}`}
       aria-hidden={!isOpen}
     >
-      <Link className="m-flat" href="/" onClick={onClose}>
-        Home
-      </Link>
-
-      <details className="m-grp">
-        <summary>
-          Come funziona
-          <ChevronDown />
-        </summary>
-        <div className="m-sub">
-          <Link href="/come-funziona" onClick={onClose}>Il metodo {brand.name}</Link>
-          <Link href="/piattaforma" onClick={onClose}>La piattaforma</Link>
-          <Link href="/esami-diploma" onClick={onClose}>Il valore del diploma</Link>
-          <Link href="/esami-normativa" onClick={onClose}>Esami e normativa</Link>
-          <Link href="/iscrizioni" onClick={onClose}>Iscrizioni</Link>
-          <Link href="/sedi-esame" onClick={onClose}>Sedi d&apos;esame</Link>
-        </div>
-      </details>
-
-      <Link className="m-flat" href="/diplomi" onClick={onClose}>
-        Diplomi
-      </Link>
-      <Link className="m-flat" href="/prezzi" onClick={onClose}>
-        Prezzi
-      </Link>
-
-      <details className="m-grp">
-        <summary>
-          Chi siamo
-          <ChevronDown />
-        </summary>
-        <div className="m-sub">
-          <Link href="/chi-siamo" onClick={onClose}>Chi siamo</Link>
-          <Link href="/credibilita" onClick={onClose}>Perché fidarti</Link>
-          <Link href="/chi-siamo#partner" onClick={onClose}>Partner</Link>
-          <Link href="/contatti" onClick={onClose}>Lavora con noi</Link>
-        </div>
-      </details>
+      {nav.map(item =>
+        item.kind === 'link' ? (
+          <Link key={item.label} className="m-flat" href={item.href} onClick={onClose}>
+            {item.label}
+          </Link>
+        ) : (
+          <details key={item.label} className="m-grp">
+            <summary>
+              {item.label}
+              <ChevronDown />
+            </summary>
+            <div className="m-sub">
+              {item.columns.map(col =>
+                col.items.map(link => (
+                  <Link key={link.href} href={link.href} onClick={onClose}>
+                    {link.label}
+                  </Link>
+                ))
+              )}
+            </div>
+          </details>
+        )
+      )}
 
       <Link
         className="btn btn-primary btn-block"

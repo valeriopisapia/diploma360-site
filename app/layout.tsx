@@ -3,7 +3,7 @@ import { brand } from '@/lib/brand'
 import { ConsentDefault } from '@/components/gtm/ConsentDefault'
 import { GtmScript } from '@/components/gtm/GtmScript'
 import { SiteHeader } from '@/components/layout/SiteHeader'
-import { Footer } from '@/components/layout/Footer'
+import { BrandFooter } from '@/components/layout/BrandFooter'
 import { CookieBanner } from '@/components/consent/CookieBanner'
 import { ChromeGate } from '@/components/layout/ChromeGate'
 import './globals.css'
@@ -57,7 +57,7 @@ export default function RootLayout({
         <GtmScript />
         <ChromeGate><SiteHeader /></ChromeGate>
         {children}
-        <ChromeGate><Footer /></ChromeGate>
+        <ChromeGate><BrandFooter /></ChromeGate>
         <CookieBanner />
       </body>
     </html>

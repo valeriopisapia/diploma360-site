@@ -7,7 +7,7 @@ export async function POST(req: Request) {
   let body: Record<string, unknown>
   try { body = await req.json() }
   catch { return Response.json({ error: 'Corpo della richiesta non valido' }, { status: 400 }) }
-  const { nome, telefono, email, per_chi, messaggio, pagina, origine, ts, website } = body
+  const { nome, telefono, email, per_chi, messaggio, pagina, origine, ts, website, prodotto } = body
 
   // Honeypot: bot filled the hidden field — silently succeed, do not call Brevo
   if (website) {
@@ -38,6 +38,9 @@ export async function POST(req: Request) {
     ts: ts as string | undefined,
     // Server-authoritative: the brand of THIS deployment, not client-supplied.
     brand: brand.name,
+    // Client-supplied: which product the form belongs to (defaults to Diploma
+    // for existing forms that don't pass it).
+    prodotto: (prodotto as string | undefined) ?? 'Diploma',
   }
   const result = await createBrevoContact(payload, { apiKey, listId })
 

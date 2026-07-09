@@ -1,0 +1,133 @@
+/* === Ripetizioni → Come funziona (La Scuola360) ===
+   Ported 1:1 from `materiale/consegna-valerio 2/Ripetizioni-Come-Funziona.dc.html`
+   (fully inline-styled reference — no reusable classes beyond the preview
+   tool's responsive scaffold, which is not part of the design system).
+   Reuses global design-system classes wherever they already match 1:1
+   (.wrap, .eyebrow, .grad-text, .btn*, .card, .grid-3, .trustbar/.tb-item —
+   all already in styles/site.css, same convention as the sibling
+   app/ripetizioni/prezzi and app/ripetizioni/materie pages). Only the
+   genuinely new shapes below (breadcrumb, hero visual badge, mockup
+   browser chrome, step-plan panel, dot checklists, stat cards, decide
+   split, split lead card) get their own rules, prefixed `.cf-`. */
+
+/* Breadcrumb */
+.cf-crumb{font-size:13px;color:var(--muted);margin-bottom:18px}
+.cf-crumb a{color:var(--muted)}
+.cf-crumb a:hover{color:var(--soft)}
+.cf-crumb .cur{color:var(--soft)}
+
+/* Hero — no form, image + floating stat badge */
+.cf-hero{padding:40px 0 10px}
+.cf-hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center}
+.cf-hero-grid h1{font-size:clamp(30px,5.4vw,48px);font-weight:800;line-height:1.06;letter-spacing:-.03em;margin:0 0 22px}
+.cf-hero-grid .lead{font-size:16px;color:var(--soft);line-height:1.62;max-width:520px;margin:0 0 26px}
+.cf-hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+@media (max-width:920px){.cf-hero-grid{grid-template-columns:1fr;gap:30px}}
+
+.cf-hero-img{position:relative;border-radius:24px;overflow:hidden;box-shadow:0 16px 44px rgba(91,55,40,.16);border:1px solid var(--border);aspect-ratio:4/3}
+.cf-hero-badge{position:absolute;left:18px;bottom:18px;background:rgba(255,255,255,.94);backdrop-filter:blur(6px);border-radius:16px;padding:14px 18px;box-shadow:0 8px 24px rgba(0,0,0,.14);display:flex;align-items:center;gap:12px;z-index:1}
+.cf-hero-badge .v{font-family:'Poppins',sans-serif;font-weight:800;font-size:26px}
+.cf-hero-badge .l{font-size:12.5px;color:var(--soft);font-weight:500;line-height:1.35}
+
+/* Checklist — check icon + text row (hero proof points AND "tu decidi" transparency list) */
+.cf-checks{display:flex;flex-direction:column;gap:11px}
+.cf-checks.spaced{margin-bottom:28px}
+.cf-checks-item{display:inline-flex;align-items:center;gap:9px;font-size:15px;color:#374151;font-weight:500}
+.cf-checks-item svg{width:18px;height:18px;flex-shrink:0}
+
+/* Trustbar — same shape as global .trustbar, only the top margin is page-specific */
+.cf-trustbar{margin-top:36px}
+
+/* Section head — centered eyebrow + heading, shared by 3-step / molto-di-più / numeri */
+.cf-head{text-align:center;margin-bottom:40px}
+.cf-head .eyebrow{justify-content:center}
+.cf-head h2{font-family:'Poppins',sans-serif;font-weight:800;font-size:clamp(26px,3.4vw,36px);line-height:1.14;letter-spacing:-.02em;margin:0 auto;max-width:24ch}
+
+/* Split sections — tutor / aula virtuale / percorso (each a 2-col grid, own ratio) */
+.cf-tutor{padding:64px 0 20px}
+.cf-tutor-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center}
+.cf-tutor-grid h2{font-family:'Poppins',sans-serif;font-weight:800;font-size:clamp(26px,3.4vw,36px);line-height:1.14;letter-spacing:-.02em;margin:0 0 16px}
+.cf-tutor-grid p{font-size:16.5px;color:var(--soft);line-height:1.65;margin:0 0 18px}
+.cf-tutor-grid p strong{color:#1F1F1F}
+.cf-tutor-badge{display:inline-flex;align-items:center;gap:10px;background:var(--coral-lt);border-radius:14px;padding:12px 18px;font-family:'Poppins',sans-serif;font-weight:700;font-size:15px;color:var(--coral-dk)}
+.cf-tutor-badge svg{width:20px;height:20px;flex-shrink:0}
+
+.cf-aula{padding:56px 0}
+.cf-aula-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.cf-aula-grid h2{font-family:'Poppins',sans-serif;font-weight:800;font-size:clamp(26px,3.4vw,34px);line-height:1.14;letter-spacing:-.02em;margin:0 0 14px}
+.cf-aula-grid p{font-size:16px;color:var(--soft);line-height:1.6;margin:0 0 18px}
+
+.cf-percorso{padding:20px 0}
+.cf-percorso-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.cf-percorso-grid h2{font-family:'Poppins',sans-serif;font-weight:800;font-size:clamp(26px,3.4vw,34px);line-height:1.14;letter-spacing:-.02em;margin:0 0 14px}
+.cf-percorso-grid p{font-size:16px;color:var(--soft);line-height:1.65;margin:0 0 16px}
+
+@media (max-width:920px){.cf-tutor-grid,.cf-aula-grid,.cf-percorso-grid{grid-template-columns:1fr!important}}
+
+/* Photo frame — plain, no badge (tutor section) */
+.cf-photo{position:relative;border-radius:24px;overflow:hidden;box-shadow:0 16px 44px rgba(91,55,40,.16);border:1px solid var(--border);aspect-ratio:4/3}
+
+/* Aula virtuale — browser-chrome mockup */
+.cf-mock{border-radius:20px;overflow:hidden;box-shadow:0 12px 40px rgba(91,55,40,.14);border:1px solid var(--border);background:#fff}
+.cf-mock-bar{height:38px;background:#F3EEE9;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:7px;padding:0 16px}
+.cf-mock-bar span{width:11px;height:11px;border-radius:50%;background:var(--border-s)}
+.cf-mock-bar span:first-child{background:var(--coral)}
+.cf-mock img{width:100%;height:auto;display:block}
+
+/* Dot checklist — kit di ripasso AND percorso bullet list (two-tone dots, paired) */
+.cf-kit{display:flex;flex-direction:column;gap:10px}
+.cf-kit-item{display:inline-flex;align-items:center;gap:10px;font-size:14.5px;color:#374151}
+.cf-kit-item i{width:8px;height:8px;border-radius:50%;background:var(--coral);flex-shrink:0;font-style:normal}
+.cf-kit-item.c2 i{background:var(--rosa)}
+.cf-percorso-grid .cf-kit-item{font-size:15px;font-weight:500}
+
+/* Percorso — step-plan panel */
+.cf-plan{background:linear-gradient(180deg,#FFFFFF,#FDF3EE);border:1px solid #F0E4DC;border-radius:24px;padding:34px;box-shadow:var(--shadow-sm)}
+.cf-plan-list{display:flex;flex-direction:column;gap:14px}
+.cf-plan-step{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px 18px}
+.cf-plan-num{width:36px;height:36px;flex-shrink:0;border-radius:10px;background:var(--coral-lt);color:var(--coral-dk);display:grid;place-items:center;font-family:'Poppins',sans-serif;font-weight:700}
+.cf-plan-num.c2{background:var(--rosa-lt);color:var(--rosa-dk)}
+.cf-plan-step .t{font-family:'Poppins',sans-serif;font-weight:700;font-size:15px}
+.cf-plan-step .s{font-size:13px;color:var(--soft)}
+
+/* 3 step / molto di più cards */
+.cf-steps{padding:20px 0 40px}
+.cf-step-num{width:40px;height:40px;border-radius:50%;background:var(--grad);color:#fff;font-family:'Poppins',sans-serif;font-weight:700;font-size:17px;display:grid;place-items:center;margin-bottom:16px;box-shadow:0 4px 12px rgba(228,130,103,.32)}
+.cf-step-card h3{font-family:'Poppins',sans-serif;font-size:19px;margin:0 0 8px}
+.cf-step-card p{font-size:14.5px;color:var(--soft);line-height:1.6;margin:0}
+
+.cf-more{padding:40px 0}
+.cf-feat-ic{width:46px;height:46px;border-radius:13px;background:var(--coral-lt);color:var(--coral-dk);display:grid;place-items:center;margin-bottom:16px}
+.cf-feat-ic svg{width:23px;height:23px}
+.cf-feat-card h3{font-family:'Poppins',sans-serif;font-size:18px;margin:0 0 8px}
+.cf-feat-card p{font-size:14px;color:var(--soft);line-height:1.6;margin:0}
+
+/* Numeri — stat cards */
+.cf-numbers{padding:20px 0 40px}
+.cf-stat{text-align:center}
+.cf-stat .v{font-family:'Poppins',sans-serif;font-weight:800;font-size:34px;line-height:1}
+.cf-stat .l{font-size:14px;color:var(--soft);margin-top:8px}
+
+/* Tu decidi — 2-col split (tinted card + white checklist card) */
+.cf-decide{padding:40px 0}
+.cf-decide-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.cf-decide-a{background:#FBD9C2;border-radius:22px;padding:36px}
+.cf-decide-a .tag{font-family:'Poppins',sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#993C1D;margin-bottom:14px}
+.cf-decide-a h3{font-size:22px;margin:0 0 10px}
+.cf-decide-a p{font-size:15px;color:#5A4030;line-height:1.6;margin:0}
+.cf-decide-b{padding:36px}
+.cf-decide-b .tag{font-family:'Poppins',sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--rosa-dk);margin-bottom:16px}
+@media (max-width:900px){.cf-decide-grid{grid-template-columns:1fr}}
+
+/* Lead — split card (gradient panel + form), same shape as the sibling Ripetizioni pages */
+.cf-form-sec{padding:40px 0 70px}
+.cf-lead{scroll-margin-top:90px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-xl);box-shadow:var(--shadow-lg);overflow:hidden;display:grid;grid-template-columns:1fr 1fr}
+.cf-lead-info{background:linear-gradient(160deg,#E3815A 0%,#E0709A 60%,#EC89C0 120%);color:#fff;padding:clamp(30px,4vw,52px);display:flex;flex-direction:column;justify-content:center}
+.cf-lead-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.2);font-family:'Poppins',sans-serif;font-weight:700;font-size:11.5px;padding:6px 12px;border-radius:999px;margin-bottom:18px;width:fit-content}
+.cf-lead-info h2{font-family:'Poppins',sans-serif;font-weight:800;font-size:clamp(26px,3.2vw,34px);line-height:1.16;letter-spacing:-.02em;margin:0 0 14px}
+.cf-lead-info p{font-size:16px;line-height:1.6;opacity:.96;margin:0 0 24px}
+.cf-lead-contacts{display:flex;flex-direction:column;gap:12px;font-size:15px;font-weight:500}
+.cf-lead-contacts a{display:inline-flex;align-items:center;gap:11px;color:#fff}
+.cf-lead-contacts svg{width:18px;height:18px}
+.cf-lead-form{padding:clamp(24px,3vw,40px)}
+@media (max-width:920px){.cf-lead{grid-template-columns:1fr}}

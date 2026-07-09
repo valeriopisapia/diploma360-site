@@ -7,12 +7,13 @@ const env = { apiKey: 'k', listId: '7' }
 it('maps payload to Brevo attributes and succeeds on 201', async () => {
   const fetchMock = vi.fn(async () => new Response(null, { status: 201 }))
   const res = await createBrevoContact(
-    { email: 'a@b.it', telefono: '333', nome: 'Ada', per_chi: 'Per me', pagina: '/lp', origine: 'landing-ads', brand: 'La Scuola360' },
+    { email: 'a@b.it', telefono: '333', nome: 'Ada', per_chi: 'Per me', pagina: '/lp', origine: 'landing-ads', brand: 'La Scuola360', prodotto: 'Ripetizioni' },
     env, fetchMock as any)
   expect(res.ok).toBe(true)
   const body = JSON.parse((fetchMock.mock.calls[0][1] as any).body)
   expect(body.listIds).toEqual([7])
   expect(body.attributes).toMatchObject({ NOME: 'Ada', TELEFONO: '333', PER_CHI: 'Per me', PAGINA_ARRIVO: '/lp', ORIGINE: 'landing-ads', BRAND: 'La Scuola360' })
+  expect(body.attributes.PRODOTTO).toBe('Ripetizioni')
 })
 
 it('also populates the native SMS field for a bare Italian mobile (E.164)', async () => {

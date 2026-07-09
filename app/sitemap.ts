@@ -27,6 +27,13 @@ const STATIC_ROUTES = [
   '/termini',
 ]
 
+const RIPETIZIONI_ROUTES = [
+  '/ripetizioni',
+  '/ripetizioni/come-funziona',
+  '/ripetizioni/prezzi',
+  '/ripetizioni/materie',
+]
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date()
 
@@ -36,6 +43,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: route === '/' ? 'weekly' : 'monthly',
     priority: route === '/' ? 1.0 : 0.8,
   }))
+
+  const ripetizioniEntries: MetadataRoute.Sitemap =
+    brand.id === 'lascuola360'
+      ? RIPETIZIONI_ROUTES.map((route) => ({
+          url: `${BASE}${route}`,
+          lastModified,
+          changeFrequency: 'monthly',
+          priority: 0.7,
+        }))
+      : []
 
   const cityEntries: MetadataRoute.Sitemap = allCittaSlugs().map((slug) => ({
     url: `${BASE}/recupero-anni-scolastici-${slug}`,
@@ -51,5 +68,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }))
 
-  return [...staticEntries, ...cityEntries, ...diplomaEntries]
+  return [...staticEntries, ...ripetizioniEntries, ...cityEntries, ...diplomaEntries]
 }

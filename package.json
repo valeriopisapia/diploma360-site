@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
+    "dev:diploma360": "NEXT_PUBLIC_BRAND=diploma360 next dev",
+    "dev:lascuola360": "NEXT_PUBLIC_BRAND=lascuola360 next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",

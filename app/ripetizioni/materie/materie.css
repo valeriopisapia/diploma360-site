@@ -1,0 +1,62 @@
+/* === Ripetizioni · Materie e DSA (La Scuola360) ===
+   Ported from `materiale/consegna-valerio 2/Ripetizioni-Materie.dc.html` (fully
+   inline-styled reference). Reuses global design-system classes wherever the
+   reference's visual matches one 1:1 (.wrap, .section, .eyebrow, .card, .btn
+   variants, .grid-3, .grid-4, .grad-text — all already in styles/site.css). Only the
+   genuinely new shapes below (breadcrumb, hero visual badge, subject-pill
+   groups, plain level/need cards, two-tone lead panel) get their own rules. */
+
+/* Breadcrumb */
+.mat-crumb{font-size:13px;color:var(--muted);margin-bottom:18px}
+.mat-crumb a{color:var(--muted)}
+.mat-crumb a:hover{color:var(--soft)}
+.mat-crumb .cur{color:var(--soft)}
+
+/* Hero */
+.mat-hero-sec{padding:40px 0 10px}
+.mat-hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center}
+.mat-hero-grid h1{font-size:clamp(30px,5.4vw,48px);line-height:1.06;letter-spacing:-.03em;margin:0 0 20px}
+.mat-hero-grid .lead{font-size:18px;color:var(--soft);line-height:1.62;max-width:520px;margin:0 0 26px}
+.mat-hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+@media (max-width:920px){.mat-hero-grid{grid-template-columns:1fr;gap:30px}}
+
+.mat-hero-img{position:relative;border-radius:24px;overflow:hidden;box-shadow:0 16px 44px rgba(91,55,40,.16);border:1px solid var(--border);aspect-ratio:4/4.4}
+.mat-hero-badge{position:absolute;left:18px;bottom:18px;background:rgba(255,255,255,.94);backdrop-filter:blur(6px);border-radius:16px;padding:14px 18px;box-shadow:0 8px 24px rgba(0,0,0,.14);display:flex;align-items:center;gap:12px}
+.mat-hero-badge .v{font-family:'Poppins',sans-serif;font-weight:800;font-size:24px}
+.mat-hero-badge .l{font-size:12.5px;color:var(--soft);font-weight:500;line-height:1.35}
+
+/* Section headers (centered eyebrow + heading) */
+.mat-sec-head{text-align:center;margin-bottom:40px}
+.mat-sec-head .eyebrow{justify-content:center}
+.mat-sec-head h2{font-size:clamp(26px,3.4vw,36px);line-height:1.14;letter-spacing:-.02em;margin:0 auto;max-width:26ch}
+.mat-sec-head.sm h2{font-size:clamp(24px,3.2vw,34px);max-width:none}
+
+/* Gruppi materie — pastel subject-pill cards */
+.mat-group-label{font-family:'Poppins',sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--coral-dk);margin-bottom:14px}
+.mat-group-label.rosa{color:var(--rosa-dk)}
+.mat-pills{display:flex;flex-wrap:wrap;gap:8px}
+.mat-pill{font-size:13.5px;font-weight:600;color:#374151;background:var(--coral-lt);border:1px solid #F1DDD3;padding:7px 13px;border-radius:99px}
+.mat-pill.rosa{background:var(--rosa-lt);border-color:#F3D6E3}
+.mat-more{text-align:center;margin-top:22px;font-size:15px;color:var(--soft)}
+.mat-more a{color:var(--rosa-dk);font-weight:600}
+
+/* Per livello — plain text cards */
+.mat-plain h3{font-size:19px;margin:0 0 8px}
+.mat-plain p{font-size:14.5px;color:var(--soft);line-height:1.55;margin:0}
+
+/* Per esigenza — compact cards */
+.mat-need{padding:24px;border-radius:var(--radius)}
+.mat-need .t{font-family:'Poppins',sans-serif;font-size:16px;font-weight:700;margin-bottom:6px}
+.mat-need p{font-size:13.5px;color:var(--soft);line-height:1.55;margin:0}
+
+/* Lead — two-tone gradient/white split panel */
+.mat-lead{scroll-margin-top:90px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-xl);box-shadow:var(--shadow-lg);overflow:hidden;display:grid;grid-template-columns:1fr 1fr}
+.mat-lead-info{background:linear-gradient(160deg,#E3815A 0%,#E0709A 60%,#EC89C0 120%);color:#fff;padding:clamp(30px,4vw,52px);display:flex;flex-direction:column;justify-content:center}
+.mat-lead-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.2);font-family:'Poppins',sans-serif;font-weight:700;font-size:11.5px;padding:6px 12px;border-radius:999px;margin-bottom:18px;width:fit-content}
+.mat-lead-info h2{font-size:clamp(26px,3.2vw,34px);line-height:1.16;letter-spacing:-.02em;margin:0 0 14px}
+.mat-lead-info p{font-size:16px;line-height:1.6;opacity:.96;margin:0 0 24px}
+.mat-lead-contacts{display:flex;flex-direction:column;gap:12px;font-size:15px;font-weight:500}
+.mat-lead-contacts a{display:inline-flex;align-items:center;gap:11px;color:#fff}
+.mat-lead-contacts svg{width:18px;height:18px}
+.mat-lead-form{padding:clamp(24px,3vw,40px)}
+@media (max-width:920px){.mat-lead{grid-template-columns:1fr}}
