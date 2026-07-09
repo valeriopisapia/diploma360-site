@@ -5,11 +5,15 @@ import { LeadForm } from './LeadForm'
 vi.mock('@/lib/analytics', () => ({ pushLead: vi.fn() }))
 import { pushLead } from '@/lib/analytics'
 
+vi.mock('@/lib/attribution', () => ({ getAttribution: vi.fn(() => ({})) }))
+import { getAttribution } from '@/lib/attribution'
+
 const { pushMock } = vi.hoisted(() => ({ pushMock: vi.fn() }))
 vi.mock('next/navigation', () => ({ useRouter: () => ({ push: pushMock }) }))
 
 beforeEach(() => {
   vi.clearAllMocks()
+  vi.mocked(getAttribution).mockReturnValue({})
   vi.stubGlobal('fetch', vi.fn(async () => new Response('{"ok":true}', { status: 200 })))
 })
 
@@ -19,7 +23,7 @@ it('submits, fires lead_submit and redirects to the thank-you route', async () =
   fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'a@b.it' } })
   fireEvent.click(screen.getByLabelText(/privacy|consenso|acconsento/i))
   fireEvent.submit(screen.getByRole('button', { name: /invia|richiedi/i }).closest('form')!)
-  await waitFor(() => expect(pushLead).toHaveBeenCalledWith({ origine: 'vetrina', pagina: '/' }))
+  await waitFor(() => expect(pushLead).toHaveBeenCalledWith(expect.objectContaining({ origine: 'vetrina', pagina: '/' })))
   expect(pushMock).toHaveBeenCalledWith('/grazie')
 })
 
@@ -30,6 +34,31 @@ it('landing-ads form redirects to /lp-thank-you-page', async () => {
   fireEvent.click(screen.getByLabelText(/privacy|consenso|acconsento/i))
   fireEvent.submit(screen.getByRole('button', { name: /invia|richiedi/i }).closest('form')!)
   await waitFor(() => expect(pushMock).toHaveBeenCalledWith('/lp-thank-you-page'))
+})
+
+it('passes user_data to pushLead on submit', async () => {
+  render(<LeadForm origine="vetrina" />)
+  fireEvent.change(screen.getByLabelText(/nome/i), { target: { value: 'Ada' } })
+  fireEvent.change(screen.getByLabelText(/telefono/i), { target: { value: '3331234567' } })
+  fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'a@b.it' } })
+  fireEvent.click(screen.getByLabelText(/privacy|consenso|acconsento/i))
+  fireEvent.submit(screen.getByRole('button', { name: /invia|richiedi/i }).closest('form')!)
+  await waitFor(() => expect(pushLead).toHaveBeenCalledWith(
+    expect.objectContaining({
+      origine: 'vetrina',
+      user_data: { email: 'a@b.it', phone_number: '3331234567', name: 'Ada' },
+    }),
+  ))
+})
+
+it('appends stored click ids to the thank-you redirect', async () => {
+  vi.mocked(getAttribution).mockReturnValue({ gclid: 'G1', wbraid: 'W1', utm_source: 'google' })
+  render(<LeadForm origine="landing-ads" />)
+  fireEvent.change(screen.getByLabelText(/telefono/i), { target: { value: '3331234567' } })
+  fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'a@b.it' } })
+  fireEvent.click(screen.getByLabelText(/privacy|consenso|acconsento/i))
+  fireEvent.submit(screen.getByRole('button', { name: /invia|richiedi/i }).closest('form')!)
+  await waitFor(() => expect(pushMock).toHaveBeenCalledWith('/lp-thank-you-page?gclid=G1&wbraid=W1'))
 })
 
 it('phone field strips non-numeric characters and caps the length', () => {

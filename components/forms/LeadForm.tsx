@@ -15,6 +15,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { pushLead } from '@/lib/analytics'
+import { getAttribution } from '@/lib/attribution'
 import styles from './LeadForm.module.css'
 
 type Origine = 'vetrina' | 'landing-ads' | 'ripetizioni'
@@ -50,6 +51,18 @@ function sanitizePhone(raw: string): string {
   const hasPlus = raw.trimStart().startsWith('+')
   const digits = raw.replace(/\D/g, '').slice(0, MAX_PHONE_DIGITS)
   return (hasPlus ? '+' : '') + digits
+}
+
+// Carry the click identifiers Google Ads needs onto the thank-you URL, so a
+// conversion tag firing on that page still sees them after the SPA redirect.
+const CLICK_IDS = ['gclid', 'gbraid', 'wbraid'] as const
+
+function withClickIds(route: string): string {
+  const attr = getAttribution()
+  const qs = new URLSearchParams()
+  for (const k of CLICK_IDS) if (attr[k]) qs.set(k, attr[k])
+  const s = qs.toString()
+  return s ? `${route}?${s}` : route
 }
 
 export function LeadForm({ origine, showPerChi = false, prodotto = 'Diploma' }: LeadFormProps) {
@@ -137,8 +150,12 @@ export function LeadForm({ origine, showPerChi = false, prodotto = 'Diploma' }: 
       // page. router.push keeps the SPA context alive so the dataLayer event
       // isn't cut off by a full reload. Stay in 'loading' so the button remains
       // disabled during the redirect.
-      pushLead({ origine, pagina })
-      router.push(THANK_YOU_ROUTE[origine])
+      pushLead({
+        origine,
+        pagina,
+        user_data: { email, phone_number: telefono, name: nome },
+      })
+      router.push(withClickIds(THANK_YOU_ROUTE[origine]))
     } catch {
       setUiStatus('err')
     }

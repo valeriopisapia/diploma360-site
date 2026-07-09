@@ -6,6 +6,7 @@ import { SiteHeader } from '@/components/layout/SiteHeader'
 import { BrandFooter } from '@/components/layout/BrandFooter'
 import { CookieBanner } from '@/components/consent/CookieBanner'
 import { ChromeGate } from '@/components/layout/ChromeGate'
+import { AttributionCapture } from '@/components/analytics/AttributionCapture'
 import './globals.css'
 
 // ─── Metadata ─────────────────────────────────────────────────────────────────
@@ -55,6 +56,7 @@ export default function RootLayout({
       </head>
       <body>
         <GtmScript />
+        <AttributionCapture />
         <ChromeGate><SiteHeader /></ChromeGate>
         {children}
         <ChromeGate><BrandFooter /></ChromeGate>
