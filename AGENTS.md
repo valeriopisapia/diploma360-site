@@ -63,6 +63,10 @@ replace the design system), Vitest + happy-dom, `sharp` (image optimisation).
 - **Structured data:** `<JsonLd>` (`components/seo/JsonLd.tsx`) — EducationalOrganization, Course,
   FAQPage, BreadcrumbList.
 - Header/footer/cookie banner come from the root layout; pages must NOT render them.
+- **Form in fondo:** `components/forms/LeadSection.tsx` is the reusable bottom-of-page conversion
+  block (`id="lead"` + `LeadForm`, `origine="vetrina"`). Content pages that need an in-page form use
+  it (prezzi, diplomi index, and the institutional pages); on-page CTAs point to `#lead` (in-page),
+  NOT `/#lead` (home). City + diploma-detail templates have their own `id="lead"` form already.
 
 ## Non-negotiable content constraints (founder-approved; enforce on every edit)
 - Prices VERBATIM: `1.500 / 1.900 / 2.900 €`; rates `72,68 / 92,06 / 140,52 €/mese × 24`.
@@ -112,7 +116,11 @@ replace the design system), Vitest + happy-dom, `sharp` (image optimisation).
 - The SAME repo/content serves TWO brands. **`lib/brand.ts` is the single source of truth**: it
   exports the active `brand` selected at BUILD time by `NEXT_PUBLIC_BRAND` (default `diploma360`;
   unknown value → throws). Per-brand fields: `name`, `domain`, `logo.{header,lp,alt,ogImage}`,
-  `contacts` (incl. per-brand `email`), `gtmId`, `legal.{entity,iubendaPolicyId}`, `platformHost`.
+  `contacts` (incl. per-brand `email`), `gtmId`, `legal.{entity,iubendaPolicyId}`, `platformHost`,
+  `header.{showPhone,primaryCta}` (diploma360 = phone + "Chiama ora"; lascuola360 = no phone +
+  "Iscriviti" → `/iscrizioni`), `copy.{diverso,credibilitaLead}` (brand-gendered adjective +
+  de-doubled credibilità line). **Route new per-brand divergence through `brand.*` fields, NOT
+  scattered `if (brand.id)` in shared JSX/CSS** — e.g. the header CTA + those two copy fragments do.
   Secrets (`BREVO_*`) stay runtime env. GTM/Iubenda id are SHARED; email/domain/logo differ.
 - **NEVER hardcode the brand name `Diploma360` or the domain `www.diploma360.it`** in
   `app/`,`components/`,`data/` — use `brand.name` / `brand.domain` / `brand.logo.*`. A guard test
@@ -142,10 +150,10 @@ replace the design system), Vitest + happy-dom, `sharp` (image optimisation).
 - Two remotes, keep BOTH in sync: `origin` (GitLab, source of truth) + `github`
   (`valeriopisapia/diploma360-site`, deploy trigger). **After every commit, push to both.**
 - Primary target: **Firebase App Hosting** (`apphosting.yaml`, connects via the GitHub repo).
-  Live deploy URL: `https://diploma360-site--schoolrcloud.us-east4.hosted.app` — **verify live
-  changes HERE.** As of 2026-07, `www.diploma360.it` still serves the OLD WordPress/Divi site
-  (contains forbidden "59€ / senza interessi / MIUR"); do not test this Next.js site there until the
-  DNS is cut over.
+  Live deploy URL: `https://diploma360-site--schoolrcloud.us-east4.hosted.app`.
+  **DNS cut over — verified 2026-07-10:** `www.diploma360.it` now serves THIS Next.js site (GTM
+  `GTM-K5VMGM8C` + GA4 `G-3QLZTYR5WK` load; the old WordPress/Divi site is gone). So live changes can
+  be verified on `www.diploma360.it` directly (it redirects to the apex `diploma360.it`).
   Alternative (opt-in, validated): **Cloud Run via GitLab CI** (`Dockerfile`, `.gitlab-ci.yml`,
   `next.config` `output:'standalone'`). Full guide: `docs/DEPLOY.md`.
 - Secrets (`BREVO_API_KEY`, `BREVO_LIST_ID`) come from Secret Manager at runtime, never in the repo.
