@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { buildMetadata } from '@/lib/seo'
+import { LeadSection } from '@/components/forms/LeadSection'
 import { brand } from '@/lib/brand'
 import './garanzia.css'
 
@@ -43,7 +44,7 @@ export default function Garanzia() {
             <h1>Se non passi l&apos;esame, <span className="hl">ti ripreparariamo gratis</span>.</h1>
             <p className="lead">Nei piani Plus e Max, includiamo la garanzia ufficiale: se al primo tentativo non passi l&apos;esame finale, riprepariamo gratuitamente lo studente per la sessione successiva. Qui sotto trovi le condizioni esplicite, in chiaro, senza asterischi nascosti.</p>
             <div className="cta-row">
-              <a className="btn btn-primary btn-lg" href="/#lead">Voglio sapere di più</a>
+              <a className="btn btn-primary btn-lg" href="#lead">Voglio sapere di più</a>
               <a className="btn btn-out btn-lg" href="/prezzi">Vai ai prezzi</a>
             </div>
           </div>
@@ -204,7 +205,7 @@ export default function Garanzia() {
               <p>30 minuti, gratis, senza impegno. Capiamo insieme la situazione e ti diciamo se possiamo aiutarti davvero.</p>
             </div>
             <div className="cta-band-btns">
-              <a className="btn btn-white btn-lg" href="/#lead">Parla con un coordinatore</a>
+              <a className="btn btn-white btn-lg" href="#lead">Parla con un coordinatore</a>
               <a className="btn btn-glass btn-lg" href="tel:0684280999">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
                 Chiama 06 84 280 999
@@ -213,6 +214,8 @@ export default function Garanzia() {
           </div>
         </div>
       </section>
+
+      <LeadSection />
     </>
   )
 }

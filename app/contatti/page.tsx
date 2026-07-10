@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { buildMetadata } from '@/lib/seo'
+import { LeadSection } from '@/components/forms/LeadSection'
 import { brand } from '@/lib/brand'
 import './contatti.css'
 
@@ -43,7 +44,7 @@ export default function Contatti() {
               <strong>gratuita e senza impegno</strong>: in 30 minuti capiamo la tua situazione e ti proponiamo un percorso su misura.
             </p>
             <div className="cta-row">
-              <a className="btn btn-primary btn-lg" href="/#lead">Scopri il tuo percorso</a>
+              <a className="btn btn-primary btn-lg" href="#lead">Scopri il tuo percorso</a>
               <a className="btn btn-out btn-lg" href="https://wa.me/393517214644" target="_blank" rel="noopener">WhatsApp</a>
             </div>
           </div>
@@ -152,10 +153,12 @@ export default function Contatti() {
             <p>Compila il form sulla Home: ti ricontattiamo entro 24h con una proposta di percorso. Gratis e senza impegno.</p>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <a className="btn btn-primary btn-lg" href="/#lead">Vai al form di richiesta</a>
+            <a className="btn btn-primary btn-lg" href="#lead">Vai al form di richiesta</a>
           </div>
         </div>
       </section>
+
+      <LeadSection />
     </>
   )
 }

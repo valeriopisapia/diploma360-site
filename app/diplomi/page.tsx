@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { JsonLd } from '@/components/seo/JsonLd'
+import { LeadSection } from '@/components/forms/LeadSection'
 import { buildMetadata } from '@/lib/seo'
 import { diplomi } from '@/data/diplomi'
 import { brand } from '@/lib/brand'
@@ -49,7 +50,7 @@ export default function Diplomi() {
             <h1>18+ indirizzi di studio. <span className="hl">Quello giusto è uno solo: il tuo</span>.</h1>
             <p className="lead">Licei, Tecnici, Professionali: in {brand.name} prepariamo tutti gli indirizzi di Stato. Durante la consulenza valutiamo insieme quale è il più adatto alla tua storia scolastica, agli anni da recuperare e a quello che vuoi fare dopo.</p>
             <div className="cta-row">
-              <a className="btn btn-primary btn-lg" href="/#lead">Scopri quale fa per te</a>
+              <a className="btn btn-primary btn-lg" href="#lead">Scopri quale fa per te</a>
               <Link className="btn btn-out btn-lg" href="/come-funziona">Scopri il metodo</Link>
             </div>
           </div>
@@ -158,7 +159,7 @@ export default function Diplomi() {
           <a href="#licei">Licei (8)</a>
           <a href="#tecnici">Tecnici (8+)</a>
           <a href="#professionali">Professionali (5+)</a>
-          <a href="/#lead">Consulenza gratuita</a>
+          <a href="#lead">Consulenza gratuita</a>
         </div>
       </nav>
 
@@ -261,7 +262,7 @@ export default function Diplomi() {
               <p>In consulenza gratuita ti aiutiamo a capire qual è il diploma più adatto al tuo percorso, alla tua storia scolastica e ai tuoi obiettivi.</p>
             </div>
             <div className="cta-band-btns">
-              <a className="btn btn-white btn-lg" href="/#lead">Scopri il tuo percorso</a>
+              <a className="btn btn-white btn-lg" href="#lead">Scopri il tuo percorso</a>
               <a className="btn btn-glass btn-lg" href="https://wa.me/393517214644" target="_blank" rel="noopener">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.1s-.8 1-.9 1.2c-.2.2-.3.2-.6.1-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.6s-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6 2 .8 2.7.9 3.7.8.6-.1 1.8-.8 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-2.9.8.8-2.8-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
                 Scrivici su WhatsApp
@@ -270,6 +271,8 @@ export default function Diplomi() {
           </div>
         </div>
       </section>
+
+      <LeadSection title="Scopri quale diploma fa per te." />
     </>
   )
 }

@@ -1,6 +1,6 @@
 /* === Diplomi index page === */
 .dhero{padding:84px 0 52px;background:linear-gradient(180deg,#F5DED4 0%,#FAE5DC 100%);position:relative;overflow:hidden}
-.dhero .wrap{position:relative;z-index:1;max-width:920px}
+.dhero .wrap{position:relative;z-index:1;max-width:1280px}
 .dhero .eb{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--coral-dk);letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px}
 .dhero .eb::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--coral)}
 .dhero h1{font-size:42px;font-weight:800;line-height:1.1;letter-spacing:-.015em;margin:0 0 14px;max-width:760px}

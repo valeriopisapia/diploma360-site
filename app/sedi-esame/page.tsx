@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { buildMetadata } from '@/lib/seo'
+import { LeadSection } from '@/components/forms/LeadSection'
 import { brand } from '@/lib/brand'
 import './sedi-esame.css'
 
@@ -73,7 +74,7 @@ export default function SediEsame() {
             <h1>Studi da casa. <span className="grad-text">L&apos;esame lo fai vicino a te.</span></h1>
             <p className="lead">Con {brand.name} prepari il diploma online, in totale flessibilità. Ti sposti una sola volta: per sostenere l&apos;esame, in una scuola statale o paritaria convenzionata nella provincia più vicina a te. Alla burocrazia della candidatura pensiamo noi.</p>
             <div className="ph-cta">
-              <a className="btn btn-primary btn-lg" href="/#lead">Scopri il tuo percorso</a>
+              <a className="btn btn-primary btn-lg" href="#lead">Scopri il tuo percorso</a>
               <a className="btn btn-out btn-lg" href="https://wa.me/393517214644" target="_blank" rel="noopener">Chiedi su WhatsApp</a>
             </div>
           </div>
@@ -192,7 +193,7 @@ export default function SediEsame() {
             <SedeCard city="Bologna" href="/recupero-anni-scolastici-bologna" />
             <SedeCard city="Genova" href="/recupero-anni-scolastici-genova" />
             <SedeCard city="Padova" href="/recupero-anni-scolastici-padova" />
-            <Link className="sede-card" href="/#lead">
+            <Link className="sede-card" href="#lead">
               <span className="city"><PinIcon />Brescia</span>
               <span className="meta">Istituto statale / paritario convenzionato</span>
               <span className="go">Verifica la sede <ArrowIcon /></span>
@@ -257,12 +258,14 @@ export default function SediEsame() {
               <p>In consulenza gratuita verifichiamo la tua situazione e ti diciamo dove potrai sostenere l&apos;esame, in chiaro e senza impegno.</p>
             </div>
             <div className="cta-band-btns">
-              <a className="btn btn-white btn-lg" href="/#lead">Scopri il tuo percorso</a>
+              <a className="btn btn-white btn-lg" href="#lead">Scopri il tuo percorso</a>
               <a className="btn btn-glass btn-lg" href="https://wa.me/393517214644" target="_blank" rel="noopener">Scrivici su WhatsApp</a>
             </div>
           </div>
         </div>
       </section>
+
+      <LeadSection />
     </>
   )
 }
