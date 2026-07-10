@@ -1,5 +1,6 @@
 import { JsonLd } from '@/components/seo/JsonLd'
 import { buildMetadata } from '@/lib/seo'
+import { LeadSection } from '@/components/forms/LeadSection'
 import { brand } from '@/lib/brand'
 import './faq.css'
 
@@ -158,7 +159,7 @@ export default function Faq() {
             <h1>Tutto quello che vuoi <span className="hl">sapere su {brand.name}</span>.</h1>
             <p className="lead">Le risposte alle domande più comuni su percorso, esami, costi e modalità. Se non trovi quello che cerchi, scrivici su WhatsApp: rispondiamo entro 24h.</p>
             <div className="cta-row">
-              <a className="btn btn-primary btn-lg" href="/#lead">Scopri il tuo percorso</a>
+              <a className="btn btn-primary btn-lg" href="#lead">Scopri il tuo percorso</a>
               <a className="btn btn-out btn-lg" href="https://wa.me/393517214644" target="_blank" rel="noopener">WhatsApp</a>
             </div>
           </div>
@@ -356,7 +357,7 @@ export default function Faq() {
               <p>Scrivici: rispondiamo entro 24h, anche su WhatsApp. La prima consulenza con un esperto didattico è sempre gratuita.</p>
             </div>
             <div className="cta-band-btns">
-              <a className="btn btn-white btn-lg" href="/#lead">Scopri il tuo percorso</a>
+              <a className="btn btn-white btn-lg" href="#lead">Scopri il tuo percorso</a>
               <a className="btn btn-glass btn-lg" href="https://wa.me/393517214644" target="_blank" rel="noopener">
                 <svg viewBox="0 0 24 24" fill="currentColor">
                   <path d="M17.5 14.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.1s-.8 1-.9 1.2c-.2.2-.3.2-.6.1-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.6s-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6 2 .8 2.7.9 3.7.8.6-.1 1.8-.8 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z" />
@@ -368,6 +369,8 @@ export default function Faq() {
           </div>
         </div>
       </section>
+
+      <LeadSection />
     </>
   )
 }

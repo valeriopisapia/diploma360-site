@@ -1,5 +1,6 @@
 import { JsonLd } from '@/components/seo/JsonLd'
 import { buildMetadata } from '@/lib/seo'
+import { LeadSection } from '@/components/forms/LeadSection'
 import { brand } from '@/lib/brand'
 import './recuperare-due-anni-in-uno.css'
 
@@ -239,6 +240,8 @@ export default function RecuperareDueAnniInUno() {
           </div>
         </div>
       </section>
+
+      <LeadSection />
     </>
   )
 }

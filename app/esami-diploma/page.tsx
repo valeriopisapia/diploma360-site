@@ -1,5 +1,6 @@
 import { JsonLd } from '@/components/seo/JsonLd'
 import { buildMetadata } from '@/lib/seo'
+import { LeadSection } from '@/components/forms/LeadSection'
 import { brand } from '@/lib/brand'
 import './esami-diploma.css'
 
@@ -42,7 +43,7 @@ export default function EsamiDiploma() {
             <h1>Un <span className="hl">Diploma di Stato riconosciuto</span>. Valido davvero, ovunque.</h1>
             <p className="lead">Il diploma che ottieni con {brand.name} è un Diploma di Stato: lo stesso titolo di una scuola statale, con lo stesso valore legale. Noi ti prepariamo all&apos;esame, il diploma lo rilascia la scuola in sede ufficiale. Qui ti spieghiamo perché conta e a cosa ti serve davvero.</p>
             <div className="cta-row">
-              <a className="btn btn-primary btn-lg" href="/#lead">Scopri il tuo percorso</a>
+              <a className="btn btn-primary btn-lg" href="#lead">Scopri il tuo percorso</a>
               <a className="btn btn-out btn-lg" href="https://wa.me/393517214644" target="_blank" rel="noopener">WhatsApp</a>
             </div>
           </div>
@@ -222,7 +223,7 @@ export default function EsamiDiploma() {
               <p>In consulenza gratuita ti diciamo in chiaro quanti anni puoi recuperare, in quanto tempo e con quale valore. Senza impegno.</p>
             </div>
             <div className="cta-band-btns">
-              <a className="btn btn-white btn-lg" href="/#lead">Scopri il tuo percorso</a>
+              <a className="btn btn-white btn-lg" href="#lead">Scopri il tuo percorso</a>
               <a className="btn btn-glass btn-lg" href="https://wa.me/393517214644" target="_blank" rel="noopener">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.1s-.8 1-.9 1.2c-.2.2-.3.2-.6.1-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.6s-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6 2 .8 2.7.9 3.7.8.6-.1 1.8-.8 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-2.9.8.8-2.8-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
                 Scrivici su WhatsApp
@@ -231,6 +232,8 @@ export default function EsamiDiploma() {
           </div>
         </div>
       </section>
+
+      <LeadSection />
     </>
   )
 }

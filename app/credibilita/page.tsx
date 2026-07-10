@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { buildMetadata } from '@/lib/seo'
+import { LeadSection } from '@/components/forms/LeadSection'
 import { brand } from '@/lib/brand'
 import './credibilita.css'
 
@@ -43,7 +44,7 @@ export default function Credibilita() {
             <h1>Non siamo un diplomificio. <span className="grad-text">Ti prepariamo davvero.</span></h1>
             <p className="lead">Il diploma non si compra: si prepara. La cronaca è piena di scuole chiuse e titoli annullati. Qui ti spieghiamo chi siamo, quali tutele hai per iscritto e come riconoscere una scuola seria — così scegli con gli occhi aperti.</p>
             <div className="ph-cta">
-              <a className="btn btn-primary btn-lg" href="/#lead">Parla con un consulente</a>
+              <a className="btn btn-primary btn-lg" href="#lead">Parla con un consulente</a>
               <a className="btn btn-out btn-lg" href="https://wa.me/393517214644" target="_blank" rel="noopener">Chiedi su WhatsApp</a>
             </div>
           </div>
@@ -295,12 +296,14 @@ export default function Credibilita() {
               <p>In consulenza gratuita ti spieghiamo in chiaro percorso, tempi, costi e garanzie. Senza promesse impossibili e senza impegno.</p>
             </div>
             <div className="cta-band-btns">
-              <a className="btn btn-white btn-lg" href="/#lead">Parla con un consulente</a>
+              <a className="btn btn-white btn-lg" href="#lead">Parla con un consulente</a>
               <a className="btn btn-glass btn-lg" href="https://wa.me/393517214644" target="_blank" rel="noopener">Scrivici su WhatsApp</a>
             </div>
           </div>
         </div>
       </section>
+
+      <LeadSection />
     </>
   )
 }

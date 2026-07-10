@@ -40,8 +40,8 @@ export default function NotFound() {
             <a className="btn btn-primary btn-lg" href="/">
               Torna alla home
             </a>
-            <a className="btn btn-out btn-lg" href="tel:0684280999">
-              Chiama ora
+            <a className="btn btn-out btn-lg" href={brand.header.primaryCta.href}>
+              {brand.header.primaryCta.label}
             </a>
           </div>
         </div>

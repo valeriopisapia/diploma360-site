@@ -147,7 +147,7 @@ export default async function DiplomaPage({
               ))}
             </div>
             <div className="cta-row">
-              <a className="btn btn-primary btn-lg" href="/#lead">Richiedi informazioni</a>
+              <a className="btn btn-primary btn-lg" href="#lead">Richiedi informazioni</a>
               <Link className="btn btn-out btn-lg" href="/come-funziona">Scopri il metodo</Link>
             </div>
           </div>
