@@ -1,6 +1,6 @@
 /* === Contatti page styles (ported from contatti.html <style>, :root and body omitted) === */
 .ahero{padding:84px 0 52px;background:linear-gradient(180deg,#F5DED4 0%,#FAE5DC 100%);position:relative;overflow:hidden}
-.ahero .wrap{position:relative;z-index:1;max-width:920px}
+.ahero .wrap{position:relative;z-index:1;max-width:1280px}
 .ahero .eb{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--coral-dk);letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px}
 .ahero .eb::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--coral)}
 .ahero .eyebrow-b{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--coral-dk);letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px}

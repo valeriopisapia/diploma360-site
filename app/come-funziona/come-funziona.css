@@ -1,6 +1,6 @@
 /* === Come funziona V3 (brochure-style) === */
 .mhero{padding:84px 0 52px;background:linear-gradient(180deg,#F5DED4 0%,#FAE5DC 100%);position:relative;overflow:hidden}
-.mhero .wrap{position:relative;z-index:1;max-width:920px}
+.mhero .wrap{position:relative;z-index:1;max-width:1280px}
 .mhero .eyebrow-b{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--coral-dk);letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px}
 .mhero .eyebrow-b::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--coral)}
 .mhero h1{font-size:42px;font-weight:800;line-height:1.1;letter-spacing:-.015em;margin:0 0 16px;max-width:760px}

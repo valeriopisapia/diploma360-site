@@ -40,7 +40,7 @@ export default function ComeFunziona() {
         <div className="wrap mhero-grid">
           <div className="mhero-copy">
             <span className="eyebrow-b">Cos&apos;è {brand.name}</span>
-            <h1>Perché {brand.name} <span className="hl">è diverso</span>.</h1>
+            <h1>Perché {brand.name} <span className="hl">è {brand.copy.diverso}</span>.</h1>
             <p className="lead">Non ti diamo solo contenuti da studiare. Organizziamo un percorso: partiamo dagli anni da recuperare, costruiamo un piano, mettiamo a disposizione materiali e tutor, e ti accompagniamo fino agli esami.</p>
             <p className="diff"><em>La differenza è questa:</em> non devi capire da solo cosa studiare. Il percorso viene organizzato intorno alla tua situazione, ai tuoi tempi e all&apos;esame da sostenere.</p>
             <div className="cta-row">

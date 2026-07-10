@@ -40,36 +40,38 @@ export function SiteHeader() {
           <MegaMenu />
 
           <div className="header-cta">
-            <a
-              className="header-tel"
-              href="tel:0684280999"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 6,
-                color: '#1F1F1F',
-                textDecoration: 'none',
-                fontWeight: 700,
-                fontSize: '13.5px',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#993C1D"
-                strokeWidth={2.2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                style={{ width: 14, height: 14, flexShrink: 0 }}
-                aria-hidden="true"
+            {brand.header.showPhone && (
+              <a
+                className="header-tel"
+                href={brand.contacts.telHref}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                  color: '#1F1F1F',
+                  textDecoration: 'none',
+                  fontWeight: 700,
+                  fontSize: '13.5px',
+                  whiteSpace: 'nowrap',
+                }}
               >
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z" />
-              </svg>
-              06 84 280 999
-            </a>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#993C1D"
+                  strokeWidth={2.2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  style={{ width: 14, height: 14, flexShrink: 0 }}
+                  aria-hidden="true"
+                >
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z" />
+                </svg>
+                {brand.contacts.telDisplay}
+              </a>
+            )}
             <a className="login-link" href="#">Accedi</a>
-            <a className="btn btn-primary" href="tel:0684280999">Chiama ora</a>
+            <a className="btn btn-primary" href={brand.header.primaryCta.href}>{brand.header.primaryCta.label}</a>
           </div>
 
           <button

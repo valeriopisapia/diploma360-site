@@ -79,7 +79,7 @@ export default function Credibilita() {
           <div className="sec-head center">
             <span className="eyebrow">Chi c&apos;è dietro</span>
             <h2 className="sec-h2">Una realtà strutturata, <span className="grad-text">non un sito improvvisato</span>.</h2>
-            <p className="sec-lead">{brand.name} è il percorso verso il Diploma di Stato di LaScuola360, marchio di Classme S.r.l. Dietro la piattaforma ci sono persone vere.</p>
+            <p className="sec-lead">{brand.copy.credibilitaLead}</p>
           </div>
           <div className="who-grid">
             <div className="tut-card">

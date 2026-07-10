@@ -1,0 +1,9 @@
+/* Reusable bottom-of-page lead section — centers the shared .form-card so it reads
+   well outside the hero's two-column grid. */
+.section {
+  padding: 60px 0;
+}
+.inner {
+  max-width: 500px;
+  margin-inline: auto;
+}

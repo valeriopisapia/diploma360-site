@@ -21,6 +21,21 @@ export type Brand = {
   /** Decorative host shown in the fake browser URL bars on the piattaforma mockups
    *  (e.g. "app.diploma360.it"). Not a real subdomain — display text only. */
   platformHost: string
+  /** Header CTA cluster config (differs per brand: diploma360 shows the phone + "Chiama ora";
+   *  lascuola360 drops the phone and uses an "Iscriviti" button). */
+  header: {
+    showPhone: boolean
+    primaryCta: { label: string; href: string }
+  }
+  /** Brand-specific copy fragments that can't be derived from `name` alone — gender agreement,
+   *  and sentences where the brand name would otherwise appear twice. Keeps shared pages free of
+   *  `if (brand.id)` conditionals. */
+  copy: {
+    /** adjective agreeing with the brand-name gender: diploma360 masc, lascuola360 fem */
+    diverso: string
+    /** credibilita page `sec-lead` sentence, verbatim per brand */
+    credibilitaLead: string
+  }
 }
 
 // Contacts are shared across brands today, but modelled per-brand for a future split.
@@ -46,6 +61,15 @@ const BRANDS: Record<BrandId, Brand> = {
     gtmId: 'GTM-K5VMGM8C',
     legal: { entity: 'Classme S.r.l.', iubendaPolicyId: '43474147' },
     platformHost: 'app.diploma360.it',
+    header: {
+      showPhone: true,
+      primaryCta: { label: 'Chiama ora', href: SHARED_CONTACTS.telHref },
+    },
+    copy: {
+      diverso: 'diverso',
+      credibilitaLead:
+        'Diploma360 è il percorso verso il Diploma di Stato di LaScuola360, marchio di Classme S.r.l. Dietro la piattaforma ci sono persone vere.',
+    },
   },
   lascuola360: {
     id: 'lascuola360',
@@ -62,6 +86,15 @@ const BRANDS: Record<BrandId, Brand> = {
     gtmId: 'GTM-K5VMGM8C', // shared with Diploma360 (same GTM container / GA4 / Meta)
     legal: { entity: 'Classme S.r.l.', iubendaPolicyId: '43474147' }, // same Iubenda policy (Classme)
     platformHost: 'app.lascuola360.it',
+    header: {
+      showPhone: false,
+      primaryCta: { label: 'Iscriviti', href: '/iscrizioni' },
+    },
+    copy: {
+      diverso: 'diversa',
+      credibilitaLead:
+        'Il diploma è il percorso di La Scuola360, marchio di Classme S.r.l. Dietro la piattaforma ci sono persone vere.',
+    },
   },
 }
 
