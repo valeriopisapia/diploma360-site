@@ -83,7 +83,7 @@ export default function Prezzi() {
           <div className="ahd">
             <span className="eb">3 piani</span>
             <h2>Trasparenza prima di tutto: <span className="hl">i prezzi sono qui</span>.</h2>
-            <p>I tre piani {brand.name} nascono da tre situazioni reali che incontriamo ogni mese. Sotto trovi cosa includono, in cosa si differenziano e quanto costano — tutto in chiaro.</p>
+            <p>I prezzi qui sotto sono per recuperare <strong>fino a due anni in uno</strong>. I tre piani {brand.name} nascono da tre situazioni reali che incontriamo ogni mese. Sotto trovi cosa includono, in cosa si differenziano e quanto costano — tutto in chiaro.</p>
           </div>
           <div className="total-band">
             <div className="plans">
@@ -217,6 +217,7 @@ export default function Prezzi() {
           <div className="ahd">
             <span className="eb">Domande comuni sui prezzi</span>
             <h2>Tutto quello che vuoi <span className="hl">sapere sui costi</span>.</h2>
+            <p>Le domande che ci fanno più spesso su rate, garanzia esame e tasse esterne — con risposte chiare, senza sorprese.</p>
           </div>
           <div className="faq-block">
             <details open>
