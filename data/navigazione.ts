@@ -3,9 +3,19 @@ import { brand } from '@/lib/brand'
 // ── Brand-aware nav data model (consumed by MegaMenu/MobileMenu) ──
 export type NavLink = { label: string; href: string }
 export type NavColumn = { label: string; items: NavLink[] }
+/** Optional promo card shown on the right side of a mega panel (La Scuola360 only —
+ *  the diploma360 brand's mega items omit `promo`, so the box never renders there). */
+export type NavPromo = {
+  /** small uppercase kicker; accent colour picked by `accent` */
+  eyebrow: string
+  title: string
+  text: string
+  cta: NavLink
+  accent: 'coral' | 'magenta'
+}
 export type NavItem =
   | { kind: 'link'; label: string; href: string }
-  | { kind: 'mega'; label: string; columns: NavColumn[] }
+  | { kind: 'mega'; label: string; columns: NavColumn[]; promo?: NavPromo }
 
 const DIPLOMA_NAV: NavItem[] = [
   { kind: 'link', label: 'Home', href: '/' },
@@ -52,7 +62,13 @@ const LASCUOLA_NAV: NavItem[] = [
       { label: 'Garanzia', href: '/garanzia' },
       { label: 'FAQ', href: '/faq' },
     ]},
-  ]},
+  ], promo: {
+    accent: 'coral',
+    eyebrow: 'Recupero anni',
+    title: 'Fino a più anni in uno',
+    text: 'Diploma di Stato riconosciuto, tutor per materia e piattaforma dedicata.',
+    cta: { label: 'Consulenza gratuita', href: '/recuperare-due-anni-in-uno#lead' },
+  }},
   { kind: 'mega', label: 'Ripetizioni', columns: [
     { label: 'Il servizio', items: [
       { label: 'Come funziona', href: '/ripetizioni/come-funziona' },
@@ -64,7 +80,13 @@ const LASCUOLA_NAV: NavItem[] = [
       { label: 'Per livello', href: '/ripetizioni/materie#livello' },
       { label: 'Recupero debiti · aiuto compiti', href: '/ripetizioni/materie#esigenza' },
     ]},
-  ]},
+  ], promo: {
+    accent: 'magenta',
+    eyebrow: 'Prima lezione',
+    title: 'Provala gratis, poi decidi',
+    text: 'Ci dici materia e obiettivo, ti troviamo il tutor giusto. Senza impegno.',
+    cta: { label: 'Prenota la prova', href: '/ripetizioni#lead' },
+  }},
   { kind: 'link', label: 'Chi siamo', href: '/chi-siamo' },
 ]
 

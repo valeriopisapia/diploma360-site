@@ -103,6 +103,16 @@ export function MegaMenu() {
               </div>
             ))}
           </div>
+          {topItem.promo && (
+            <div className={`mega-promo mega-promo--${topItem.promo.accent}`}>
+              <span className="mega-promo-eyebrow">{topItem.promo.eyebrow}</span>
+              <span className="mega-promo-title">{topItem.promo.title}</span>
+              <p className="mega-promo-text">{topItem.promo.text}</p>
+              <Link className="mega-promo-cta" href={topItem.promo.cta.href}>
+                {topItem.promo.cta.label} <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     )
