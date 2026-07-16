@@ -1,0 +1,43 @@
+/* home-schoolr.css — bespoke rules for the Schoolr rebrand landing.
+   The rest of the page styling lives inline (style={{…}}) matching the source .dc.html. */
+
+.sr-transit { animation: sr-arrowpulse 2.4s ease-in-out infinite; }
+@keyframes sr-arrowpulse {
+  0%, 100% { transform: translateX(0); opacity: .85; }
+  50%      { transform: translateX(5px); opacity: 1; }
+}
+
+/* Schoolr wordmark (replaces missing logo-schoolr.png) */
+.sr-logo-word {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  letter-spacing: -.02em;
+  color: #C7674E;
+  line-height: 1;
+  display: inline-block;
+}
+
+@media (max-width: 900px) {
+  .sr-2col { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .sr-3col { grid-template-columns: 1fr !important; }
+  .sr-4stat { grid-template-columns: repeat(2, 1fr) !important; }
+  .sr-hide-sm { display: none !important; }
+}
+@media (max-width: 680px) {
+  .sr-section { padding-left: 20px !important; padding-right: 20px !important; }
+  .sr-header-inner { padding: 0 16px !important; gap: 10px !important; }
+  .sr-hd-logos { gap: 8px !important; }
+  .sr-hd-logos img, .sr-hd-logos .sr-logo-word { height: 20px !important; font-size: 20px !important; }
+  .sr-hd-logos .sr-arrow { display: none !important; }
+  .sr-hd-right { gap: 9px !important; }
+  .sr-lbl { display: none !important; }
+  .sr-cta-hd .sr-cta-full { display: none !important; }
+  .sr-cta-hd .sr-cta-short { display: inline !important; }
+  .sr-cta-hd { padding: 9px 15px !important; }
+  .sr-hero-logos { gap: 14px !important; margin-bottom: 28px !important; }
+  .sr-hero-logos .sr-l1 { height: 28px !important; font-size: 28px !important; }
+  .sr-hero-logos .sr-l2 { height: 29px !important; }
+  .sr-hero-logos .sr-arrow2 { width: 22px !important; height: 22px !important; }
+  .sr-footer-inner { padding-left: 20px !important; padding-right: 20px !important; }
+}
+.sr-cta-hd .sr-cta-short { display: none; }
