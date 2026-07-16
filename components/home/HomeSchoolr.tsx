@@ -1433,14 +1433,29 @@ export function HomeSchoolr() {
             fontSize: 13,
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: 11 }}>
-            {/* LaScuola360 logo (same SVG as header/hero) to unify the brand mark;
-               the gradient wordmark reads on the dark footer. */}
-            <img
-              src="/schoolr/logo-lascuola360.svg"
-              alt="LaScuola360"
-              style={{ height: 24, width: 'auto', display: 'block' }}
-            />
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            {/* La Scuola360 brand mark — reuses the design-system .brand-mark
+               (gradient circle) + .brand-name from styles/site.css so it matches
+               the La Scuola360 footer logo exactly; forced white on the dark bg. */}
+            <span className="brand-mark">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="white"
+                strokeWidth={2.4}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M21 2v6h-6" />
+                <path d="M3 12a9 9 0 0 1 15-6.7L21 8" />
+                <path d="M21 22v-6h-6" />
+                <path d="M3 12a9 9 0 0 0 15 6.7L21 16" />
+              </svg>
+            </span>
+            <span className="brand-name" style={{ color: '#fff' }}>
+              La Scuola360
+            </span>
           </div>
           <div style={{ color: '#80868F' }}>© 2026 Classme S.r.l. · P.IVA 15441141007 · Viale Castrense 5, 00182 Roma</div>
         </div>
