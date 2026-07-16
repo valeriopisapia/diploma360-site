@@ -1,4 +1,4 @@
-import { it, expect } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { resolveBrand } from './brand'
 
 it('defaults to diploma360 when unset', () => {
@@ -16,4 +16,22 @@ it('resolves lascuola360', () => {
 
 it('throws on an unknown brand so a misconfigured build fails loudly', () => {
   expect(() => resolveBrand('acme')).toThrow(/unknown brand/i)
+})
+
+describe('resolveBrand', () => {
+  it('resolves schoolr with schoolr.net domain and its own GTM container', () => {
+    const b = resolveBrand('schoolr')
+    expect(b.id).toBe('schoolr')
+    expect(b.domain).toBe('https://schoolr.net')
+    expect(b.gtmId).toBe('GTM-K8W5CM7C')
+  })
+
+  it('still resolves the two existing brands', () => {
+    expect(resolveBrand('diploma360').id).toBe('diploma360')
+    expect(resolveBrand('lascuola360').id).toBe('lascuola360')
+  })
+
+  it('throws on unknown brand', () => {
+    expect(() => resolveBrand('nope')).toThrow(/Unknown brand/)
+  })
 })

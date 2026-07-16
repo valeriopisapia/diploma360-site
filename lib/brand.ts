@@ -8,7 +8,7 @@
  * Secrets (BREVO_API_KEY, BREVO_LIST_ID) are NOT here — they stay runtime env per project.
  */
 
-export type BrandId = 'diploma360' | 'lascuola360'
+export type BrandId = 'diploma360' | 'lascuola360' | 'schoolr'
 
 export type Brand = {
   id: BrandId
@@ -94,6 +94,33 @@ const BRANDS: Record<BrandId, Brand> = {
       diverso: 'diversa',
       credibilitaLead:
         'Il diploma è il percorso di La Scuola360, marchio di Classme S.r.l. Dietro la piattaforma ci sono persone vere.',
+    },
+  },
+  schoolr: {
+    id: 'schoolr',
+    name: 'Schoolr',
+    domain: 'https://schoolr.net',
+    logo: {
+      // Wordmark rendered as text (.sr-logo-word); paths are placeholders/unused.
+      header: '/schoolr/logo-schoolr.png',
+      lp: '/schoolr/logo-schoolr.png',
+      alt: 'Schoolr — ora LaScuola360',
+      ogImage: '/og-image-lascuola360.png',
+    },
+    contacts: SHARED_CONTACTS,
+    // schoolr's own GTM container (GA4 G-Q0817JQ7RN + Meta pixel already configured)
+    gtmId: 'GTM-K8W5CM7C',
+    legal: { entity: 'Classme S.r.l.', iubendaPolicyId: '43474147' },
+    platformHost: 'app.lascuola360.it', // unused placeholder
+    header: {
+      // unused — site chrome is hidden for schoolr (ChromeGate), page has its own header
+      showPhone: false,
+      primaryCta: { label: 'Vai a LaScuola360', href: 'https://www.lascuola360.it/' },
+    },
+    copy: {
+      // unused — schoolr renders no shared pages
+      diverso: 'diverso',
+      credibilitaLead: '',
     },
   },
 }
