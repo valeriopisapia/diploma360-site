@@ -70,7 +70,7 @@ export function SiteHeader() {
                 {brand.contacts.telDisplay}
               </a>
             )}
-            <a className="login-link" href="#">Accedi</a>
+            <a className="login-link" href="https://app.schoolr.net/">Accedi</a>
             <a className="btn btn-primary" href={brand.header.primaryCta.href}>{brand.header.primaryCta.label}</a>
           </div>
 
