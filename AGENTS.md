@@ -37,9 +37,12 @@ replace the design system), Vitest + happy-dom, `sharp` (image optimisation).
   which wraps `<SiteHeader/>` and `<BrandFooter/>` in the root layout. GTM/consent/cookie banner
   still apply. LP chrome is componentised in `app/lp/`: `LpHeader`, `LpFooter`, `LpFloatActions`.
 - **Per-brand pages (multi-brand):** `/` and `/chi-siamo` are thin **selectors** on `brand.id`
-  (`HomeDiploma`/`HomeLaScuola`, `ChiSiamoDiploma`/`ChiSiamoLaScuola`). La-Scuola360-ONLY routes
-  `app/ripetizioni/*` (landing + come-funziona + prezzi + materie) call `assertBrand('lascuola360')`
-  (→ 404 on Diploma360, excluded from its sitemap). Footer is per-brand via `BrandFooter`
+  (`HomeDiploma`/`HomeLaScuola`, `ChiSiamoDiploma`/`ChiSiamoLaScuola`; the LaScuola variants of
+  `/` and `/chi-siamo` end with a bottom `<LeadSection>`, the Diploma ones don't). La-Scuola360-ONLY
+  routes `app/ripetizioni/*` (landing + come-funziona + prezzi + materie) **and** `app/diploma-panoramica`
+  (Diploma-overview landing — first item of the Diploma mega-menu "Il metodo") call
+  `assertBrand('lascuola360')` (→ 404 on Diploma360, excluded from its sitemap; non-ripetizioni
+  LS360-only routes are listed in `sitemap.ts` `LASCUOLA_ONLY_ROUTES`). Footer is per-brand via `BrandFooter`
   (`RipFooter` for La Scuola360, `Footer` for Diploma360). Nav is data-driven per brand
   (`data/navigazione.ts` `getHeaderNav()` → `MegaMenu`/`MobileMenu`). Scroll/counter motion:
   `components/motion/Reveal.tsx` (honors `prefers-reduced-motion`). See the **Brands** section.
