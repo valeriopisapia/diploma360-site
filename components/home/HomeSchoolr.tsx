@@ -1434,9 +1434,13 @@ export function HomeSchoolr() {
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: 11 }}>
-            <span style={{ fontFamily: "'Poppins',sans-serif", fontWeight: 700, fontSize: 16, color: '#fff' }}>
-              LaScuola360
-            </span>
+            {/* LaScuola360 logo (same SVG as header/hero) to unify the brand mark;
+               the gradient wordmark reads on the dark footer. */}
+            <img
+              src="/schoolr/logo-lascuola360.svg"
+              alt="LaScuola360"
+              style={{ height: 24, width: 'auto', display: 'block' }}
+            />
           </div>
           <div style={{ color: '#80868F' }}>© 2026 Classme S.r.l. · P.IVA 15441141007 · Viale Castrense 5, 00182 Roma</div>
         </div>
