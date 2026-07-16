@@ -113,7 +113,8 @@ replace the design system), Vitest + happy-dom, `sharp` (image optimisation).
   renders the Iubenda policy (from `brand.legal.iubendaPolicyId`) as a direct **iframe** — no CTA.
 
 ## Brands (multi-brand: Diploma360 + La Scuola360)
-- The SAME repo/content serves TWO brands. **`lib/brand.ts` is the single source of truth**: it
+- The SAME repo/content serves THREE brands (Diploma360 + La Scuola360 + Schoolr). **`lib/brand.ts`
+  is the single source of truth**: it
   exports the active `brand` selected at BUILD time by `NEXT_PUBLIC_BRAND` (default `diploma360`;
   unknown value → throws). Per-brand fields: `name`, `domain`, `logo.{header,lp,alt,ogImage}`,
   `contacts` (incl. per-brand `email`), `gtmId`, `legal.{entity,iubendaPolicyId}`, `platformHost`,
@@ -136,6 +137,12 @@ replace the design system), Vitest + happy-dom, `sharp` (image optimisation).
   Motion via `components/motion/Reveal.tsx`. La Scuola360 page assets live under `public/lascuola360/`
   (**Luxottica excluded** from the partner carousel). **Verbatim-price + honest-claims constraints
   apply to BOTH brands.** When editing shared components, keep Diploma360's output UNCHANGED.
+- **Schoolr is a single-page rebrand brand.** `NEXT_PUBLIC_BRAND=schoolr` (domain `schoolr.net`)
+  serves ONLY the "Schoolr → LaScuola360" rebrand landing at `/` (`components/home/HomeSchoolr.tsx`,
+  self-contained — site chrome hidden by `ChromeGate`). It uses schoolr's own GTM container
+  `GTM-K8W5CM7C` (GA4 `G-Q0817JQ7RN` + its Meta pixel). `proxy.ts` 301-redirects every
+  non-home path to `https://www.lascuola360.it/`; its sitemap is only `/`. Deploy as a third
+  Firebase App Hosting backend `schoolr-site` with `NEXT_PUBLIC_BRAND=schoolr`.
 - Verify each brand: `NEXT_PUBLIC_BRAND=lascuola360 npm run build` (and `=diploma360`); Diploma360's
   `/`,`/chi-siamo`, nav, footer, sitemap must remain unchanged.
 - **Deploy:** both brands are separate BACKENDS in the SAME Firebase project `schoolrcloud`
