@@ -119,7 +119,7 @@ export default function Prezzi() {
                   <span className="pnum">02</span>
                   <span className="pname-new">Piano Plus</span>
                 </div>
-                <h3>Plus</h3>
+                <h3 className="pnarr">Voglio essere seguito — lezioni 1:1 e garanzia esame.</h3>
                 <p className="desc">Il piano più scelto. Tutto del Basic + lezioni 1:1 con tutor di materia, coordinatrice dedicata e la garanzia «Promosso o Ripreparato».</p>
                 <p className="pquote">«Da solo mi blocco. Voglio qualcuno che mi spiega, che mi richiama quando rallento, che mi dice quando sono pronto.»</p>
                 <div className="price">

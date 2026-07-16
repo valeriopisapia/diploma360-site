@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { brand } from '@/lib/brand'
 import { Reveal, Counter } from '@/components/motion/Reveal'
+import { LeadSection } from '@/components/forms/LeadSection'
 import './home-lascuola.css'
 
 /**
@@ -617,6 +618,9 @@ export function HomeLaScuola() {
           </div>
         </div>
       </section>
+
+      {/* ── FORM IN FONDO ───────────────────────────────────────── */}
+      <LeadSection />
     </>
   )
 }

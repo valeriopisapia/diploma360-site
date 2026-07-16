@@ -47,6 +47,7 @@ const LASCUOLA_NAV: NavItem[] = [
   { kind: 'link', label: 'Home', href: '/' },
   { kind: 'mega', label: 'Diploma', columns: [
     { label: 'Il metodo', items: [
+      { label: 'Panoramica', href: '/diploma-panoramica' },
       { label: 'Come funziona', href: '/come-funziona' },
       { label: 'La piattaforma', href: '/piattaforma' },
     ]},

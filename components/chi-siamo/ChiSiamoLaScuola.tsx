@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { brand } from '@/lib/brand'
 import { Reveal, Counter } from '@/components/motion/Reveal'
+import { LeadSection } from '@/components/forms/LeadSection'
 import './chi-siamo-lascuola.css'
 
 /**
@@ -396,12 +397,15 @@ export function ChiSiamoLaScuola() {
               <p>In consulenza gratuita ti raccontiamo chi siamo e come possiamo aiutarti. Senza impegno.</p>
             </div>
             <div className="cta-band-btns">
-              <a className="btn btn-white btn-lg" href="/#lead">Percorso Diploma</a>
+              <a className="btn btn-white btn-lg" href="#lead">Percorso Diploma</a>
               <a className="btn btn-glass btn-lg" href="/ripetizioni">Ripetizioni</a>
             </div>
           </div>
         </div>
       </section>
+
+      {/* ── FORM IN FONDO ───────────────────────────────────────── */}
+      <LeadSection />
     </>
   )
 }

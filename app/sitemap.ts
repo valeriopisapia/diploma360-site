@@ -34,6 +34,9 @@ const RIPETIZIONI_ROUTES = [
   '/ripetizioni/materie',
 ]
 
+// La Scuola360-only routes outside the /ripetizioni tree (gated via assertBrand).
+const LASCUOLA_ONLY_ROUTES = ['/diploma-panoramica']
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date()
 
@@ -57,7 +60,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const ripetizioniEntries: MetadataRoute.Sitemap =
     brand.id === 'lascuola360'
-      ? RIPETIZIONI_ROUTES.map((route) => ({
+      ? [...RIPETIZIONI_ROUTES, ...LASCUOLA_ONLY_ROUTES].map((route) => ({
           url: `${BASE}${route}`,
           lastModified,
           changeFrequency: 'monthly',
