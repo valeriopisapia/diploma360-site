@@ -37,6 +37,17 @@ const RIPETIZIONI_ROUTES = [
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date()
 
+  if (brand.id === 'schoolr') {
+    return [
+      {
+        url: `${BASE}/`,
+        lastModified,
+        changeFrequency: 'weekly',
+        priority: 1.0,
+      },
+    ]
+  }
+
   const staticEntries: MetadataRoute.Sitemap = STATIC_ROUTES.map((route) => ({
     url: `${BASE}${route}`,
     lastModified,
