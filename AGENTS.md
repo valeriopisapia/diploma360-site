@@ -112,7 +112,7 @@ replace the design system), Vitest + happy-dom, `sharp` (image optimisation).
 - **Legal pages** (`/privacy`, `/termini`, `/cookie`): `components/legal/IubendaPolicy.tsx`
   renders the Iubenda policy (from `brand.legal.iubendaPolicyId`) as a direct **iframe** — no CTA.
 
-## Brands (multi-brand: Diploma360 + La Scuola360)
+## Brands (multi-brand: Diploma360 + La Scuola360 + Schoolr)
 - The SAME repo/content serves THREE brands (Diploma360 + La Scuola360 + Schoolr). **`lib/brand.ts`
   is the single source of truth**: it
   exports the active `brand` selected at BUILD time by `NEXT_PUBLIC_BRAND` (default `diploma360`;
