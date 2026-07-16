@@ -92,7 +92,7 @@ export function LeadForm({ origine, showPerChi = false, prodotto = 'Diploma' }: 
       return
     }
 
-    // Client-side validation of required fields
+    // Client-side validation of required fields (all fields required except messaggio)
     const telInput = form.querySelector<HTMLInputElement>('[name="telefono"]')
     const telefono = (telInput?.value ?? '').trim()
     const email = (
@@ -100,6 +100,11 @@ export function LeadForm({ origine, showPerChi = false, prodotto = 'Diploma' }: 
     ).trim()
     const consenso =
       form.querySelector<HTMLInputElement>('[name="consenso"]')?.checked ?? false
+    const nome = (
+      form.querySelector<HTMLInputElement>('[name="nome"]')?.value ?? ''
+    ).trim()
+    const perChiEl = form.querySelector<HTMLInputElement>('[name="per_chi"]:checked')
+    const per_chi = perChiEl?.value ?? ''
 
     // Guard the phone format even against paste/autofill that bypass live filtering.
     if (telefono && !PHONE_RE.test(telefono)) {
@@ -110,16 +115,19 @@ export function LeadForm({ origine, showPerChi = false, prodotto = 'Diploma' }: 
       telInput?.setCustomValidity('')
     }
 
-    if (!telefono || !email || !consenso || !PHONE_RE.test(telefono)) {
+    // per_chi is required only on forms that render it (showPerChi).
+    if (
+      !nome ||
+      !telefono ||
+      !email ||
+      !consenso ||
+      !PHONE_RE.test(telefono) ||
+      (showPerChi && !per_chi)
+    ) {
       form.reportValidity?.()
       return
     }
 
-    const nome = (
-      form.querySelector<HTMLInputElement>('[name="nome"]')?.value ?? ''
-    ).trim()
-    const perChiEl = form.querySelector<HTMLInputElement>('[name="per_chi"]:checked')
-    const per_chi = perChiEl?.value ?? ''
     const messaggio = (
       form.querySelector<HTMLTextAreaElement>('[name="messaggio"]')?.value ?? ''
     ).trim()
@@ -175,6 +183,7 @@ export function LeadForm({ origine, showPerChi = false, prodotto = 'Diploma' }: 
           name="nome"
           type="text"
           autoComplete="name"
+          required
           placeholder="Es. Marco Rossi"
         />
       </div>
@@ -213,11 +222,11 @@ export function LeadForm({ origine, showPerChi = false, prodotto = 'Diploma' }: 
           <span className="field-label">Per chi è il percorso?</span>
           <div className="seg" role="radiogroup" aria-label="Per chi è il percorso?">
             <label className="seg-opt">
-              <input type="radio" name="per_chi" value="Per me" />
+              <input type="radio" name="per_chi" value="Per me" required />
               <span>Per me</span>
             </label>
             <label className="seg-opt">
-              <input type="radio" name="per_chi" value="Per mio figlio" />
+              <input type="radio" name="per_chi" value="Per mio figlio" required />
               <span>Per mio figlio</span>
             </label>
           </div>

@@ -19,6 +19,7 @@ beforeEach(() => {
 
 it('submits, fires lead_submit and redirects to the thank-you route', async () => {
   render(<LeadForm origine="vetrina" />)
+  fireEvent.change(screen.getByLabelText(/nome/i), { target: { value: 'Ada' } })
   fireEvent.change(screen.getByLabelText(/telefono/i), { target: { value: '3331234567' } })
   fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'a@b.it' } })
   fireEvent.click(screen.getByLabelText(/privacy|consenso|acconsento/i))
@@ -29,6 +30,7 @@ it('submits, fires lead_submit and redirects to the thank-you route', async () =
 
 it('landing-ads form redirects to /lp-thank-you-page', async () => {
   render(<LeadForm origine="landing-ads" />)
+  fireEvent.change(screen.getByLabelText(/nome/i), { target: { value: 'Ada' } })
   fireEvent.change(screen.getByLabelText(/telefono/i), { target: { value: '3331234567' } })
   fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'a@b.it' } })
   fireEvent.click(screen.getByLabelText(/privacy|consenso|acconsento/i))
@@ -54,6 +56,7 @@ it('passes user_data to pushLead on submit', async () => {
 it('appends stored click ids to the thank-you redirect', async () => {
   vi.mocked(getAttribution).mockReturnValue({ gclid: 'G1', wbraid: 'W1', utm_source: 'google' })
   render(<LeadForm origine="landing-ads" />)
+  fireEvent.change(screen.getByLabelText(/nome/i), { target: { value: 'Ada' } })
   fireEvent.change(screen.getByLabelText(/telefono/i), { target: { value: '3331234567' } })
   fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'a@b.it' } })
   fireEvent.click(screen.getByLabelText(/privacy|consenso|acconsento/i))
@@ -72,6 +75,7 @@ it('phone field strips non-numeric characters and caps the length', () => {
 
 it('blocks submit when the phone number is too short', async () => {
   render(<LeadForm origine="vetrina" />)
+  fireEvent.change(screen.getByLabelText(/nome/i), { target: { value: 'Ada' } })
   fireEvent.input(screen.getByLabelText(/telefono/i), { target: { value: '333' } })
   fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'a@b.it' } })
   fireEvent.click(screen.getByLabelText(/privacy|consenso|acconsento/i))
@@ -89,4 +93,38 @@ it('honeypot filled: skips fetch and shows success', async () => {
     expect(container.querySelector('.lf-status')).not.toHaveAttribute('hidden'),
   )
   expect(fetch).not.toHaveBeenCalled()
+})
+
+it('blocks submit when the name is empty', async () => {
+  render(<LeadForm origine="vetrina" />)
+  // nome intentionally left blank
+  fireEvent.change(screen.getByLabelText(/telefono/i), { target: { value: '3331234567' } })
+  fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'a@b.it' } })
+  fireEvent.click(screen.getByLabelText(/privacy|consenso|acconsento/i))
+  fireEvent.submit(screen.getByRole('button', { name: /invia|richiedi/i }).closest('form')!)
+  await waitFor(() => expect(fetch).not.toHaveBeenCalled())
+  expect(pushMock).not.toHaveBeenCalled()
+})
+
+it('blocks submit when per_chi is required but not selected', async () => {
+  render(<LeadForm origine="ripetizioni" showPerChi />)
+  fireEvent.change(screen.getByLabelText(/nome/i), { target: { value: 'Ada' } })
+  fireEvent.change(screen.getByLabelText(/telefono/i), { target: { value: '3331234567' } })
+  fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'a@b.it' } })
+  fireEvent.click(screen.getByLabelText(/privacy|consenso|acconsento/i))
+  // per_chi radio intentionally left unselected
+  fireEvent.submit(screen.getByRole('button', { name: /invia|richiedi/i }).closest('form')!)
+  await waitFor(() => expect(fetch).not.toHaveBeenCalled())
+  expect(pushMock).not.toHaveBeenCalled()
+})
+
+it('submits a showPerChi form once per_chi is selected', async () => {
+  render(<LeadForm origine="ripetizioni" showPerChi />)
+  fireEvent.change(screen.getByLabelText(/nome/i), { target: { value: 'Ada' } })
+  fireEvent.change(screen.getByLabelText(/telefono/i), { target: { value: '3331234567' } })
+  fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'a@b.it' } })
+  fireEvent.click(screen.getByLabelText(/privacy|consenso|acconsento/i))
+  fireEvent.click(screen.getByLabelText(/per me/i))
+  fireEvent.submit(screen.getByRole('button', { name: /invia|richiedi/i }).closest('form')!)
+  await waitFor(() => expect(fetch).toHaveBeenCalled())
 })
