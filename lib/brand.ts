@@ -88,7 +88,7 @@ const BRANDS: Record<BrandId, Brand> = {
     platformHost: 'app.lascuola360.it',
     header: {
       showPhone: false,
-      primaryCta: { label: 'Iscriviti', href: '/iscrizioni' },
+      primaryCta: { label: 'Iscriviti', href: 'https://app.schoolr.net/signup' },
     },
     copy: {
       diverso: 'diversa',
