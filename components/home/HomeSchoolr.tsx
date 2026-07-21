@@ -248,26 +248,63 @@ export function HomeSchoolr() {
           </p>
 
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14 }}>
-            <a
-              href="https://www.lascuola360.it/ripetizioni"
-              style={{
-                fontFamily: "'Poppins',sans-serif",
-                fontWeight: 600,
-                fontSize: 16,
-                color: '#fff',
-                background: 'linear-gradient(135deg,#E3815A,#EC89C0)',
-                textDecoration: 'none',
-                padding: '16px 32px',
-                borderRadius: 999,
-                boxShadow: '0 10px 28px rgba(228,130,103,.34)',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 10,
-              }}
-            >
-              Entra in LaScuola360 <span style={{ fontSize: 18 }}>→</span>
-            </a>
-            <span style={{ fontSize: 14, color: '#5A626D' }}>Il tuo account resta lo stesso.</span>
+            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 14 }}>
+              <a
+                href="https://www.lascuola360.it/ripetizioni"
+                style={{
+                  fontFamily: "'Poppins',sans-serif",
+                  fontWeight: 600,
+                  fontSize: 16,
+                  color: '#fff',
+                  background: 'linear-gradient(135deg,#E3815A,#EC89C0)',
+                  textDecoration: 'none',
+                  padding: '16px 32px',
+                  borderRadius: 999,
+                  boxShadow: '0 10px 28px rgba(228,130,103,.34)',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 10,
+                }}
+              >
+                Entra in LaScuola360 <span style={{ fontSize: 18 }}>→</span>
+              </a>
+              <a
+                href="https://app.schoolr.net/"
+                style={{
+                  fontFamily: "'Poppins',sans-serif",
+                  fontWeight: 600,
+                  fontSize: 16,
+                  color: '#C7674E',
+                  background: '#fff',
+                  border: '1.5px solid #E4C3B6',
+                  textDecoration: 'none',
+                  padding: '14.5px 30.5px',
+                  borderRadius: 999,
+                  boxShadow: '0 6px 18px rgba(228,130,103,.12)',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 10,
+                }}
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2.2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  style={{ width: 18, height: 18 }}
+                >
+                  <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                  <polyline points="10 17 15 12 10 7" />
+                  <line x1="15" y1="12" x2="3" y2="12" />
+                </svg>
+                Accedi
+              </a>
+            </div>
+            <span style={{ fontSize: 14, color: '#5A626D' }}>
+              Il tuo account resta lo stesso: accedi come hai sempre fatto.
+            </span>
           </div>
 
           <div
