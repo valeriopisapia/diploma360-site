@@ -452,7 +452,7 @@ export function HomeSchoolr() {
             >
               4,7<span style={{ fontSize: 22 }}>/5</span>
             </div>
-            <div style={{ fontSize: '13.5px', color: '#5A626D', marginTop: 9 }}>su Trustpilot</div>
+            <div style={{ fontSize: '13.5px', color: '#5A626D', marginTop: 9 }}>su Google</div>
           </div>
         </div>
       </section>
