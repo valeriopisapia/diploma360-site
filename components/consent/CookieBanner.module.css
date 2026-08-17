@@ -1,4 +1,7 @@
-/* Component-specific overrides — base styles come from site.css .cookie-banner */
+/* Component-specific overrides — base layout/colors come from site.css .cookie-banner,
+ * .cookie-text, .cookie-actions. This module only adds what site.css doesn't know about yet:
+ * the three-category toggle list, the "always on" badge, the close affordance, and wrapping
+ * the (now three) action buttons on narrow screens. */
 .banner {
   /* Ensure banner sits above other content when visible */
   position: fixed;
@@ -6,4 +9,56 @@
   left: 0;
   right: 0;
   z-index: 9999;
+  padding-right: 44px; /* room for the close button */
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  color: var(--soft, #5a626d);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 999px;
+}
+
+.close:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin-top: 10px;
+}
+
+.category {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.category input[disabled] {
+  cursor: not-allowed;
+}
+
+.always {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  color: var(--soft, #5a626d);
+  margin-left: 4px;
+}
+
+.actions {
+  flex-wrap: wrap;
 }

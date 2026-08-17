@@ -128,3 +128,31 @@ it('submits a showPerChi form once per_chi is selected', async () => {
   fireEvent.submit(screen.getByRole('button', { name: /invia|richiedi/i }).closest('form')!)
   await waitFor(() => expect(fetch).toHaveBeenCalled())
 })
+
+// Task 6 — the checkbox is "presa visione" (art. 6.1.b GDPR), not consent:
+// contacting a lead who requested a quote doesn't need a consent checkbox.
+it('privacy checkbox label is "presa visione", not a consent request', () => {
+  const { container } = render(<LeadForm origine="vetrina" />)
+  const label = container.querySelector('.lf-consent')!
+  expect(label.textContent).toContain("Ho letto l'Informativa privacy")
+  expect(label.textContent?.toLowerCase()).not.toContain('acconsento')
+})
+
+it('privacy checkbox links to /privacy, opening in a new tab safely', () => {
+  const { container } = render(<LeadForm origine="vetrina" />)
+  const link = container.querySelector('.lf-consent a')!
+  expect(link).toHaveAttribute('href', '/privacy')
+  expect(link).toHaveAttribute('target', '_blank')
+  expect(link).toHaveAttribute('rel', expect.stringContaining('noopener'))
+})
+
+it('privacy checkbox is still required for submit', async () => {
+  render(<LeadForm origine="vetrina" />)
+  fireEvent.change(screen.getByLabelText(/nome/i), { target: { value: 'Ada' } })
+  fireEvent.change(screen.getByLabelText(/telefono/i), { target: { value: '3331234567' } })
+  fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'a@b.it' } })
+  // checkbox intentionally left unchecked
+  fireEvent.submit(screen.getByRole('button', { name: /invia|richiedi/i }).closest('form')!)
+  await waitFor(() => expect(fetch).not.toHaveBeenCalled())
+  expect(pushMock).not.toHaveBeenCalled()
+})

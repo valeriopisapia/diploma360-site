@@ -17,7 +17,14 @@ export type Brand = {
   logo: { header: string; lp: string; alt: string; ogImage: string }
   contacts: { telDisplay: string; telHref: string; whatsappUrl: string; email: string }
   gtmId: string
-  legal: { entity: string; iubendaPolicyId: string }
+  legal: {
+    entity: string
+    iubendaPolicyId: string
+    /** Cookie name that stores the user's consent choice (lib/consent.ts). Per-brand so
+     *  lascuola360's own cookie policy (published Task 1) names its own cookie; the other
+     *  brands keep the historical `d360_consent` name for continuity. */
+    consentCookieName: string
+  }
   /** Decorative host shown in the fake browser URL bars on the piattaforma mockups
    *  (e.g. "app.diploma360.it"). Not a real subdomain — display text only. */
   platformHost: string
@@ -59,7 +66,11 @@ const BRANDS: Record<BrandId, Brand> = {
     },
     contacts: SHARED_CONTACTS,
     gtmId: 'GTM-K5VMGM8C',
-    legal: { entity: 'Classme S.r.l.', iubendaPolicyId: '43474147' },
+    legal: {
+      entity: 'Classme S.r.l.',
+      iubendaPolicyId: '43474147',
+      consentCookieName: 'd360_consent',
+    },
     platformHost: 'app.diploma360.it',
     header: {
       showPhone: true,
@@ -84,7 +95,11 @@ const BRANDS: Record<BrandId, Brand> = {
     },
     contacts: { ...SHARED_CONTACTS, email: 'info@lascuola360.it' },
     gtmId: 'GTM-K5VMGM8C', // shared with Diploma360 (same GTM container / GA4 / Meta)
-    legal: { entity: 'Classme S.r.l.', iubendaPolicyId: '43474147' }, // same Iubenda policy (Classme)
+    legal: {
+      entity: 'Classme S.r.l.',
+      iubendaPolicyId: '43474147', // same Iubenda policy (Classme)
+      consentCookieName: 'lascuola360_consent',
+    },
     platformHost: 'app.lascuola360.it',
     header: {
       showPhone: false,
@@ -110,7 +125,11 @@ const BRANDS: Record<BrandId, Brand> = {
     contacts: SHARED_CONTACTS,
     // schoolr's own GTM container (GA4 G-Q0817JQ7RN + Meta pixel already configured)
     gtmId: 'GTM-K8W5CM7C',
-    legal: { entity: 'Classme S.r.l.', iubendaPolicyId: '43474147' },
+    legal: {
+      entity: 'Classme S.r.l.',
+      iubendaPolicyId: '43474147',
+      consentCookieName: 'd360_consent',
+    },
     platformHost: 'app.lascuola360.it', // unused placeholder
     header: {
       // unused — site chrome is hidden for schoolr (ChromeGate), page has its own header

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import './RipFooter.css'
 import { brand } from '@/lib/brand'
+import { OpenCookiePreferencesButton } from '@/components/consent/OpenCookiePreferencesButton'
 
 /**
  * RipFooter — La Scuola360 footer, ported from
@@ -103,6 +104,17 @@ export function RipFooter() {
                 <Link href={item.href}>{item.label}</Link>
               </span>
             ))}
+            {/* Task 5: cookie preferences control (a button — it dispatches an event, it
+             *  does not navigate) and the legal contact channel for recesso/reclami/diritti
+             *  privacy. Not part of LEGAL_LINKS (link-only data). */}
+            <span>
+              {' · '}
+              <OpenCookiePreferencesButton className="footer-cookie-btn" />
+            </span>
+            <span>
+              {' · '}
+              <Link href={`mailto:${brand.contacts.email}`}>{brand.contacts.email}</Link>
+            </span>
           </div>
         </div>
 

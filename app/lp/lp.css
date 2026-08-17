@@ -328,6 +328,8 @@ h1,h2,h3{font-family:Poppins,Inter,sans-serif;letter-spacing:-.03em;color:var(--
 .footer-col h4{font-family:Poppins;color:#fff;font-size:13px;letter-spacing:.02em;margin-bottom:12px;font-weight:700}
 .footer-col a,.footer-col .fc-item{display:block;color:#AEB5BF;font-size:13px;line-height:1.4;padding:6px 0;transition:color .15s}
 .footer-col a:hover{color:#fff}
+.footer-col button.footer-cookie-btn{display:block;width:100%;text-align:left;background:none;border:none;margin:0;font:inherit;color:#AEB5BF;font-size:13px;line-height:1.4;padding:6px 0;cursor:pointer;transition:color .15s}
+.footer-col button.footer-cookie-btn:hover{color:#fff}
 .footer-col .fc-item{color:#9097A1}
 .footer-col .fc-item b{color:#C7CDD6;font-weight:600;font-family:Inter}
 .footer-bottom{border-top:1px solid rgba(255,255,255,.1);margin-top:42px;padding-top:22px;display:flex;justify-content:space-between;gap:28px;flex-wrap:wrap;align-items:flex-start}

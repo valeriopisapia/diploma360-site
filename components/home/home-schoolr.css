@@ -7,6 +7,11 @@
   50%      { transform: translateX(5px); opacity: 1; }
 }
 
+/* Footer "Gestisci le preferenze sui cookie" button — reset to look like the surrounding
+   footer text, not a form control. */
+.sr-footer-cookie-btn { background: none; border: none; padding: 0; margin: 0; font: inherit; font-size: 12.5px; color: #AEB3BA; cursor: pointer; }
+.sr-footer-cookie-btn:hover { color: #fff; }
+
 /* Schoolr wordmark (replaces missing logo-schoolr.png) */
 .sr-logo-word {
   font-family: 'Poppins', sans-serif;

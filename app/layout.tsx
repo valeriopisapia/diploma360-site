@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { brand } from '@/lib/brand'
 import { ConsentDefault } from '@/components/gtm/ConsentDefault'
+import { ConsentFromStorage } from '@/components/gtm/ConsentFromStorage'
 import { GtmScript } from '@/components/gtm/GtmScript'
 import { SiteHeader } from '@/components/layout/SiteHeader'
 import { BrandFooter } from '@/components/layout/BrandFooter'
@@ -31,13 +32,15 @@ export default function RootLayout({
   return (
     <html lang="it">
       {/*
-        ConsentDefault MUST appear before GtmScript.
-        Placing it in <head> as a plain inline <script> ensures it executes
-        at parse time (before any deferred/interactive scripts run).
-        GtmScript (afterInteractive) sits first in <body> so the noscript
-        iframe fallback is also in the body, as the spec requires.
+        ConsentDefault MUST appear before ConsentFromStorage, which MUST appear before
+        GtmScript. All three are plain inline <script> elements (dangerouslySetInnerHTML,
+        not useEffect) so they execute at parse time in source order: default-deny first,
+        then re-apply any stored choice for returning visitors, then GTM's container script
+        (afterInteractive) reads a consent state that is already correct.
+        GtmScript sits first in <body> so the noscript iframe fallback is also in the body,
+        as the spec requires.
 
-        Google Fonts <link> tags follow ConsentDefault.  Using standard <link>
+        Google Fonts <link> tags follow the consent scripts.  Using standard <link>
         rel="stylesheet" loads fonts under their literal family names ('Inter',
         'Poppins') so site.css selectors resolve correctly.  next/font/google
         hashes the font-family name (e.g. __Inter_abc123), which breaks any
@@ -47,6 +50,7 @@ export default function RootLayout({
       */}
       <head>
         <ConsentDefault />
+        <ConsentFromStorage />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link

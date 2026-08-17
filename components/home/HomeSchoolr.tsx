@@ -1,6 +1,7 @@
 import './home-schoolr.css'
 import Image from 'next/image'
 import { brand } from '@/lib/brand'
+import { OpenCookiePreferencesButton } from '@/components/consent/OpenCookiePreferencesButton'
 
 /**
  * HomeSchoolr — Schoolr → LaScuola360 rebrand-announcement landing, ported 1:1 from
@@ -1495,6 +1496,28 @@ export function HomeSchoolr() {
             </span>
           </div>
           <div style={{ color: '#80868F' }}>© 2026 Classme S.r.l. · P.IVA 15441141007 · Viale Castrense 5, 00182 Roma</div>
+        </div>
+        {/* CookieBanner is mounted unconditionally by the root layout (RootLayout, outside
+           ChromeGate) — this row is the only way to reopen it on this self-contained page. */}
+        <div
+          style={{
+            maxWidth: 1180,
+            margin: '14px auto 0',
+            padding: '0 32px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 10,
+            flexWrap: 'wrap',
+            fontSize: 12.5,
+            color: '#80868F',
+          }}
+        >
+          <OpenCookiePreferencesButton className="sr-footer-cookie-btn" />
+          <span aria-hidden="true">·</span>
+          <a href={`mailto:${brand.contacts.email}`} style={{ color: '#AEB3BA' }}>
+            {brand.contacts.email}
+          </a>
         </div>
       </footer>
     </div>

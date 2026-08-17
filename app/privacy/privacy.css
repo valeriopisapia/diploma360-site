@@ -8,3 +8,6 @@
 .legal ul{margin:6px 0 6px 20px}
 .legal a{color:var(--coral-dk);font-weight:600;text-decoration:underline}
 .legal .card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:30px 34px;box-shadow:var(--shadow-sm)}
+.legal table{display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border-collapse:collapse;margin:16px 0}
+.legal th,.legal td{padding:8px 12px;border:1px solid var(--border);font-size:14px;text-align:left;vertical-align:top;white-space:nowrap}
+.legal .legal-meta{font-size:13px;color:var(--muted);margin-bottom:26px}

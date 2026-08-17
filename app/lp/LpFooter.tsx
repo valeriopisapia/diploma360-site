@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { brand } from '@/lib/brand'
+import { OpenCookiePreferencesButton } from '@/components/consent/OpenCookiePreferencesButton'
 
 /**
  * LpFooter — footer for the Ads landing funnel (own chrome, separate from the
@@ -64,7 +65,7 @@ export function LpFooter() {
             <h4>Contatti</h4>
             <a href="tel:+390684280999">06 84 280 999</a>
             <a href="https://wa.me/393517214644">Scrivici su WhatsApp</a>
-            <a href="mailto:info@diploma360.it">info@diploma360.it</a>
+            <a href={`mailto:${brand.contacts.email}`}>{brand.contacts.email}</a>
             <span className="fc-item"><b>Lun–Ven</b> 9:00–19:00</span>
           </div>
           <div className="footer-col">
@@ -72,6 +73,7 @@ export function LpFooter() {
             <a href="/privacy">Privacy Policy</a>
             <a href="/cookie">Cookie Policy</a>
             <a href="/termini">Termini e condizioni</a>
+            <OpenCookiePreferencesButton className="footer-cookie-btn" />
           </div>
         </div>
         <div className="footer-bottom">
