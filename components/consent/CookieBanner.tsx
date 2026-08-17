@@ -68,11 +68,18 @@ export function CookieBanner() {
     commit({ statistics, marketing })
   }
 
-  /** Closing/ignoring the banner is NOT a choice: only technical cookies apply, for this
-   *  session only (applyConsent with both flags off — mirrors "denied" default). No cookie
-   *  is written, so the banner reappears on the next visit. */
+  /** The X means "cancel", and what cancelling does depends on whether a choice already exists.
+   *
+   *  Nothing stored (first visit): closing is NOT a choice — only technical cookies apply, for
+   *  this session only (applyConsent with both flags off, mirroring the "denied" default). No
+   *  cookie is written, so the banner reappears on the next visit.
+   *
+   *  A choice already stored (banner reopened from the footer): closing changes nothing at all.
+   *  Revoking here would push the tags to denied for the rest of the SPA session while the
+   *  cookie still says granted, and the user asked to cancel — not to revoke. Revoking is done
+   *  by unticking the categories and saving. */
   function handleClose() {
-    applyConsent(false, false)
+    if (readConsent() === null) applyConsent(false, false)
     setVisible(false)
   }
 

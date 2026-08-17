@@ -143,6 +143,47 @@ describe('marketing attribution capture (mkt_attr) follows the choice', () => {
   })
 })
 
+describe('the X means "cancel", and cancel never revokes a stored choice', () => {
+  it('closing a REOPENED banner leaves the stored choice untouched and applies nothing', () => {
+    // Regression: handleClose used to call applyConsent(false, false) unconditionally. On a
+    // banner reopened from the footer that silently pushed the tags to denied for the rest of
+    // the SPA session while the cookie still said granted — UI and tags out of sync, and the
+    // user had asked to cancel, not to revoke.
+    writeConsent({ statistics: true, marketing: true })
+    render(<CookieBanner />)
+    fireEvent(document, new Event('d360:open-cookie-banner'))
+    vi.mocked(applyConsent).mockClear()
+
+    fireEvent.click(screen.getByRole('button', { name: /chiudi/i }))
+
+    expect(applyConsent).not.toHaveBeenCalled()
+    expect(readConsent()).toEqual({ statistics: true, marketing: true })
+    expect(screen.queryByRole('dialog')).toBeNull()
+  })
+
+  it('discards unsaved toggles instead of persisting them', () => {
+    writeConsent({ statistics: true, marketing: false })
+    render(<CookieBanner />)
+    fireEvent(document, new Event('d360:open-cookie-banner'))
+
+    fireEvent.click(screen.getByRole('checkbox', { name: /profilazione|marketing/i }))
+    fireEvent.click(screen.getByRole('button', { name: /chiudi/i }))
+
+    expect(readConsent()).toEqual({ statistics: true, marketing: false })
+    expect(applyConsent).not.toHaveBeenCalled()
+  })
+
+  it('still applies the session-only denied when nothing was ever stored', () => {
+    // First visit: closing is not a choice, so the tags stay denied for this session and no
+    // cookie is written — the banner has to come back next time.
+    render(<CookieBanner />)
+    fireEvent.click(screen.getByRole('button', { name: /chiudi/i }))
+
+    expect(applyConsent).toHaveBeenCalledWith(false, false)
+    expect(readConsent()).toBeNull()
+  })
+})
+
 it('none of the interactions ever touch localStorage (no legacy residue)', () => {
   render(<CookieBanner />)
   fireEvent.click(screen.getByRole('button', { name: /accetta tutti/i }))
