@@ -78,8 +78,16 @@ function migrateFromLegacyLocalStorage(): ConsentChoice | null {
 
   if (legacy !== 'all' && legacy !== 'necessary') return null
 
+  // 'all' migrates to statistics ONLY, never to marketing. The banner that wrote this value
+  // asked about one thing — "cookie di statistica per migliorare il sito" — and never
+  // mentioned profiling or advertising. Mapping 'all' to marketing:true would manufacture a
+  // consent the user was never asked for and could not have refused: not a valid consent, and
+  // it would silently switch the ad signals to granted for every returning visitor.
+  // Whoever wants marketing gets asked properly, via the banner's three categories.
   const migrated: ConsentChoice =
-    legacy === 'all' ? { statistics: true, marketing: true } : { statistics: false, marketing: false }
+    legacy === 'all'
+      ? { statistics: true, marketing: false }
+      : { statistics: false, marketing: false }
 
   writeConsent(migrated)
   try {

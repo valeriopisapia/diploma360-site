@@ -68,12 +68,21 @@ describe('consent (default brand: diploma360, cookie d360_consent)', () => {
     expect(readConsent()).toBeNull()
   })
 
-  it('migrates legacy localStorage "all" to full consent, writes the cookie, and clears the old key', async () => {
+  it('migrates legacy localStorage "all" to statistics ONLY — the old banner never asked about marketing', async () => {
     localStorage.setItem('d360_consent', 'all')
     const { readConsent } = await import('./consent')
-    expect(readConsent()).toEqual({ statistics: true, marketing: true })
-    expect(document.cookie).toContain('d360_consent=v1.s.m')
+    expect(readConsent()).toEqual({ statistics: true, marketing: false })
+    expect(document.cookie).toContain('d360_consent=v1.s._')
     expect(localStorage.getItem('d360_consent')).toBeNull()
+  })
+
+  it('the migration never fabricates marketing consent out of the legacy value', async () => {
+    // Guard against a well-meaning "all means all" simplification: the legacy banner's copy
+    // only ever mentioned statistics, so no marketing consent exists to migrate.
+    localStorage.setItem('d360_consent', 'all')
+    const { readConsent } = await import('./consent')
+    expect(readConsent()?.marketing).toBe(false)
+    expect(document.cookie).not.toContain('v1.s.m')
   })
 
   it('migrates legacy localStorage "necessary" to no consent, writes the cookie, and clears the old key', async () => {
