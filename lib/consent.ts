@@ -33,10 +33,17 @@ function cookieName(): string {
 }
 
 /** Builds the full `Set-Cookie`-style string written to `document.cookie`. Exported so its
- *  attributes (Max-Age, Path, SameSite) are testable without inspecting the live jar. */
+ *  attributes (Max-Age, Path, SameSite, Secure) are testable without inspecting the live jar.
+ *
+ *  `Secure` is conditional on the page being served over https, same idiom as
+ *  lib/attribution.ts: browsers reject a `Secure` cookie on a plain-http origin, so setting it
+ *  unconditionally would silently drop the consent choice in local development and make the
+ *  banner reappear on every page load. */
 export function serializeConsentCookie(c: ConsentChoice): string {
   const value = `v1.${c.statistics ? 's' : '_'}.${c.marketing ? 'm' : '_'}`
-  return `${cookieName()}=${value}; Max-Age=${MAX_AGE_SECONDS}; Path=/; SameSite=Lax`
+  const secure =
+    typeof location !== 'undefined' && location.protocol === 'https:' ? '; Secure' : ''
+  return `${cookieName()}=${value}; Max-Age=${MAX_AGE_SECONDS}; Path=/; SameSite=Lax${secure}`
 }
 
 export function writeConsent(c: ConsentChoice): void {

@@ -12,7 +12,17 @@ function clearAllCookies() {
   }
 }
 
+const DEFAULT_URL = 'http://localhost:3000/'
+
+/** The `Secure` attribute is conditional on the page being served over https, so these tests
+ *  drive the protocol directly. happy-dom's own URL setter is used rather than stubbing
+ *  `location`, which is not configurable. */
+function setUrl(url: string) {
+  ;(window as unknown as { happyDOM: { setURL(u: string): void } }).happyDOM.setURL(url)
+}
+
 beforeEach(() => {
+  setUrl(DEFAULT_URL)
   clearAllCookies()
   localStorage.clear()
 })
@@ -20,6 +30,7 @@ beforeEach(() => {
 afterEach(() => {
   clearAllCookies()
   localStorage.clear()
+  setUrl(DEFAULT_URL)
   vi.doUnmock('@/lib/brand')
   vi.resetModules()
 })
@@ -47,6 +58,35 @@ describe('consent (default brand: diploma360, cookie d360_consent)', () => {
     expect(str).toContain('Max-Age=15552000')
     expect(str).toContain('Path=/')
     expect(str).toContain('SameSite=Lax')
+  })
+
+  it('serializeConsentCookie adds Secure over https', async () => {
+    setUrl('https://lascuola360.it/')
+    const { serializeConsentCookie } = await import('./consent')
+    expect(serializeConsentCookie({ statistics: true, marketing: false })).toContain('; Secure')
+  })
+
+  it('serializeConsentCookie omits Secure over plain http (local dev would drop the cookie)', async () => {
+    setUrl('http://localhost:3000/')
+    const { serializeConsentCookie } = await import('./consent')
+    expect(serializeConsentCookie({ statistics: true, marketing: false })).not.toContain('Secure')
+  })
+
+  it('the Secure flag does not disturb the rest of the attributes', async () => {
+    setUrl('https://lascuola360.it/')
+    const { serializeConsentCookie } = await import('./consent')
+    const str = serializeConsentCookie({ statistics: false, marketing: true })
+    expect(str).toContain('d360_consent=v1._.m')
+    expect(str).toContain('Max-Age=15552000')
+    expect(str).toContain('Path=/')
+    expect(str).toContain('SameSite=Lax')
+  })
+
+  it('roundtrips over https — the written cookie is still readable', async () => {
+    setUrl('https://lascuola360.it/')
+    const { writeConsent, readConsent } = await import('./consent')
+    writeConsent({ statistics: true, marketing: false })
+    expect(readConsent()).toEqual({ statistics: true, marketing: false })
   })
 
   it('serializeConsentCookie encodes both flags on', async () => {
