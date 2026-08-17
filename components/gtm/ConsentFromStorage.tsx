@@ -20,6 +20,14 @@ import { brand } from '@/lib/brand'
  * The cookie-parsing regex mirrors lib/consent.ts's `v1.<s|_>.<m|_>` format on purpose
  * (duplicated, not imported): this script must have zero module dependencies to stay
  * inlineable at parse time. It is a single anchored regex — no eval, no dependencies.
+ *
+ * The gtag payload below also duplicates lib/analytics.ts's applyConsent() category -> keys
+ * map (statistics -> analytics_storage; marketing -> ad_storage + ad_user_data +
+ * ad_personalization), for the same "must stay dependency-free" reason. Both duplications
+ * (cookie format AND category map) are guarded by ConsentFromStorage.test.tsx, which drives
+ * this script from a cookie built by the real lib/consent.ts serializer and cross-checks the
+ * resulting gtag call against applyConsent()'s own — so either map (or the cookie format)
+ * drifting out of sync turns that test red.
  */
 
 function buildScript(cookieName: string): string {
