@@ -1,6 +1,9 @@
+'use client'
+
 import Link from 'next/link'
 import { footerNav } from '@/data/navigazione'
 import { brand } from '@/lib/brand'
+import { OpenCookiePreferencesButton } from '@/components/consent/OpenCookiePreferencesButton'
 
 /** Footer column group labels rendered as nav columns. */
 const COLUMN_LABELS = ['Percorso', brand.name, 'Contatti'] as const
@@ -10,6 +13,10 @@ export function Footer() {
     label => footerNav.find(g => g.label === label)!
   )
   const legalGroup = footerNav.find(g => g.label === 'Legale')!
+  // The "Gestisci le preferenze" control and the contact mailto (Task 5) are NOT part of
+  // footerNav.Legale: NavColumn.items is href-only (link data), but the preferences control
+  // must be a real <button> (it dispatches an event, it does not navigate) — so both are
+  // rendered here as a special case rather than forced into the link-only nav model.
 
   return (
     <footer className="site-footer">
@@ -73,6 +80,14 @@ export function Footer() {
                 <Link href={item.href}>{item.label}</Link>
               </span>
             ))}
+            <span>
+              {' · '}
+              <OpenCookiePreferencesButton className="footer-cookie-btn" />
+            </span>
+            <span>
+              {' · '}
+              <Link href={`mailto:${brand.contacts.email}`}>{brand.contacts.email}</Link>
+            </span>
           </div>
         </div>
       </div>
