@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { applyConsent } from '@/lib/analytics'
-import { captureAttribution } from '@/lib/attribution'
+import { captureAttribution, clearAttribution } from '@/lib/attribution'
 import { readConsent, writeConsent, type ConsentChoice } from '@/lib/consent'
 import styles from './CookieBanner.module.css'
 
@@ -59,7 +59,11 @@ export function CookieBanner() {
     // click identifiers are still in location.search, so nothing is lost by waiting for the
     // choice. Order matters: captureAttribution reads the consent cookie itself, so it has to
     // run *after* writeConsent — before it, it would read the previous value and skip.
+    // Saving a choice WITHOUT marketing is a revocation and deletes the cookie: it lasts 90
+    // days and pushLead() spreads it into every lead, so leaving it would keep attributing
+    // after the user said no. Only on a saved choice — the X goes through handleClose.
     if (choice.marketing) captureAttribution()
+    else clearAttribution()
     setVisible(false)
   }
 

@@ -1,6 +1,6 @@
 // lib/attribution.test.ts
 import { it, expect, beforeEach, describe } from 'vitest'
-import { captureAttribution, getAttribution, ATTR_PARAMS } from './attribution'
+import { captureAttribution, clearAttribution, getAttribution, ATTR_PARAMS } from './attribution'
 import { writeConsent } from './consent'
 
 // happy-dom: clear cookies between tests. `expires` in the past is the portable deletion
@@ -86,6 +86,14 @@ describe('consent gate: mkt_attr is an advertising cookie', () => {
     expect(getAttribution()).toEqual({ gclid: 'ABC123' })
   })
 
+  it('a revoked choice stops any further capture', () => {
+    writeConsent({ statistics: false, marketing: true })
+    captureAttribution('?gclid=ABC123')
+    writeConsent({ statistics: true, marketing: false })
+    captureAttribution('?gclid=LATER')
+    expect(getAttribution()).not.toHaveProperty('gclid', 'LATER')
+  })
+
   it('captures on a later call once consent arrives, params still in the URL', () => {
     // The landing-page sequence: page loads with the ad params but no choice yet (nothing
     // written), then the visitor accepts marketing and the banner re-runs the capture.
@@ -102,4 +110,73 @@ it('returns {} for a malformed cookie without throwing', () => {
   document.cookie = 'mkt_attr=%7Bnot-json; path=/'
   expect(() => getAttribution()).not.toThrow()
   expect(getAttribution()).toEqual({})
+})
+
+describe('clearAttribution: revoking marketing consent removes the stored attribution', () => {
+  it('deletes an existing mkt_attr cookie from the jar', () => {
+    grantMarketing()
+    captureAttribution('?gclid=ABC123&utm_source=google')
+    expect(hasStoredAttribution()).toBe(true)
+
+    clearAttribution()
+
+    expect(hasStoredAttribution()).toBe(false)
+  })
+
+  it('leaves getAttribution() empty and non-throwing afterwards', () => {
+    // pushLead() spreads getAttribution() into the dataLayer on every lead. Once the cookie is
+    // gone it has to read as "no attribution", not blow up mid-submit.
+    grantMarketing()
+    captureAttribution('?gclid=ABC123')
+    clearAttribution()
+
+    expect(() => getAttribution()).not.toThrow()
+    expect(getAttribution()).toEqual({})
+  })
+
+  it('is a harmless no-op when there is nothing stored', () => {
+    expect(() => clearAttribution()).not.toThrow()
+    expect(getAttribution()).toEqual({})
+  })
+
+  it('does not resurrect the data on a later read of the same page', () => {
+    grantMarketing()
+    captureAttribution('?gclid=ABC123')
+    clearAttribution()
+    // consent is still "granted" in the cookie at this point: clearing must not be undone by
+    // a subsequent capture that finds no params in the URL
+    captureAttribution('?foo=bar')
+    expect(getAttribution()).toEqual({})
+  })
+})
+
+describe('pushLead after a revocation (real modules, real cookie jar)', () => {
+  it('sends no attribution and does not throw once the cookie is cleared', async () => {
+    // The coordinator's check: pushLead needs no change of its own — with the cookie gone,
+    // getAttribution() simply contributes nothing to the dataLayer entry.
+    const { pushLead } = await import('./analytics')
+    window.dataLayer = []
+
+    grantMarketing()
+    captureAttribution('?gclid=ABC123&utm_source=google')
+    clearAttribution()
+
+    expect(() => pushLead({ origine: 'vetrina', pagina: '/prezzi' })).not.toThrow()
+
+    const event = window.dataLayer.at(-1) as Record<string, unknown>
+    expect(event.event).toBe('lead_submit')
+    expect(event).not.toHaveProperty('gclid')
+    expect(event).not.toHaveProperty('utm_source')
+  })
+
+  it('still sends the attribution while the consent stands (control case)', async () => {
+    const { pushLead } = await import('./analytics')
+    window.dataLayer = []
+
+    grantMarketing()
+    captureAttribution('?gclid=ABC123')
+    pushLead({ origine: 'vetrina', pagina: '/prezzi' })
+
+    expect(window.dataLayer.at(-1)).toMatchObject({ gclid: 'ABC123' })
+  })
 })

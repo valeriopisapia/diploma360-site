@@ -12,6 +12,11 @@
  * exists yet and nothing is written: that is the intended behaviour, not a lost capture.
  * The banner re-runs the capture as soon as marketing is accepted (see CookieBanner.commit),
  * while the ad params are still in `location.search` on the landing page.
+ *
+ * REVOCATION: symmetrically, saving a choice without marketing deletes the cookie
+ * (`clearAttribution`). The policy promises revocation takes effect immediately, and this
+ * cookie lives 90 days and is spread into every `lead_submit` by `pushLead()` — left behind it
+ * would let the site honour a revocation on paper while still attributing in practice.
  */
 
 import { readConsent } from '@/lib/consent'
@@ -40,6 +45,20 @@ function readCookie(): Attr {
 
 export function getAttribution(): Attr {
   return readCookie()
+}
+
+/** Deletes the attribution cookie. Called when a choice without marketing is SAVED — never on
+ *  the X, which means "cancel" and must not destroy data the stored choice still allows
+ *  (see CookieBanner.handleClose).
+ *
+ *  Deletion uses `expires` in the past rather than `max-age=0`: it is the portable idiom, and
+ *  the one this project already relies on. `Path` and `Secure` mirror what `captureAttribution`
+ *  writes — a delete only matches a cookie with the same name/path, and on https a non-Secure
+ *  write cannot overwrite a Secure cookie. */
+export function clearAttribution(): void {
+  if (typeof document === 'undefined') return
+  const secure = typeof location !== 'undefined' && location.protocol === 'https:' ? '; Secure' : ''
+  document.cookie = `${COOKIE}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; SameSite=Lax${secure}`
 }
 
 export function captureAttribution(search?: string): void {

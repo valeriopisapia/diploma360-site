@@ -1,9 +1,9 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { vi, beforeEach, afterEach, it, expect, describe } from 'vitest'
 vi.mock('@/lib/analytics', () => ({ applyConsent: vi.fn() }))
-vi.mock('@/lib/attribution', () => ({ captureAttribution: vi.fn() }))
+vi.mock('@/lib/attribution', () => ({ captureAttribution: vi.fn(), clearAttribution: vi.fn() }))
 import { applyConsent } from '@/lib/analytics'
-import { captureAttribution } from '@/lib/attribution'
+import { captureAttribution, clearAttribution } from '@/lib/attribution'
 import { writeConsent, readConsent } from '@/lib/consent'
 import { CookieBanner } from './CookieBanner'
 
@@ -128,6 +128,38 @@ describe('marketing attribution capture (mkt_attr) follows the choice', () => {
     render(<CookieBanner />)
     fireEvent.click(screen.getByRole('button', { name: /chiudi/i }))
     expect(captureAttribution).not.toHaveBeenCalled()
+  })
+
+  it('rejecting everything clears any previously stored attribution', () => {
+    // The policy promises revocation takes effect immediately. A 90-day attribution cookie
+    // outliving the revocation would keep feeding pushLead(), so the site would be declaring a
+    // revocation while still attributing.
+    render(<CookieBanner />)
+    fireEvent.click(screen.getByRole('button', { name: /rifiuta tutti/i }))
+    expect(clearAttribution).toHaveBeenCalled()
+  })
+
+  it('saving preferences with marketing off clears the stored attribution', () => {
+    render(<CookieBanner />)
+    fireEvent.click(screen.getByRole('checkbox', { name: /statistic/i }))
+    fireEvent.click(screen.getByRole('button', { name: /salva preferenze/i }))
+    expect(clearAttribution).toHaveBeenCalled()
+  })
+
+  it('accepting marketing does NOT clear', () => {
+    render(<CookieBanner />)
+    fireEvent.click(screen.getByRole('button', { name: /accetta tutti/i }))
+    expect(clearAttribution).not.toHaveBeenCalled()
+  })
+
+  it('closing with the X clears nothing — cancelling is not a revocation', () => {
+    // Consistent with I1: the X on a reopened banner means "cancel", so it must not destroy
+    // data the stored choice still entitles us to keep.
+    writeConsent({ statistics: true, marketing: true })
+    render(<CookieBanner />)
+    fireEvent(document, new Event('d360:open-cookie-banner'))
+    fireEvent.click(screen.getByRole('button', { name: /chiudi/i }))
+    expect(clearAttribution).not.toHaveBeenCalled()
   })
 
   it('the capture runs after the consent cookie is written, never before', () => {
