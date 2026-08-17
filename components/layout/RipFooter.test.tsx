@@ -55,8 +55,14 @@ it('has a mailto link to the brand contact email', () => {
 })
 
 describe('integration: real RipFooter + real CookieBanner (lascuola360 seam)', () => {
+  // In the app, `gtag` is defined by the inline ConsentDefault script in <head>, parsed long
+  // before React mounts. This test mounts the banner without the layout around it, so it has
+  // to provide the same guarantee — the banner re-applies a stored choice at mount and would
+  // otherwise hit an undefined gtag that never happens in production.
   beforeEach(() => {
     clearAllCookies()
+    window.dataLayer = []
+    window.gtag = vi.fn()
   })
 
   afterEach(() => {

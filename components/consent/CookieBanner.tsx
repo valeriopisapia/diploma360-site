@@ -29,6 +29,13 @@ export function CookieBanner() {
     }
     setStatistics(stored.statistics)
     setMarketing(stored.marketing)
+    // Re-apply the stored choice. Redundant with the inline ConsentFromStorage script for the
+    // ordinary returning visitor (harmless: same values, and gtag consent update is
+    // idempotent), but NOT redundant on the page load that migrates the legacy localStorage
+    // value: there the cookie does not exist yet when the inline script runs, readConsent()
+    // creates it right here, and without this call the whole session would stay denied
+    // despite a stored consent.
+    applyConsent(stored.statistics, stored.marketing)
   }, [])
 
   useEffect(() => {

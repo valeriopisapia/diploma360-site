@@ -14,8 +14,14 @@ function clearAllCookies() {
   }
 }
 
+/** In the app, `gtag` is defined by the inline ConsentDefault script in <head>, parsed long
+ *  before React mounts. These integration tests mount the banner without the layout around
+ *  it, so they have to provide the same guarantee — the banner re-applies a stored choice at
+ *  mount and would otherwise hit an undefined gtag that never happens in production. */
 beforeEach(() => {
   clearAllCookies()
+  window.dataLayer = []
+  window.gtag = vi.fn()
 })
 
 afterEach(() => {

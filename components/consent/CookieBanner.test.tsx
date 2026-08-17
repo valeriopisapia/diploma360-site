@@ -143,6 +143,38 @@ describe('marketing attribution capture (mkt_attr) follows the choice', () => {
   })
 })
 
+describe('a stored choice is re-applied at mount', () => {
+  it('applies the stored choice on mount instead of leaving the page denied', () => {
+    // The inline ConsentFromStorage script covers the normal returning visitor, but it runs
+    // before the bundle and can only see a cookie that already exists.
+    writeConsent({ statistics: true, marketing: true })
+    render(<CookieBanner />)
+    expect(applyConsent).toHaveBeenCalledWith(true, true)
+  })
+
+  it('applies a partial stored choice verbatim', () => {
+    writeConsent({ statistics: true, marketing: false })
+    render(<CookieBanner />)
+    expect(applyConsent).toHaveBeenCalledWith(true, false)
+  })
+
+  it('applies the migrated choice on the page load that performs the migration', () => {
+    // The migration path is the one the inline script cannot help with: at that point the
+    // cookie does not exist yet, readConsent() creates it here — so without this, the whole
+    // first page load after the migration stayed denied despite a stored consent.
+    localStorage.setItem('d360_consent', 'all')
+    render(<CookieBanner />)
+    expect(applyConsent).toHaveBeenCalledWith(true, false)
+    expect(screen.queryByRole('dialog')).toBeNull()
+  })
+
+  it('applies nothing at mount when no choice is stored (the banner asks instead)', () => {
+    render(<CookieBanner />)
+    expect(applyConsent).not.toHaveBeenCalled()
+    expect(screen.getByRole('dialog')).toBeInTheDocument()
+  })
+})
+
 describe('the X means "cancel", and cancel never revokes a stored choice', () => {
   it('closing a REOPENED banner leaves the stored choice untouched and applies nothing', () => {
     // Regression: handleClose used to call applyConsent(false, false) unconditionally. On a
@@ -165,6 +197,7 @@ describe('the X means "cancel", and cancel never revokes a stored choice', () =>
     writeConsent({ statistics: true, marketing: false })
     render(<CookieBanner />)
     fireEvent(document, new Event('d360:open-cookie-banner'))
+    vi.mocked(applyConsent).mockClear() // mount re-applies the stored choice; not what this asserts
 
     fireEvent.click(screen.getByRole('checkbox', { name: /profilazione|marketing/i }))
     fireEvent.click(screen.getByRole('button', { name: /chiudi/i }))
