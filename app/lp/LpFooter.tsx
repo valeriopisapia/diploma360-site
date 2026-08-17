@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { brand } from '@/lib/brand'
+import { OpenCookiePreferencesButton } from '@/components/consent/OpenCookiePreferencesButton'
 
 /**
  * LpFooter — footer for the Ads landing funnel (own chrome, separate from the
@@ -72,6 +73,7 @@ export function LpFooter() {
             <a href="/privacy">Privacy Policy</a>
             <a href="/cookie">Cookie Policy</a>
             <a href="/termini">Termini e condizioni</a>
+            <OpenCookiePreferencesButton className="footer-cookie-btn" />
           </div>
         </div>
         <div className="footer-bottom">
