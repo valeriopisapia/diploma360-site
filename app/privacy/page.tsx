@@ -1,6 +1,7 @@
 import { buildMetadata } from '@/lib/seo'
 import { brand } from '@/lib/brand'
 import { IubendaPolicy } from '@/components/legal/IubendaPolicy'
+import { LegalHtml } from '@/components/legal/LegalHtml'
 import './privacy.css'
 
 export const metadata = buildMetadata({
@@ -10,13 +11,18 @@ export const metadata = buildMetadata({
 })
 
 export default function Privacy() {
+  const inHouse = brand.id === 'lascuola360'
   return (
     <main className="section">
       <div className="wrap">
-        <div className="legal">
-          <h1>Privacy Policy</h1>
-          <IubendaPolicy type="privacy" />
-        </div>
+        {inHouse ? (
+          <LegalHtml doc="privacy" />
+        ) : (
+          <div className="legal">
+            <h1>Privacy Policy</h1>
+            <IubendaPolicy type="privacy" />
+          </div>
+        )}
       </div>
     </main>
   )
