@@ -1,7 +1,9 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { vi, beforeEach, afterEach, it, expect, describe } from 'vitest'
 vi.mock('@/lib/analytics', () => ({ applyConsent: vi.fn() }))
+vi.mock('@/lib/attribution', () => ({ captureAttribution: vi.fn() }))
 import { applyConsent } from '@/lib/analytics'
+import { captureAttribution } from '@/lib/attribution'
 import { writeConsent, readConsent } from '@/lib/consent'
 import { CookieBanner } from './CookieBanner'
 
@@ -90,6 +92,55 @@ it('closing without choosing applies only-technical for the session, writes NO c
   expect(readConsent()).toBeNull()
   expect(applyConsent).toHaveBeenCalledWith(false, false)
   expect(screen.queryByRole('dialog')).toBeNull()
+})
+
+describe('marketing attribution capture (mkt_attr) follows the choice', () => {
+  // lib/attribution refuses to write without marketing consent, so on the landing page the
+  // ad params are still in location.search but nothing has been captured yet. Whoever accepts
+  // marketing must have the capture re-run right away, or the click id is lost for good.
+  it('accept all re-runs the capture', () => {
+    render(<CookieBanner />)
+    fireEvent.click(screen.getByRole('button', { name: /accetta tutti/i }))
+    expect(captureAttribution).toHaveBeenCalled()
+  })
+
+  it('saving preferences with marketing on re-runs the capture', () => {
+    render(<CookieBanner />)
+    fireEvent.click(screen.getByRole('checkbox', { name: /profilazione|marketing/i }))
+    fireEvent.click(screen.getByRole('button', { name: /salva preferenze/i }))
+    expect(captureAttribution).toHaveBeenCalled()
+  })
+
+  it('reject all does NOT capture', () => {
+    render(<CookieBanner />)
+    fireEvent.click(screen.getByRole('button', { name: /rifiuta tutti/i }))
+    expect(captureAttribution).not.toHaveBeenCalled()
+  })
+
+  it('saving preferences with statistics only does NOT capture', () => {
+    render(<CookieBanner />)
+    fireEvent.click(screen.getByRole('checkbox', { name: /statistic/i }))
+    fireEvent.click(screen.getByRole('button', { name: /salva preferenze/i }))
+    expect(captureAttribution).not.toHaveBeenCalled()
+  })
+
+  it('closing with the X does NOT capture', () => {
+    render(<CookieBanner />)
+    fireEvent.click(screen.getByRole('button', { name: /chiudi/i }))
+    expect(captureAttribution).not.toHaveBeenCalled()
+  })
+
+  it('the capture runs after the consent cookie is written, never before', () => {
+    // Ordering matters: captureAttribution reads the consent cookie itself. Called before
+    // writeConsent it would read the *old* value and skip the write entirely.
+    let consentAtCaptureTime: string | null = null
+    vi.mocked(captureAttribution).mockImplementation(() => {
+      consentAtCaptureTime = readConsent() ? 'written' : 'missing'
+    })
+    render(<CookieBanner />)
+    fireEvent.click(screen.getByRole('button', { name: /accetta tutti/i }))
+    expect(consentAtCaptureTime).toBe('written')
+  })
 })
 
 it('none of the interactions ever touch localStorage (no legacy residue)', () => {

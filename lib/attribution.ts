@@ -4,7 +4,17 @@
  * landing URL and persists them in a brand-neutral first-party cookie so they
  * survive intra-site navigation and the client-side thank-you redirect.
  * Cookies are domain-scoped, so diploma360.it / lascuola360.it never share this.
+ *
+ * CONSENT: `mkt_attr` stores advertising click identifiers (gclid, fbclid, msclkid…), so it
+ * is an advertising cookie in substance whatever its first-party form — and the published
+ * cookie policy promises that no advertising tool activates before the visitor chooses.
+ * It is therefore written ONLY with marketing consent. On the very first load no choice
+ * exists yet and nothing is written: that is the intended behaviour, not a lost capture.
+ * The banner re-runs the capture as soon as marketing is accepted (see CookieBanner.commit),
+ * while the ad params are still in `location.search` on the landing page.
  */
+
+import { readConsent } from '@/lib/consent'
 
 const COOKIE = 'mkt_attr'
 const MAX_AGE = 60 * 60 * 24 * 90 // 90 days (Google Ads conversion window)
@@ -34,6 +44,7 @@ export function getAttribution(): Attr {
 
 export function captureAttribution(search?: string): void {
   if (typeof window === 'undefined') return
+  if (readConsent()?.marketing !== true) return
   const params = new URLSearchParams(search ?? window.location.search)
   const merged = readCookie()
   let changed = false

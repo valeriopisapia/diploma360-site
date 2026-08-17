@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { applyConsent } from '@/lib/analytics'
+import { captureAttribution } from '@/lib/attribution'
 import { readConsent, writeConsent, type ConsentChoice } from '@/lib/consent'
 import styles from './CookieBanner.module.css'
 
@@ -46,6 +47,12 @@ export function CookieBanner() {
   function commit(choice: ConsentChoice) {
     writeConsent(choice)
     applyConsent(choice.statistics, choice.marketing)
+    // Accepting marketing re-runs the attribution capture, which the first page load
+    // deliberately skipped for lack of consent (lib/attribution). On the ad landing page the
+    // click identifiers are still in location.search, so nothing is lost by waiting for the
+    // choice. Order matters: captureAttribution reads the consent cookie itself, so it has to
+    // run *after* writeConsent — before it, it would read the previous value and skip.
+    if (choice.marketing) captureAttribution()
     setVisible(false)
   }
 
