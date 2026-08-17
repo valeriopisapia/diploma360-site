@@ -75,6 +75,18 @@ Da eseguire **dopo** aver pubblicato il contenitore GTM (sezione 1) e **dopo** i
 sito con la nuova Cookie Policy. Tutti i passaggi vanno fatti su `lascuola360.it`; la sezione
 4 ripete i controlli essenziali sugli altri domini del gruppo.
 
+### Valori per brand (nome cookie di consenso)
+
+Il nome del cookie che memorizza la scelta dell'utente **cambia per dominio** — non è lo
+stesso ovunque. Dove nei passi seguenti si parla del "cookie di consenso", usare questa
+tabella:
+
+| Dominio | Nome cookie | Durata |
+|---|---|---|
+| `lascuola360.it` | `lascuola360_consent` | 180 giorni |
+| `diploma360.it` | `d360_consent` | 180 giorni |
+| `schoolr.net` | `d360_consent` | 180 giorni |
+
 ### 2.1 Nessun cookie di marketing prima della scelta
 
 - [ ] Aprire una **finestra di navigazione anonima**.
@@ -97,6 +109,18 @@ console.log('cookie attuali:', document.cookie || '(nessuno)');
 
 - [ ] Risultato atteso sulla prima riga: **`nessuno ✓`**. Se compare `PRESENTI ✗`, il blocco
       del Pixel (sezione 1) non è ancora efficace — non proseguire, tornare alla sezione 1.
+
+**Se il risultato è `PRESENTI ✗`, prima di concludere che il blocco non funziona:**
+
+- Controllare in GTM → **Versioni** che la versione **pubblicata** (non solo salvata) sia
+  quella con il controllo di consenso `ad_storage` sui tag pubblicitari (sezione 1.3).
+- Attendere qualche minuto: la propagazione della nuova versione non è sempre istantanea.
+- **Chiudere del tutto** la finestra anonima e **aprirne una nuova**: i cookie già scritti in
+  una finestra anonima aperta in precedenza non spariscono da soli finché quella finestra
+  resta aperta, anche ricaricando la pagina.
+- Se il problema persiste, aprire DevTools → **Network**, filtrare per `facebook` e
+  individuare quale richiesta scrive il cookie prima del consenso: identifica il tag
+  incriminato non ancora coperto dal blocco.
 
 ### 2.2 Accettando tutto, i cookie DEVONO comparire
 
@@ -124,16 +148,20 @@ console.log('cookie attuali:', document.cookie || '(nessuno)');
       nel passaggio precedente), non vuoto e non con le impostazioni di default.
 - [ ] Cambiare almeno una scelta (es. attivare la categoria "Statistica") e salvare.
 - [ ] Aprire DevTools → **Application → Cookies** → dominio del sito.
-- [ ] Verificare che il cookie **`lascuola360_consent`** sia presente, con il nuovo valore
+- [ ] Verificare che il cookie di consenso (nome secondo la tabella "Valori per brand" sopra —
+      su lascuola360.it è **`lascuola360_consent`**) sia presente, con il nuovo valore
       corrispondente alla scelta appena fatta, e una durata (colonna "Expires / Max-Age") di
-      circa **6 mesi** (180 giorni) da quel momento.
+      **180 giorni** (Max-Age `15552000`) da quel momento.
 
 ### 2.5 Controlli statici sulle tre pagine legali
 
 Sulle pagine `/termini`, `/privacy`, `/cookie` di lascuola360.it:
 
-- [ ] Nessun segnaposto **`[DATA]`** visibile in nessuna delle tre pagine.
-- [ ] Un solo **titolo principale (h1)** per pagina — nessuna pagina ne mostra due.
+- [ ] Nessun segnaposto **`[DATA]`** visibile **nel testo della pagina come appare a schermo**
+      (un `[DATA]` dentro un commento HTML non visibile non conta come errore).
+- [ ] Un solo **titolo principale (h1)** visibile a schermo per pagina — nessuna pagina ne
+      mostra due (contano solo i titoli effettivamente renderizzati, non eventuali h1 dentro
+      commenti HTML).
 - [ ] Le tabelle presenti scorrono orizzontalmente senza sfondare lo schermo, testate da un
       telefono (o dalla vista mobile del browser, larghezza intorno ai 375px).
 - [ ] Nessuna sezione relativa a **Klarna** visibile in nessuna delle tre pagine (va tolta
@@ -155,6 +183,11 @@ Dalla **cookie policy**:
 - [ ] Il link a **Meta** (informativa sui cookie/consenso Meta) apre correttamente.
 - [ ] Il link al **Garante per la protezione dei dati personali** apre correttamente.
 
+Per i tre link esterni (Google, Meta, Garante): controllare anche che il dominio mostrato
+nella barra degli indirizzi, una volta aperta la pagina, sia quello atteso (rispettivamente
+un dominio `google.com`, `meta.com`, `garanteprivacy.it`) e non un redirect verso un altro
+dominio.
+
 ---
 
 ## 3. Verifica brand secondari
@@ -171,9 +204,14 @@ non toccati da questa modifica) e usa lo stesso banner cookie su `schoolr.net`.
       "Gestisci le preferenze sui cookie" funzionino.
 
 Nota: diploma360.it condivide il contenitore GTM `GTM-K5VMGM8C` con lascuola360.it, quindi il
-blocco del Pixel fatto in sezione 1 si applica anche a diploma360.it. Schoolr.net usa un
-contenitore GTM separato (`GTM-K8W5CM7C`), non toccato da questa checklist — se anche lì è
-presente un Pixel Meta o altri tag pubblicitari, va valutato a parte se serve lo stesso blocco.
+blocco del Pixel fatto in sezione 1 si applica automaticamente anche a diploma360.it.
+Schoolr.net usa invece un contenitore GTM **separato** (`GTM-K8W5CM7C`), non toccato dalla
+sezione 1 di questo documento — va controllato a parte:
+
+- [ ] **Verificare se il contenitore `GTM-K8W5CM7C` (schoolr.net) contiene tag pubblicitari**
+      (Meta Pixel o altri, vedi l'elenco per tipo alla sezione 1.2): se sì, applicare la
+      stessa impostazione di consenso della sezione 1 (Impostazioni di consenso → Controlli
+      di consenso aggiuntivi richiesti → `ad_storage`) anche lì, e pubblicare il contenitore.
 
 ---
 
