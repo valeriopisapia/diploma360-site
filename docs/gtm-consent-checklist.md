@@ -5,19 +5,34 @@ diploma360.it / lascuola360.it. Da eseguire in console, non nel codice.
 
 ## ⚠️ Ordine di esecuzione — leggere prima di procedere
 
-**Questa checklist va completata PRIMA di pubblicare la nuova Cookie Policy sul sito.**
+Le due sezioni di questo documento hanno tempi diversi, e vanno tenuti distinti: la sezione 1
+si fa **prima** del merge, la sezione 2 si può fare **solo dopo** il deploy. Non è una
+contraddizione, è una sequenza — ma va letta bene, perché il collaudo della sezione 2 richiede
+il sito già online con i nuovi testi e quindi **non** può essere una condizione per mandarlo
+online.
 
 La nuova Cookie Policy dichiara che il Pixel di Meta viene bloccato finché l'utente non dà
 il consenso al marketing. Oggi non è così: il Pixel scrive il cookie `_fbp` al primo
 caricamento della pagina, prima di qualsiasi scelta dell'utente. Se la pagina `/cookie` va
 online prima che il blocco sia fatto e pubblicato in GTM, il sito dichiara un comportamento
-che non rispetta — è il primo problema da correggere prima di andare live.
+che non rispetta.
 
 Sequenza corretta:
 
-1. Sezione 1 di questo documento (console GTM) — blocco Pixel, pubblicazione contenitore.
-2. Sezione 2 di questo documento (collaudo da browser) — conferma che il blocco funziona.
-3. Solo a questo punto: via libera alla pubblicazione della pagina `/cookie`.
+1. **Sezione 1 — BLOCCANTE PRE-MERGE.** Console GTM: blocco dei tag pubblicitari e
+   pubblicazione del contenitore. Va **completata e pubblicata prima** che la MR con le nuove
+   pagine legali venga mergiata. Il contenitore GTM è indipendente dal deploy del sito: si può
+   (e si deve) sistemare prima, e la modifica è retrocompatibile — bloccare i tag senza
+   consenso non rompe nulla del sito attuale.
+2. **Sezione 2 — COLLAUDO IMMEDIATAMENTE POST-DEPLOY.** Da browser, sul sito già online con i
+   nuovi testi. Va eseguita **subito dopo il deploy**, non "quando capita": finché non è
+   spuntata, il sito sta dichiarando pubblicamente un comportamento che nessuno ha ancora
+   verificato sul campo.
+3. **Se la sezione 2 fallisce → rollback**, non "sistemiamo domani". In pratica: ripristinare
+   il deploy precedente delle pagine legali (o rimettere le vecchie policy Iubenda), così il
+   sito torna a non dichiarare una cosa che non rispetta, e solo dopo si indaga sulla causa in
+   console GTM. La discriminante è il punto 2.1: se prima di qualunque scelta compaiono
+   cookie di marketing, si è nel caso di rollback.
 
 ---
 
@@ -71,9 +86,11 @@ le modifiche sono salvate in bozza.
 
 ## 2. Collaudo post-deploy (da browser)
 
-Da eseguire **dopo** aver pubblicato il contenitore GTM (sezione 1) e **dopo** il deploy del
-sito con la nuova Cookie Policy. Tutti i passaggi vanno fatti su `lascuola360.it`; la sezione
-4 ripete i controlli essenziali sugli altri domini del gruppo.
+Da eseguire **subito dopo** il deploy del sito con la nuova Cookie Policy (e con il contenitore
+GTM della sezione 1 già pubblicato). Se un controllo di questa sezione fallisce, si applica la
+regola di rollback dell'"Ordine di esecuzione" in testa al documento. Tutti i passaggi vanno
+fatti su `lascuola360.it`; la sezione 3 ripete i controlli essenziali sugli altri domini del
+gruppo.
 
 ### Valori per brand (nome cookie di consenso)
 
@@ -153,7 +170,72 @@ console.log('cookie attuali:', document.cookie || '(nessuno)');
       corrispondente alla scelta appena fatta, e una durata (colonna "Expires / Max-Age") di
       **180 giorni** (Max-Age `15552000`) da quel momento.
 
-### 2.5 Controlli statici sulle tre pagine legali
+### 2.5 Percorso di migrazione (utente che aveva già scelto col vecchio banner)
+
+Chi ha visitato il sito prima di questa modifica ha la vecchia scelta salvata in
+`localStorage` sotto la chiave `d360_consent`, non in un cookie. Il sito la converte una volta
+sola, al primo caricamento utile. Da verificare che quella conversione avvenga davvero e che
+non regali consensi mai prestati.
+
+- [ ] Aprire una **finestra anonima** e andare sul sito.
+- [ ] Prima di toccare il banner, aprire la console (F12) e simulare il vecchio utente:
+
+```js
+// Simula un utente che aveva accettato col VECCHIO banner (che chiedeva solo la statistica).
+localStorage.setItem('d360_consent', 'all');
+location.reload();
+```
+
+- [ ] Dopo il reload, verificare che il banner **NON ricompaia**: la scelta precedente è stata
+      riconosciuta e non va richiesta di nuovo.
+- [ ] In DevTools → **Application → Cookies**, verificare che sia comparso il cookie di
+      consenso col nome del brand (su lascuola360.it: **`lascuola360_consent`**), con durata
+      180 giorni.
+- [ ] Verificare che il valore del cookie sia **`v1.s._`** e **non** `v1.s.m`: la statistica è
+      migrata, il marketing **no**. È voluto — il vecchio banner parlava solo di «cookie di
+      statistica per migliorare il sito» e non ha mai chiesto il marketing, quindi non c'è
+      nessun consenso pubblicitario da riportare.
+- [ ] In **Application → Local Storage**, verificare che la vecchia chiave `d360_consent` sia
+      stata **rimossa** (la conversione avviene una volta sola).
+- [ ] Ricaricare ancora e rilanciare lo script della sezione 2.1: devono comparire i cookie di
+      statistica (`_ga`) ma **non** quelli di marketing (`_fbp`, `_fbc`, `_gcl_au`) — coerente
+      con la migrazione di sopra.
+
+### 2.6 Percorso della X (chiudere il banner non è una scelta)
+
+- [ ] **Nuova finestra anonima**, andare sul sito, e chiudere il banner con la **X** in alto
+      (senza cliccare né Accetta né Rifiuta).
+- [ ] In DevTools → **Application → Cookies**: **nessun cookie di consenso** deve essere stato
+      scritto (chiudere non è una scelta, quindi non viene memorizzata).
+- [ ] Verificare che non compaiano cookie di marketing né di statistica.
+- [ ] **Chiudere del tutto** la finestra anonima, aprirne una nuova e tornare sul sito: il
+      banner **deve ricomparire**, perché la scelta non è mai stata data.
+- [ ] Controprova sul banner **riaperto dal footer** a scelta già salvata: dopo aver salvato
+      una scelta qualsiasi, riaprire le preferenze dal footer, cambiare una spunta **senza
+      salvare** e chiudere con la X. La scelta memorizzata deve restare **quella di prima**
+      (verificare il valore del cookie in Application → Cookies): lì la X vuol dire «annulla»,
+      non «revoca».
+
+### 2.7 Gli identificativi dichiarati nella policy sono quelli veri
+
+La Cookie Policy pubblicata nomina per esteso gli strumenti installati. Se gli ID dichiarati
+non fossero quelli realmente in uso, la pagina descriverebbe un altro sito. Da confrontare uno
+per uno con il contenitore reale:
+
+| Dichiarato in `/cookie` | Dove verificarlo |
+|---|---|
+| GA4 **`G-3QLZTYR5WK`** | GTM → tag GA4, campo ID misurazione; oppure in console `dataLayer` / richieste a `google-analytics.com` con `tid=G-3QLZTYR5WK` |
+| Meta Pixel **`1020929560296043`** | GTM → tag Meta Pixel, campo ID; oppure DevTools → Network, richiesta a `facebook.com/tr?id=1020929560296043` dopo aver accettato tutto |
+| Contenitore GTM **`GTM-K5VMGM8C`** | Barra del titolo del contenitore in GTM; oppure la richiesta a `googletagmanager.com/gtm.js?id=GTM-K5VMGM8C` |
+
+- [ ] GA4: l'ID che gira sul sito è `G-3QLZTYR5WK` (nessun'altra proprietà GA4 attiva non
+      dichiarata).
+- [ ] Meta Pixel: l'ID che gira sul sito è `1020929560296043`.
+- [ ] Il contenitore caricato è `GTM-K5VMGM8C`.
+- [ ] Se in Network compaiono **altri** ID di misurazione o pixel non elencati nella policy,
+      segnalarlo: o vanno rimossi, o la policy va integrata (l'elenco è dichiarato completo).
+
+### 2.8 Controlli statici sulle tre pagine legali
 
 Sulle pagine `/termini`, `/privacy`, `/cookie` di lascuola360.it:
 
@@ -167,7 +249,7 @@ Sulle pagine `/termini`, `/privacy`, `/cookie` di lascuola360.it:
 - [ ] Nessuna sezione relativa a **Klarna** visibile in nessuna delle tre pagine (va tolta
       finché il contratto con Klarna non è firmato).
 
-### 2.6 Link interni ed esterni — tutti devono rispondere
+### 2.9 Link interni ed esterni — tutti devono rispondere
 
 Dai **termini**:
 - [ ] `/prezzi` risponde (200, non 404).
@@ -217,9 +299,25 @@ sezione 1 di questo documento — va controllato a parte:
 
 ## 4. Chiusura
 
-- [ ] Tutti i punti delle sezioni 1 e 2 sono spuntati e verificati di persona.
+Due firme distinte, perché i due momenti sono distinti.
+
+**Prima del merge** (dopo la sola sezione 1):
+
+- [ ] Tutti i punti della sezione 1 sono spuntati e verificati di persona.
+- [ ] Il contenitore `GTM-K5VMGM8C` è **pubblicato** (non solo salvato in bozza) con il blocco
+      dei tag pubblicitari senza consenso `ad_storage`.
+- [ ] Confermo che si può procedere con il merge e il deploy delle nuove pagine legali.
+
+Nome e data: ________________________________
+
+**Subito dopo il deploy** (sezioni 2 e 3):
+
+- [ ] Tutti i punti della sezione 2 sono spuntati e verificati di persona sul sito online,
+      inclusi il percorso di migrazione (2.5), il percorso della X (2.6) e la corrispondenza
+      degli identificativi dichiarati (2.7).
 - [ ] La sezione 3 è stata verificata.
-- [ ] Confermo per iscritto che il blocco del Pixel è pubblicato e collaudato, ed è possibile
-      procedere con la pubblicazione della nuova Cookie Policy.
+- [ ] Nessun controllo è fallito. In caso contrario ho applicato il rollback previsto
+      nell'"Ordine di esecuzione" e segnalato l'esito, invece di lasciare online una policy
+      non ancora verificata.
 
 Nome e data: ________________________________
