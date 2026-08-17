@@ -1,5 +1,3 @@
-'use client'
-
 import Link from 'next/link'
 import './RipFooter.css'
 import { brand } from '@/lib/brand'
