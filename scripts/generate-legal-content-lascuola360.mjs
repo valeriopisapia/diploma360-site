@@ -1,9 +1,17 @@
 #!/usr/bin/env node
 /**
  * Genera i moduli in data/legal/lascuola360/{termini,privacy,cookie}.ts a partire dai
- * frammenti HTML legali forniti dal committente (fuori repo, percorso fisso su questa
- * macchina — vedi SOURCE_DIR). Conversione meccanica, testo statico: niente fs a runtime,
- * niente config di bundling. Non editare i .ts a mano: rilanciare questo script.
+ * frammenti HTML legali forniti dal committente, versionati in
+ * docs/legal-sources/lascuola360/ (vedi SOURCE_DIR). Conversione meccanica, testo statico:
+ * niente fs a runtime, niente config di bundling. Non editare i .ts a mano: rilanciare
+ * questo script.
+ *
+ * SORGENTI IN REPO: i frammenti stanno nel repo, non sul Desktop di chi li ha ricevuti, così
+ * che la CI e chiunque altro possano rigenerare l'output senza dipendere da una macchina.
+ * Una correzione al testo legale si fa nel sorgente committato e poi si rigenera.
+ * Per puntare altrove (es. un nuovo pacchetto del committente, prima di committarlo):
+ *
+ *   LEGAL_SOURCE_DIR="/percorso/al/pacchetto" node scripts/generate-legal-content-lascuola360.mjs
  *
  * Passi:
  *  1) rimuove il commento-istruzioni in testa al frammento (non va pubblicato)
@@ -36,7 +44,9 @@ import { fileURLToPath } from 'url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-const SOURCE_DIR = '/Users/valeriopisapia/Desktop/Lascuola360/Attivita 2'
+const SOURCE_DIR =
+  process.env.LEGAL_SOURCE_DIR ||
+  path.join(__dirname, '..', 'docs', 'legal-sources', 'lascuola360')
 const OUT_DIR = path.join(__dirname, '..', 'data', 'legal', 'lascuola360')
 const EFFECTIVE_DATE = '17 agosto 2026'
 const DOCS = ['termini', 'privacy', 'cookie']
