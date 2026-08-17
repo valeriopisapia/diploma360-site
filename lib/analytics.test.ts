@@ -2,7 +2,7 @@ import { it, expect, beforeEach, vi } from 'vitest'
 
 vi.mock('./attribution', () => ({ getAttribution: vi.fn(() => ({})) }))
 import { getAttribution } from './attribution'
-import { pushLead, grantConsent } from './analytics'
+import { pushLead, applyConsent } from './analytics'
 
 beforeEach(() => {
   (window as any).dataLayer = []
@@ -35,7 +35,30 @@ it('omits user_data entirely when all keys are empty', () => {
   expect(pushed).not.toHaveProperty('user_data')
 })
 
-it('grants all consent signals', () => {
-  grantConsent()
-  expect((window as any).dataLayer).toContainEqual(['consent','update',{ ad_storage:'granted', analytics_storage:'granted', ad_user_data:'granted', ad_personalization:'granted' }])
+it('applyConsent(true, true): analytics + all ad signals granted', () => {
+  applyConsent(true, true)
+  expect((window as any).dataLayer).toContainEqual(['consent','update',{
+    analytics_storage:'granted', ad_storage:'granted', ad_user_data:'granted', ad_personalization:'granted',
+  }])
+})
+
+it('applyConsent(true, false): analytics granted, ad signals denied', () => {
+  applyConsent(true, false)
+  expect((window as any).dataLayer).toContainEqual(['consent','update',{
+    analytics_storage:'granted', ad_storage:'denied', ad_user_data:'denied', ad_personalization:'denied',
+  }])
+})
+
+it('applyConsent(false, true): analytics denied, ad signals granted', () => {
+  applyConsent(false, true)
+  expect((window as any).dataLayer).toContainEqual(['consent','update',{
+    analytics_storage:'denied', ad_storage:'granted', ad_user_data:'granted', ad_personalization:'granted',
+  }])
+})
+
+it('applyConsent(false, false): everything denied', () => {
+  applyConsent(false, false)
+  expect((window as any).dataLayer).toContainEqual(['consent','update',{
+    analytics_storage:'denied', ad_storage:'denied', ad_user_data:'denied', ad_personalization:'denied',
+  }])
 })

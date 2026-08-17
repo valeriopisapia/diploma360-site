@@ -31,8 +31,8 @@ vi.mock('next/script', () => ({
   ),
 }))
 
-// CookieBanner pulls grantConsent from lib/analytics
-vi.mock('@/lib/analytics', () => ({ grantConsent: vi.fn() }))
+// CookieBanner pulls applyConsent from lib/analytics
+vi.mock('@/lib/analytics', () => ({ applyConsent: vi.fn() }))
 
 import RootLayout from './layout'
 
@@ -76,5 +76,28 @@ describe('RootLayout', () => {
     expect(consentIdx, 'ConsentDefault must precede GtmScript in source order').toBeLessThan(
       gtmIdx,
     )
+  })
+
+  it('scripts appear in order ConsentDefault -> ConsentFromStorage -> GtmScript', () => {
+    render(
+      <RootLayout>
+        <div>contenuto pagina</div>
+      </RootLayout>,
+    )
+    const fullHtml = document.documentElement.outerHTML
+    const consentDefaultIdx = fullHtml.indexOf('id="consent-default"')
+    const consentFromStorageIdx = fullHtml.indexOf('id="consent-from-storage"')
+    const gtmIdx = fullHtml.indexOf('id="gtm-loader"')
+    expect(consentDefaultIdx, 'ConsentDefault script not found').toBeGreaterThan(-1)
+    expect(consentFromStorageIdx, 'ConsentFromStorage script not found').toBeGreaterThan(-1)
+    expect(gtmIdx, 'GtmScript not found').toBeGreaterThan(-1)
+    expect(
+      consentDefaultIdx,
+      'ConsentDefault must precede ConsentFromStorage',
+    ).toBeLessThan(consentFromStorageIdx)
+    expect(
+      consentFromStorageIdx,
+      'ConsentFromStorage must precede GtmScript',
+    ).toBeLessThan(gtmIdx)
   })
 })

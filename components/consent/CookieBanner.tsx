@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { grantConsent } from '@/lib/analytics'
+import { applyConsent } from '@/lib/analytics'
 import styles from './CookieBanner.module.css'
 
 const CONSENT_KEY = 'd360_consent'
@@ -22,7 +22,7 @@ export function CookieBanner() {
 
   function handleAccept() {
     localStorage.setItem(CONSENT_KEY, 'all')
-    grantConsent()
+    applyConsent(true, true)
     setVisible(false)
   }
 
