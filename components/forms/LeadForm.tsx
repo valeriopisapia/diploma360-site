@@ -253,11 +253,26 @@ export function LeadForm({ origine, showPerChi = false, prodotto = 'Diploma' }: 
         aria-hidden="true"
       />
 
+      {/*
+        Task 6 (art. 6.1.b GDPR): contacting a lead who asked for a quote is
+        contract-preparation, not marketing — it doesn't need consent. This
+        checkbox is "presa visione" (acknowledgement of having read the privacy
+        notice), not a consent request, so it must never say "acconsento".
+        `name="consenso"` is kept as-is: it's part of the payload contract sent
+        to the backend/dataLayer (see handleSubmit above and /api/lead) —
+        renaming it is a backend/analytics contract change, out of scope here.
+        If this form ever collects DSA/BES or health-related data, that needs
+        its own separate, optional, explicit-consent checkbox — this form
+        doesn't ask for that today and the `messaggio` field must not be used
+        to solicit it either.
+      */}
       <label className="lf-consent">
         <input type="checkbox" name="consenso" required />{' '}
-        Ho letto la{' '}
-        <a href="/privacy">Privacy Policy</a>
-        {' '}e acconsento al trattamento dei dati.
+        Ho letto l&apos;
+        <a href="/privacy" target="_blank" rel="noopener">
+          Informativa privacy
+        </a>
+        .
       </label>
 
       <button type="submit" className="btn btn-primary btn-block" disabled={uiStatus === 'loading'}>
