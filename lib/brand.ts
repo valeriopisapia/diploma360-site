@@ -33,6 +33,9 @@ export type Brand = {
   header: {
     showPhone: boolean
     primaryCta: { label: string; href: string }
+    /** Login to the study platform. Shared across brands today (same app), modelled here so
+     *  header (desktop) and MobileMenu don't each hardcode the URL. */
+    loginUrl: string
   }
   /** Brand-specific copy fragments that can't be derived from `name` alone — gender agreement,
    *  and sentences where the brand name would otherwise appear twice. Keeps shared pages free of
@@ -52,6 +55,9 @@ const SHARED_CONTACTS = {
   whatsappUrl: 'https://wa.me/393517214644',
   email: 'info@diploma360.it',
 }
+
+// Same platform for every brand today, but kept as config (see Brand['header'].loginUrl).
+const SHARED_LOGIN_URL = 'https://app.schoolr.net/'
 
 const BRANDS: Record<BrandId, Brand> = {
   diploma360: {
@@ -75,6 +81,7 @@ const BRANDS: Record<BrandId, Brand> = {
     header: {
       showPhone: true,
       primaryCta: { label: 'Chiama ora', href: SHARED_CONTACTS.telHref },
+      loginUrl: SHARED_LOGIN_URL,
     },
     copy: {
       diverso: 'diverso',
@@ -104,6 +111,7 @@ const BRANDS: Record<BrandId, Brand> = {
     header: {
       showPhone: false,
       primaryCta: { label: 'Iscriviti', href: 'https://app.schoolr.net/signup' },
+      loginUrl: SHARED_LOGIN_URL,
     },
     copy: {
       diverso: 'diversa',
@@ -135,6 +143,7 @@ const BRANDS: Record<BrandId, Brand> = {
       // unused — site chrome is hidden for schoolr (ChromeGate), page has its own header
       showPhone: false,
       primaryCta: { label: 'Vai a LaScuola360', href: 'https://www.lascuola360.it/' },
+      loginUrl: SHARED_LOGIN_URL,
     },
     copy: {
       // unused — schoolr renders no shared pages
