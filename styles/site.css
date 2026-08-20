@@ -874,3 +874,14 @@ img{-webkit-user-drag:none;user-select:none}
 .hd .eb::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--coral)}
 .hd h2 .hl{color:var(--coral-dk)}
 .hd .sub{font-size:15.5px;color:#3F4754;line-height:1.65;margin:0;max-width:620px}
+
+/* === Menu mobile — azioni (Accedi + CTA di brand) ===
+   .header-cta e' display:none sotto i 980px: queste sono le stesse azioni riproposte
+   in fondo al menu mobile. Le regole generiche .mobile-menu a / .mobile-menu .btn
+   vincono per specificita' sulle .btn-*, quindi qui il pill va ridichiarato. */
+.mobile-menu .m-actions{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.mobile-menu .m-actions .btn{margin-top:0;border-radius:999px;padding:12px 18px;font-size:14px;justify-content:center}
+.mobile-menu .m-actions-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mobile-menu .m-actions-row .btn{width:100%}
+.mobile-menu .m-actions .btn-primary:hover{background:var(--grad);color:#fff}
+.mobile-menu .m-actions .btn-out:hover{background:var(--coral-lt);color:var(--coral-dk)}

@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { getHeaderNav } from '@/data/navigazione'
+import { brand } from '@/lib/brand'
 
 interface Props {
   isOpen: boolean
@@ -56,14 +57,26 @@ export function MobileMenu({ isOpen, onClose }: Props) {
         )
       )}
 
-      <Link
-        className="btn btn-primary btn-block"
-        href="/contatti"
-        style={{ marginTop: 12 }}
-        onClick={onClose}
-      >
-        Scopri il tuo percorso
-      </Link>
+      {/* Le azioni dell'header (.header-cta) sono nascoste sotto i 980px: qui sotto
+          tornano disponibili, altrimenti da mobile non esiste alcun accesso a
+          Accedi / alla CTA di brand. */}
+      <div className="m-actions">
+        <Link className="btn btn-primary btn-block" href="/contatti" onClick={onClose}>
+          Scopri il tuo percorso
+        </Link>
+        <div className="m-actions-row">
+          <a className="btn btn-out" href={brand.header.loginUrl} onClick={onClose}>
+            Accedi
+          </a>
+          <a
+            className="btn btn-out"
+            href={brand.header.primaryCta.href}
+            onClick={onClose}
+          >
+            {brand.header.primaryCta.label}
+          </a>
+        </div>
+      </div>
     </div>
   )
 }
