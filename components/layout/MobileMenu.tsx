@@ -57,25 +57,16 @@ export function MobileMenu({ isOpen, onClose }: Props) {
         )
       )}
 
-      {/* Le azioni dell'header (.header-cta) sono nascoste sotto i 980px: qui sotto
-          tornano disponibili, altrimenti da mobile non esiste alcun accesso a
-          Accedi / alla CTA di brand. */}
+      {/* .header-cta e' display:none sotto i 980px: da mobile "Accedi" sparirebbe del tutto.
+          La CTA primaria dell'header non serve qui — "Iscrizioni" e' gia' voce di menu e il
+          telefono e' nel footer. */}
       <div className="m-actions">
         <Link className="btn btn-primary btn-block" href="/contatti" onClick={onClose}>
           Scopri il tuo percorso
         </Link>
-        <div className="m-actions-row">
-          <a className="btn btn-out" href={brand.header.loginUrl} onClick={onClose}>
-            Accedi
-          </a>
-          <a
-            className="btn btn-out"
-            href={brand.header.primaryCta.href}
-            onClick={onClose}
-          >
-            {brand.header.primaryCta.label}
-          </a>
-        </div>
+        <a className="btn btn-out btn-block" href={brand.header.loginUrl} onClick={onClose}>
+          Accedi
+        </a>
       </div>
     </div>
   )
