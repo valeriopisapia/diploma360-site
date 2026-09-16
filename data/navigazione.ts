@@ -14,7 +14,7 @@ export type NavPromo = {
   accent: 'coral' | 'magenta'
 }
 export type NavItem =
-  | { kind: 'link'; label: string; href: string }
+  | { kind: 'link'; label: string; href: string; fullReload?: boolean }
   | { kind: 'mega'; label: string; columns: NavColumn[]; promo?: NavPromo }
 
 const DIPLOMA_NAV: NavItem[] = [
@@ -89,6 +89,7 @@ const LASCUOLA_NAV: NavItem[] = [
     cta: { label: 'Prenota la prova', href: '/ripetizioni#lead' },
   }},
   { kind: 'link', label: 'Chi siamo', href: '/chi-siamo' },
+  { kind: 'link', label: 'Blog', href: '/blog', fullReload: true },
 ]
 
 export function getHeaderNav(): NavItem[] {

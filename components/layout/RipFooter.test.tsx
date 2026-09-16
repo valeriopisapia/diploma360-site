@@ -33,6 +33,13 @@ it('has a link to /termini', () => {
   expect(link).toHaveAttribute('href', '/termini')
 })
 
+it('links to the blog with a document navigation', () => {
+  render(<RipFooter />)
+  const link = screen.getByRole('link', { name: 'Blog' })
+  expect(link).toHaveAttribute('href', '/blog')
+  expect(link.tagName).toBe('A')
+})
+
 it('has a "Gestisci le preferenze sui cookie" BUTTON (not a link)', () => {
   render(<RipFooter />)
   const el = screen.getByRole('button', { name: /gestisci le preferenze sui cookie/i })

@@ -1,4 +1,4 @@
-import { it, expect } from 'vitest'
+import { afterEach, expect, it, vi } from 'vitest'
 import { footerNav, getHeaderNav } from './navigazione'
 
 it('diploma360 nav: Home, Come funziona▾, Diplomi, Prezzi, Chi siamo', () => {
@@ -28,4 +28,25 @@ it('header is non-empty and all hrefs are clean routes', () => {
 it('footer links to legal pages', () => {
   const hrefs = footerNav.flatMap(g => g.items.map(i => i.href))
   expect(hrefs).toEqual(expect.arrayContaining(['/privacy', '/cookie', '/termini']))
+})
+
+afterEach(() => {
+  vi.unstubAllEnvs()
+  vi.resetModules()
+})
+
+it('shows Blog only in La Scuola360 navigation', async () => {
+  vi.stubEnv('NEXT_PUBLIC_BRAND', 'lascuola360')
+  vi.resetModules()
+  const { getHeaderNav } = await import('./navigazione')
+  expect(getHeaderNav()).toContainEqual({
+    kind: 'link', label: 'Blog', href: '/blog', fullReload: true,
+  })
+})
+
+it('does not change the other brand navigation', async () => {
+  vi.stubEnv('NEXT_PUBLIC_BRAND', 'diploma360')
+  vi.resetModules()
+  const { getHeaderNav } = await import('./navigazione')
+  expect(getHeaderNav().some(item => item.kind === 'link' && item.href === '/blog')).toBe(false)
 })

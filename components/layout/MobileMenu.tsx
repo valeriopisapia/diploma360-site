@@ -35,9 +35,15 @@ export function MobileMenu({ isOpen, onClose }: Props) {
     >
       {nav.map(item =>
         item.kind === 'link' ? (
-          <Link key={item.label} className="m-flat" href={item.href} onClick={onClose}>
-            {item.label}
-          </Link>
+          item.fullReload ? (
+            <a key={item.label} className="m-flat" href={item.href} onClick={onClose}>
+              {item.label}
+            </a>
+          ) : (
+            <Link key={item.label} className="m-flat" href={item.href} onClick={onClose}>
+              {item.label}
+            </Link>
+          )
         ) : (
           <details key={item.label} className="m-grp">
             <summary>

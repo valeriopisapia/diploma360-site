@@ -122,9 +122,13 @@ export function MegaMenu() {
     <nav className="mainnav">
       {nav.map((item, i) =>
         item.kind === 'link' ? (
-          <Link key={item.label} className="navlink" href={item.href}>
-            {item.label}
-          </Link>
+          item.fullReload ? (
+            <a key={item.label} className="navlink" href={item.href}>{item.label}</a>
+          ) : (
+            <Link key={item.label} className="navlink" href={item.href}>
+              {item.label}
+            </Link>
+          )
         ) : (
           renderMega(item, i)
         )

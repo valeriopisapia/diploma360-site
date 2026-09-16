@@ -20,6 +20,7 @@ const FOOTER_COLUMNS = [
       { label: 'Come funziona', href: '/come-funziona' },
       { label: 'Diplomi e indirizzi', href: '/diplomi' },
       { label: 'Prezzi e piani', href: '/prezzi' },
+      { label: 'Blog', href: '/blog' },
     ],
   },
   {
@@ -84,10 +85,10 @@ export function RipFooter() {
           {FOOTER_COLUMNS.map(col => (
             <div key={col.label} className="fcol">
               <h4>{col.label}</h4>
-              {col.items.map(item => (
-                <Link key={item.href} href={item.href}>
-                  {item.label}
-                </Link>
+              {col.items.map(item => item.href === '/blog' ? (
+                <a key={item.href} href={item.href}>{item.label}</a>
+              ) : (
+                <Link key={item.href} href={item.href}>{item.label}</Link>
               ))}
             </div>
           ))}
