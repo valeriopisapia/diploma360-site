@@ -8,7 +8,10 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/lp', '/api/'],
     },
-    sitemap: `${brand.domain}/sitemap.xml`,
+    sitemap:
+      brand.id === 'lascuola360'
+        ? [`${brand.domain}/sitemap.xml`, 'https://lascuola360.it/blog/sitemap.xml']
+        : `${brand.domain}/sitemap.xml`,
     host: brand.domain,
   }
 }
