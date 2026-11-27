@@ -11,7 +11,7 @@ it('uses the active brand domain and name', () => {
 
 it('builds canonical + index metadata', () => {
   const m = buildMetadata({ title: 'X', description: 'Y', path: '/prezzi' })
-  expect(m.alternates?.canonical).toBe('https://www.diploma360.it/prezzi')
+  expect(m.alternates?.canonical).toBe('https://diploma360.it/prezzi')
   expect(m.title).toBe('X')
 })
 it('sets noindex robots when asked', () => {

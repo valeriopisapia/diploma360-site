@@ -26,3 +26,35 @@ env:
     secret: BREVO_LIST_ID
     availability:
       - RUNTIME
+
+  # reCAPTCHA Enterprise (invisible, score-based) on the lead form — see lib/recaptcha.ts.
+  # Key `landing-lead-form` in GCP project schoolrcloud (domains: diploma360.it/.net,
+  # lascuola360.it, schoolr.net + subdomains; NOT *.hosted.app → on the hosted.app preview
+  # hosts no valid token is produced and the assessment fails).
+  # The site key is PUBLIC (it ends up in the browser bundle), not a secret. It is inlined
+  # at BUILD: changing/removing it needs a new rollout. Empty value → feature fully off.
+  # NOTE: values set in the App Hosting console (backend → Settings → Environment)
+  # OVERRIDE this file, per backend.
+  # The runtime service account needs roles/recaptchaenterprise.agent on schoolrcloud;
+  # without it the API answers 403 and the check fails OPEN (lead saved, warning logged).
+  - variable: NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+    value: 6LeDSTUuAAAAAGNeSTBkmAtGbHPSI8Eui-YcNSo3
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: RECAPTCHA_PROJECT_ID
+    value: schoolrcloud
+    availability:
+      - RUNTIME
+  # "false" = observe only (assess + log `reCAPTCHA: result=…`, never reject).
+  # "true"  = reject missing/invalid/wrong-action/low-score tokens with HTTP 400.
+  # Google errors/timeouts/403 always fail OPEN regardless of this flag.
+  - variable: RECAPTCHA_ENFORCE
+    value: "false"
+    availability:
+      - RUNTIME
+  # Optional: minimum score (0..1), default 0.3.
+  # - variable: RECAPTCHA_SCORE_THRESHOLD
+  #   value: "0.3"
+  #   availability:
+  #     - RUNTIME

@@ -48,7 +48,8 @@ const SOURCE_DIR =
   process.env.LEGAL_SOURCE_DIR ||
   path.join(__dirname, '..', 'docs', 'legal-sources', 'lascuola360')
 const OUT_DIR = path.join(__dirname, '..', 'data', 'legal', 'lascuola360')
-const EFFECTIVE_DATE = '17 agosto 2026'
+// Data di entrata in vigore per documento: si aggiorna solo quella del testo modificato.
+const EFFECTIVE_DATES = { termini: '17 agosto 2026', privacy: '27 novembre 2026', cookie: '27 novembre 2026' }
 const DOCS = ['termini', 'privacy', 'cookie']
 
 const publishGatedBlocks = process.env.PUBLISH_GATED_BLOCKS === '1'
@@ -75,7 +76,7 @@ for (const doc of DOCS) {
   let html = fs.readFileSync(srcPath, 'utf8')
   html = stripLeadingComment(html)
   html = stripContractGatedBlocks(html)
-  html = html.replaceAll('[DATA]', EFFECTIVE_DATE)
+  html = html.replaceAll('[DATA]', EFFECTIVE_DATES[doc])
 
   const outPath = path.join(OUT_DIR, `${doc}.ts`)
   fs.writeFileSync(
@@ -83,7 +84,7 @@ for (const doc of DOCS) {
     '// Generato dal pacchetto legale del 12/08/2026 — non modificare a mano il testo:\n' +
       '// correzioni ai contenuti passano dal responsabile di prodotto.\n' +
       '// Rigenerare con: node scripts/generate-legal-content-lascuola360.mjs\n' +
-      'export const updatedAt = ' + JSON.stringify(EFFECTIVE_DATE) + '\n' +
+      'export const updatedAt = ' + JSON.stringify(EFFECTIVE_DATES[doc]) + '\n' +
       'export const html = ' + JSON.stringify(html) + '\n',
   )
 }

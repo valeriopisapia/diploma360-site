@@ -156,3 +156,36 @@ it('privacy checkbox is still required for submit', async () => {
   await waitFor(() => expect(fetch).not.toHaveBeenCalled())
   expect(pushMock).not.toHaveBeenCalled()
 })
+
+function fillAndSubmit() {
+  fireEvent.change(screen.getByLabelText(/nome/i), { target: { value: 'Ada' } })
+  fireEvent.change(screen.getByLabelText(/telefono/i), { target: { value: '3331234567' } })
+  fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'a@b.it' } })
+  fireEvent.click(screen.getByLabelText(/privacy|consenso|acconsento/i))
+  fireEvent.submit(screen.getByRole('button', { name: /invia|richiedi/i }).closest('form')!)
+}
+
+it('server error: shows the WhatsApp/phone fallback, no redirect, no lead event', async () => {
+  vi.stubGlobal('fetch', vi.fn(async () => new Response('{"error":"x"}', { status: 400 })))
+  const { container } = render(<LeadForm origine="vetrina" />)
+  fillAndSubmit()
+  await waitFor(() => expect(container.querySelector('.lf-status')).not.toHaveAttribute('hidden'))
+  expect(container.querySelector('.lf-status')!.textContent).toContain('Invio non riuscito')
+  expect(container.querySelector('.lf-status a[href="tel:0684280999"]')).not.toBeNull()
+  expect(pushMock).not.toHaveBeenCalled()
+  expect(pushLead).not.toHaveBeenCalled()
+})
+
+it('429: shows a retry-later message with the same fallback contacts and re-enables the button', async () => {
+  vi.stubGlobal('fetch', vi.fn(async () => new Response('{"error":"x"}', { status: 429 })))
+  const { container } = render(<LeadForm origine="vetrina" />)
+  fillAndSubmit()
+  await waitFor(() => expect(container.querySelector('.lf-status')).not.toHaveAttribute('hidden'))
+  const status = container.querySelector('.lf-status')!
+  expect(status).toHaveClass('err')
+  expect(status.textContent).toContain('riprova tra qualche minuto')
+  expect(status.querySelector('a[href="https://wa.me/393517214644"]')).not.toBeNull()
+  expect(screen.getByRole('button', { name: /invia/i })).not.toBeDisabled()
+  expect(pushMock).not.toHaveBeenCalled()
+  expect(pushLead).not.toHaveBeenCalled()
+})

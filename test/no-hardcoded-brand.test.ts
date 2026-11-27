@@ -3,14 +3,15 @@ import { execSync } from 'node:child_process'
 
 // Brand name AND brand domain must come from lib/brand.ts, never be hardcoded in
 // copy/data/structured-data. Scans tracked source under app/, components/, data/
-// for the capitalised name literal `Diploma360` or the domain host `www.diploma360.it`.
+// for the capitalised name literal `Diploma360` or the domain host (`www.diploma360.it`, or the
+// canonical apex written as a URL, `https://diploma360.it`).
 // (The contact email `info@diploma360.it` has no `www.` and is intentionally NOT
 // matched — contacts are a separate, shared concern routed through brand.contacts.)
 it('has no hardcoded brand name or domain outside lib/brand.ts', () => {
   let out = ''
   try {
     out = execSync(
-      `git grep -n -I -E "Diploma360|www\\.diploma360\\.it" -- app components data ':!lib/brand.ts'`,
+      `git grep -n -I -E "Diploma360|www\\.diploma360\\.it|https?://diploma360\\.it" -- app components data ':!lib/brand.ts'`,
       { encoding: 'utf8' },
     )
   } catch {

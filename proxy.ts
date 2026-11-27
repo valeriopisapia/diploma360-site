@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { brand } from '@/lib/brand'
 
-const LASCUOLA_HOME = 'https://www.lascuola360.it/'
+const LASCUOLA_HOME = 'https://lascuola360.it/'
 
 // This repo's Next.js (16.2.9) deprecates the `middleware.ts` / `middleware()`
 // convention in favor of `proxy.ts` / `proxy()` (see

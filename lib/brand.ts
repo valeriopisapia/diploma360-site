@@ -13,6 +13,9 @@ export type BrandId = 'diploma360' | 'lascuola360' | 'schoolr'
 export type Brand = {
   id: BrandId
   name: string
+  /** Canonical origin (no trailing slash) used for canonical URLs, OpenGraph, robots
+   *  `Host`, sitemap and JSON-LD. Must be the host that answers 200 directly: App
+   *  Hosting redirects www → apex, so this is the APEX domain. */
   domain: string
   logo: { header: string; lp: string; alt: string; ogImage: string }
   contacts: { telDisplay: string; telHref: string; whatsappUrl: string; email: string }
@@ -63,7 +66,7 @@ const BRANDS: Record<BrandId, Brand> = {
   diploma360: {
     id: 'diploma360',
     name: 'Diploma360',
-    domain: 'https://www.diploma360.it',
+    domain: 'https://diploma360.it',
     logo: {
       header: '/assets-vetrina/logo-diploma360.png',
       lp: '/foto/logo-diploma360.png',
@@ -92,7 +95,7 @@ const BRANDS: Record<BrandId, Brand> = {
   lascuola360: {
     id: 'lascuola360',
     name: 'La Scuola360',
-    domain: 'https://www.lascuola360.it',
+    domain: 'https://lascuola360.it',
     logo: {
       // PLACEHOLDER assets — added in Phase 3. Paths are final; files land then.
       header: '/assets-vetrina/logo-lascuola360.png',
@@ -142,7 +145,7 @@ const BRANDS: Record<BrandId, Brand> = {
     header: {
       // unused — site chrome is hidden for schoolr (ChromeGate), page has its own header
       showPhone: false,
-      primaryCta: { label: 'Vai a LaScuola360', href: 'https://www.lascuola360.it/' },
+      primaryCta: { label: 'Vai a LaScuola360', href: 'https://lascuola360.it/' },
       loginUrl: SHARED_LOGIN_URL,
     },
     copy: {
