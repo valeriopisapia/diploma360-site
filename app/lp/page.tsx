@@ -217,9 +217,9 @@ export default function LpPage() {
           </div>
           <p className="asterisk-note" style={{ textAlign: 'center', padding: '14px 24px 18px', margin: 0 }}>
             <b>*</b>Promosso o Ripreparato: garanzia inclusa nei piani Plus e Max, secondo condizioni.
-            Se non passi l'esame, ti riprepariamo gratis.{' '}
+            Se non passi l&apos;esame, ti riprepariamo gratis.{' '}
             <b style={{ marginLeft: '10px' }}>*</b>97% promossi: dati interni {brand.name}; i risultati
-            possono variare in base alla situazione di partenza e all'impegno dello studente.
+            possono variare in base alla situazione di partenza e all&apos;impegno dello studente.
           </p>
         </section>
 
@@ -292,7 +292,7 @@ export default function LpPage() {
           <div className="wrap">
             <div className="metodo-top">
               <div className="sec-head">
-                <div className="tag">Cos'è {brand.name}</div>
+                <div className="tag">Cos&apos;è {brand.name}</div>
                 <h2>Perché {brand.name} è diverso.</h2>
                 <p className="sec-lead">
                   Non ti diamo solo contenuti da studiare. Organizziamo un percorso: partiamo dagli
@@ -330,7 +330,7 @@ export default function LpPage() {
               <div className="pillar">
                 <span className="step"><span className="num">04</span> Esami</span>
                 <h3>Fino al diploma</h3>
-                <p>Candidatura, fascicolo, PCTO, tesina e sede d'esame: ti seguiamo anche sui passaggi organizzativi.</p>
+                <p>Candidatura, fascicolo, PCTO, tesina e sede d&apos;esame: ti seguiamo anche sui passaggi organizzativi.</p>
               </div>
             </div>
           </div>
@@ -344,8 +344,8 @@ export default function LpPage() {
               <h2>18 indirizzi tra cui scegliere.</h2>
               <p className="sec-lead">
                 Ti prepariamo agli esami per il diploma di Stato riconosciuto su licei, istituti
-                tecnici e professionali. In consulenza valutiamo l'indirizzo più adatto in base alla
-                storia scolastica, agli anni da recuperare e all'esame da sostenere.
+                tecnici e professionali. In consulenza valutiamo l&apos;indirizzo più adatto in base alla
+                storia scolastica, agli anni da recuperare e all&apos;esame da sostenere.
               </p>
             </div>
             <div className="indirizzi">
@@ -596,7 +596,7 @@ export default function LpPage() {
                   </div>
                 </div>
                 <span className="stars">★★★★★</span>
-                <p>&ldquo;All'inizio eravamo preoccupati, ma il tutor ci ha aiutato a capire il percorso e a organizzare lo studio. Non sentirci soli è stata la cosa più utile.&rdquo;</p>
+                <p>&ldquo;All&apos;inizio eravamo preoccupati, ma il tutor ci ha aiutato a capire il percorso e a organizzare lo studio. Non sentirci soli è stata la cosa più utile.&rdquo;</p>
               </div>
               <div className="testi-card">
                 <div className="t-head">

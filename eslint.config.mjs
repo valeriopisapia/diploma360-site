@@ -12,7 +12,16 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Read-only static reference sources (see AGENTS.md) — not part of the app.
+    "materiale/**",
   ]),
+  {
+    // Test doubles (mocked fetch/dataLayer/window) are typed loosely on purpose.
+    files: ["**/*.test.ts", "**/*.test.tsx"],
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off",
+    },
+  },
 ]);
 
 export default eslintConfig;
