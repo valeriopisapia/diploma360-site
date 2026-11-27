@@ -21,6 +21,10 @@ export function CookieBanner() {
     return stored ?? { statistics: false, marketing: false }
   }, [])
 
+  // Reads the consent cookie after mount on purpose: the banner must not render on the
+  // server (no cookie access there) and must not cause a hydration mismatch, so the
+  // first render is always "hidden" and this effect syncs it with the browser state.
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     const stored = readConsent()
     if (stored === null) {
@@ -37,6 +41,7 @@ export function CookieBanner() {
     // despite a stored consent.
     applyConsent(stored.statistics, stored.marketing)
   }, [])
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   useEffect(() => {
     function handleOpen() {

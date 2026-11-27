@@ -49,6 +49,11 @@ export function useReveal<T extends HTMLElement = HTMLElement>() {
       return // no-op: stays visible
     }
 
+    // Deliberate post-mount flip (see file header): the server/first render is the
+    // final visible state; only once the browser has confirmed IntersectionObserver
+    // support and no reduced-motion preference do we hide the element until it scrolls
+    // into view. Reading those browser-only facts requires an effect.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setVisible(false)
     const io = new IntersectionObserver(
       (entries) => {
@@ -150,9 +155,15 @@ interface CounterProps {
 export function Counter({ value, className, durationMs = 1000 }: CounterProps) {
   const ref = useRef<HTMLSpanElement | null>(null)
   const [display, setDisplay] = useState(value)
+  // When `value` changes, show the new final value right away (React's "adjust state
+  // when a prop changes" pattern, instead of a synchronous setState inside the effect).
+  const [displayFor, setDisplayFor] = useState(value)
+  if (displayFor !== value) {
+    setDisplayFor(value)
+    setDisplay(value)
+  }
 
   useEffect(() => {
-    setDisplay(value)
     const el = ref.current
     if (!el) return
 
