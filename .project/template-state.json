@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "template_version": "1.1.0",
+  "answers": {
+    "name": "Diploma360 Site",
+    "slug": "diploma360-site",
+    "provider": "github",
+    "tracker": "jira",
+    "profile": "generic",
+    "kind": "component",
+    "workspace_url": ""
+  },
+  "files": {
+    ".project/LICENSE": {
+      "sha256": "1b35499b4dc748949d38a3d817ae8289dcd1ea88e8ac46370c1d884e48be8dc7",
+      "ownership": "template"
+    },
+    "AGENTS.md": {
+      "sha256": "19c07eb7ca3eee12acea90755170a0876d53f04fd49af9594416a7ba05941c0f",
+      "ownership": "block",
+      "block_sha256": "4263e7b2fbd5772ad6570a056d7c3c18278b2a0a35dfbd0ce3320e1a967725b6"
+    },
+    "CLAUDE.md": {
+      "sha256": "336cc4fbf19beaada7ccf9986414fa91851a8d7a07dfb3ccbe800a69eed0ab49",
+      "ownership": "project"
+    }
+  }
+}
