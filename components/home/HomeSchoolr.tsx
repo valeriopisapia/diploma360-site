@@ -159,7 +159,7 @@ export function HomeSchoolr() {
               <span className="sr-lbl">WhatsApp</span>
             </a>
             <a
-              href="https://www.lascuola360.it/"
+              href="https://lascuola360.it/"
               className="sr-cta-hd"
               style={{
                 fontFamily: "'Poppins',sans-serif",
@@ -251,7 +251,7 @@ export function HomeSchoolr() {
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14 }}>
             <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 14 }}>
               <a
-                href="https://www.lascuola360.it/ripetizioni"
+                href="https://lascuola360.it/ripetizioni"
                 style={{
                   fontFamily: "'Poppins',sans-serif",
                   fontWeight: 600,
@@ -866,7 +866,7 @@ export function HomeSchoolr() {
               </div>
             </div>
             <a
-              href="https://www.lascuola360.it/"
+              href="https://lascuola360.it/"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -1358,7 +1358,7 @@ export function HomeSchoolr() {
               prima lezione è gratuita e senza impegno.
             </p>
             <a
-              href="https://www.lascuola360.it/"
+              href="https://lascuola360.it/"
               style={{
                 fontFamily: "'Poppins',sans-serif",
                 fontWeight: 600,
