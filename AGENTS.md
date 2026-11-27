@@ -61,7 +61,8 @@ replace the design system), Vitest + happy-dom, `sharp` (image optimisation).
 - **Page-specific CSS = plain global `app/<route>/<name>.css`** imported at top of the page —
   NOT CSS Modules (the ported markup uses bare global class names; Modules would hash them).
 - **Metadata:** every page uses `buildMetadata()` from `lib/seo.ts` (title, description, canonical
-  under `https://www.diploma360.it`, OpenGraph + Twitter + default `/og-image.png`). Root layout
+  under the APEX `brand.domain` (e.g. `https://diploma360.it` — App Hosting redirects www → apex,
+  so canonical/sitemap/robots `Host` must use the apex, which answers 200), OpenGraph + Twitter + default `/og-image.png`). Root layout
   sets `metadataBase` + `viewport` (theme-color).
 - **Structured data:** `<JsonLd>` (`components/seo/JsonLd.tsx`) — EducationalOrganization, Course,
   FAQPage, BreadcrumbList.
@@ -111,7 +112,30 @@ replace the design system), Vitest + happy-dom, `sharp` (image optimisation).
   attempt it retries once WITHOUT `SMS` (TELEFONO still holds the number) → the lead is never lost.
   CRITICAL: a `duplicate_parameter` from the with-`SMS` attempt must NOT be treated as success (that
   silently drops the lead) — only a duplicate on the no-`SMS` attempt = genuine already-exists = ok.
-  Key/secret are server-side only.
+  Key/secret are server-side only. Brevo failures are logged as `status` + `code` ONLY (the
+  response body can echo the email/phone).
+- **`/api/lead` guards** (`lib/leadGuard.ts`, order: Origin → rate limit → JSON → honeypot →
+  validation → reCAPTCHA → Brevo). All CONSERVATIVE — never stricter than `LeadForm`:
+  - Origin: 403 only if an `Origin` header is present and is not a brand domain (apex/www, all
+    brands), a `*--schoolrcloud.*.hosted.app` backend, localhost, the request's own host, or in
+    `LEAD_ALLOWED_ORIGINS` (comma-separated).
+  - Rate limit: in-memory per IP (left-most `X-Forwarded-For`), 15 / 10 min per instance
+    (`LEAD_RATE_LIMIT_MAX`, `0` = off) → 429; `LeadForm` shows a "riprova tra qualche minuto"
+    message with the same WhatsApp/phone fallback. Instances scale 0..N: speed bump only.
+  - Validation → 400 `{error}`: strings only; email loose `x@y.z`, ≤254; phone = client rule
+    `^\+?\d{6,15}$` after stripping separators (raw value still forwarded); `prodotto` ∈
+    `Diploma|Ripetizioni` (absent → `Diploma`) — **add new products to `ALLOWED_PRODOTTI`**;
+    `messaggio`/`pagina` truncated (5000/1000), never rejected. Body > 32 KB → 413.
+  - `updateEnabled: true` stays (resubmissions update the contact instead of failing).
+- **reCAPTCHA Enterprise** (invisible, score-based; `lib/recaptcha.ts` server,
+  `lib/recaptchaClient.ts` browser). Off unless `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` (public, BUILD)
+  is set. Script loaded only on first focus/input in the form; token (action `lead_submit`) sent
+  as `recaptcha_token`; a missing token never blocks the client. Server: REST
+  `projects/{RECAPTCHA_PROJECT_ID}/assessments` with ADC from the Cloud Run metadata server
+  (runtime SA needs `roles/recaptchaenterprise.agent`). `RECAPTCHA_ENFORCE=false` (default) =
+  assess + log `reCAPTCHA: result=…` only; `true` = 400 on missing/invalid/wrong-action/score <
+  `RECAPTCHA_SCORE_THRESHOLD` (0.3). Google errors, timeouts (3 s) and 403 → fail OPEN. The key
+  does not list `*.hosted.app`, so on preview hosts assessments fail (rejected only if enforcing).
 - **Legal pages** (`/privacy`, `/termini`, `/cookie`): `components/legal/IubendaPolicy.tsx`
   renders the Iubenda policy (from `brand.legal.iubendaPolicyId`) as a direct **iframe** — no CTA.
 
@@ -144,7 +168,7 @@ replace the design system), Vitest + happy-dom, `sharp` (image optimisation).
   serves ONLY the "Schoolr → LaScuola360" rebrand landing at `/` (`components/home/HomeSchoolr.tsx`,
   self-contained — site chrome hidden by `ChromeGate`). It uses schoolr's own GTM container
   `GTM-K8W5CM7C` (GA4 `G-Q0817JQ7RN` + its Meta pixel). `proxy.ts` 301-redirects every
-  non-home path to `https://www.lascuola360.it/`; its sitemap is only `/`. Deploy as a third
+  non-home path to `https://lascuola360.it/`; its sitemap is only `/`. Deploy as a third
   Firebase App Hosting backend `schoolr-site` with `NEXT_PUBLIC_BRAND=schoolr`.
 - Verify each brand: `NEXT_PUBLIC_BRAND=lascuola360 npm run build` (and `=diploma360`); Diploma360's
   `/`,`/chi-siamo`, nav, footer, sitemap must remain unchanged.
@@ -201,8 +225,10 @@ node --input-type=module -e '
 '
 ```
 
-Workspace verification also runs `npm run lint`. ESLint currently fails on
-the baseline because of existing lint errors.
+Workspace verification also runs `npm run lint`, which must report 0 errors
+(warnings allowed: `no-img-element`, and `no-html-link-for-pages` deliberately kept
+as a warning — internal `<a>` links do full page loads that GTM Page View triggers
+rely on; see `eslint.config.mjs`).
 
 For page or shared layout changes, run the relevant brand builds documented
 above. See [the deployment guide](docs/DEPLOY.md) for brand and hosting conventions.

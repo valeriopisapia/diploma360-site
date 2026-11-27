@@ -178,6 +178,39 @@ Verifica locale del brand: `NEXT_PUBLIC_BRAND=lascuola360 npm run build`.
 > ℹ️ Le barre URL nei mockup piattaforma sono **testo decorativo** (`brand.platformHost`), non
 > sottodomini reali: `app.diploma360.it` / `app.lascuola360.it`.
 
+## H. Protezione del form lead (`/api/lead`) e reCAPTCHA Enterprise
+
+Guardie server sempre attive (dettagli in `AGENTS.md` → Integrations): controllo `Origin`
+(403), rate limit best-effort per IP (429, `LEAD_RATE_LIMIT_MAX`, default 15 ogni 10 minuti per
+istanza), validazione del payload (400). Variabili opzionali: `LEAD_RATE_LIMIT_MAX`,
+`LEAD_ALLOWED_ORIGINS`.
+
+reCAPTCHA Enterprise (chiave `landing-lead-form`, progetto `schoolrcloud`), configurato in
+`apphosting.yaml` — i valori della console App Hosting (backend → Settings → Environment)
+**hanno la precedenza** sul file, backend per backend:
+
+| Variabile | Disponibilità | Default | Effetto |
+|---|---|---|---|
+| `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` | BUILD + RUNTIME | vuoto = tutto disattivato | chiave pubblica; cambiarla richiede un nuovo rollout |
+| `RECAPTCHA_PROJECT_ID` | RUNTIME | vuoto = nessuna verifica server | progetto GCP della chiave |
+| `RECAPTCHA_ENFORCE` | RUNTIME | `false` = solo log | `true` = 400 su token mancante/non valido/punteggio basso |
+| `RECAPTCHA_SCORE_THRESHOLD` | RUNTIME | `0.3` | soglia minima |
+
+1. **IAM**: il service account di runtime del backend deve avere
+   `roles/recaptchaenterprise.agent` sul progetto `schoolrcloud`. Per vedere quale SA usa il
+   backend: `firebase apphosting:backends:get <backend> --project schoolrcloud` oppure
+   `gcloud run services describe <backend> --region us-east4 --project schoolrcloud
+   --format='value(spec.template.spec.serviceAccountName)'` (di norma
+   `firebase-app-hosting-compute@schoolrcloud.iam.gserviceaccount.com`). Poi:
+   `gcloud projects add-iam-policy-binding schoolrcloud --member=serviceAccount:<SA>
+   --role=roles/recaptchaenterprise.agent`. Senza ruolo l'API risponde 403 → fail-open
+   (lead salvato, log `reCAPTCHA: result=unavailable detail=assessments status 403`).
+2. **Osservazione**: con `RECAPTCHA_ENFORCE=false` cercare nei log Cloud Run le righe
+   `reCAPTCHA: result=` (pass/fail con `score` e `reason`) per qualche giorno.
+3. **Enforcement**: impostare `RECAPTCHA_ENFORCE=true` solo dopo aver verificato i punteggi.
+   Gli host `*.hosted.app` non sono nella chiave: lì il token non è valido e, con enforcement
+   attivo, l'invio dal dominio di anteprima viene rifiutato.
+
 ## F. Decisioni di business ancora aperte (non bloccano il deploy)
 1. **Indirizzo sede**: vetrina `Viale Castrense 5, 00182 Roma` vs landing `Via Giovanni Antonelli
    41, 00197 Roma` — da unificare.
