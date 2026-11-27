@@ -28,7 +28,7 @@ interface LeadFormProps {
   prodotto?: string
 }
 
-type UIStatus = 'idle' | 'loading' | 'ok' | 'err'
+type UIStatus = 'idle' | 'loading' | 'ok' | 'err' | 'limit'
 
 // Thank-you route per origin: the vetrina forms land on /grazie, the ads
 // landing form on its own /lp-thank-you-page (own chrome, separate conversion URL).
@@ -152,6 +152,11 @@ export function LeadForm({ origine, showPerChi = false, prodotto = 'Diploma' }: 
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       })
+      if (res.status === 429) {
+        // Server-side rate limit: same fallback contacts, with a "retry later" hint.
+        setUiStatus('limit')
+        return
+      }
       if (!res.ok) throw new Error('bad status')
 
       // Fire the GTM event first, then client-side navigate to the thank-you
@@ -284,13 +289,15 @@ export function LeadForm({ origine, showPerChi = false, prodotto = 'Diploma' }: 
         role="status"
         aria-live="polite"
         aria-atomic="true"
-        className={`lf-status${uiStatus === 'ok' ? ' ok' : uiStatus === 'err' ? ' err' : ''}`}
+        className={`lf-status${uiStatus === 'ok' ? ' ok' : uiStatus === 'err' || uiStatus === 'limit' ? ' err' : ''}`}
         hidden={uiStatus === 'idle' || uiStatus === 'loading'}
       >
         {uiStatus === 'ok' && 'Richiesta inviata! Ti ricontattiamo entro 24h.'}
-        {uiStatus === 'err' && (
+        {(uiStatus === 'err' || uiStatus === 'limit') && (
           <>
-            Invio non riuscito. Scrivici su{' '}
+            {uiStatus === 'limit'
+              ? 'Troppi invii ravvicinati: riprova tra qualche minuto, oppure scrivici su'
+              : 'Invio non riuscito. Scrivici su'}{' '}
             <a
               href="https://wa.me/393517214644"
               target="_blank"

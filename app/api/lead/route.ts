@@ -1,23 +1,61 @@
 import { createBrevoContact, LeadPayload } from '@/lib/brevo'
 import { brand } from '@/lib/brand'
+import { checkRateLimit, clientIp, isAllowedOrigin, validateLead } from '@/lib/leadGuard'
 
 export const runtime = 'nodejs'
 
+/** Upper bound for the raw JSON body: the real form sends well under 10 KB. */
+const MAX_BODY_BYTES = 32 * 1024
+
+/**
+ * Extract only Brevo's machine-readable error `code` (e.g. "invalid_parameter").
+ * The body/message can echo contact data (email, phone), so it is never logged.
+ */
+function brevoErrorCode(text: string): string {
+  try {
+    const code = (JSON.parse(text) as { code?: unknown })?.code
+    if (typeof code === 'string' && /^[a-z_]{1,64}$/i.test(code)) return code
+  } catch {
+    // not JSON
+  }
+  return 'unknown'
+}
+
 export async function POST(req: Request) {
-  let body: Record<string, unknown>
-  try { body = await req.json() }
-  catch { return Response.json({ error: 'Corpo della richiesta non valido' }, { status: 400 }) }
-  const { nome, telefono, email, per_chi, messaggio, pagina, origine, ts, website, prodotto } = body
+  // Reject cross-site browser submissions (only when an Origin header is present).
+  if (!isAllowedOrigin(req)) {
+    return Response.json({ error: 'Origine della richiesta non consentita' }, { status: 403 })
+  }
+
+  // Best-effort per-IP speed bump (per instance, in memory).
+  if (!checkRateLimit(clientIp(req))) {
+    return Response.json(
+      { error: 'Troppe richieste, riprova tra qualche minuto' },
+      { status: 429, headers: { 'retry-after': '600' } },
+    )
+  }
+
+  let body: unknown
+  try {
+    const raw = await req.text()
+    if (raw.length > MAX_BODY_BYTES) {
+      return Response.json({ error: 'Corpo della richiesta non valido' }, { status: 413 })
+    }
+    body = JSON.parse(raw)
+  } catch {
+    return Response.json({ error: 'Corpo della richiesta non valido' }, { status: 400 })
+  }
 
   // Honeypot: bot filled the hidden field — silently succeed, do not call Brevo
-  if (website) {
+  if (typeof body === 'object' && body !== null && (body as Record<string, unknown>).website) {
     return Response.json({ ok: true })
   }
 
-  // Validation: email and telefono are required
-  if (!email || !telefono) {
-    return Response.json({ error: 'Email e telefono sono obbligatori' }, { status: 400 })
+  const v = validateLead(body)
+  if (!v.ok) {
+    return Response.json({ error: v.error }, { status: 400 })
   }
+  const lead = v.lead
 
   // Check required env vars
   const apiKey = process.env.BREVO_API_KEY
@@ -26,21 +64,20 @@ export async function POST(req: Request) {
     return Response.json({ error: 'Brevo non configurato (manca BREVO_API_KEY o BREVO_LIST_ID)' }, { status: 500 })
   }
 
-  // Values are validated/trusted above; cast from unknown to the expected string types
   const payload: LeadPayload = {
-    nome: nome as string | undefined,
-    telefono: telefono as string,
-    email: email as string,
-    per_chi: per_chi as string | undefined,
-    messaggio: messaggio as string | undefined,
-    pagina: pagina as string | undefined,
-    origine: origine as string | undefined,
-    ts: ts as string | undefined,
+    nome: lead.nome,
+    telefono: lead.telefono,
+    email: lead.email,
+    per_chi: lead.per_chi,
+    messaggio: lead.messaggio,
+    pagina: lead.pagina,
+    origine: lead.origine,
+    ts: lead.ts,
     // Server-authoritative: the brand of THIS deployment, not client-supplied.
     brand: brand.name,
-    // Client-supplied: which product the form belongs to (defaults to Diploma
-    // for existing forms that don't pass it).
-    prodotto: (prodotto as string | undefined) ?? 'Diploma',
+    // Client-supplied but restricted to the known products (validateLead);
+    // defaults to Diploma for forms that don't pass it.
+    prodotto: lead.prodotto,
   }
   const result = await createBrevoContact(payload, { apiKey, listId })
 
@@ -49,6 +86,9 @@ export async function POST(req: Request) {
   }
 
   const httpStatus = result.status >= 400 ? result.status : 502
-  console.error('Brevo error:', result.error)
+  // Status + code only: the Brevo response body may contain personal data.
+  console.error(
+    `Brevo error: status=${result.status} code=${result.status === 0 ? 'network' : brevoErrorCode(result.error)}`,
+  )
   return Response.json({ error: 'Brevo ha rifiutato la richiesta' }, { status: httpStatus })
 }
