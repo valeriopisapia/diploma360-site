@@ -10,12 +10,18 @@
  * Honeypot field `website` guards against bots (invisible to real users).
  * On success: POST /api/lead + pushLead GTM event.
  * On error: fallback with WhatsApp 351 7214644 / phone 06 8428 0999.
+ *
+ * reCAPTCHA Enterprise (only when NEXT_PUBLIC_RECAPTCHA_SITE_KEY is set at build):
+ * the Google script is loaded lazily on the first focus/input inside the form, a
+ * token for action `lead_submit` is requested at submit time and sent as
+ * `recaptcha_token`. A missing token never blocks the submit client-side.
  */
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { pushLead } from '@/lib/analytics'
 import { getAttribution } from '@/lib/attribution'
+import { getRecaptchaToken, isRecaptchaEnabled, loadRecaptcha } from '@/lib/recaptchaClient'
 import styles from './LeadForm.module.css'
 
 type Origine = 'vetrina' | 'landing-ads' | 'ripetizioni'
@@ -68,6 +74,12 @@ function withClickIds(route: string): string {
 export function LeadForm({ origine, showPerChi = false, prodotto = 'Diploma' }: LeadFormProps) {
   const router = useRouter()
   const [uiStatus, setUiStatus] = useState<UIStatus>('idle')
+  const recaptcha = isRecaptchaEnabled()
+
+  // First interaction with the form → load the reCAPTCHA script (never on page view).
+  const warmRecaptcha = () => {
+    loadRecaptcha().catch(() => {})
+  }
 
   // Live-filter the phone field: rewrite the value on every input/paste so
   // invalid characters can never remain, and clear any prior custom-validity.
@@ -146,6 +158,10 @@ export function LeadForm({ origine, showPerChi = false, prodotto = 'Diploma' }: 
         prodotto,
       }
       if (per_chi) payload.per_chi = per_chi
+      if (recaptcha) {
+        const token = await getRecaptchaToken('lead_submit')
+        if (token) payload.recaptcha_token = token
+      }
 
       const res = await fetch('/api/lead', {
         method: 'POST',
@@ -177,6 +193,8 @@ export function LeadForm({ origine, showPerChi = false, prodotto = 'Diploma' }: 
   return (
     <form
       onSubmit={handleSubmit}
+      onFocus={recaptcha ? warmRecaptcha : undefined}
+      onInput={recaptcha ? warmRecaptcha : undefined}
       noValidate
       data-lead-form
       className={styles.form}
@@ -280,9 +298,27 @@ export function LeadForm({ origine, showPerChi = false, prodotto = 'Diploma' }: 
         .
       </label>
 
+      {/* The floating reCAPTCHA badge would cover the WhatsApp button: Google allows
+          hiding it when the notice below is shown in the form instead. */}
+      {recaptcha && <style>{'.grecaptcha-badge{visibility:hidden!important}'}</style>}
+
       <button type="submit" className="btn btn-primary btn-block" disabled={uiStatus === 'loading'}>
         {uiStatus === 'loading' ? 'Invio in corso…' : 'Invia la richiesta'}
       </button>
+
+      {recaptcha && (
+        <p className={styles.recaptchaNote}>
+          Questo sito è protetto da reCAPTCHA: si applicano le{' '}
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">
+            Norme sulla privacy
+          </a>{' '}
+          e i{' '}
+          <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">
+            Termini di servizio
+          </a>{' '}
+          di Google.
+        </p>
+      )}
 
       {/* aria-live region: always in DOM so screen readers detect it */}
       <p

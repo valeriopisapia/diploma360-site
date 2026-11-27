@@ -1,6 +1,7 @@
 import { createBrevoContact, LeadPayload } from '@/lib/brevo'
 import { brand } from '@/lib/brand'
 import { checkRateLimit, clientIp, isAllowedOrigin, validateLead } from '@/lib/leadGuard'
+import { describeOutcome, recaptchaConfig, shouldReject, verifyRecaptcha } from '@/lib/recaptcha'
 
 export const runtime = 'nodejs'
 
@@ -62,6 +63,19 @@ export async function POST(req: Request) {
   const listId = process.env.BREVO_LIST_ID
   if (!apiKey || !listId) {
     return Response.json({ error: 'Brevo non configurato (manca BREVO_API_KEY o BREVO_LIST_ID)' }, { status: 500 })
+  }
+
+  // reCAPTCHA Enterprise (feature-flagged; disabled when not configured). Observe-only
+  // unless RECAPTCHA_ENFORCE=true; Google errors/timeouts always fail open.
+  const captchaCfg = recaptchaConfig()
+  const captcha = await verifyRecaptcha(lead.recaptchaToken, { config: captchaCfg })
+  if (captcha.status !== 'disabled') {
+    const line = describeOutcome(captcha, captchaCfg)
+    if (captcha.status === 'pass') console.info(line)
+    else console.warn(line)
+  }
+  if (shouldReject(captcha, captchaCfg)) {
+    return Response.json({ error: 'Verifica di sicurezza non superata' }, { status: 400 })
   }
 
   const payload: LeadPayload = {

@@ -9,3 +9,15 @@
      from the imported site.css global sheet. Add component-specific rules here
      as pages compose this form into different contexts. */
 }
+
+/* Shown only when reCAPTCHA is enabled (replaces the hidden floating badge). */
+.recaptchaNote {
+  font-size: 11px;
+  color: var(--soft);
+  line-height: 1.45;
+  margin: 10px 0 0;
+}
+.recaptchaNote a {
+  color: inherit;
+  text-decoration: underline;
+}

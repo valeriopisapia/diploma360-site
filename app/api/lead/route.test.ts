@@ -3,12 +3,15 @@ import { it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { POST } from './route'
 import { resetRateLimit } from '@/lib/leadGuard'
 import { resolveBrand } from '@/lib/brand'
+import { resetRecaptchaTokenCache } from '@/lib/recaptcha'
 
 beforeEach(() => {
   process.env.BREVO_API_KEY = 'k'
   process.env.BREVO_LIST_ID = '7'
   delete process.env.LEAD_RATE_LIMIT_MAX
+  for (const k of ['NEXT_PUBLIC_RECAPTCHA_SITE_KEY', 'RECAPTCHA_PROJECT_ID', 'RECAPTCHA_ENFORCE', 'RECAPTCHA_SCORE_THRESHOLD']) delete process.env[k]
   resetRateLimit()
+  resetRecaptchaTokenCache()
   vi.stubGlobal('fetch', vi.fn(async () => new Response(null, { status: 201 })))
 })
 afterEach(() => {
@@ -164,4 +167,86 @@ it('logs only Brevo status and code, never the response body', async () => {
   expect(logged).toContain('code=invalid_parameter')
   expect(logged).not.toContain('a@b.it')
   expect(logged).not.toContain('3331234567')
+})
+
+// --- reCAPTCHA ----------------------------------------------------------------
+
+/** Brevo 201, metadata token, and a configurable assessments response. */
+function stubGoogleAndBrevo(assessment: () => Response | Promise<Response>) {
+  const f = vi.fn(async (url: string | URL | Request) => {
+    const u = String(url)
+    if (u.startsWith('http://metadata.google.internal/')) {
+      return new Response(JSON.stringify({ access_token: 't', expires_in: 3600 }), { status: 200 })
+    }
+    if (u.startsWith('https://recaptchaenterprise.googleapis.com/')) return assessment()
+    return new Response(null, { status: 201 }) // Brevo
+  })
+  vi.stubGlobal('fetch', f)
+  return f
+}
+const brevoCalls = (f: ReturnType<typeof vi.fn>) => f.mock.calls.filter(c => String(c[0]).includes('api.brevo.com')).length
+const score = (s: number, action = 'lead_submit') =>
+  new Response(JSON.stringify({ tokenProperties: { valid: true, action }, riskAnalysis: { score: s } }), { status: 200 })
+
+function enableCaptcha(enforce: boolean) {
+  process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY = 'site-key'
+  process.env.RECAPTCHA_PROJECT_ID = 'schoolrcloud'
+  process.env.RECAPTCHA_ENFORCE = enforce ? 'true' : 'false'
+}
+
+it('reCAPTCHA not configured: no Google call, payload token ignored (today\'s behaviour)', async () => {
+  const f = stubGoogleAndBrevo(() => score(0.9))
+  const r = await post({ ...VALID, recaptcha_token: 'tok' })
+  expect(r.status).toBe(200)
+  expect(f).toHaveBeenCalledOnce()
+  expect(brevoCalls(f)).toBe(1)
+  expect(JSON.stringify(f.mock.calls[0][1])).not.toContain('tok')
+})
+
+it('reCAPTCHA enforced: good score passes, low score / missing token → 400 without Brevo', async () => {
+  enableCaptcha(true)
+  vi.spyOn(console, 'info').mockImplementation(() => {})
+  const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+
+  let f = stubGoogleAndBrevo(() => score(0.9))
+  expect((await post({ ...VALID, recaptcha_token: 'tok' })).status).toBe(200)
+  expect(brevoCalls(f)).toBe(1)
+
+  f = stubGoogleAndBrevo(() => score(0.1))
+  const low = await post({ ...VALID, recaptcha_token: 'tok' })
+  expect(low.status).toBe(400)
+  expect((await low.json()).error).toBe('Verifica di sicurezza non superata')
+  expect(brevoCalls(f)).toBe(0)
+
+  f = stubGoogleAndBrevo(() => score(0.9))
+  expect((await post(VALID)).status).toBe(400)
+  expect(brevoCalls(f)).toBe(0)
+  expect(warn.mock.calls.flat().join(' ')).toContain('reason=missing_token')
+})
+
+it('reCAPTCHA enforced but Google down / 403 → fail open, lead saved', async () => {
+  enableCaptcha(true)
+  const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+  for (const status of [503, 403]) {
+    resetRecaptchaTokenCache()
+    const f = stubGoogleAndBrevo(() => new Response('{}', { status }))
+    expect((await post({ ...VALID, recaptcha_token: 'tok' })).status).toBe(200)
+    expect(brevoCalls(f)).toBe(1)
+  }
+  expect(warn.mock.calls.flat().join(' ')).toContain('(fail-open)')
+})
+
+it('reCAPTCHA observe-only (RECAPTCHA_ENFORCE=false): failures are logged, never rejected', async () => {
+  enableCaptcha(false)
+  const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+  let f = stubGoogleAndBrevo(() => score(0.1))
+  expect((await post({ ...VALID, recaptcha_token: 'tok' })).status).toBe(200)
+  expect(brevoCalls(f)).toBe(1)
+  f = stubGoogleAndBrevo(() => score(0.9))
+  expect((await post(VALID)).status).toBe(200)
+  expect(brevoCalls(f)).toBe(1)
+  const logged = warn.mock.calls.flat().join(' ')
+  expect(logged).toContain('reason=low_score')
+  expect(logged).toContain('enforce=false')
+  expect(logged).not.toContain('a@b.it')
 })
